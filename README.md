@@ -91,7 +91,8 @@ records=40
 
 Technical proof cleared; 30-day artifact closed as a v0.1 alpha.
 
-The next appropriate work is not more product surface. It is either:
+The public methodology and in-corpus case-study narrative are now part of the alpha artifact.
 
-- recover/regenerate the 100-study corpus as v0.2 data expansion; or
-- write the public methodology/case-study narrative around the already-frozen v0.1-alpha evidence package.
+The next appropriate work is v0.2 data expansion: recover or regenerate the 100-study corpus, add stronger deferred
+case-study candidates such as NCT01275677, and run a separate severity-calibration audit. Do not reopen v0.1-alpha
+architecture to do that work.
