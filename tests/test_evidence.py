@@ -265,7 +265,7 @@ class EvidenceRecordTests(unittest.TestCase):
             finally:
                 connection.close()
 
-    def test_secondary_outcome_claims_are_neutral_for_post_completion_changes(self) -> None:
+    def test_secondary_outcome_claims_are_neutral_for_registry_outcome_changes(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             db_path = f"{tmpdir}/trialdiff.sqlite3"
             init_db(db_path)
@@ -288,7 +288,7 @@ class EvidenceRecordTests(unittest.TestCase):
                 not_supported = json.loads(row["claims_not_supported_json"])
                 self.assertTrue(any("secondary outcome" in claim for claim in supported))
                 self.assertTrue(any("post_recruitment" in claim for claim in supported))
-                self.assertIn("That this post-completion change reflects outcome switching rather than a legitimate registry correction.", not_supported)
+                self.assertIn("That this registry outcome change reflects outcome switching rather than a legitimate registry correction.", not_supported)
                 self.assertIn("That the change was or was not disclosed in a manuscript.", not_supported)
             finally:
                 connection.close()

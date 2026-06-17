@@ -76,7 +76,7 @@ Audit result: record contains timeline date paths, value-signal classification, 
 - Patch hash prefix: 24334e62db3c941a
 - Canonical hash prefix: 27488b4aae8a05f0
 
-Audit result: record contains secondary-outcome path evidence and the category-specific non-claim that TrialDiff does not determine whether the change reflects outcome switching rather than a legitimate registry correction.
+Audit result: record contains secondary-outcome path evidence and the category-specific non-claim that TrialDiff does not determine whether the registry outcome change reflects outcome switching rather than a legitimate registry correction.
 
 ## 5. evt_NCT03197935_v19_v20_0ab34beeb3be
 

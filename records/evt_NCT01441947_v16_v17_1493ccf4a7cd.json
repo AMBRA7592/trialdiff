@@ -15,7 +15,7 @@
       "That the change caused or altered the trial's results.",
       "That the change was or was not disclosed in a manuscript.",
       "That TrialDiff determines regulatory compliance or non-compliance.",
-      "That this post-completion change reflects outcome switching rather than a legitimate registry correction.",
+      "That this registry outcome change reflects outcome switching rather than a legitimate registry correction.",
       "That the outcome change was inconsistent with the protocol or statistical analysis plan."
     ],
     "claims_supported": [
@@ -130,7 +130,7 @@
     "That the change caused or altered the trial's results.",
     "That the change was or was not disclosed in a manuscript.",
     "That TrialDiff determines regulatory compliance or non-compliance.",
-    "That this post-completion change reflects outcome switching rather than a legitimate registry correction.",
+    "That this registry outcome change reflects outcome switching rather than a legitimate registry correction.",
     "That the outcome change was inconsistent with the protocol or statistical analysis plan."
   ],
   "claims_supported": [
@@ -215,7 +215,7 @@
     }
   ],
   "provenance": {
-    "evidence_canonical_hash": "27488b4aae8a05f0436e74ad81f72002a7f3cbc42aa56abf4e31d01422012f7b",
+    "evidence_canonical_hash": "4afeb01341d8406b79f23958d27f15876f8a248c584f56f2aae92645253e96e5",
     "evidence_source": "derived_evidence_record",
     "evidence_source_url": "trialdiff://evidence-record/evt_NCT01441947_v16_v17_1493ccf4a7cd",
     "evidence_version": 1,

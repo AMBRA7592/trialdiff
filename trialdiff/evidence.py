@@ -77,7 +77,7 @@ CATEGORY_CLAIMS_NOT_SUPPORTED: dict[str, list[str]] = {
         "That the outcome change was inconsistent with the protocol or statistical analysis plan.",
     ],
     "secondary_outcome_change": [
-        "That this post-completion change reflects outcome switching rather than a legitimate registry correction.",
+        "That this registry outcome change reflects outcome switching rather than a legitimate registry correction.",
         "That the outcome change was inconsistent with the protocol or statistical analysis plan.",
     ],
     "serious_adverse_event_removal": [
