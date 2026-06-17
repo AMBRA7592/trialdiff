@@ -4,7 +4,7 @@ Audit date: 2026-06-17
 
 Audit scope: five selected records from `records/`, chosen to cover post-recruitment outcome changes, status termination, timeline movement, secondary outcome change, and enrollment change.
 
-This audit checks record integrity and claim boundaries. It does not judge scientific justification, sponsor intent, manuscript disclosure, misconduct, or regulatory compliance.
+This is a structural audit: it checks record integrity, source/provenance fields, rule attribution, and claim boundaries. It is not a severity-calibration audit. It does not judge scientific justification, sponsor intent, manuscript disclosure, misconduct, or regulatory compliance.
 
 > Severity means review priority, not proven wrongdoing.
 
