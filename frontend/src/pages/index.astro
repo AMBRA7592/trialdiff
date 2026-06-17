@@ -1,6 +1,7 @@
 ---
 import {
   Activity,
+  BookOpen,
   Clock3,
   Database,
   ExternalLink,
@@ -98,6 +99,27 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
           supports and what it does not support.
         </div>
       </div>
+    </section>
+
+    <section class="grid case-grid">
+      <a class="panel case-card" href="/case-studies/nct01441947-secondary-outcome">
+        <span class="case-icon"><BookOpen size={18} /></span>
+        <span>
+          <span class="lens-title">Case Study A: read an Evidence Record</span>
+          <span class="lens-description">
+            A compact secondary-outcome record with five changed paths, one outcome rule, and explicit non-claims.
+          </span>
+        </span>
+      </a>
+      <a class="panel case-card" href="/case-studies/nct02942355-timeline-slip">
+        <span class="case-icon"><BookOpen size={18} /></span>
+        <span>
+          <span class="lens-title">Case Study B: late-stage timeline movement</span>
+          <span class="lens-description">
+            A 731-day timeline movement surfaced as review-priority without asserting intent or wrongdoing.
+          </span>
+        </span>
+      </a>
     </section>
 
     <section class="grid stats-grid">
@@ -325,6 +347,10 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
 
   @media (max-width: 560px) {
     .lens-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .case-grid {
       grid-template-columns: 1fr;
     }
   }

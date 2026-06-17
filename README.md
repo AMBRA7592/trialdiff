@@ -29,6 +29,7 @@ This repository snapshot contains:
 - `NON_CLAIMS.md` - what the demo explicitly does not claim
 - `EVIDENCE_RECORD_SCHEMA.md` - schema description for exported records
 - `VALIDATION.md` - validation and audit status
+- `RELEASE_NOTES_v0.1-alpha.md` - what exists, what is excluded, and what is deferred
 - `manual-audit-5-records.md` - five-record manual audit notes
 - `MANIFEST.sha256` - SHA-256 manifest for frozen files
 - `scripts/export_alpha_demo.py` - deterministic export script

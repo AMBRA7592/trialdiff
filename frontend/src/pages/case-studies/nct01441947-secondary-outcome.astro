@@ -1,0 +1,113 @@
+---
+import { ArrowLeft, ExternalLink } from "@lucide/astro";
+
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Case Study A | TrialDiff"
+  description="A clean in-corpus TrialDiff case study showing how to read an Evidence Record."
+>
+  <main class="page-shell stack methodology-page">
+    <a class="button" href="/">
+      <ArrowLeft size={16} />
+      Back to dashboard
+    </a>
+
+    <header class="panel panel-pad">
+      <p class="eyebrow">Case Study A</p>
+      <h1>How to read an Evidence Record</h1>
+      <p class="lede">
+        This case uses an in-corpus secondary-outcome record from NCT01441947. It is a compact mechanism demo: five
+        changed paths, one outcome rule, one timing modifier, and explicit claim boundaries.
+      </p>
+    </header>
+
+    <section class="panel panel-pad disclaimer">
+      <div class="disclaimer-inner">
+        <div>
+          Severity means review priority, not proven wrongdoing. This case study explains what the registry record
+          supports and what it does not support.
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel-pad method-section">
+      <h2>Record</h2>
+      <p>
+        TrialDiff compares ClinicalTrials.gov versions 16 and 17 for NCT01441947, a Massachusetts General Hospital
+        study titled "Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer."
+      </p>
+      <p>
+        Evidence Record:
+        <a href="/events/evt_NCT01441947_v16_v17_1493ccf4a7cd">
+          evt_NCT01441947_v16_v17_1493ccf4a7cd
+        </a>
+      </p>
+      <p>
+        Canonical JSON:
+        <a href="/events/evt_NCT01441947_v16_v17_1493ccf4a7cd.json">
+          /events/evt_NCT01441947_v16_v17_1493ccf4a7cd.json
+        </a>
+      </p>
+    </section>
+
+    <section class="panel panel-pad method-section">
+      <h2>What Changed</h2>
+      <p>
+        The patch removed one path under the secondary-outcome module:
+        <code>/protocolSection/outcomesModule/secondaryOutcomes/3</code>.
+      </p>
+      <p>
+        The same amendment also updated registry housekeeping paths including status verification date, last update
+        submit date, and last update post date. It also added an annotation section. The case is useful because the
+        evidence object is small enough to inspect directly.
+      </p>
+    </section>
+
+    <section class="panel panel-pad method-section">
+      <h2>Why It Was Ranked Critical</h2>
+      <p>
+        The deterministic rule <code>secondary_outcome_any_change</code> fired because a secondary-outcome registry path
+        changed. The base severity was high.
+      </p>
+      <p>
+        The from-version timing context was <code>late_recruitment</code>. TrialDiff's timing modifier escalated the
+        final severity from high to critical because late-stage outcome changes have higher review priority than the
+        same change before recruitment.
+      </p>
+    </section>
+
+    <section class="panel panel-pad method-section">
+      <h2>What This Supports</h2>
+      <p>
+        This record supports a narrow factual statement: a secondary-outcome registry field changed between versions 16
+        and 17, the change occurred in a late-recruitment context, and the stored JSON Patch and rule hash identify why
+        TrialDiff classified it as review-priority.
+      </p>
+    </section>
+
+    <section class="panel panel-pad method-section">
+      <h2>What This Does Not Support</h2>
+      <p>
+        This case does not show misconduct, sponsor intent, scientific unjustifiability, manuscript non-disclosure, or
+        regulatory non-compliance. It also does not determine whether the registry outcome change reflects outcome
+        switching rather than a legitimate registry correction.
+      </p>
+      <p>
+        The correct next question is the record's own review question: what did the secondary outcome field say before
+        and after the amendment, and what contemporaneous public document explains the change?
+      </p>
+    </section>
+
+    <section class="panel panel-pad method-section">
+      <h2>External Source</h2>
+      <p>
+        <a href="https://clinicaltrials.gov/study/NCT01441947">
+          View NCT01441947 on ClinicalTrials.gov
+          <ExternalLink size={14} />
+        </a>
+      </p>
+    </section>
+  </main>
+</BaseLayout>

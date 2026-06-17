@@ -1,0 +1,108 @@
+---
+import { ArrowLeft, ExternalLink } from "@lucide/astro";
+
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Case Study B | TrialDiff"
+  description="A TrialDiff case study showing why late-stage timeline registry changes can matter."
+>
+  <main class="page-shell stack methodology-page">
+    <a class="button" href="/">
+      <ArrowLeft size={16} />
+      Back to dashboard
+    </a>
+
+    <header class="panel panel-pad">
+      <p class="eyebrow">Case Study B</p>
+      <h1>Why late-stage timeline changes matter</h1>
+      <p class="lede">
+        This case uses an in-corpus timeline record from NCT02942355. It shows how TrialDiff separates a factual
+        registry movement from any claim about intent, quality, or wrongdoing.
+      </p>
+    </header>
+
+    <section class="panel panel-pad disclaimer">
+      <div class="disclaimer-inner">
+        <div>
+          Severity means review priority, not proven wrongdoing. This case study surfaces a major timeline movement for
+          review; it does not determine whether the movement was scientifically justified.
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel-pad method-section">
+      <h2>Record</h2>
+      <p>
+        TrialDiff compares ClinicalTrials.gov versions 26 and 27 for NCT02942355, a Wake Forest University Health
+        Sciences study titled "Trial of Anastrozole and Palbociclib in Metastatic HER2-Negative Breast Cancer."
+      </p>
+      <p>
+        Evidence Record:
+        <a href="/events/evt_NCT02942355_v26_v27_f30d5b213a35">
+          evt_NCT02942355_v26_v27_f30d5b213a35
+        </a>
+      </p>
+      <p>
+        Canonical JSON:
+        <a href="/events/evt_NCT02942355_v26_v27_f30d5b213a35.json">
+          /events/evt_NCT02942355_v26_v27_f30d5b213a35.json
+        </a>
+      </p>
+    </section>
+
+    <section class="panel panel-pad method-section">
+      <h2>What Changed</h2>
+      <p>
+        The patch replaced both the primary completion date and completion date with <code>2028-06-30</code>. It also
+        updated status verification and last-update registry fields.
+      </p>
+      <p>
+        TrialDiff's value signal records a 731-day timeline movement. The changed paths are concentrated in the status
+        module, which makes this record a cleaner teaching case than a large multi-module patch.
+      </p>
+    </section>
+
+    <section class="panel panel-pad method-section">
+      <h2>Why It Was Ranked Critical</h2>
+      <p>
+        The timeline rule treated a movement greater than 365 days as a major slip, giving the event high base severity.
+        The from-version timing context was <code>late_recruitment</code>, so the timing modifier escalated the final
+        severity to critical.
+      </p>
+    </section>
+
+    <section class="panel panel-pad method-section">
+      <h2>What This Supports</h2>
+      <p>
+        This record supports a narrow factual statement: between versions 26 and 27, trial timeline fields moved by 731
+        days, the movement occurred in a late-recruitment context, and TrialDiff classified the amendment as a
+        review-priority timeline event.
+      </p>
+    </section>
+
+    <section class="panel panel-pad method-section">
+      <h2>What This Does Not Support</h2>
+      <p>
+        This case does not show misconduct, sponsor intent, scientific unjustifiability, manuscript non-disclosure, or
+        regulatory non-compliance. It does not determine whether the amendment was a delay, a backfill, a correction, or
+        an expected operational update.
+      </p>
+      <p>
+        The correct next question is the record's own review question: what explains the major timeline movement, and
+        does the amendment represent a delay, a backfill, or a correction?
+      </p>
+    </section>
+
+    <section class="panel panel-pad method-section">
+      <h2>External Source</h2>
+      <p>
+        <a href="https://clinicaltrials.gov/study/NCT02942355">
+          View NCT02942355 on ClinicalTrials.gov
+          <ExternalLink size={14} />
+        </a>
+      </p>
+    </section>
+  </main>
+</BaseLayout>

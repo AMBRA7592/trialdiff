@@ -219,6 +219,27 @@ h2 {
   color: #d7d3c8;
 }
 
+.case-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.case-card {
+  display: flex;
+  gap: 12px;
+  min-height: 94px;
+  padding: 16px;
+}
+
+.case-card:hover {
+  text-decoration: none;
+}
+
+.case-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: var(--accent);
+}
+
 .section-head {
   display: flex;
   align-items: center;
