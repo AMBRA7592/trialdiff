@@ -1,0 +1,434 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/contactsLocationsModule/centralContacts",
+      "/protocolSection/contactsLocationsModule/locations/0/contacts",
+      "/protocolSection/contactsLocationsModule/locations/0/status",
+      "/protocolSection/designModule/enrollmentInfo/count",
+      "/protocolSection/designModule/enrollmentInfo/type",
+      "/protocolSection/statusModule/completionDateStruct/date",
+      "/protocolSection/statusModule/completionDateStruct/type",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/overallStatus",
+      "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+      "/protocolSection/statusModule/primaryCompletionDateStruct/type",
+      "/protocolSection/statusModule/statusVerifiedDate",
+      "/protocolSection/statusModule/whyStopped"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT05180006_v3_v4_3cebafd518aa. ClinicalTrials.gov NCT05180006, versions 3-4. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance.",
+      "That TrialDiff determines whether the stopped-trial explanation satisfies 42 CFR 11.64."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 3 to version 4 for NCT05180006.",
+      "The JSON Patch for this comparison has hash 3282eb736dafd492435031eb6abbe06e2f4c934a4fc028366dd4b307f95020be.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under the status or stopped-trial explanation module changed between ClinicalTrials.gov versions 3 and 4.",
+      "The timing context for the from-version record was early_recruitment.",
+      "The deterministic rules that fired were: contact_admin_change, enrollment_count_change, enrollment_type_change, terminal_status_change, why_stopped_change.",
+      "The changed JSON Pointer paths were: /protocolSection/contactsLocationsModule/centralContacts, /protocolSection/contactsLocationsModule/locations/0/contacts, /protocolSection/contactsLocationsModule/locations/0/status, /protocolSection/designModule/enrollmentInfo/count, /protocolSection/designModule/enrollmentInfo/type, /protocolSection/statusModule/completionDateStruct/date, /protocolSection/statusModule/completionDateStruct/type, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/overallStatus, /protocolSection/statusModule/primaryCompletionDateStruct/date, /protocolSection/statusModule/primaryCompletionDateStruct/type, /protocolSection/statusModule/statusVerifiedDate, /protocolSection/statusModule/whyStopped.",
+      "The timeline value moved by 46 days.",
+      "The timeline value moved by 411 days.",
+      "The whyStopped value matched TrialDiff's low-information phrase list.",
+      "The enrollment count changed by at least 20 percent.",
+      "The changed paths include the ClinicalTrials.gov whyStopped field, a stopped-trial explanation field relevant to 42 CFR 11.64 when applicable."
+    ],
+    "classification": {
+      "categories": [
+        "status_termination",
+        "enrollment_change",
+        "timeline_major_slip",
+        "timeline_shift",
+        "administrative_contact_change"
+      ],
+      "category": "status_termination",
+      "deterministic_rules": [
+        "contact_admin_change",
+        "enrollment_count_change",
+        "enrollment_type_change",
+        "terminal_status_change",
+        "why_stopped_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "early_recruitment",
+      "value_signals": [
+        {
+          "category": "timeline_shift",
+          "date_struct": "primaryCompletionDateStruct",
+          "delta_days": 46,
+          "direction": "earlier",
+          "new_precision": "day",
+          "new_type": "ACTUAL",
+          "new_value": "2024-12-17",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2025-02",
+          "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+          "severity": "medium",
+          "signal": "timeline_shift"
+        },
+        {
+          "category": "timeline_major_slip",
+          "date_struct": "completionDateStruct",
+          "delta_days": 411,
+          "direction": "earlier",
+          "new_precision": "day",
+          "new_type": "ACTUAL",
+          "new_value": "2024-12-17",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2026-02",
+          "path": "/protocolSection/statusModule/completionDateStruct/date",
+          "severity": "high",
+          "signal": "timeline_major_slip"
+        },
+        {
+          "category": "status_termination",
+          "path": "/protocolSection/statusModule/whyStopped",
+          "severity": "high",
+          "signal": "why_stopped_low_information",
+          "value": "Abandon of the partner, ROCHE"
+        },
+        {
+          "category": "enrollment_change",
+          "new_value": 33,
+          "old_value": 185,
+          "path": "/protocolSection/designModule/enrollmentInfo/count",
+          "pct_change": 0.8216,
+          "severity": "high",
+          "signal": "enrollment_count_change_ge_20pct"
+        }
+      ]
+    },
+    "event_id": "evt_NCT05180006_v3_v4_3cebafd518aa",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2025-11"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/overallStatus",
+        "value": "TERMINATED"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+        "value": "2024-12-17"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/type",
+        "value": "ACTUAL"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/completionDateStruct/date",
+        "value": "2024-12-17"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/completionDateStruct/type",
+        "value": "ACTUAL"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2025-11-24"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2025-12-01"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/statusModule/whyStopped",
+        "value": "Abandon of the partner, ROCHE"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/designModule/enrollmentInfo/count",
+        "value": 33
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/designModule/enrollmentInfo/type",
+        "value": "ACTUAL"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/centralContacts"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/locations/0/status"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/locations/0/contacts"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "edaafaec07446a800e2624d063a4ba3316550625325dad56a20efc61402a09f7",
+      "materiality_event_hash": "b377af76b8fd62e0517ba3646130700fcc8407e8f8a8d76f55eb6b5bc8e0fa85",
+      "patch_hash": "3282eb736dafd492435031eb6abbe06e2f4c934a4fc028366dd4b307f95020be",
+      "patch_raw_hash": "abbd2ebcab0c9c001b5aa8cf128414b2740d74ecf992dd62eb2e15039f6e6b41",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT05180006/history/3?patchToVersion=4",
+      "to_snapshot_hash": null
+    },
+    "review_question": "Does the public registry record give a specific explanation for the stopped or terminal status?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT05180006",
+      "nct_id": "NCT05180006"
+    },
+    "versions": {
+      "from_version": 3,
+      "submitted_date": "2025-11-24",
+      "to_version": 4
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/contactsLocationsModule/centralContacts",
+    "/protocolSection/contactsLocationsModule/locations/0/contacts",
+    "/protocolSection/contactsLocationsModule/locations/0/status",
+    "/protocolSection/designModule/enrollmentInfo/count",
+    "/protocolSection/designModule/enrollmentInfo/type",
+    "/protocolSection/statusModule/completionDateStruct/date",
+    "/protocolSection/statusModule/completionDateStruct/type",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/overallStatus",
+    "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+    "/protocolSection/statusModule/primaryCompletionDateStruct/type",
+    "/protocolSection/statusModule/statusVerifiedDate",
+    "/protocolSection/statusModule/whyStopped"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT05180006_v3_v4_3cebafd518aa. ClinicalTrials.gov NCT05180006, versions 3-4. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance.",
+    "That TrialDiff determines whether the stopped-trial explanation satisfies 42 CFR 11.64."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 3 to version 4 for NCT05180006.",
+    "The JSON Patch for this comparison has hash 3282eb736dafd492435031eb6abbe06e2f4c934a4fc028366dd4b307f95020be.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under the status or stopped-trial explanation module changed between ClinicalTrials.gov versions 3 and 4.",
+    "The timing context for the from-version record was early_recruitment.",
+    "The deterministic rules that fired were: contact_admin_change, enrollment_count_change, enrollment_type_change, terminal_status_change, why_stopped_change.",
+    "The changed JSON Pointer paths were: /protocolSection/contactsLocationsModule/centralContacts, /protocolSection/contactsLocationsModule/locations/0/contacts, /protocolSection/contactsLocationsModule/locations/0/status, /protocolSection/designModule/enrollmentInfo/count, /protocolSection/designModule/enrollmentInfo/type, /protocolSection/statusModule/completionDateStruct/date, /protocolSection/statusModule/completionDateStruct/type, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/overallStatus, /protocolSection/statusModule/primaryCompletionDateStruct/date, /protocolSection/statusModule/primaryCompletionDateStruct/type, /protocolSection/statusModule/statusVerifiedDate, /protocolSection/statusModule/whyStopped.",
+    "The timeline value moved by 46 days.",
+    "The timeline value moved by 411 days.",
+    "The whyStopped value matched TrialDiff's low-information phrase list.",
+    "The enrollment count changed by at least 20 percent.",
+    "The changed paths include the ClinicalTrials.gov whyStopped field, a stopped-trial explanation field relevant to 42 CFR 11.64 when applicable."
+  ],
+  "classification": {
+    "categories": [
+      "status_termination",
+      "enrollment_change",
+      "timeline_major_slip",
+      "timeline_shift",
+      "administrative_contact_change"
+    ],
+    "category": "status_termination",
+    "deterministic_rules": [
+      "contact_admin_change",
+      "enrollment_count_change",
+      "enrollment_type_change",
+      "terminal_status_change",
+      "why_stopped_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "early_recruitment",
+    "value_signals": [
+      {
+        "category": "timeline_shift",
+        "date_struct": "primaryCompletionDateStruct",
+        "delta_days": 46,
+        "direction": "earlier",
+        "new_precision": "day",
+        "new_type": "ACTUAL",
+        "new_value": "2024-12-17",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2025-02",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+        "severity": "medium",
+        "signal": "timeline_shift"
+      },
+      {
+        "category": "timeline_major_slip",
+        "date_struct": "completionDateStruct",
+        "delta_days": 411,
+        "direction": "earlier",
+        "new_precision": "day",
+        "new_type": "ACTUAL",
+        "new_value": "2024-12-17",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2026-02",
+        "path": "/protocolSection/statusModule/completionDateStruct/date",
+        "severity": "high",
+        "signal": "timeline_major_slip"
+      },
+      {
+        "category": "status_termination",
+        "path": "/protocolSection/statusModule/whyStopped",
+        "severity": "high",
+        "signal": "why_stopped_low_information",
+        "value": "Abandon of the partner, ROCHE"
+      },
+      {
+        "category": "enrollment_change",
+        "new_value": 33,
+        "old_value": 185,
+        "path": "/protocolSection/designModule/enrollmentInfo/count",
+        "pct_change": 0.8216,
+        "severity": "high",
+        "signal": "enrollment_count_change_ge_20pct"
+      }
+    ]
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT05180006_v3_v4_3cebafd518aa",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT05180006_v3_v4_3cebafd518aa.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT05180006_v3_v4_3cebafd518aa",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT05180006"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2025-11"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/overallStatus",
+      "value": "TERMINATED"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+      "value": "2024-12-17"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/primaryCompletionDateStruct/type",
+      "value": "ACTUAL"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/completionDateStruct/date",
+      "value": "2024-12-17"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/completionDateStruct/type",
+      "value": "ACTUAL"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2025-11-24"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2025-12-01"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/statusModule/whyStopped",
+      "value": "Abandon of the partner, ROCHE"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/designModule/enrollmentInfo/count",
+      "value": 33
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/designModule/enrollmentInfo/type",
+      "value": "ACTUAL"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/centralContacts"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/locations/0/status"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/locations/0/contacts"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "71f44572273471d520f8755a3d232459e3c10efbe8a52ef05fb6d4f2c680f364",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT05180006_v3_v4_3cebafd518aa",
+    "evidence_version": 1,
+    "from_snapshot_hash": "edaafaec07446a800e2624d063a4ba3316550625325dad56a20efc61402a09f7",
+    "materiality_event_hash": "b377af76b8fd62e0517ba3646130700fcc8407e8f8a8d76f55eb6b5bc8e0fa85",
+    "patch_hash": "3282eb736dafd492435031eb6abbe06e2f4c934a4fc028366dd4b307f95020be",
+    "patch_raw_hash": "abbd2ebcab0c9c001b5aa8cf128414b2740d74ecf992dd62eb2e15039f6e6b41",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT05180006/history/3?patchToVersion=4",
+    "to_snapshot_hash": null
+  },
+  "review_question": "Does the public registry record give a specific explanation for the stopped or terminal status?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT05180006",
+    "current_record_hash": "63d5de01a0a41fdc83bb4ee7606e2675da776f9c96cde1d3428645e92bc485af",
+    "current_record_raw_hash": "63d5de01a0a41fdc83bb4ee7606e2675da776f9c96cde1d3428645e92bc485af",
+    "lead_sponsor": "Gustave Roussy, Cancer Campus, Grand Paris",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT05180006",
+    "official_title": "Impact of Neoadjuvant Immunotherapy in Early Stage Breast Cancer Before Standard Therapy",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT05180006",
+    "title": "Impact of Neoadjuvant Immunotherapy in Early Stage Breast Cancer Before Standard Therapy"
+  },
+  "versions": {
+    "from_version": 3,
+    "submitted_date": "2025-11-24",
+    "to_version": 4
+  }
+}

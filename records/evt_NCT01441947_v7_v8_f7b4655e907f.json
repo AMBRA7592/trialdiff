@@ -1,0 +1,586 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/armsInterventionsModule/armGroups",
+      "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels",
+      "/protocolSection/armsInterventionsModule/interventions/0/description",
+      "/protocolSection/armsInterventionsModule/interventions/0/name",
+      "/protocolSection/armsInterventionsModule/interventions/1",
+      "/protocolSection/contactsLocationsModule/centralContacts",
+      "/protocolSection/contactsLocationsModule/locations/0/contacts",
+      "/protocolSection/contactsLocationsModule/locations/0/status",
+      "/protocolSection/contactsLocationsModule/locations/1/contacts",
+      "/protocolSection/contactsLocationsModule/locations/1/status",
+      "/protocolSection/contactsLocationsModule/locations/2/contacts",
+      "/protocolSection/contactsLocationsModule/locations/2/status",
+      "/protocolSection/contactsLocationsModule/locations/3/status",
+      "/protocolSection/contactsLocationsModule/overallOfficials/0/name",
+      "/protocolSection/sponsorCollaboratorsModule/responsibleParty/investigatorFullName",
+      "/protocolSection/statusModule/completionDateStruct/date",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/overallStatus",
+      "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT01441947_v7_v8_f7b4655e907f. ClinicalTrials.gov NCT01441947, versions 7-8. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 7 to version 8 for NCT01441947.",
+      "The JSON Patch for this comparison has hash 52f418fe35ce3ab384623d275fdb836d93da962fa2d5436b3f9defdf7c789bed.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under an arm or intervention module changed between ClinicalTrials.gov versions 7 and 8.",
+      "The timing context for the from-version record was late_recruitment.",
+      "The deterministic rules that fired were: arms_or_interventions_change, contact_admin_change.",
+      "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels, /protocolSection/armsInterventionsModule/interventions/0/description, /protocolSection/armsInterventionsModule/interventions/0/name, /protocolSection/armsInterventionsModule/interventions/1, /protocolSection/contactsLocationsModule/centralContacts, /protocolSection/contactsLocationsModule/locations/0/contacts, /protocolSection/contactsLocationsModule/locations/0/status, /protocolSection/contactsLocationsModule/locations/1/contacts, /protocolSection/contactsLocationsModule/locations/1/status, /protocolSection/contactsLocationsModule/locations/2/contacts, /protocolSection/contactsLocationsModule/locations/2/status, /protocolSection/contactsLocationsModule/locations/3/status, /protocolSection/contactsLocationsModule/overallOfficials/0/name, /protocolSection/sponsorCollaboratorsModule/responsibleParty/investigatorFullName, /protocolSection/statusModule/completionDateStruct/date, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/overallStatus, /protocolSection/statusModule/primaryCompletionDateStruct/date, /protocolSection/statusModule/statusVerifiedDate.",
+      "The timeline value moved by 548 days.",
+      "The timeline value moved by 761 days."
+    ],
+    "classification": {
+      "categories": [
+        "arm_intervention_change",
+        "timeline_major_slip",
+        "administrative_contact_change"
+      ],
+      "category": "arm_intervention_change",
+      "deterministic_rules": [
+        "arms_or_interventions_change",
+        "contact_admin_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "late_recruitment",
+      "value_signals": [
+        {
+          "category": "timeline_major_slip",
+          "date_struct": "primaryCompletionDateStruct",
+          "delta_days": 548,
+          "direction": "later",
+          "new_precision": "month",
+          "new_type": "ESTIMATED",
+          "new_value": "2015-12",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2014-06",
+          "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+          "severity": "high",
+          "signal": "timeline_major_slip"
+        },
+        {
+          "category": "timeline_major_slip",
+          "date_struct": "completionDateStruct",
+          "delta_days": 761,
+          "direction": "later",
+          "new_precision": "month",
+          "new_type": "ESTIMATED",
+          "new_value": "2016-12",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2014-11",
+          "path": "/protocolSection/statusModule/completionDateStruct/date",
+          "severity": "high",
+          "signal": "timeline_major_slip"
+        }
+      ]
+    },
+    "event_id": "evt_NCT01441947_v7_v8_f7b4655e907f",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2014-11"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/overallStatus",
+        "value": "RECRUITING"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+        "value": "2015-12"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/completionDateStruct/date",
+        "value": "2016-12"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2014-11-10"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2014-11-11"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/sponsorCollaboratorsModule/responsibleParty/investigatorFullName",
+        "value": "Steven Isakoff, MD, PhD"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/name",
+        "value": "Cabozantinib"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/description",
+        "value": "Part of combination arm"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels",
+        "value": [
+          "Cabozantinib plus fulvestrant"
+        ]
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/interventions/1",
+        "value": {
+          "armGroupLabels": [
+            "Cabozantinib plus fulvestrant"
+          ],
+          "description": "part of combination arm",
+          "name": "Fulvestrant",
+          "otherNames": [
+            "Faslodex"
+          ],
+          "type": "DRUG"
+        }
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/armGroups",
+        "value": [
+          {
+            "description": "Combination therapy with cabozantinib 60 mg daily plus fulvestrant 500 mg monthly IM",
+            "interventionNames": [
+              "Drug: Cabozantinib",
+              "Drug: Fulvestrant"
+            ],
+            "label": "Cabozantinib plus fulvestrant",
+            "type": "EXPERIMENTAL"
+          }
+        ]
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/contactsLocationsModule/overallOfficials/0/name",
+        "value": "Steven J Isakoff, MD, PhD"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/contactsLocationsModule/locations/0/status",
+        "value": "RECRUITING"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/contactsLocationsModule/locations/0/contacts",
+        "value": [
+          {
+            "email": "sjisakoff@partners.org",
+            "name": "Steve Isakoff, MD PhD",
+            "phone": "617-726-4920",
+            "role": "CONTACT"
+          }
+        ]
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/contactsLocationsModule/locations/1/status",
+        "value": "RECRUITING"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/contactsLocationsModule/locations/1/contacts",
+        "value": [
+          {
+            "email": "scome@bidmc.harvard.edu",
+            "name": "Steven Come",
+            "role": "CONTACT"
+          },
+          {
+            "name": "Steve Come, MD",
+            "role": "PRINCIPAL_INVESTIGATOR"
+          }
+        ]
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/contactsLocationsModule/locations/2/status",
+        "value": "RECRUITING"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/contactsLocationsModule/locations/2/contacts",
+        "value": [
+          {
+            "email": "sara_tolaney@dfci.harvard.edu",
+            "name": "Sara Tolaney",
+            "role": "CONTACT"
+          },
+          {
+            "name": "Sara Tolaney, MD MPH",
+            "role": "PRINCIPAL_INVESTIGATOR"
+          }
+        ]
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/contactsLocationsModule/locations/3/status",
+        "value": "ACTIVE_NOT_RECRUITING"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/contactsLocationsModule/centralContacts",
+        "value": [
+          {
+            "email": "sisakoff@partners.org",
+            "name": "Steven J Isakoff, MD, PhD",
+            "phone": "617-726-4920",
+            "role": "CONTACT"
+          }
+        ]
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "653486686c50ab8370b0697d6968f4f270c94957d151d85b96ab4262de95fdf6",
+      "materiality_event_hash": "05ac7cea2c5ecd007ebc117b0bcb7642148c3588f521e6b0bd82a4cbc4c65b2e",
+      "patch_hash": "52f418fe35ce3ab384623d275fdb836d93da962fa2d5436b3f9defdf7c789bed",
+      "patch_raw_hash": "fb763856dc57bd54ec310b995e7f2247b28b5a314103039d8ee85b8db38abc4e",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT01441947/history/7?patchToVersion=8",
+      "to_snapshot_hash": "6bc37bba93e531e2233821c626886c986fe203549532577654b150d4f22ccc1e"
+    },
+    "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT01441947",
+      "nct_id": "NCT01441947"
+    },
+    "versions": {
+      "from_version": 7,
+      "submitted_date": "2014-11-10",
+      "to_version": 8
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/armsInterventionsModule/armGroups",
+    "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels",
+    "/protocolSection/armsInterventionsModule/interventions/0/description",
+    "/protocolSection/armsInterventionsModule/interventions/0/name",
+    "/protocolSection/armsInterventionsModule/interventions/1",
+    "/protocolSection/contactsLocationsModule/centralContacts",
+    "/protocolSection/contactsLocationsModule/locations/0/contacts",
+    "/protocolSection/contactsLocationsModule/locations/0/status",
+    "/protocolSection/contactsLocationsModule/locations/1/contacts",
+    "/protocolSection/contactsLocationsModule/locations/1/status",
+    "/protocolSection/contactsLocationsModule/locations/2/contacts",
+    "/protocolSection/contactsLocationsModule/locations/2/status",
+    "/protocolSection/contactsLocationsModule/locations/3/status",
+    "/protocolSection/contactsLocationsModule/overallOfficials/0/name",
+    "/protocolSection/sponsorCollaboratorsModule/responsibleParty/investigatorFullName",
+    "/protocolSection/statusModule/completionDateStruct/date",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/overallStatus",
+    "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT01441947_v7_v8_f7b4655e907f. ClinicalTrials.gov NCT01441947, versions 7-8. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 7 to version 8 for NCT01441947.",
+    "The JSON Patch for this comparison has hash 52f418fe35ce3ab384623d275fdb836d93da962fa2d5436b3f9defdf7c789bed.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under an arm or intervention module changed between ClinicalTrials.gov versions 7 and 8.",
+    "The timing context for the from-version record was late_recruitment.",
+    "The deterministic rules that fired were: arms_or_interventions_change, contact_admin_change.",
+    "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels, /protocolSection/armsInterventionsModule/interventions/0/description, /protocolSection/armsInterventionsModule/interventions/0/name, /protocolSection/armsInterventionsModule/interventions/1, /protocolSection/contactsLocationsModule/centralContacts, /protocolSection/contactsLocationsModule/locations/0/contacts, /protocolSection/contactsLocationsModule/locations/0/status, /protocolSection/contactsLocationsModule/locations/1/contacts, /protocolSection/contactsLocationsModule/locations/1/status, /protocolSection/contactsLocationsModule/locations/2/contacts, /protocolSection/contactsLocationsModule/locations/2/status, /protocolSection/contactsLocationsModule/locations/3/status, /protocolSection/contactsLocationsModule/overallOfficials/0/name, /protocolSection/sponsorCollaboratorsModule/responsibleParty/investigatorFullName, /protocolSection/statusModule/completionDateStruct/date, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/overallStatus, /protocolSection/statusModule/primaryCompletionDateStruct/date, /protocolSection/statusModule/statusVerifiedDate.",
+    "The timeline value moved by 548 days.",
+    "The timeline value moved by 761 days."
+  ],
+  "classification": {
+    "categories": [
+      "arm_intervention_change",
+      "timeline_major_slip",
+      "administrative_contact_change"
+    ],
+    "category": "arm_intervention_change",
+    "deterministic_rules": [
+      "arms_or_interventions_change",
+      "contact_admin_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "late_recruitment",
+    "value_signals": [
+      {
+        "category": "timeline_major_slip",
+        "date_struct": "primaryCompletionDateStruct",
+        "delta_days": 548,
+        "direction": "later",
+        "new_precision": "month",
+        "new_type": "ESTIMATED",
+        "new_value": "2015-12",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2014-06",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+        "severity": "high",
+        "signal": "timeline_major_slip"
+      },
+      {
+        "category": "timeline_major_slip",
+        "date_struct": "completionDateStruct",
+        "delta_days": 761,
+        "direction": "later",
+        "new_precision": "month",
+        "new_type": "ESTIMATED",
+        "new_value": "2016-12",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2014-11",
+        "path": "/protocolSection/statusModule/completionDateStruct/date",
+        "severity": "high",
+        "signal": "timeline_major_slip"
+      }
+    ]
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT01441947_v7_v8_f7b4655e907f",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT01441947_v7_v8_f7b4655e907f.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT01441947_v7_v8_f7b4655e907f",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT01441947"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2014-11"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/overallStatus",
+      "value": "RECRUITING"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+      "value": "2015-12"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/completionDateStruct/date",
+      "value": "2016-12"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2014-11-10"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2014-11-11"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/sponsorCollaboratorsModule/responsibleParty/investigatorFullName",
+      "value": "Steven Isakoff, MD, PhD"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/name",
+      "value": "Cabozantinib"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/description",
+      "value": "Part of combination arm"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels",
+      "value": [
+        "Cabozantinib plus fulvestrant"
+      ]
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/interventions/1",
+      "value": {
+        "armGroupLabels": [
+          "Cabozantinib plus fulvestrant"
+        ],
+        "description": "part of combination arm",
+        "name": "Fulvestrant",
+        "otherNames": [
+          "Faslodex"
+        ],
+        "type": "DRUG"
+      }
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/armGroups",
+      "value": [
+        {
+          "description": "Combination therapy with cabozantinib 60 mg daily plus fulvestrant 500 mg monthly IM",
+          "interventionNames": [
+            "Drug: Cabozantinib",
+            "Drug: Fulvestrant"
+          ],
+          "label": "Cabozantinib plus fulvestrant",
+          "type": "EXPERIMENTAL"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/contactsLocationsModule/overallOfficials/0/name",
+      "value": "Steven J Isakoff, MD, PhD"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/contactsLocationsModule/locations/0/status",
+      "value": "RECRUITING"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/contactsLocationsModule/locations/0/contacts",
+      "value": [
+        {
+          "email": "sjisakoff@partners.org",
+          "name": "Steve Isakoff, MD PhD",
+          "phone": "617-726-4920",
+          "role": "CONTACT"
+        }
+      ]
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/contactsLocationsModule/locations/1/status",
+      "value": "RECRUITING"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/contactsLocationsModule/locations/1/contacts",
+      "value": [
+        {
+          "email": "scome@bidmc.harvard.edu",
+          "name": "Steven Come",
+          "role": "CONTACT"
+        },
+        {
+          "name": "Steve Come, MD",
+          "role": "PRINCIPAL_INVESTIGATOR"
+        }
+      ]
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/contactsLocationsModule/locations/2/status",
+      "value": "RECRUITING"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/contactsLocationsModule/locations/2/contacts",
+      "value": [
+        {
+          "email": "sara_tolaney@dfci.harvard.edu",
+          "name": "Sara Tolaney",
+          "role": "CONTACT"
+        },
+        {
+          "name": "Sara Tolaney, MD MPH",
+          "role": "PRINCIPAL_INVESTIGATOR"
+        }
+      ]
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/contactsLocationsModule/locations/3/status",
+      "value": "ACTIVE_NOT_RECRUITING"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/contactsLocationsModule/centralContacts",
+      "value": [
+        {
+          "email": "sisakoff@partners.org",
+          "name": "Steven J Isakoff, MD, PhD",
+          "phone": "617-726-4920",
+          "role": "CONTACT"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "8fdbf904fbae081118f491d894a032011eedefcf999c3ea9f5d543c7602747c7",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT01441947_v7_v8_f7b4655e907f",
+    "evidence_version": 1,
+    "from_snapshot_hash": "653486686c50ab8370b0697d6968f4f270c94957d151d85b96ab4262de95fdf6",
+    "materiality_event_hash": "05ac7cea2c5ecd007ebc117b0bcb7642148c3588f521e6b0bd82a4cbc4c65b2e",
+    "patch_hash": "52f418fe35ce3ab384623d275fdb836d93da962fa2d5436b3f9defdf7c789bed",
+    "patch_raw_hash": "fb763856dc57bd54ec310b995e7f2247b28b5a314103039d8ee85b8db38abc4e",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT01441947/history/7?patchToVersion=8",
+    "to_snapshot_hash": "6bc37bba93e531e2233821c626886c986fe203549532577654b150d4f22ccc1e"
+  },
+  "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT01441947",
+    "current_record_hash": "c55f5fa065637193e9b1e93d3ba8d5e856f335e738dac7b8db817572613a37d9",
+    "current_record_raw_hash": "c55f5fa065637193e9b1e93d3ba8d5e856f335e738dac7b8db817572613a37d9",
+    "lead_sponsor": "Massachusetts General Hospital",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT01441947",
+    "official_title": "A Phase II Trial of Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer With Involvement of Bone",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT01441947",
+    "title": "Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer"
+  },
+  "versions": {
+    "from_version": 7,
+    "submitted_date": "2014-11-10",
+    "to_version": 8
+  }
+}

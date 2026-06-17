@@ -1,0 +1,434 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/armsInterventionsModule/armGroups",
+      "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels",
+      "/protocolSection/armsInterventionsModule/interventions/0/description",
+      "/protocolSection/armsInterventionsModule/interventions/1",
+      "/protocolSection/contactsLocationsModule/overallOfficials",
+      "/protocolSection/descriptionModule/briefSummary",
+      "/protocolSection/designModule/enrollmentInfo",
+      "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+      "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+      "/protocolSection/outcomesModule/secondaryOutcomes/0/measure",
+      "/protocolSection/outcomesModule/secondaryOutcomes/0/timeFrame",
+      "/protocolSection/outcomesModule/secondaryOutcomes/1",
+      "/protocolSection/sponsorCollaboratorsModule/responsibleParty",
+      "/protocolSection/statusModule/expandedAccessInfo",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT00337649_v19_v20_c909feb56bd7. ClinicalTrials.gov NCT00337649, versions 19-20. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance.",
+      "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 19 to version 20 for NCT00337649.",
+      "The JSON Patch for this comparison has hash a6a6e4245880f1e26cead597972a44e74c8f58aea5d365aa31a1b4fa5830553d.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under the primary outcome module changed between ClinicalTrials.gov versions 19 and 20.",
+      "The timing context for the from-version record was post_recruitment.",
+      "The deterministic rules that fired were: arms_or_interventions_change, primary_outcome_any_change, secondary_outcome_any_change.",
+      "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels, /protocolSection/armsInterventionsModule/interventions/0/description, /protocolSection/armsInterventionsModule/interventions/1, /protocolSection/contactsLocationsModule/overallOfficials, /protocolSection/descriptionModule/briefSummary, /protocolSection/designModule/enrollmentInfo, /protocolSection/outcomesModule/primaryOutcomes/0/measure, /protocolSection/outcomesModule/primaryOutcomes/0/timeFrame, /protocolSection/outcomesModule/secondaryOutcomes/0/measure, /protocolSection/outcomesModule/secondaryOutcomes/0/timeFrame, /protocolSection/outcomesModule/secondaryOutcomes/1, /protocolSection/sponsorCollaboratorsModule/responsibleParty, /protocolSection/statusModule/expandedAccessInfo, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+    ],
+    "classification": {
+      "categories": [
+        "primary_outcome_change",
+        "arm_intervention_change",
+        "secondary_outcome_change"
+      ],
+      "category": "primary_outcome_change",
+      "deterministic_rules": [
+        "arms_or_interventions_change",
+        "primary_outcome_any_change",
+        "secondary_outcome_any_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "post_recruitment",
+      "value_signals": []
+    },
+    "event_id": "evt_NCT00337649_v19_v20_c909feb56bd7",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2008-01"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2008-01-18"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2008-01-23"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/statusModule/expandedAccessInfo",
+        "value": {
+          "hasExpandedAccess": false
+        }
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/sponsorCollaboratorsModule/responsibleParty",
+        "value": {
+          "oldNameTitle": "Clinical Trials, Study Director",
+          "oldOrganization": "Hoffmann-La Roche"
+        }
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/descriptionModule/briefSummary",
+        "value": "This single arm study will determine the efficacy and safety of an epothilone D and Herceptin combination regimen in patients with HER-2 positive locally advanced or metastatic breast cancer.\nEpothilone D will be administered intravenously on days 1, 8 and 15 every 4 weeks at a dose not exceeding 100mg&#x2F;m2.\nHerceptin will be administered intravenously on a weekly schedule; a 4mg&#x2F;kg loading dose will be followed by a weekly maintenance dose of 2mg&#x2F;kg.\nThe anticipated time on study treatment is until disease progression, and the target sample size is &lt;100 individuals."
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/designModule/enrollmentInfo",
+        "value": {
+          "count": 27,
+          "type": "ACTUAL"
+        }
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/description",
+        "value": "&lt;100mg&#x2F;m2 iv on days 1, 8 and 15 every 4 weeks"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels",
+        "value": [
+          "1"
+        ]
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/interventions/1",
+        "value": {
+          "armGroupLabels": [
+            "1"
+          ],
+          "description": "4mg&#x2F;kg iv loading dose followed by 2mg&#x2F;kg iv weekly",
+          "name": "Herceptin",
+          "type": "DRUG"
+        }
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/armGroups",
+        "value": [
+          {
+            "interventionNames": [
+              "Drug: Epothilone D",
+              "Drug: Herceptin"
+            ],
+            "label": "1",
+            "type": "EXPERIMENTAL"
+          }
+        ]
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+        "value": "Response rate (RECIST criteria)"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+        "value": "Event driven"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/0/measure",
+        "value": "Duration of response, time to tumor progression."
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/0/timeFrame",
+        "value": "Event driven"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/1",
+        "value": {
+          "measure": "AEs, laboratory tests",
+          "timeFrame": "Throughout study"
+        }
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/contactsLocationsModule/overallOfficials",
+        "value": [
+          {
+            "affiliation": "Hoffmann-La Roche",
+            "name": "Clinical Trials",
+            "role": "STUDY_DIRECTOR"
+          }
+        ]
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "92491a3c8e63c8d16c95fe62dfb827b8f48f8edb91fb13a5b8c9fe1eeee02e0b",
+      "materiality_event_hash": "7644096c92df4de863ddccbd15a82235a9b550b039263a5caa8fbaa44cab0285",
+      "patch_hash": "a6a6e4245880f1e26cead597972a44e74c8f58aea5d365aa31a1b4fa5830553d",
+      "patch_raw_hash": "980182e195852b49874f173c1290e139694f0cf955336ce3b4ffe8389ae2eb4e",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT00337649/history/19?patchToVersion=20",
+      "to_snapshot_hash": "da19c43e382905e44bf59e8b85306f2faed5b8b89f616b26bc82d3ae9f0b9944"
+    },
+    "review_question": "What did the primary outcome field say before and after the amendment, and is there a public protocol, statistical analysis plan, or manuscript explaining the change?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT00337649",
+      "nct_id": "NCT00337649"
+    },
+    "versions": {
+      "from_version": 19,
+      "submitted_date": "2008-01-18",
+      "to_version": 20
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/armsInterventionsModule/armGroups",
+    "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels",
+    "/protocolSection/armsInterventionsModule/interventions/0/description",
+    "/protocolSection/armsInterventionsModule/interventions/1",
+    "/protocolSection/contactsLocationsModule/overallOfficials",
+    "/protocolSection/descriptionModule/briefSummary",
+    "/protocolSection/designModule/enrollmentInfo",
+    "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+    "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+    "/protocolSection/outcomesModule/secondaryOutcomes/0/measure",
+    "/protocolSection/outcomesModule/secondaryOutcomes/0/timeFrame",
+    "/protocolSection/outcomesModule/secondaryOutcomes/1",
+    "/protocolSection/sponsorCollaboratorsModule/responsibleParty",
+    "/protocolSection/statusModule/expandedAccessInfo",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT00337649_v19_v20_c909feb56bd7. ClinicalTrials.gov NCT00337649, versions 19-20. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance.",
+    "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 19 to version 20 for NCT00337649.",
+    "The JSON Patch for this comparison has hash a6a6e4245880f1e26cead597972a44e74c8f58aea5d365aa31a1b4fa5830553d.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under the primary outcome module changed between ClinicalTrials.gov versions 19 and 20.",
+    "The timing context for the from-version record was post_recruitment.",
+    "The deterministic rules that fired were: arms_or_interventions_change, primary_outcome_any_change, secondary_outcome_any_change.",
+    "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels, /protocolSection/armsInterventionsModule/interventions/0/description, /protocolSection/armsInterventionsModule/interventions/1, /protocolSection/contactsLocationsModule/overallOfficials, /protocolSection/descriptionModule/briefSummary, /protocolSection/designModule/enrollmentInfo, /protocolSection/outcomesModule/primaryOutcomes/0/measure, /protocolSection/outcomesModule/primaryOutcomes/0/timeFrame, /protocolSection/outcomesModule/secondaryOutcomes/0/measure, /protocolSection/outcomesModule/secondaryOutcomes/0/timeFrame, /protocolSection/outcomesModule/secondaryOutcomes/1, /protocolSection/sponsorCollaboratorsModule/responsibleParty, /protocolSection/statusModule/expandedAccessInfo, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+  ],
+  "classification": {
+    "categories": [
+      "primary_outcome_change",
+      "arm_intervention_change",
+      "secondary_outcome_change"
+    ],
+    "category": "primary_outcome_change",
+    "deterministic_rules": [
+      "arms_or_interventions_change",
+      "primary_outcome_any_change",
+      "secondary_outcome_any_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "post_recruitment",
+    "value_signals": []
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT00337649_v19_v20_c909feb56bd7",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT00337649_v19_v20_c909feb56bd7.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT00337649_v19_v20_c909feb56bd7",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT00337649"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2008-01"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2008-01-18"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2008-01-23"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/statusModule/expandedAccessInfo",
+      "value": {
+        "hasExpandedAccess": false
+      }
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/sponsorCollaboratorsModule/responsibleParty",
+      "value": {
+        "oldNameTitle": "Clinical Trials, Study Director",
+        "oldOrganization": "Hoffmann-La Roche"
+      }
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/descriptionModule/briefSummary",
+      "value": "This single arm study will determine the efficacy and safety of an epothilone D and Herceptin combination regimen in patients with HER-2 positive locally advanced or metastatic breast cancer.\nEpothilone D will be administered intravenously on days 1, 8 and 15 every 4 weeks at a dose not exceeding 100mg&#x2F;m2.\nHerceptin will be administered intravenously on a weekly schedule; a 4mg&#x2F;kg loading dose will be followed by a weekly maintenance dose of 2mg&#x2F;kg.\nThe anticipated time on study treatment is until disease progression, and the target sample size is &lt;100 individuals."
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/designModule/enrollmentInfo",
+      "value": {
+        "count": 27,
+        "type": "ACTUAL"
+      }
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/description",
+      "value": "&lt;100mg&#x2F;m2 iv on days 1, 8 and 15 every 4 weeks"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels",
+      "value": [
+        "1"
+      ]
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/interventions/1",
+      "value": {
+        "armGroupLabels": [
+          "1"
+        ],
+        "description": "4mg&#x2F;kg iv loading dose followed by 2mg&#x2F;kg iv weekly",
+        "name": "Herceptin",
+        "type": "DRUG"
+      }
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/armGroups",
+      "value": [
+        {
+          "interventionNames": [
+            "Drug: Epothilone D",
+            "Drug: Herceptin"
+          ],
+          "label": "1",
+          "type": "EXPERIMENTAL"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+      "value": "Response rate (RECIST criteria)"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+      "value": "Event driven"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/0/measure",
+      "value": "Duration of response, time to tumor progression."
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/0/timeFrame",
+      "value": "Event driven"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/1",
+      "value": {
+        "measure": "AEs, laboratory tests",
+        "timeFrame": "Throughout study"
+      }
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/contactsLocationsModule/overallOfficials",
+      "value": [
+        {
+          "affiliation": "Hoffmann-La Roche",
+          "name": "Clinical Trials",
+          "role": "STUDY_DIRECTOR"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "2fdd27914694684c132126d6900183edf70ee56c574bfd6766f2c122505f79cb",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT00337649_v19_v20_c909feb56bd7",
+    "evidence_version": 1,
+    "from_snapshot_hash": "92491a3c8e63c8d16c95fe62dfb827b8f48f8edb91fb13a5b8c9fe1eeee02e0b",
+    "materiality_event_hash": "7644096c92df4de863ddccbd15a82235a9b550b039263a5caa8fbaa44cab0285",
+    "patch_hash": "a6a6e4245880f1e26cead597972a44e74c8f58aea5d365aa31a1b4fa5830553d",
+    "patch_raw_hash": "980182e195852b49874f173c1290e139694f0cf955336ce3b4ffe8389ae2eb4e",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT00337649/history/19?patchToVersion=20",
+    "to_snapshot_hash": "da19c43e382905e44bf59e8b85306f2faed5b8b89f616b26bc82d3ae9f0b9944"
+  },
+  "review_question": "What did the primary outcome field say before and after the amendment, and is there a public protocol, statistical analysis plan, or manuscript explaining the change?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT00337649",
+    "current_record_hash": "ec94fb1adad5c2870d50750ada11d8088931d9e371bb5b28bba3f7b6dcf50f5d",
+    "current_record_raw_hash": "ec94fb1adad5c2870d50750ada11d8088931d9e371bb5b28bba3f7b6dcf50f5d",
+    "lead_sponsor": "Hoffmann-La Roche",
+    "lead_sponsor_class": "INDUSTRY",
+    "nct_id": "NCT00337649",
+    "official_title": "An Open-label Study to Evaluate the Effect of Combination Therapy With Epothilone D and Herceptin on Tumor Response in Patients With HER-2 Overexpressing Locally Advanced or Metastatic Breast Cancer",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT00337649",
+    "title": "A Study of Epothilone D in Combination With Herceptin (Trastuzumab) in Patients With HER-2 Positive Advanced or Metastatic Breast Cancer"
+  },
+  "versions": {
+    "from_version": 19,
+    "submitted_date": "2008-01-18",
+    "to_version": 20
+  }
+}

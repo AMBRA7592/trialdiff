@@ -1,0 +1,16 @@
+[
+  {
+    "op": "replace",
+    "path": "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+    "value": "Progression-free survival"
+  },
+  {
+    "op": "remove",
+    "path": "/protocolSection/outcomesModule/primaryOutcomes/1"
+  },
+  {
+    "op": "replace",
+    "path": "/protocolSection/designModule/enrollmentInfo/count",
+    "value": 80
+  }
+]

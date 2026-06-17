@@ -1,0 +1,366 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/contactsLocationsModule/centralContacts",
+      "/protocolSection/contactsLocationsModule/locations/0/contacts",
+      "/protocolSection/designModule/enrollmentInfo/count",
+      "/protocolSection/designModule/enrollmentInfo/type",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/overallStatus",
+      "/protocolSection/statusModule/startDateStruct/date",
+      "/protocolSection/statusModule/startDateStruct/type",
+      "/protocolSection/statusModule/statusVerifiedDate",
+      "/protocolSection/statusModule/whyStopped"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT05315687_v3_v4_9f878aed379e. ClinicalTrials.gov NCT05315687, versions 3-4. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance.",
+      "That TrialDiff determines whether the stopped-trial explanation satisfies 42 CFR 11.64."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 3 to version 4 for NCT05315687.",
+      "The JSON Patch for this comparison has hash 4cac48c60e6e0b59be53cc6fc133626be931840481285fcd38b8f8e2ad2d7ef5.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under the status or stopped-trial explanation module changed between ClinicalTrials.gov versions 3 and 4.",
+      "The timing context for the from-version record was pre_recruitment.",
+      "The deterministic rules that fired were: contact_admin_change, enrollment_count_change, enrollment_type_change, terminal_status_change, why_stopped_change.",
+      "The changed JSON Pointer paths were: /protocolSection/contactsLocationsModule/centralContacts, /protocolSection/contactsLocationsModule/locations/0/contacts, /protocolSection/designModule/enrollmentInfo/count, /protocolSection/designModule/enrollmentInfo/type, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/overallStatus, /protocolSection/statusModule/startDateStruct/date, /protocolSection/statusModule/startDateStruct/type, /protocolSection/statusModule/statusVerifiedDate, /protocolSection/statusModule/whyStopped.",
+      "The timeline value moved by 106 days.",
+      "The whyStopped value matched TrialDiff's low-information phrase list.",
+      "The enrollment count changed from a positive value to zero.",
+      "The changed paths include the ClinicalTrials.gov whyStopped field, a stopped-trial explanation field relevant to 42 CFR 11.64 when applicable."
+    ],
+    "classification": {
+      "categories": [
+        "status_termination",
+        "enrollment_change",
+        "timeline_significant_shift",
+        "administrative_contact_change"
+      ],
+      "category": "status_termination",
+      "deterministic_rules": [
+        "contact_admin_change",
+        "enrollment_count_change",
+        "enrollment_type_change",
+        "terminal_status_change",
+        "why_stopped_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "pre_recruitment",
+      "value_signals": [
+        {
+          "category": "timeline_significant_shift",
+          "date_struct": "startDateStruct",
+          "delta_days": 106,
+          "direction": "earlier",
+          "new_precision": "day",
+          "new_type": "ACTUAL",
+          "new_value": "2022-08-17",
+          "old_precision": "day",
+          "old_type": "ESTIMATED",
+          "old_value": "2022-12-01",
+          "path": "/protocolSection/statusModule/startDateStruct/date",
+          "severity": "high",
+          "signal": "timeline_significant_shift"
+        },
+        {
+          "category": "status_termination",
+          "path": "/protocolSection/statusModule/whyStopped",
+          "severity": "high",
+          "signal": "why_stopped_low_information",
+          "value": "Study is being closed because PI left Emory"
+        },
+        {
+          "category": "enrollment_change",
+          "new_value": 0,
+          "old_value": 50,
+          "path": "/protocolSection/designModule/enrollmentInfo/count",
+          "pct_change": 1.0,
+          "severity": "critical",
+          "signal": "enrollment_zeroed"
+        }
+      ]
+    },
+    "event_id": "evt_NCT05315687_v3_v4_9f878aed379e",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2024-01"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/overallStatus",
+        "value": "WITHDRAWN"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/startDateStruct/date",
+        "value": "2022-08-17"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/startDateStruct/type",
+        "value": "ACTUAL"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2024-01-18"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2024-01-19"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/statusModule/whyStopped",
+        "value": "Study is being closed because PI left Emory"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/designModule/enrollmentInfo/count",
+        "value": 0
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/designModule/enrollmentInfo/type",
+        "value": "ACTUAL"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/centralContacts"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/locations/0/contacts"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "29280d44131fd7b58d098abff7ede93f3be6ccb6e295f4b6dad4671ae3da61b2",
+      "materiality_event_hash": "10b8ac6c2428a00d16439e10b18d0138639f73af8ca3efa00685532b17507776",
+      "patch_hash": "4cac48c60e6e0b59be53cc6fc133626be931840481285fcd38b8f8e2ad2d7ef5",
+      "patch_raw_hash": "a230f5fc3c9b05a7ec29ab6a3d2321a5b89568fa61cec9aad64065e2aa9e0d9a",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT05315687/history/3?patchToVersion=4",
+      "to_snapshot_hash": null
+    },
+    "review_question": "Does the public registry record give a specific explanation for the stopped or terminal status?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT05315687",
+      "nct_id": "NCT05315687"
+    },
+    "versions": {
+      "from_version": 3,
+      "submitted_date": "2024-01-18",
+      "to_version": 4
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/contactsLocationsModule/centralContacts",
+    "/protocolSection/contactsLocationsModule/locations/0/contacts",
+    "/protocolSection/designModule/enrollmentInfo/count",
+    "/protocolSection/designModule/enrollmentInfo/type",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/overallStatus",
+    "/protocolSection/statusModule/startDateStruct/date",
+    "/protocolSection/statusModule/startDateStruct/type",
+    "/protocolSection/statusModule/statusVerifiedDate",
+    "/protocolSection/statusModule/whyStopped"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT05315687_v3_v4_9f878aed379e. ClinicalTrials.gov NCT05315687, versions 3-4. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance.",
+    "That TrialDiff determines whether the stopped-trial explanation satisfies 42 CFR 11.64."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 3 to version 4 for NCT05315687.",
+    "The JSON Patch for this comparison has hash 4cac48c60e6e0b59be53cc6fc133626be931840481285fcd38b8f8e2ad2d7ef5.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under the status or stopped-trial explanation module changed between ClinicalTrials.gov versions 3 and 4.",
+    "The timing context for the from-version record was pre_recruitment.",
+    "The deterministic rules that fired were: contact_admin_change, enrollment_count_change, enrollment_type_change, terminal_status_change, why_stopped_change.",
+    "The changed JSON Pointer paths were: /protocolSection/contactsLocationsModule/centralContacts, /protocolSection/contactsLocationsModule/locations/0/contacts, /protocolSection/designModule/enrollmentInfo/count, /protocolSection/designModule/enrollmentInfo/type, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/overallStatus, /protocolSection/statusModule/startDateStruct/date, /protocolSection/statusModule/startDateStruct/type, /protocolSection/statusModule/statusVerifiedDate, /protocolSection/statusModule/whyStopped.",
+    "The timeline value moved by 106 days.",
+    "The whyStopped value matched TrialDiff's low-information phrase list.",
+    "The enrollment count changed from a positive value to zero.",
+    "The changed paths include the ClinicalTrials.gov whyStopped field, a stopped-trial explanation field relevant to 42 CFR 11.64 when applicable."
+  ],
+  "classification": {
+    "categories": [
+      "status_termination",
+      "enrollment_change",
+      "timeline_significant_shift",
+      "administrative_contact_change"
+    ],
+    "category": "status_termination",
+    "deterministic_rules": [
+      "contact_admin_change",
+      "enrollment_count_change",
+      "enrollment_type_change",
+      "terminal_status_change",
+      "why_stopped_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "pre_recruitment",
+    "value_signals": [
+      {
+        "category": "timeline_significant_shift",
+        "date_struct": "startDateStruct",
+        "delta_days": 106,
+        "direction": "earlier",
+        "new_precision": "day",
+        "new_type": "ACTUAL",
+        "new_value": "2022-08-17",
+        "old_precision": "day",
+        "old_type": "ESTIMATED",
+        "old_value": "2022-12-01",
+        "path": "/protocolSection/statusModule/startDateStruct/date",
+        "severity": "high",
+        "signal": "timeline_significant_shift"
+      },
+      {
+        "category": "status_termination",
+        "path": "/protocolSection/statusModule/whyStopped",
+        "severity": "high",
+        "signal": "why_stopped_low_information",
+        "value": "Study is being closed because PI left Emory"
+      },
+      {
+        "category": "enrollment_change",
+        "new_value": 0,
+        "old_value": 50,
+        "path": "/protocolSection/designModule/enrollmentInfo/count",
+        "pct_change": 1.0,
+        "severity": "critical",
+        "signal": "enrollment_zeroed"
+      }
+    ]
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT05315687_v3_v4_9f878aed379e",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT05315687_v3_v4_9f878aed379e.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT05315687_v3_v4_9f878aed379e",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT05315687"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2024-01"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/overallStatus",
+      "value": "WITHDRAWN"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/startDateStruct/date",
+      "value": "2022-08-17"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/startDateStruct/type",
+      "value": "ACTUAL"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2024-01-18"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2024-01-19"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/statusModule/whyStopped",
+      "value": "Study is being closed because PI left Emory"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/designModule/enrollmentInfo/count",
+      "value": 0
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/designModule/enrollmentInfo/type",
+      "value": "ACTUAL"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/centralContacts"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/locations/0/contacts"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "7dae0fb242671b2cd4c2bc213a6990c680cca0ae97731e4bd4ebccb63da69f56",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT05315687_v3_v4_9f878aed379e",
+    "evidence_version": 1,
+    "from_snapshot_hash": "29280d44131fd7b58d098abff7ede93f3be6ccb6e295f4b6dad4671ae3da61b2",
+    "materiality_event_hash": "10b8ac6c2428a00d16439e10b18d0138639f73af8ca3efa00685532b17507776",
+    "patch_hash": "4cac48c60e6e0b59be53cc6fc133626be931840481285fcd38b8f8e2ad2d7ef5",
+    "patch_raw_hash": "a230f5fc3c9b05a7ec29ab6a3d2321a5b89568fa61cec9aad64065e2aa9e0d9a",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT05315687/history/3?patchToVersion=4",
+    "to_snapshot_hash": null
+  },
+  "review_question": "Does the public registry record give a specific explanation for the stopped or terminal status?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT05315687",
+    "current_record_hash": "67eca884dd4f9b14a2c16141606ca244f94e94f78d8e9a6267ef1e8345222b58",
+    "current_record_raw_hash": "67eca884dd4f9b14a2c16141606ca244f94e94f78d8e9a6267ef1e8345222b58",
+    "lead_sponsor": "Emory University",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT05315687",
+    "official_title": "Safety and Efficacy of Radioembolization of Metastatic Breast Cancer to the Liver as a 2nd/3rd Line Therapy",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT05315687",
+    "title": "Radioembolization of Metastatic Breast Cancer to the Liver as a 2nd/3rd Line Therapy"
+  },
+  "versions": {
+    "from_version": 3,
+    "submitted_date": "2024-01-18",
+    "to_version": 4
+  }
+}

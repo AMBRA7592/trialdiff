@@ -1,0 +1,302 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/outcomesModule/secondaryOutcomes/4",
+      "/protocolSection/statusModule/completionDateStruct/date",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT01441947_v13_v14_7214dc7d893f. ClinicalTrials.gov NCT01441947, versions 13-14. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance.",
+      "That this post-completion change reflects outcome switching rather than a legitimate registry correction.",
+      "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 13 to version 14 for NCT01441947.",
+      "The JSON Patch for this comparison has hash b25aeb0de07d6c12cbb24ca4b4facba6d768392480952872734e4d3ca474571d.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was high.",
+      "A registry field under the secondary outcome module changed between ClinicalTrials.gov versions 13 and 14.",
+      "The timing context for the from-version record was late_recruitment.",
+      "The deterministic rules that fired were: secondary_outcome_any_change.",
+      "The changed JSON Pointer paths were: /protocolSection/outcomesModule/secondaryOutcomes/4, /protocolSection/statusModule/completionDateStruct/date, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/primaryCompletionDateStruct/date, /protocolSection/statusModule/statusVerifiedDate.",
+      "The timeline value moved by 366 days.",
+      "The timeline value moved by 365 days."
+    ],
+    "classification": {
+      "categories": [
+        "secondary_outcome_change",
+        "timeline_major_slip",
+        "timeline_significant_shift"
+      ],
+      "category": "secondary_outcome_change",
+      "deterministic_rules": [
+        "secondary_outcome_any_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "high",
+      "timing_context": "late_recruitment",
+      "value_signals": [
+        {
+          "category": "timeline_major_slip",
+          "date_struct": "primaryCompletionDateStruct",
+          "delta_days": 366,
+          "direction": "later",
+          "new_precision": "month",
+          "new_type": "ESTIMATED",
+          "new_value": "2020-12",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2019-12",
+          "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+          "severity": "high",
+          "signal": "timeline_major_slip"
+        },
+        {
+          "category": "timeline_significant_shift",
+          "date_struct": "completionDateStruct",
+          "delta_days": 365,
+          "direction": "later",
+          "new_precision": "month",
+          "new_type": "ESTIMATED",
+          "new_value": "2021-12",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2020-12",
+          "path": "/protocolSection/statusModule/completionDateStruct/date",
+          "severity": "high",
+          "signal": "timeline_significant_shift"
+        }
+      ]
+    },
+    "event_id": "evt_NCT01441947_v13_v14_7214dc7d893f",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2019-08"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+        "value": "2020-12"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/completionDateStruct/date",
+        "value": "2021-12"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2019-08-22"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2019-08-28"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/4"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/4"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "07b82fa1069927da148408ad64e54b80cdbb06b3edb5c7d8bd8deb62f39ba28b",
+      "materiality_event_hash": "641bbe5cc5eac7335020313eb96ac23f0511de6ab4bc476d0e211e231fe346d4",
+      "patch_hash": "b25aeb0de07d6c12cbb24ca4b4facba6d768392480952872734e4d3ca474571d",
+      "patch_raw_hash": "4974c61aa94abf400de209cc80af8db04bdb8df1c91a98a2cdd7f12fedf4204d",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT01441947/history/13?patchToVersion=14",
+      "to_snapshot_hash": "2f4beaa9c9ebda37f2106b6e6a1afecabd7b2cde63b76f4a369ce50e82dbee05"
+    },
+    "review_question": "What did the secondary outcome field say before and after the amendment, and what contemporaneous public document explains the change?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT01441947",
+      "nct_id": "NCT01441947"
+    },
+    "versions": {
+      "from_version": 13,
+      "submitted_date": "2019-08-22",
+      "to_version": 14
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/outcomesModule/secondaryOutcomes/4",
+    "/protocolSection/statusModule/completionDateStruct/date",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT01441947_v13_v14_7214dc7d893f. ClinicalTrials.gov NCT01441947, versions 13-14. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance.",
+    "That this post-completion change reflects outcome switching rather than a legitimate registry correction.",
+    "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 13 to version 14 for NCT01441947.",
+    "The JSON Patch for this comparison has hash b25aeb0de07d6c12cbb24ca4b4facba6d768392480952872734e4d3ca474571d.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was high.",
+    "A registry field under the secondary outcome module changed between ClinicalTrials.gov versions 13 and 14.",
+    "The timing context for the from-version record was late_recruitment.",
+    "The deterministic rules that fired were: secondary_outcome_any_change.",
+    "The changed JSON Pointer paths were: /protocolSection/outcomesModule/secondaryOutcomes/4, /protocolSection/statusModule/completionDateStruct/date, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/primaryCompletionDateStruct/date, /protocolSection/statusModule/statusVerifiedDate.",
+    "The timeline value moved by 366 days.",
+    "The timeline value moved by 365 days."
+  ],
+  "classification": {
+    "categories": [
+      "secondary_outcome_change",
+      "timeline_major_slip",
+      "timeline_significant_shift"
+    ],
+    "category": "secondary_outcome_change",
+    "deterministic_rules": [
+      "secondary_outcome_any_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "high",
+    "timing_context": "late_recruitment",
+    "value_signals": [
+      {
+        "category": "timeline_major_slip",
+        "date_struct": "primaryCompletionDateStruct",
+        "delta_days": 366,
+        "direction": "later",
+        "new_precision": "month",
+        "new_type": "ESTIMATED",
+        "new_value": "2020-12",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2019-12",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+        "severity": "high",
+        "signal": "timeline_major_slip"
+      },
+      {
+        "category": "timeline_significant_shift",
+        "date_struct": "completionDateStruct",
+        "delta_days": 365,
+        "direction": "later",
+        "new_precision": "month",
+        "new_type": "ESTIMATED",
+        "new_value": "2021-12",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2020-12",
+        "path": "/protocolSection/statusModule/completionDateStruct/date",
+        "severity": "high",
+        "signal": "timeline_significant_shift"
+      }
+    ]
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT01441947_v13_v14_7214dc7d893f",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT01441947_v13_v14_7214dc7d893f.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT01441947_v13_v14_7214dc7d893f",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT01441947"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2019-08"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+      "value": "2020-12"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/completionDateStruct/date",
+      "value": "2021-12"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2019-08-22"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2019-08-28"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/4"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/4"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "4bd40ef4415500e38811ec3115956f0bc554cb1ee390a29f429e42581b0109b7",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT01441947_v13_v14_7214dc7d893f",
+    "evidence_version": 1,
+    "from_snapshot_hash": "07b82fa1069927da148408ad64e54b80cdbb06b3edb5c7d8bd8deb62f39ba28b",
+    "materiality_event_hash": "641bbe5cc5eac7335020313eb96ac23f0511de6ab4bc476d0e211e231fe346d4",
+    "patch_hash": "b25aeb0de07d6c12cbb24ca4b4facba6d768392480952872734e4d3ca474571d",
+    "patch_raw_hash": "4974c61aa94abf400de209cc80af8db04bdb8df1c91a98a2cdd7f12fedf4204d",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT01441947/history/13?patchToVersion=14",
+    "to_snapshot_hash": "2f4beaa9c9ebda37f2106b6e6a1afecabd7b2cde63b76f4a369ce50e82dbee05"
+  },
+  "review_question": "What did the secondary outcome field say before and after the amendment, and what contemporaneous public document explains the change?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT01441947",
+    "current_record_hash": "c55f5fa065637193e9b1e93d3ba8d5e856f335e738dac7b8db817572613a37d9",
+    "current_record_raw_hash": "c55f5fa065637193e9b1e93d3ba8d5e856f335e738dac7b8db817572613a37d9",
+    "lead_sponsor": "Massachusetts General Hospital",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT01441947",
+    "official_title": "A Phase II Trial of Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer With Involvement of Bone",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT01441947",
+    "title": "Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer"
+  },
+  "versions": {
+    "from_version": 13,
+    "submitted_date": "2019-08-22",
+    "to_version": 14
+  }
+}

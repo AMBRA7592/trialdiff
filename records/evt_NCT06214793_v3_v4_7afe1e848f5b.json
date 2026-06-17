@@ -1,0 +1,268 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/contactsLocationsModule/centralContacts",
+      "/protocolSection/contactsLocationsModule/locations/0/contacts",
+      "/protocolSection/contactsLocationsModule/locations/1/contacts",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/overallStatus",
+      "/protocolSection/statusModule/statusVerifiedDate",
+      "/protocolSection/statusModule/whyStopped"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT06214793_v3_v4_7afe1e848f5b. ClinicalTrials.gov NCT06214793, versions 3-4. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance.",
+      "That TrialDiff determines whether the stopped-trial explanation satisfies 42 CFR 11.64."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 3 to version 4 for NCT06214793.",
+      "The JSON Patch for this comparison has hash a50d8b9e7f13b600b52761e0f5c6870cf2f798965b73d31a59f732da47cdf82e.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under the status or stopped-trial explanation module changed between ClinicalTrials.gov versions 3 and 4.",
+      "The timing context for the from-version record was pre_recruitment.",
+      "The deterministic rules that fired were: contact_admin_change, terminal_status_change, why_stopped_change.",
+      "The changed JSON Pointer paths were: /protocolSection/contactsLocationsModule/centralContacts, /protocolSection/contactsLocationsModule/locations/0/contacts, /protocolSection/contactsLocationsModule/locations/1/contacts, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/overallStatus, /protocolSection/statusModule/statusVerifiedDate, /protocolSection/statusModule/whyStopped.",
+      "The whyStopped value matched TrialDiff's low-information phrase list.",
+      "The changed paths include the ClinicalTrials.gov whyStopped field, a stopped-trial explanation field relevant to 42 CFR 11.64 when applicable."
+    ],
+    "classification": {
+      "categories": [
+        "status_termination",
+        "administrative_contact_change"
+      ],
+      "category": "status_termination",
+      "deterministic_rules": [
+        "contact_admin_change",
+        "terminal_status_change",
+        "why_stopped_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "pre_recruitment",
+      "value_signals": [
+        {
+          "category": "status_termination",
+          "path": "/protocolSection/statusModule/whyStopped",
+          "severity": "high",
+          "signal": "why_stopped_low_information",
+          "value": "Anheart acquired by Nuvation Bio; leadership not moving forward"
+        }
+      ]
+    },
+    "event_id": "evt_NCT06214793_v3_v4_7afe1e848f5b",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2024-08"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/overallStatus",
+        "value": "SUSPENDED"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2024-08-07"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2024-08-09"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/statusModule/whyStopped",
+        "value": "Anheart acquired by Nuvation Bio; leadership not moving forward"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/centralContacts"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/locations/0/contacts"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/locations/1/contacts"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "37329d0775bc5da79b7ab60c402d3735e97ef3cb51de2dec92cb7f197b3b1192",
+      "materiality_event_hash": "b8550a9df23365512e846cf545565a459d2aa70972bc0ebc58229c5149cdb988",
+      "patch_hash": "a50d8b9e7f13b600b52761e0f5c6870cf2f798965b73d31a59f732da47cdf82e",
+      "patch_raw_hash": "f976e0ed58db1756ff4736fc9d7ffc7a524c8bbe43b5eb559d7cd62c54a2424c",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT06214793/history/3?patchToVersion=4",
+      "to_snapshot_hash": "23f37181dbb1226dbd45da1147f4d199b49aa9a8aaf9a2379f5d5b0ce5dde602"
+    },
+    "review_question": "Does the public registry record give a specific explanation for the stopped or terminal status?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT06214793",
+      "nct_id": "NCT06214793"
+    },
+    "versions": {
+      "from_version": 3,
+      "submitted_date": "2024-08-07",
+      "to_version": 4
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/contactsLocationsModule/centralContacts",
+    "/protocolSection/contactsLocationsModule/locations/0/contacts",
+    "/protocolSection/contactsLocationsModule/locations/1/contacts",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/overallStatus",
+    "/protocolSection/statusModule/statusVerifiedDate",
+    "/protocolSection/statusModule/whyStopped"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT06214793_v3_v4_7afe1e848f5b. ClinicalTrials.gov NCT06214793, versions 3-4. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance.",
+    "That TrialDiff determines whether the stopped-trial explanation satisfies 42 CFR 11.64."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 3 to version 4 for NCT06214793.",
+    "The JSON Patch for this comparison has hash a50d8b9e7f13b600b52761e0f5c6870cf2f798965b73d31a59f732da47cdf82e.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under the status or stopped-trial explanation module changed between ClinicalTrials.gov versions 3 and 4.",
+    "The timing context for the from-version record was pre_recruitment.",
+    "The deterministic rules that fired were: contact_admin_change, terminal_status_change, why_stopped_change.",
+    "The changed JSON Pointer paths were: /protocolSection/contactsLocationsModule/centralContacts, /protocolSection/contactsLocationsModule/locations/0/contacts, /protocolSection/contactsLocationsModule/locations/1/contacts, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/overallStatus, /protocolSection/statusModule/statusVerifiedDate, /protocolSection/statusModule/whyStopped.",
+    "The whyStopped value matched TrialDiff's low-information phrase list.",
+    "The changed paths include the ClinicalTrials.gov whyStopped field, a stopped-trial explanation field relevant to 42 CFR 11.64 when applicable."
+  ],
+  "classification": {
+    "categories": [
+      "status_termination",
+      "administrative_contact_change"
+    ],
+    "category": "status_termination",
+    "deterministic_rules": [
+      "contact_admin_change",
+      "terminal_status_change",
+      "why_stopped_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "pre_recruitment",
+    "value_signals": [
+      {
+        "category": "status_termination",
+        "path": "/protocolSection/statusModule/whyStopped",
+        "severity": "high",
+        "signal": "why_stopped_low_information",
+        "value": "Anheart acquired by Nuvation Bio; leadership not moving forward"
+      }
+    ]
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT06214793_v3_v4_7afe1e848f5b",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT06214793_v3_v4_7afe1e848f5b.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT06214793_v3_v4_7afe1e848f5b",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT06214793"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2024-08"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/overallStatus",
+      "value": "SUSPENDED"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2024-08-07"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2024-08-09"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/statusModule/whyStopped",
+      "value": "Anheart acquired by Nuvation Bio; leadership not moving forward"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/centralContacts"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/locations/0/contacts"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/locations/1/contacts"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "c58fd002c5c48c705b62ce7f9b6f8ecb7b3fb2003cbefce35148fef67731d7dc",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT06214793_v3_v4_7afe1e848f5b",
+    "evidence_version": 1,
+    "from_snapshot_hash": "37329d0775bc5da79b7ab60c402d3735e97ef3cb51de2dec92cb7f197b3b1192",
+    "materiality_event_hash": "b8550a9df23365512e846cf545565a459d2aa70972bc0ebc58229c5149cdb988",
+    "patch_hash": "a50d8b9e7f13b600b52761e0f5c6870cf2f798965b73d31a59f732da47cdf82e",
+    "patch_raw_hash": "f976e0ed58db1756ff4736fc9d7ffc7a524c8bbe43b5eb559d7cd62c54a2424c",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT06214793/history/3?patchToVersion=4",
+    "to_snapshot_hash": "23f37181dbb1226dbd45da1147f4d199b49aa9a8aaf9a2379f5d5b0ce5dde602"
+  },
+  "review_question": "Does the public registry record give a specific explanation for the stopped or terminal status?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT06214793",
+    "current_record_hash": "936f93f63991e4d3a6a427f03dc02ab65d163aee6b7ffb11d6151ee65c67dcb8",
+    "current_record_raw_hash": "936f93f63991e4d3a6a427f03dc02ab65d163aee6b7ffb11d6151ee65c67dcb8",
+    "lead_sponsor": "Megan Kruse, MD",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT06214793",
+    "official_title": "A Phase II Study of Taletrectinib in Previously Treated Metastatic CDH1-mutated Invasive Lobular Cancer (ILC) of the Breast (TaCe)",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT06214793",
+    "title": "Taletrectinib in Previously Treated Metastatic CDH1-mutated Invasive Lobular Cancer (ILC)"
+  },
+  "versions": {
+    "from_version": 3,
+    "submitted_date": "2024-08-07",
+    "to_version": 4
+  }
+}

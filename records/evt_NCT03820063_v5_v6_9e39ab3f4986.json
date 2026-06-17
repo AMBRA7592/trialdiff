@@ -1,0 +1,482 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/armsInterventionsModule/armGroups/0/description",
+      "/protocolSection/armsInterventionsModule/interventions/0/description",
+      "/protocolSection/contactsLocationsModule/locations/0/status",
+      "/protocolSection/contactsLocationsModule/locations/15/status",
+      "/protocolSection/contactsLocationsModule/locations/20",
+      "/protocolSection/contactsLocationsModule/locations/35",
+      "/protocolSection/contactsLocationsModule/locations/39/status",
+      "/protocolSection/contactsLocationsModule/locations/4/contacts",
+      "/protocolSection/contactsLocationsModule/locations/4/status",
+      "/protocolSection/contactsLocationsModule/locations/40/status",
+      "/protocolSection/contactsLocationsModule/locations/46/contacts",
+      "/protocolSection/contactsLocationsModule/locations/46/status",
+      "/protocolSection/contactsLocationsModule/locations/7/status",
+      "/protocolSection/descriptionModule/detailedDescription",
+      "/protocolSection/designModule/designInfo/interventionModelDescription",
+      "/protocolSection/eligibilityModule/eligibilityCriteria",
+      "/protocolSection/outcomesModule/secondaryOutcomes/9",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT03820063_v5_v6_9e39ab3f4986. ClinicalTrials.gov NCT03820063, versions 5-6. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 5 to version 6 for NCT03820063.",
+      "The JSON Patch for this comparison has hash 673e9736fdf34101c107e150d24a43f95cefe8f2ae834801723ef53caa0ad1e7.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under the study design module changed between ClinicalTrials.gov versions 5 and 6.",
+      "The timing context for the from-version record was early_recruitment.",
+      "The deterministic rules that fired were: arms_or_interventions_change, design_info_change, eligibility_criteria_change, secondary_outcome_any_change.",
+      "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups/0/description, /protocolSection/armsInterventionsModule/interventions/0/description, /protocolSection/contactsLocationsModule/locations/0/status, /protocolSection/contactsLocationsModule/locations/15/status, /protocolSection/contactsLocationsModule/locations/20, /protocolSection/contactsLocationsModule/locations/35, /protocolSection/contactsLocationsModule/locations/39/status, /protocolSection/contactsLocationsModule/locations/4/contacts, /protocolSection/contactsLocationsModule/locations/4/status, /protocolSection/contactsLocationsModule/locations/40/status, /protocolSection/contactsLocationsModule/locations/46/contacts, /protocolSection/contactsLocationsModule/locations/46/status, /protocolSection/contactsLocationsModule/locations/7/status, /protocolSection/descriptionModule/detailedDescription, /protocolSection/designModule/designInfo/interventionModelDescription, /protocolSection/eligibilityModule/eligibilityCriteria, /protocolSection/outcomesModule/secondaryOutcomes/9, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+    ],
+    "classification": {
+      "categories": [
+        "design_change",
+        "arm_intervention_change",
+        "secondary_outcome_change",
+        "eligibility_change"
+      ],
+      "category": "design_change",
+      "deterministic_rules": [
+        "arms_or_interventions_change",
+        "design_info_change",
+        "eligibility_criteria_change",
+        "secondary_outcome_any_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "early_recruitment",
+      "value_signals": []
+    },
+    "event_id": "evt_NCT03820063_v5_v6_9e39ab3f4986",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2020-07"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2020-07-08"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2020-07-10"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/descriptionModule/detailedDescription",
+        "value": "<p>High pathological complete response (pCR)-rates are seen using different neoadjuvant chemotherapy schedules with trastuzumab and pertuzumab in HER2-positive stage II - III breast cancer patients.\nTotal pCR rates in breast and axilla have been described as high as 64%, and with an even higher rate of &gt;80% in patients with HER2-positive and hormone receptor (HR) negative tumors.\nPCR is associated with better long-term outcomes in patients with HER2-positive breast cancer.\nThree year progression-free survival ranges between 85-90%.\nNeoadjuvant treatment of HER2-positive breast cancer typically consists of six to nine cycles of treatment.\nLonger duration of treatment is associated with higher pCR-rates but gives more toxicity.\nPathological complete responses are sometimes seen after only 10-12 days of neoadjuvant treatment.\nIt is therefore important to investigate which patients can safely be treated with less than six cycles of chemotherapy and who requires more than six cycles for maximum activity.</p><p>The radiologic response of a breast tumor after neoadjuvant therapy is predictive of the pathologic response, although the accuracy differs between breast cancer subtypes.\nIt is hypothesized that patients with an early complete radiologic response may not benefit from additional chemotherapy and can be referred for early surgery.\nPatients who have not achieved pCR after early surgery despite radiologic complete response (rCR) are candidates for further adjuvant chemotherapy to complete the initially planned number of treatment cycles and maintain maximum treatment activity.\nImaged guided de-escalation in which the number of treatment cycles is determined by the radiologic response could thus reduce toxicity in neoadjuvant treatment while maintaining activity.</p><p>This study will evaluate the efficacy of image-guided de-escalation of neoadjuvant chemotherapy in patients with HER2-positive breast cancer.</p><p>To maintain efficacy, patients who do not achieve pCR will complete a total of nine cycles taxane-containing chemotherapy followed by 14 cycles of treatment with adjuvant T-DM1.\nPatients who achieve early pCR will continue treatment with Herceptin\u00ae and pertuzumab to complete one full year of treatment.</p>"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/designModule/designInfo/interventionModelDescription",
+        "value": "neoadjuvant courses PTC-Ptz; adjuvant courses Ptz (pCR) or T-DM1 (non-pCR)"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/0/description",
+        "value": "<ul><li>Paclitaxel 80mg&#x2F;m2 administered intravenously on day 1 and day 8</li><li>Herceptin\u00ae 6mg&#x2F;kg administered intravenously on day 1 (loading dose 8mg&#x2F;kg) or Herceptin\u00ae administered subcutaneously 600mg on day 1</li><li>Carboplatin AUC 6mg\u2022ml&#x2F;min administered intravenously on day 1</li><li>Pertuzumab 420mg administered intravenously on day 1 (loading dose 840mg)</li><li>Treatment cycles are repeated on day 22</li></ul><p>Patients who do not achieve pCR will complete a total of nine cycles taxane-containing chemotherapy followed by 14 cycles of treatment with adjuvant T-DM1.</p>"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/description",
+        "value": "<ul><li>Paclitaxel 80mg&#x2F;m2 administered intravenously on day 1 and day 8</li><li>Herceptin\u00ae 6mg&#x2F;kg administered intravenously on day 1 (loading dose 8mg&#x2F;kg) or Herceptin\u00ae administered subcutaneously 600mg on day 1</li><li>Carboplatin AUC 6mg\u2022ml&#x2F;min administered intravenously on day 1</li><li>Pertuzumab 420mg administered intravenously on day 1 (loading dose 840mg)</li><li>Treatment cycles are repeated on day 22</li></ul><p>In case of non pCR; Adjuvant T-DM1, 3.6mg&#x2F;kg Q 22 days, for 14 cycles.</p>"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/9",
+        "value": {
+          "description": "Number of patients with tumor present at Vacuum Assisted Core Biopsy at the moment of radiological complete response on MRI",
+          "measure": "Incidence of number of tumor positive Vacuum Assisted Core Biopsy",
+          "timeFrame": "an average 6 months"
+        }
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/eligibilityModule/eligibilityCriteria",
+        "value": "<p>Inclusion Criteria:</p><ol><li>Histologically confirmed primairy infiltrating breast cancer.</li><li>Stage II or Ill disease.</li><li>Overexpression and&#x2F;or amplification of HER2 in an invasive component of the core biopsy.</li><li>Age &lt;:18</li><li>ECOG Group performance status</li><li>LVEF &gt;50% measured by echocardiography, MRI or MUGA</li><li>Known HR-status ( in percentages)</li></ol><p>Exclusion Criteria:</p><ol><li>Previous radiation therapy of chemotherapy</li><li>Pregnancy or breastfeeding</li><li>Evidence of distant metastases</li><li>Evidence of bilateral infiltrating breast cancer</li><li>Concurrent anti-cancer treatment or another investigational drug</li></ol>"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/contactsLocationsModule/locations/0/status",
+        "value": "RECRUITING"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/contactsLocationsModule/locations/4/status",
+        "value": "ACTIVE_NOT_RECRUITING"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/locations/4/contacts"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/contactsLocationsModule/locations/7/status",
+        "value": "RECRUITING"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/contactsLocationsModule/locations/15/status",
+        "value": "RECRUITING"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/contactsLocationsModule/locations/20",
+        "value": {
+          "city": "Gorinchem",
+          "country": "Netherlands",
+          "facility": "RIVAS Beatrixziekenhuis",
+          "geoPoint": {
+            "lat": 51.83652,
+            "lon": 4.97243
+          },
+          "status": "ACTIVE_NOT_RECRUITING"
+        }
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/contactsLocationsModule/locations/35",
+        "value": {
+          "city": "Roermond",
+          "contacts": [
+            {
+              "name": "M den Boer, MD",
+              "role": "CONTACT"
+            },
+            {
+              "name": "M den Boer, MD",
+              "role": "PRINCIPAL_INVESTIGATOR"
+            }
+          ],
+          "country": "Netherlands",
+          "facility": "Laurentius ziekenhuis",
+          "geoPoint": {
+            "lat": 51.19417,
+            "lon": 5.9875
+          },
+          "status": "RECRUITING"
+        }
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/contactsLocationsModule/locations/39/status",
+        "value": "RECRUITING"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/contactsLocationsModule/locations/40/status",
+        "value": "TERMINATED"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/contactsLocationsModule/locations/46/status",
+        "value": "RECRUITING"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/contactsLocationsModule/locations/46/contacts",
+        "value": [
+          {
+            "name": "I Baas, MD",
+            "role": "CONTACT"
+          },
+          {
+            "name": "I Baas, MD",
+            "role": "PRINCIPAL_INVESTIGATOR"
+          }
+        ]
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "e689a32bb2097bb6ed45f3f57af162ea382e60ca76a512eb931cf9a0242d692e",
+      "materiality_event_hash": "e955064a6bdd55577be5bdd3ede7cdbcca550ee4d707d2030bcd4af4dee5a442",
+      "patch_hash": "673e9736fdf34101c107e150d24a43f95cefe8f2ae834801723ef53caa0ad1e7",
+      "patch_raw_hash": "e35b18760cb1026e58c1dfaeadf73bbdf4018c6da5517a2298a5357fab505cf0",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT03820063/history/5?patchToVersion=6",
+      "to_snapshot_hash": "8482b2b3f3ea61c0c3abb1e6b11cb540558e9da01c111e4af86ef6999a053dd6"
+    },
+    "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT03820063",
+      "nct_id": "NCT03820063"
+    },
+    "versions": {
+      "from_version": 5,
+      "submitted_date": "2020-07-08",
+      "to_version": 6
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/armsInterventionsModule/armGroups/0/description",
+    "/protocolSection/armsInterventionsModule/interventions/0/description",
+    "/protocolSection/contactsLocationsModule/locations/0/status",
+    "/protocolSection/contactsLocationsModule/locations/15/status",
+    "/protocolSection/contactsLocationsModule/locations/20",
+    "/protocolSection/contactsLocationsModule/locations/35",
+    "/protocolSection/contactsLocationsModule/locations/39/status",
+    "/protocolSection/contactsLocationsModule/locations/4/contacts",
+    "/protocolSection/contactsLocationsModule/locations/4/status",
+    "/protocolSection/contactsLocationsModule/locations/40/status",
+    "/protocolSection/contactsLocationsModule/locations/46/contacts",
+    "/protocolSection/contactsLocationsModule/locations/46/status",
+    "/protocolSection/contactsLocationsModule/locations/7/status",
+    "/protocolSection/descriptionModule/detailedDescription",
+    "/protocolSection/designModule/designInfo/interventionModelDescription",
+    "/protocolSection/eligibilityModule/eligibilityCriteria",
+    "/protocolSection/outcomesModule/secondaryOutcomes/9",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT03820063_v5_v6_9e39ab3f4986. ClinicalTrials.gov NCT03820063, versions 5-6. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 5 to version 6 for NCT03820063.",
+    "The JSON Patch for this comparison has hash 673e9736fdf34101c107e150d24a43f95cefe8f2ae834801723ef53caa0ad1e7.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under the study design module changed between ClinicalTrials.gov versions 5 and 6.",
+    "The timing context for the from-version record was early_recruitment.",
+    "The deterministic rules that fired were: arms_or_interventions_change, design_info_change, eligibility_criteria_change, secondary_outcome_any_change.",
+    "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups/0/description, /protocolSection/armsInterventionsModule/interventions/0/description, /protocolSection/contactsLocationsModule/locations/0/status, /protocolSection/contactsLocationsModule/locations/15/status, /protocolSection/contactsLocationsModule/locations/20, /protocolSection/contactsLocationsModule/locations/35, /protocolSection/contactsLocationsModule/locations/39/status, /protocolSection/contactsLocationsModule/locations/4/contacts, /protocolSection/contactsLocationsModule/locations/4/status, /protocolSection/contactsLocationsModule/locations/40/status, /protocolSection/contactsLocationsModule/locations/46/contacts, /protocolSection/contactsLocationsModule/locations/46/status, /protocolSection/contactsLocationsModule/locations/7/status, /protocolSection/descriptionModule/detailedDescription, /protocolSection/designModule/designInfo/interventionModelDescription, /protocolSection/eligibilityModule/eligibilityCriteria, /protocolSection/outcomesModule/secondaryOutcomes/9, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+  ],
+  "classification": {
+    "categories": [
+      "design_change",
+      "arm_intervention_change",
+      "secondary_outcome_change",
+      "eligibility_change"
+    ],
+    "category": "design_change",
+    "deterministic_rules": [
+      "arms_or_interventions_change",
+      "design_info_change",
+      "eligibility_criteria_change",
+      "secondary_outcome_any_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "early_recruitment",
+    "value_signals": []
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT03820063_v5_v6_9e39ab3f4986",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT03820063_v5_v6_9e39ab3f4986.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT03820063_v5_v6_9e39ab3f4986",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT03820063"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2020-07"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2020-07-08"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2020-07-10"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/descriptionModule/detailedDescription",
+      "value": "<p>High pathological complete response (pCR)-rates are seen using different neoadjuvant chemotherapy schedules with trastuzumab and pertuzumab in HER2-positive stage II - III breast cancer patients.\nTotal pCR rates in breast and axilla have been described as high as 64%, and with an even higher rate of &gt;80% in patients with HER2-positive and hormone receptor (HR) negative tumors.\nPCR is associated with better long-term outcomes in patients with HER2-positive breast cancer.\nThree year progression-free survival ranges between 85-90%.\nNeoadjuvant treatment of HER2-positive breast cancer typically consists of six to nine cycles of treatment.\nLonger duration of treatment is associated with higher pCR-rates but gives more toxicity.\nPathological complete responses are sometimes seen after only 10-12 days of neoadjuvant treatment.\nIt is therefore important to investigate which patients can safely be treated with less than six cycles of chemotherapy and who requires more than six cycles for maximum activity.</p><p>The radiologic response of a breast tumor after neoadjuvant therapy is predictive of the pathologic response, although the accuracy differs between breast cancer subtypes.\nIt is hypothesized that patients with an early complete radiologic response may not benefit from additional chemotherapy and can be referred for early surgery.\nPatients who have not achieved pCR after early surgery despite radiologic complete response (rCR) are candidates for further adjuvant chemotherapy to complete the initially planned number of treatment cycles and maintain maximum treatment activity.\nImaged guided de-escalation in which the number of treatment cycles is determined by the radiologic response could thus reduce toxicity in neoadjuvant treatment while maintaining activity.</p><p>This study will evaluate the efficacy of image-guided de-escalation of neoadjuvant chemotherapy in patients with HER2-positive breast cancer.</p><p>To maintain efficacy, patients who do not achieve pCR will complete a total of nine cycles taxane-containing chemotherapy followed by 14 cycles of treatment with adjuvant T-DM1.\nPatients who achieve early pCR will continue treatment with Herceptin\u00ae and pertuzumab to complete one full year of treatment.</p>"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/designModule/designInfo/interventionModelDescription",
+      "value": "neoadjuvant courses PTC-Ptz; adjuvant courses Ptz (pCR) or T-DM1 (non-pCR)"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/0/description",
+      "value": "<ul><li>Paclitaxel 80mg&#x2F;m2 administered intravenously on day 1 and day 8</li><li>Herceptin\u00ae 6mg&#x2F;kg administered intravenously on day 1 (loading dose 8mg&#x2F;kg) or Herceptin\u00ae administered subcutaneously 600mg on day 1</li><li>Carboplatin AUC 6mg\u2022ml&#x2F;min administered intravenously on day 1</li><li>Pertuzumab 420mg administered intravenously on day 1 (loading dose 840mg)</li><li>Treatment cycles are repeated on day 22</li></ul><p>Patients who do not achieve pCR will complete a total of nine cycles taxane-containing chemotherapy followed by 14 cycles of treatment with adjuvant T-DM1.</p>"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/description",
+      "value": "<ul><li>Paclitaxel 80mg&#x2F;m2 administered intravenously on day 1 and day 8</li><li>Herceptin\u00ae 6mg&#x2F;kg administered intravenously on day 1 (loading dose 8mg&#x2F;kg) or Herceptin\u00ae administered subcutaneously 600mg on day 1</li><li>Carboplatin AUC 6mg\u2022ml&#x2F;min administered intravenously on day 1</li><li>Pertuzumab 420mg administered intravenously on day 1 (loading dose 840mg)</li><li>Treatment cycles are repeated on day 22</li></ul><p>In case of non pCR; Adjuvant T-DM1, 3.6mg&#x2F;kg Q 22 days, for 14 cycles.</p>"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/9",
+      "value": {
+        "description": "Number of patients with tumor present at Vacuum Assisted Core Biopsy at the moment of radiological complete response on MRI",
+        "measure": "Incidence of number of tumor positive Vacuum Assisted Core Biopsy",
+        "timeFrame": "an average 6 months"
+      }
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/eligibilityModule/eligibilityCriteria",
+      "value": "<p>Inclusion Criteria:</p><ol><li>Histologically confirmed primairy infiltrating breast cancer.</li><li>Stage II or Ill disease.</li><li>Overexpression and&#x2F;or amplification of HER2 in an invasive component of the core biopsy.</li><li>Age &lt;:18</li><li>ECOG Group performance status</li><li>LVEF &gt;50% measured by echocardiography, MRI or MUGA</li><li>Known HR-status ( in percentages)</li></ol><p>Exclusion Criteria:</p><ol><li>Previous radiation therapy of chemotherapy</li><li>Pregnancy or breastfeeding</li><li>Evidence of distant metastases</li><li>Evidence of bilateral infiltrating breast cancer</li><li>Concurrent anti-cancer treatment or another investigational drug</li></ol>"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/contactsLocationsModule/locations/0/status",
+      "value": "RECRUITING"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/contactsLocationsModule/locations/4/status",
+      "value": "ACTIVE_NOT_RECRUITING"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/locations/4/contacts"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/contactsLocationsModule/locations/7/status",
+      "value": "RECRUITING"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/contactsLocationsModule/locations/15/status",
+      "value": "RECRUITING"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/contactsLocationsModule/locations/20",
+      "value": {
+        "city": "Gorinchem",
+        "country": "Netherlands",
+        "facility": "RIVAS Beatrixziekenhuis",
+        "geoPoint": {
+          "lat": 51.83652,
+          "lon": 4.97243
+        },
+        "status": "ACTIVE_NOT_RECRUITING"
+      }
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/contactsLocationsModule/locations/35",
+      "value": {
+        "city": "Roermond",
+        "contacts": [
+          {
+            "name": "M den Boer, MD",
+            "role": "CONTACT"
+          },
+          {
+            "name": "M den Boer, MD",
+            "role": "PRINCIPAL_INVESTIGATOR"
+          }
+        ],
+        "country": "Netherlands",
+        "facility": "Laurentius ziekenhuis",
+        "geoPoint": {
+          "lat": 51.19417,
+          "lon": 5.9875
+        },
+        "status": "RECRUITING"
+      }
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/contactsLocationsModule/locations/39/status",
+      "value": "RECRUITING"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/contactsLocationsModule/locations/40/status",
+      "value": "TERMINATED"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/contactsLocationsModule/locations/46/status",
+      "value": "RECRUITING"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/contactsLocationsModule/locations/46/contacts",
+      "value": [
+        {
+          "name": "I Baas, MD",
+          "role": "CONTACT"
+        },
+        {
+          "name": "I Baas, MD",
+          "role": "PRINCIPAL_INVESTIGATOR"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "56d0e11ca7ca7911c76ae3c608edd357f208238e5ea8b65b378bc0132fd2dcb4",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT03820063_v5_v6_9e39ab3f4986",
+    "evidence_version": 1,
+    "from_snapshot_hash": "e689a32bb2097bb6ed45f3f57af162ea382e60ca76a512eb931cf9a0242d692e",
+    "materiality_event_hash": "e955064a6bdd55577be5bdd3ede7cdbcca550ee4d707d2030bcd4af4dee5a442",
+    "patch_hash": "673e9736fdf34101c107e150d24a43f95cefe8f2ae834801723ef53caa0ad1e7",
+    "patch_raw_hash": "e35b18760cb1026e58c1dfaeadf73bbdf4018c6da5517a2298a5357fab505cf0",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT03820063/history/5?patchToVersion=6",
+    "to_snapshot_hash": "8482b2b3f3ea61c0c3abb1e6b11cb540558e9da01c111e4af86ef6999a053dd6"
+  },
+  "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT03820063",
+    "current_record_hash": "b48bd441f9fb64c4e2d5396f6e8818ba8d6051ba0644a9e6cf8e5b351a24078e",
+    "current_record_raw_hash": "b48bd441f9fb64c4e2d5396f6e8818ba8d6051ba0644a9e6cf8e5b351a24078e",
+    "lead_sponsor": "Borstkanker Onderzoek Groep",
+    "lead_sponsor_class": "NETWORK",
+    "nct_id": "NCT03820063",
+    "official_title": "Image-guided De-escalation of Neo-adjuvant Chemotherapy in HER2-positive Breast Cancer: the TRAIN-3 Study",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT03820063",
+    "title": "Image-guided De-escalation of Neo-adjuvant Chemotherapy in HER2-positive Breast Cancer: the TRAIN-3 Study"
+  },
+  "versions": {
+    "from_version": 5,
+    "submitted_date": "2020-07-08",
+    "to_version": 6
+  }
+}

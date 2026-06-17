@@ -1,0 +1,1246 @@
+{
+  "candidate_count": 800,
+  "errors": [],
+  "filters": {
+    "allowed_phases": [
+      "PHASE2",
+      "PHASE3"
+    ],
+    "last_update_posted_gte": "2021-05-20",
+    "min_versions": 3,
+    "study_type": "INTERVENTIONAL"
+  },
+  "generated_at": "2026-05-20T16:39:55Z",
+  "locally_eligible_count": 139,
+  "name": "breast_cancer_phase2_3",
+  "query": {
+    "endpoint": "/api/v2/studies",
+    "limit": 100,
+    "max_pages": 50,
+    "query.cond": "breast cancer"
+  },
+  "relaxation": {},
+  "selected_count": 100,
+  "selected_nct_ids": [
+    "NCT00879086",
+    "NCT04584853",
+    "NCT02297412",
+    "NCT06401005",
+    "NCT04307329",
+    "NCT00769379",
+    "NCT04588246",
+    "NCT00128856",
+    "NCT05756166",
+    "NCT02384239",
+    "NCT03735680",
+    "NCT04478279",
+    "NCT06923527",
+    "NCT05460273",
+    "NCT00577122",
+    "NCT06695845",
+    "NCT02632045",
+    "NCT04224272",
+    "NCT04296175",
+    "NCT04501523",
+    "NCT01357772",
+    "NCT05967286",
+    "NCT03094169",
+    "NCT03359954",
+    "NCT06580002",
+    "NCT04923542",
+    "NCT05243641",
+    "NCT05676255",
+    "NCT03025035",
+    "NCT00530868",
+    "NCT03772353",
+    "NCT06434077",
+    "NCT06078384",
+    "NCT04075058",
+    "NCT05415215",
+    "NCT02086578",
+    "NCT02229084",
+    "NCT02614833",
+    "NCT01556243",
+    "NCT00691678",
+    "NCT01033032",
+    "NCT06135493",
+    "NCT03584009",
+    "NCT05593094",
+    "NCT00099437",
+    "NCT04482309",
+    "NCT02221999",
+    "NCT05748834",
+    "NCT01730833",
+    "NCT05329532",
+    "NCT04669132",
+    "NCT06840821",
+    "NCT00629616",
+    "NCT00490139",
+    "NCT01275677",
+    "NCT03477019",
+    "NCT05891561",
+    "NCT00432172",
+    "NCT03980054",
+    "NCT06963905",
+    "NCT00165256",
+    "NCT03760588",
+    "NCT03535506",
+    "NCT04278144",
+    "NCT01471106",
+    "NCT03414684",
+    "NCT04569747",
+    "NCT03283384",
+    "NCT05549505",
+    "NCT02978495",
+    "NCT02340221",
+    "NCT02183805",
+    "NCT04871854",
+    "NCT03130439",
+    "NCT02642094",
+    "NCT02576431",
+    "NCT03734029",
+    "NCT02154529",
+    "NCT03393845",
+    "NCT07193394",
+    "NCT06760637",
+    "NCT01142401",
+    "NCT04756765",
+    "NCT03152929",
+    "NCT02917005",
+    "NCT01147016",
+    "NCT01124695",
+    "NCT05900206",
+    "NCT03515798",
+    "NCT01818063",
+    "NCT07285044",
+    "NCT06975085",
+    "NCT04578106",
+    "NCT02137252",
+    "NCT01224678",
+    "NCT05303038",
+    "NCT06650748",
+    "NCT03905343",
+    "NCT05860465",
+    "NCT05554211"
+  ],
+  "studies": [
+    {
+      "last_update_posted": "2023-06-22",
+      "lead_sponsor": "Eisai Inc.",
+      "nct_id": "NCT00879086",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "A Study Comparing Eribulin Mesylate and Ixabepilone in Causing or Exacerbating Neuropathy in Participants With Advanced Breast Cancer",
+      "version_count": 11
+    },
+    {
+      "last_update_posted": "2026-01-14",
+      "lead_sponsor": "Institute of Cancer Research, United Kingdom",
+      "nct_id": "NCT04584853",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "PreOperative Endocrine Therapy for Individualised Care With Abemaciclib",
+      "version_count": 12
+    },
+    {
+      "last_update_posted": "2022-01-31",
+      "lead_sponsor": "Academic and Community Cancer Research United",
+      "nct_id": "NCT02297412",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Minocycline Hydrochloride in Reducing Chemotherapy-Induced Peripheral Neuropathy and Acute Pain in Patients With Breast Cancer Undergoing Treatment With Paclitaxel",
+      "version_count": 15
+    },
+    {
+      "last_update_posted": "2024-12-02",
+      "lead_sponsor": "Hubei Cancer Hospital",
+      "nct_id": "NCT06401005",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "SBRT, Chemotherapy, and AK104 Neoadjuvant Therapy for Triple-negative Breast Cancer (TNBC)",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2024-10-22",
+      "lead_sponsor": "The Netherlands Cancer Institute",
+      "nct_id": "NCT04307329",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Monalizumab and Trastuzumab In Metastatic HER2-pOSitive breAst Cancer: MIMOSA-trial",
+      "version_count": 9
+    },
+    {
+      "last_update_posted": "2025-06-12",
+      "lead_sponsor": "National Cancer Institute (NCI)",
+      "nct_id": "NCT00769379",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "COMPLETED",
+      "title": "Radiation Therapy With or Without Trastuzumab in Treating Women With Ductal Carcinoma In Situ Who Have Undergone Lumpectomy",
+      "version_count": 1651
+    },
+    {
+      "last_update_posted": "2026-05-20",
+      "lead_sponsor": "NRG Oncology",
+      "nct_id": "NCT04588246",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "TERMINATED",
+      "title": "Comparing Whole Brain Radiotherapy Using a Technique That Avoids the Hippocampus to Stereotactic Radiosurgery in Patients With Cancer That Has Spread to the Brain and Come Back in Other Areas of the Brain After Earlier Stereotactic Radiosurgery",
+      "version_count": 20
+    },
+    {
+      "last_update_posted": "2023-03-06",
+      "lead_sponsor": "Spanish Breast Cancer Research Group",
+      "nct_id": "NCT00128856",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Gemcitabine, Doxorubicin and Paclitaxel (GAT) as Neoadjuvant Treatment of Breast Cancer Patients",
+      "version_count": 5
+    },
+    {
+      "last_update_posted": "2025-06-24",
+      "lead_sponsor": "Roswell Park Cancer Institute",
+      "nct_id": "NCT05756166",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "TERMINATED",
+      "title": "Rintatolimod, Celecoxib and Interferon Alpha 2b With Pembrolizumab For the Treatment of Patients With Metastatic or Unresectable Triple Negative Breast Cancer",
+      "version_count": 14
+    },
+    {
+      "last_update_posted": "2022-03-16",
+      "lead_sponsor": "University of California, San Francisco",
+      "nct_id": "NCT02384239",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "A Study of Palbociclib in Combination With Fulvestrant or Tamoxifen as Treatment for Metastatic Breast Cancer",
+      "version_count": 10
+    },
+    {
+      "last_update_posted": "2023-07-07",
+      "lead_sponsor": "OncoNano Medicine, Inc.",
+      "nct_id": "NCT03735680",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "A Study to Evaluate ONM-100, an Intraoperative Fluorescence Imaging Agent for the Detection of Cancer",
+      "version_count": 13
+    },
+    {
+      "last_update_posted": "2026-02-09",
+      "lead_sponsor": "Sapience Therapeutics",
+      "nct_id": "NCT04478279",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "A Phase 1-2 Study of ST101 in Patients With Advanced Solid Tumors",
+      "version_count": 24
+    },
+    {
+      "last_update_posted": "2026-05-12",
+      "lead_sponsor": "Yale University",
+      "nct_id": "NCT06923527",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "Circulating Tumor DNA",
+      "version_count": 12
+    },
+    {
+      "last_update_posted": "2026-03-11",
+      "lead_sponsor": "AstraZeneca",
+      "nct_id": "NCT05460273",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "A Study of Dato-DXd in Chinese Patients With Advanced Non-Small Cell Lung Cancer, Triple-negative Breast Cancer and Other Solid Tumors (TROPION-PanTumor02)",
+      "version_count": 15
+    },
+    {
+      "last_update_posted": "2023-10-16",
+      "lead_sponsor": "Indiana University",
+      "nct_id": "NCT00577122",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Medroxyprogesterone +/- Cyclophosphamide & Methotrexate in Hormone Receptor-Negative Recurrent/Metastatic Breast Cancer",
+      "version_count": 16
+    },
+    {
+      "last_update_posted": "2026-04-09",
+      "lead_sponsor": "Jazz Pharmaceuticals",
+      "nct_id": "NCT06695845",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "A Phase 2 Study of Zanidatamab in Patients With HER2-expressing Tumors",
+      "version_count": 17
+    },
+    {
+      "last_update_posted": "2024-12-06",
+      "lead_sponsor": "Melissa K Accordino",
+      "nct_id": "NCT02632045",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Study of Efficacy of Ribociclib After Progression on CDK4/6 Inhibition in Patients With HR+ HER2- Advanced Breast Cancer",
+      "version_count": 15
+    },
+    {
+      "last_update_posted": "2025-08-01",
+      "lead_sponsor": "Jazz Pharmaceuticals",
+      "nct_id": "NCT04224272",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "A Study of ZW25 (Zanidatamab) With Palbociclib Plus Fulvestrant in Patients With HER2+/HR+ Advanced Breast Cancer",
+      "version_count": 21
+    },
+    {
+      "last_update_posted": "2025-03-26",
+      "lead_sponsor": "Fudan University",
+      "nct_id": "NCT04296175",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Carboplatin Intensified Chemotherapy for TRIple NEgative Breast Cancer(CITRINE)",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2023-02-21",
+      "lead_sponsor": "Sun Yat-Sen Memorial Hospital of Sun Yat-Sen University",
+      "nct_id": "NCT04501523",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "A Prospective, Phase II Trial Using ctDNA to Initiate Post-operation Boost Therapy After NAC in TNBC",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2023-07-17",
+      "lead_sponsor": "Andrea DeCensi",
+      "nct_id": "NCT01357772",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Trial of Low Dose Tamoxifen in Women With Breast Intraepithelial Neoplasia - Long Term Follow-up",
+      "version_count": 10
+    },
+    {
+      "last_update_posted": "2024-03-20",
+      "lead_sponsor": "National Cancer Institute (NCI)",
+      "nct_id": "NCT05967286",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "WITHDRAWN",
+      "title": "Olaparib and Alpelisib for Treatment of Metastatic Breast Cancer, A ComboMATCH Treatment Trial",
+      "version_count": 4
+    },
+    {
+      "last_update_posted": "2025-06-11",
+      "lead_sponsor": "Formation Biologics",
+      "nct_id": "NCT03094169",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "TERMINATED",
+      "title": "AVID100 in Advanced Epithelial Carcinomas",
+      "version_count": 14
+    },
+    {
+      "last_update_posted": "2026-03-05",
+      "lead_sponsor": "M.D. Anderson Cancer Center",
+      "nct_id": "NCT03359954",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Radiation Therapy Before Surgery in Treating Patients With Hormone Receptor Positive, HER2 Negative Breast Cancer",
+      "version_count": 18
+    },
+    {
+      "last_update_posted": "2025-06-26",
+      "lead_sponsor": "University of California, Irvine",
+      "nct_id": "NCT06580002",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "Repurposing Riluzole for Cancer-Related Cognitive Impairment: A Pilot Trial",
+      "version_count": 4
+    },
+    {
+      "last_update_posted": "2026-02-06",
+      "lead_sponsor": "H. Lee Moffitt Cancer Center and Research Institute",
+      "nct_id": "NCT04923542",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "Stereotactic Radiation & Abemaciclib in the Management of HR+/HER2- Breast Cancer Brain Metastases",
+      "version_count": 17
+    },
+    {
+      "last_update_posted": "2025-06-11",
+      "lead_sponsor": "M.D. Anderson Cancer Center",
+      "nct_id": "NCT05243641",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "TERMINATED",
+      "title": "Neratinib and Capmatinib Combination (Phase Ib/II) in Metastatic Breast Cancer and Inflammatory Breast Cancer Patients With Abnormal HER-family and c-Met Pathway Activity as Measured by the CELsignia Signaling Analysis Test",
+      "version_count": 21
+    },
+    {
+      "last_update_posted": "2025-07-30",
+      "lead_sponsor": "University of Arizona",
+      "nct_id": "NCT05676255",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "The Breast Cancer Survivors and Partners Online Research Together (SUPORT) Project",
+      "version_count": 4
+    },
+    {
+      "last_update_posted": "2026-02-06",
+      "lead_sponsor": "Yuan Yuan",
+      "nct_id": "NCT03025035",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Pembrolizumab in Combination With Olaparib in Advanced BRCA-mutated or HDR-defect Breast Cancer",
+      "version_count": 26
+    },
+    {
+      "last_update_posted": "2022-10-21",
+      "lead_sponsor": "University of Alabama at Birmingham",
+      "nct_id": "NCT00530868",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Comparing Letrozole Given Alone to Letrozole Given With Avastin in Post-Menopausal Women Breast Cancer",
+      "version_count": 28
+    },
+    {
+      "last_update_posted": "2023-03-07",
+      "lead_sponsor": "Fudan University",
+      "nct_id": "NCT03772353",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "UNKNOWN",
+      "title": "Pyrotinib, Dalpiciclib(SHR6390) and Endocrine Therapy in Subjects With Dual-receptor Positive(ER+/HER2+) Advanced Breast Cancer",
+      "version_count": 8
+    },
+    {
+      "last_update_posted": "2025-06-22",
+      "lead_sponsor": "S.LAB (SOLOWAYS)",
+      "nct_id": "NCT06434077",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "NOT_YET_RECRUITING",
+      "title": "Clinical Trial Protocol: Randomized Placebo-Controlled Pilot Study of GcMAF (Soloways TM) in Patients With Metastatic Breast Cancer",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2025-11-17",
+      "lead_sponsor": "UNICANCER",
+      "nct_id": "NCT06078384",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "Pembrolizumab and Chemotherapy Treatment or no Treatment Guided by the Level of TILs in Resected Early-stage TNBC",
+      "version_count": 7
+    },
+    {
+      "last_update_posted": "2021-06-23",
+      "lead_sponsor": "Post Graduate Institute of Medical Education and Research, Chandigarh",
+      "nct_id": "NCT04075058",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "COMPLETED",
+      "title": "Hypofractionated Radiation Therapy in Patients With Breast Cancer",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2026-02-10",
+      "lead_sponsor": "Hoffmann-La Roche",
+      "nct_id": "NCT05415215",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "COMPLETED",
+      "title": "A Study to Evaluate Patient Preference for Home Administration of Fixed-Dose Combination of Pertuzumab and Trastuzumab for Subcutaneous Administration in Participants With Early or Locally Advanced/Inflammatory HER2-Positive Breast Cancer",
+      "version_count": 33
+    },
+    {
+      "last_update_posted": "2026-01-20",
+      "lead_sponsor": "Memorial Sloan Kettering Cancer Center",
+      "nct_id": "NCT02086578",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Study Assessing the Potential for Reduced Rates of Implant Failure Using Multi-Beam Intensity-Modulated Radiation Therapy for Locally Advanced Breast Cancer Patients With Implant Reconstructions",
+      "version_count": 25
+    },
+    {
+      "last_update_posted": "2024-11-07",
+      "lead_sponsor": "University of Arkansas",
+      "nct_id": "NCT02229084",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Vaccination of High Risk Breast Cancer Patients",
+      "version_count": 20
+    },
+    {
+      "last_update_posted": "2021-10-05",
+      "lead_sponsor": "Immutep S.A.S.",
+      "nct_id": "NCT02614833",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "IMP321 (Eftilagimod Alpha) as Adjunctive to a Standard Chemotherapy Paclitaxel Metastatic Breast Carcinoma",
+      "version_count": 35
+    },
+    {
+      "last_update_posted": "2023-11-30",
+      "lead_sponsor": "Alliance for Clinical Trials in Oncology",
+      "nct_id": "NCT01556243",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Breast-Conserving Surgery and Radiation Therapy in Patients With Multiple Ipsilateral Breast Cancer",
+      "version_count": 30
+    },
+    {
+      "last_update_posted": "2022-11-08",
+      "lead_sponsor": "Dawn L. Hershman",
+      "nct_id": "NCT00691678",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Glucosamine and Chondroitin for Aromatase Inhibitor Induced Joint Symptoms in Women With Breast Cancer",
+      "version_count": 8
+    },
+    {
+      "last_update_posted": "2022-05-03",
+      "lead_sponsor": "SCRI Development Innovations, LLC",
+      "nct_id": "NCT01033032",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Trial of Amrubicin as Treatment for Patients With HER2-Negative Metastatic Breast Cancer",
+      "version_count": 18
+    },
+    {
+      "last_update_posted": "2025-04-24",
+      "lead_sponsor": "Future University in Egypt",
+      "nct_id": "NCT06135493",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Prevention of Paclitaxel-induced Peripheral Neuropathy in Breast Cancer Patients",
+      "version_count": 8
+    },
+    {
+      "last_update_posted": "2022-06-28",
+      "lead_sponsor": "Hoffmann-La Roche",
+      "nct_id": "NCT03584009",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "TERMINATED",
+      "title": "A Phase II Study Comparing The Efficacy Of Venetoclax + Fulvestrant Vs. Fulvestrant In Women With Estrogen Receptor-Positive, Her2-Negative Locally Advanced Or Metastatic Breast Cancer Who Experienced Disease Recurrence Or Progression During Or After CDK4/6 Inhibitor Therapy",
+      "version_count": 26
+    },
+    {
+      "last_update_posted": "2026-02-25",
+      "lead_sponsor": "Hoffmann-La Roche",
+      "nct_id": "NCT05593094",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "A Phase 1 Trial of ZN-A-1041 Enteric Capsules or Combination in Participants With Human Epidermal Growth Factor Receptor 2 (HER2)-Positive Advanced Solid Tumors",
+      "version_count": 11
+    },
+    {
+      "last_update_posted": "2026-03-18",
+      "lead_sponsor": "AstraZeneca",
+      "nct_id": "NCT00099437",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Comparison of Fulvestrant (FASLODEX\u2122) 250 mg and 500 mg in Postmenopausal Women With Oestrogen Receptor Positive Advanced Breast Cancer Progressing or Relapsing After Previous Endocrine Therapy.",
+      "version_count": 68
+    },
+    {
+      "last_update_posted": "2026-04-09",
+      "lead_sponsor": "AstraZeneca",
+      "nct_id": "NCT04482309",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "A Phase 2 Study of T-DXd in Patients With Selected HER2 Expressing Tumors",
+      "version_count": 52
+    },
+    {
+      "last_update_posted": "2023-08-29",
+      "lead_sponsor": "RenJi Hospital",
+      "nct_id": "NCT02221999",
+      "phases": [
+        "PHASE2",
+        "PHASE3"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Weekly Paclitaxel and Cisplatin to Treat Hormone Receptor Positive and Triple Negative Breast Cancer Patients",
+      "version_count": 9
+    },
+    {
+      "last_update_posted": "2026-03-20",
+      "lead_sponsor": "SCRI Development Innovations, LLC",
+      "nct_id": "NCT05748834",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "Study of Tucatinib and Doxil in Participants With Human Epidermal Growth Factor Receptor 2 Positive (HER2+) Metastatic Breast Cancer",
+      "version_count": 10
+    },
+    {
+      "last_update_posted": "2025-06-03",
+      "lead_sponsor": "City of Hope Medical Center",
+      "nct_id": "NCT01730833",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Pertuzumab, Trastuzumab, and Paclitaxel Albumin-Stabilized Nanoparticle Formulation in Treating Patients With HER2-Positive Advanced Breast Cancer",
+      "version_count": 30
+    },
+    {
+      "last_update_posted": "2025-09-17",
+      "lead_sponsor": "Scancell Ltd",
+      "nct_id": "NCT05329532",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "Modi-1 Moditope in Breast, Head and Neck, Ovarian, or Renal Cancer",
+      "version_count": 4
+    },
+    {
+      "last_update_posted": "2022-02-23",
+      "lead_sponsor": "Instituto Brasileiro de Controle do Cancer",
+      "nct_id": "NCT04669132",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Efficacy of Olanzapine, Netupitant and Palonosetron in Controlling Nausea and Vomiting Associated With Highly Emetogenic Chemotherapy in Patients With Breast Cancer",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2025-12-02",
+      "lead_sponsor": "Mainline Biosciences (Shanghai) Co., Ltd",
+      "nct_id": "NCT06840821",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "Evaluating the Safety, Tolerability, and Preliminary Anti-tumor Activity of MB0151 in Adult Subjects With Advanced Solid Tumors Expressing Somatostatin Receptors",
+      "version_count": 4
+    },
+    {
+      "last_update_posted": "2021-06-09",
+      "lead_sponsor": "UNICANCER",
+      "nct_id": "NCT00629616",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Efficacy of Anastrozole and Fulvestrant in Patients With ER Positive, HER2 Negative, Operable Breast Cancer",
+      "version_count": 12
+    },
+    {
+      "last_update_posted": "2025-03-21",
+      "lead_sponsor": "Novartis Pharmaceuticals",
+      "nct_id": "NCT00490139",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "COMPLETED",
+      "title": "ALTTO (Adjuvant Lapatinib And/Or Trastuzumab Treatment Optimisation) Study; BIG 2-06/N063D",
+      "version_count": 203
+    },
+    {
+      "last_update_posted": "2025-07-14",
+      "lead_sponsor": "National Cancer Institute (NCI)",
+      "nct_id": "NCT01275677",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "COMPLETED",
+      "title": "Chemotherapy With or Without Trastuzumab After Surgery in Treating Women With Invasive Breast Cancer",
+      "version_count": 980
+    },
+    {
+      "last_update_posted": "2023-01-19",
+      "lead_sponsor": "St. Olavs Hospital",
+      "nct_id": "NCT03477019",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Ultrasound-enhanced Delivery of Chemotherapy to Patients With Liver Metastasis From Breast- and Colorectal Cancer",
+      "version_count": 9
+    },
+    {
+      "last_update_posted": "2024-11-27",
+      "lead_sponsor": "Shanghai Jiao Tong University School of Medicine",
+      "nct_id": "NCT05891561",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "Short-course Trastuzumab, Pertuzumab with Taxanes in the Adjuvant Treatment of Early HER2-positive Breast Cancer",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2023-04-03",
+      "lead_sponsor": "Spanish Breast Cancer Research Group",
+      "nct_id": "NCT00432172",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Selective Neoadjuvant Treatment According to Immunohistochemical Subtype for HER2 Negative Breast Cancer Patients",
+      "version_count": 9
+    },
+    {
+      "last_update_posted": "2021-05-24",
+      "lead_sponsor": "Jiangsu HengRui Medicine Co., Ltd.",
+      "nct_id": "NCT03980054",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "UNKNOWN",
+      "title": "A Study of Evaluating The Effects Of Pyrotinib After Adjuvant Trastuzumab In Women With Early Stage Breast Cancer",
+      "version_count": 4
+    },
+    {
+      "last_update_posted": "2026-02-17",
+      "lead_sponsor": "Yale University",
+      "nct_id": "NCT06963905",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "Saci Nivo Rela for TNBC",
+      "version_count": 7
+    },
+    {
+      "last_update_posted": "2025-12-29",
+      "lead_sponsor": "Dana-Farber Cancer Institute",
+      "nct_id": "NCT00165256",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Wide Excision Alone as Treatment for Ductal Carcinoma in Situ of The Breast",
+      "version_count": 18
+    },
+    {
+      "last_update_posted": "2025-02-12",
+      "lead_sponsor": "Torbjorn Omland",
+      "nct_id": "NCT03760588",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Prevention of Cardiac Dysfunction During Breast Cancer Therapy",
+      "version_count": 9
+    },
+    {
+      "last_update_posted": "2025-09-26",
+      "lead_sponsor": "Georgetown University",
+      "nct_id": "NCT03535506",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "TERMINATED",
+      "title": "Preoperative Palbociclib in Patients With DCIS of the Breast That Are Candidates for Surgery",
+      "version_count": 10
+    },
+    {
+      "last_update_posted": "2025-09-15",
+      "lead_sponsor": "Bolt Biotherapeutics, Inc.",
+      "nct_id": "NCT04278144",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "TERMINATED",
+      "title": "A First-in-human Study Using BDC-1001 as a Single Agent and in Combination With Nivolumab in Advanced HER2-Expressing Solid Tumors",
+      "version_count": 35
+    },
+    {
+      "last_update_posted": "2024-07-10",
+      "lead_sponsor": "M.D. Anderson Cancer Center",
+      "nct_id": "NCT01471106",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Phase II Short-term Adjuvant Therapy and Biomarker Studies With Targeted Agents in Women With Estrogen Receptor Negative Breast Cancer",
+      "version_count": 30
+    },
+    {
+      "last_update_posted": "2025-09-29",
+      "lead_sponsor": "Dana-Farber Cancer Institute",
+      "nct_id": "NCT03414684",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Carboplatin +/- Nivolumab in Metastatic Triple Negative Breast Cancer",
+      "version_count": 24
+    },
+    {
+      "last_update_posted": "2026-04-02",
+      "lead_sponsor": "Dana-Farber Cancer Institute",
+      "nct_id": "NCT04569747",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "A Single Arm Phase II Study of ADjuvant Endocrine Therapy, Pertuzumab, and Trastuzumab for Patients With Anatomic Stage I Hormone Receptor-positive, HER2-positive Breast Cancer",
+      "version_count": 31
+    },
+    {
+      "last_update_posted": "2025-09-19",
+      "lead_sponsor": "Borstkanker Onderzoek Groep",
+      "nct_id": "NCT03283384",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Tailoring NEOadjuvant Therapy in Hormone Receptor Positive, HER2 Negative, Luminal Breast Cancer.",
+      "version_count": 11
+    },
+    {
+      "last_update_posted": "2025-08-29",
+      "lead_sponsor": "Arvinas Inc.",
+      "nct_id": "NCT05549505",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "A Trial Using ARV-471 or Anastrozole in Post-Menopausal Women With Breast Cancer Prior to Surgery",
+      "version_count": 11
+    },
+    {
+      "last_update_posted": "2022-12-28",
+      "lead_sponsor": "Barretos Cancer Hospital",
+      "nct_id": "NCT02978495",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Neoadjuvant Carboplatin in Triple Negative Breast Cancer",
+      "version_count": 4
+    },
+    {
+      "last_update_posted": "2022-07-12",
+      "lead_sponsor": "Hoffmann-La Roche",
+      "nct_id": "NCT02340221",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "TERMINATED",
+      "title": "A Study of Taselisib + Fulvestrant Versus Placebo + Fulvestrant in Participants With Advanced or Metastatic Breast Cancer Who Have Disease Recurrence or Progression During or After Aromatase Inhibitor Therapy",
+      "version_count": 64
+    },
+    {
+      "last_update_posted": "2021-07-23",
+      "lead_sponsor": "Sun Yat-sen University",
+      "nct_id": "NCT02183805",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "TERMINATED",
+      "title": "Chemotherapy Followed by Peripheral Stem Cell Transplantation in Treating Metastatic Triple-negative Breast Cancer",
+      "version_count": 7
+    },
+    {
+      "last_update_posted": "2022-11-01",
+      "lead_sponsor": "Beni-Suef University",
+      "nct_id": "NCT04871854",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Evaluating Tocilizumab for Sever COVID-19 Infection in Breast Cancer vs. Non Cancer Pateints",
+      "version_count": 7
+    },
+    {
+      "last_update_posted": "2026-02-20",
+      "lead_sponsor": "Dana-Farber Cancer Institute",
+      "nct_id": "NCT03130439",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "TERMINATED",
+      "title": "Abemaciclib for Patients With Retinoblastoma-Positive, Triple Negative Metastatic Breast Cancer",
+      "version_count": 17
+    },
+    {
+      "last_update_posted": "2023-12-05",
+      "lead_sponsor": "LuZhe Sun",
+      "nct_id": "NCT02642094",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "TERMINATED",
+      "title": "Aging Mammary Stem Cells and Breast Cancer Prevention",
+      "version_count": 10
+    },
+    {
+      "last_update_posted": "2026-04-28",
+      "lead_sponsor": "Bayer",
+      "nct_id": "NCT02576431",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "A Study to Test the Effect of the Drug Larotrectinib in Adults and Children With NTRK-fusion Positive Solid Tumors",
+      "version_count": 97
+    },
+    {
+      "last_update_posted": "2025-10-06",
+      "lead_sponsor": "Daiichi Sankyo",
+      "nct_id": "NCT03734029",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Trastuzumab Deruxtecan (DS-8201a) Versus Investigator's Choice for HER2-low Breast Cancer That Has Spread or Cannot be Surgically Removed [DESTINY-Breast04]",
+      "version_count": 33
+    },
+    {
+      "last_update_posted": "2022-04-27",
+      "lead_sponsor": "Kadmon Corporation, LLC",
+      "nct_id": "NCT02154529",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "TERMINATED",
+      "title": "Study of the Combination of KD019 and Trastuzumab in Subjects With HER2-Positive Metastatic Breast Cancer",
+      "version_count": 25
+    },
+    {
+      "last_update_posted": "2026-01-02",
+      "lead_sponsor": "Nancy Chan, MD",
+      "nct_id": "NCT03393845",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Study of Pembrolizumab Plus Fulvestrant in Hormone Receptor Positive, HER-2 Negative Advanced/Metastatic Breast Cancer Patients",
+      "version_count": 18
+    },
+    {
+      "last_update_posted": "2026-02-23",
+      "lead_sponsor": "Institut Curie",
+      "nct_id": "NCT07193394",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "Tucatinib and Trastuzumab in HER3-mutant and HER2-not Amplified Metastatic Breast Cancer",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2026-05-19",
+      "lead_sponsor": "Pfizer",
+      "nct_id": "NCT06760637",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Study of PF-07220060 With Letrozole in Adults With HR-positive HER2-negative Breast Cancer Who Have Not Received Anticancer Treatment for Advanced/Metastatic Disease",
+      "version_count": 8
+    },
+    {
+      "last_update_posted": "2023-11-27",
+      "lead_sponsor": "National Cancer Institute (NCI)",
+      "nct_id": "NCT01142401",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Fulvestrant With or Without Bortezomib in Patients With Inoperable Locally Advanced or Metastatic Estrogen Receptor Positive Breast Cancer",
+      "version_count": 54
+    },
+    {
+      "last_update_posted": "2025-08-17",
+      "lead_sponsor": "Stanford University",
+      "nct_id": "NCT04756765",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "WITHDRAWN",
+      "title": "Talazoparib Monotherapy in PALB2 Mutation Associated Advanced Breast Cancer",
+      "version_count": 11
+    },
+    {
+      "last_update_posted": "2023-06-06",
+      "lead_sponsor": "Corewell Health West",
+      "nct_id": "NCT03152929",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "TERMINATED",
+      "title": "Paravertebral Block (PVC) Versus Pectoral Nerve Block (PEC)",
+      "version_count": 5
+    },
+    {
+      "last_update_posted": "2021-07-28",
+      "lead_sponsor": "Hamdy A. Azim",
+      "nct_id": "NCT02917005",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "UNKNOWN",
+      "title": "PalbocIclib in PreMenopausal Women With ER Positive/HER-2 Negative MetAstatic Breast Cancer",
+      "version_count": 4
+    },
+    {
+      "last_update_posted": "2023-04-27",
+      "lead_sponsor": "Barbara Ann Karmanos Cancer Institute",
+      "nct_id": "NCT01147016",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "TERMINATED",
+      "title": "Targeted T Cells After Neoadjuvant Chemotherapy in Treating Women With Stage II or III Breast Cancer Undergoing Surgery",
+      "version_count": 20
+    },
+    {
+      "last_update_posted": "2023-06-29",
+      "lead_sponsor": "ECOG-ACRIN Cancer Research Group",
+      "nct_id": "NCT01124695",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Tamoxifen Citrate in Treating Patients With Metastatic or Recurrent Breast Cancer",
+      "version_count": 132
+    },
+    {
+      "last_update_posted": "2025-09-02",
+      "lead_sponsor": "Karolinska University Hospital",
+      "nct_id": "NCT05900206",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "Trastuzumab Deruxtecan Versus Standard Neoadjuvant Treatment for HER2-positive Breast Cancer",
+      "version_count": 4
+    },
+    {
+      "last_update_posted": "2025-09-12",
+      "lead_sponsor": "Institut Paoli-Calmettes",
+      "nct_id": "NCT03515798",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Study of Immunotherapy in Combination With Chemotherapy in HER2-negative Inflammatory Breast Cancer",
+      "version_count": 8
+    },
+    {
+      "last_update_posted": "2025-04-30",
+      "lead_sponsor": "Sidney Kimmel Comprehensive Cancer Center at Thomas Jefferson University",
+      "nct_id": "NCT01818063",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Carboplatin and Combination Chemotherapy With or Without Veliparib in Treating Patients With Stage IIB-IIIC Breast Cancer",
+      "version_count": 20
+    },
+    {
+      "last_update_posted": "2026-05-18",
+      "lead_sponsor": "Mayo Clinic",
+      "nct_id": "NCT07285044",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "The Cancer Connected Access and Remote Expertise Beyond Walls Program to Provide In-Home Cancer Treatment and Improve Treatment Satisfaction in Cancer Patients Living in the Florida Panhandle and Surrounding Areas",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2026-02-12",
+      "lead_sponsor": "University of Colorado, Denver",
+      "nct_id": "NCT06975085",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Understanding and Addressing Rejection of Personalized Breast Cancer Risk Information: Administrative Supplement Study",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2026-01-06",
+      "lead_sponsor": "Fundacio Clinic Barcelona",
+      "nct_id": "NCT04578106",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "TERMINATED",
+      "title": "Omission of Surgery in Clinically Low-risk HER2positive Breast Cancer With High HER2 Addiction and a Complete Response Following Standard Anti-HER2-based Neoadjuvant Therapy",
+      "version_count": 5
+    },
+    {
+      "last_update_posted": "2021-11-16",
+      "lead_sponsor": "Dana-Farber Cancer Institute",
+      "nct_id": "NCT02137252",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "TERMINATED",
+      "title": "Naltrexone RCT for Treatment-Emergent Fatigue in Patients Receiving Radiation Therapy for Breast Cancer",
+      "version_count": 8
+    },
+    {
+      "last_update_posted": "2024-10-08",
+      "lead_sponsor": "Alliance for Clinical Trials in Oncology",
+      "nct_id": "NCT01224678",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "COMPLETED",
+      "title": "Vitamin D and Breast Cancer Biomarkers in Female Patients",
+      "version_count": 112
+    },
+    {
+      "last_update_posted": "2022-06-09",
+      "lead_sponsor": "Fudan University",
+      "nct_id": "NCT05303038",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "UNKNOWN",
+      "title": "Cryoablation Combined With Tirelizumab and Bevacizumab in Liver Metastatic TNBC Patients Failed by Multiline Therapy",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2026-03-17",
+      "lead_sponsor": "Peking University",
+      "nct_id": "NCT06650748",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "ENROLLING_BY_INVITATION",
+      "title": "Multigene Risk Score Combined With Ki-67 Dynamic Assessment in Stratified Neoadjuvant Endocrine Therapy Treatment With or Without CDK4/6 Inhibitors in HR+/HER2- Breast Cancer",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2021-06-16",
+      "lead_sponsor": "Swiss Cancer Institute",
+      "nct_id": "NCT03905343",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "TERMINATED",
+      "title": "Ribociclib-endocrine Combination Therapy Versus Chemotherapy as 1st Line in Visceral mBC",
+      "version_count": 21
+    },
+    {
+      "last_update_posted": "2026-01-14",
+      "lead_sponsor": "Shanghai Pharmaceuticals Holding Co., Ltd",
+      "nct_id": "NCT05860465",
+      "phases": [
+        "PHASE2",
+        "PHASE3"
+      ],
+      "status": "RECRUITING",
+      "title": "Safety and Efficacy of SPH4336 in Combination With Endocrine Therapy in the Treatment of Locally Advanced or Metastatic Breast Cancer",
+      "version_count": 11
+    },
+    {
+      "last_update_posted": "2025-02-21",
+      "lead_sponsor": "Northwestern University",
+      "nct_id": "NCT05554211",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "WITHDRAWN",
+      "title": "Tranexamic Acid Usage in Bilateral Mastectomy to Reduce Post-surgical Drainage",
+      "version_count": 3
+    }
+  ]
+}

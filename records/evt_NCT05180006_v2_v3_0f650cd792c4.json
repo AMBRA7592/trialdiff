@@ -1,0 +1,682 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/armsInterventionsModule/armGroups/0/description",
+      "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames",
+      "/protocolSection/armsInterventionsModule/armGroups/0/label",
+      "/protocolSection/armsInterventionsModule/armGroups/0/type",
+      "/protocolSection/armsInterventionsModule/armGroups/1/description",
+      "/protocolSection/armsInterventionsModule/armGroups/1/interventionNames/1",
+      "/protocolSection/armsInterventionsModule/armGroups/1/label",
+      "/protocolSection/armsInterventionsModule/armGroups/2/description",
+      "/protocolSection/armsInterventionsModule/armGroups/2/interventionNames/0",
+      "/protocolSection/armsInterventionsModule/armGroups/2/interventionNames/1",
+      "/protocolSection/armsInterventionsModule/armGroups/2/label",
+      "/protocolSection/armsInterventionsModule/armGroups/2/type",
+      "/protocolSection/armsInterventionsModule/armGroups/3",
+      "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0",
+      "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/1",
+      "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/2",
+      "/protocolSection/armsInterventionsModule/interventions/1/armGroupLabels/0",
+      "/protocolSection/armsInterventionsModule/interventions/1/description",
+      "/protocolSection/armsInterventionsModule/interventions/1/name",
+      "/protocolSection/armsInterventionsModule/interventions/2/armGroupLabels/0",
+      "/protocolSection/armsInterventionsModule/interventions/2/armGroupLabels/1",
+      "/protocolSection/armsInterventionsModule/interventions/2/description",
+      "/protocolSection/armsInterventionsModule/interventions/2/name",
+      "/protocolSection/armsInterventionsModule/interventions/3/armGroupLabels/0",
+      "/protocolSection/armsInterventionsModule/interventions/3/description",
+      "/protocolSection/armsInterventionsModule/interventions/3/name",
+      "/protocolSection/armsInterventionsModule/interventions/4",
+      "/protocolSection/descriptionModule/briefSummary",
+      "/protocolSection/descriptionModule/detailedDescription",
+      "/protocolSection/designModule/designInfo/interventionModelDescription",
+      "/protocolSection/designModule/enrollmentInfo/count",
+      "/protocolSection/eligibilityModule/eligibilityCriteria",
+      "/protocolSection/statusModule/completionDateStruct/date",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT05180006_v2_v3_0f650cd792c4. ClinicalTrials.gov NCT05180006, versions 2-3. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 2 to version 3 for NCT05180006.",
+      "The JSON Patch for this comparison has hash f44b9307d91ad2a02e511ed50c1519d39c9708a999dd8da99c3305446c9e5527.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under the study design module changed between ClinicalTrials.gov versions 2 and 3.",
+      "The timing context for the from-version record was early_recruitment.",
+      "The deterministic rules that fired were: arms_or_interventions_change, design_info_change, eligibility_criteria_change, enrollment_count_change.",
+      "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups/0/description, /protocolSection/armsInterventionsModule/armGroups/0/interventionNames, /protocolSection/armsInterventionsModule/armGroups/0/label, /protocolSection/armsInterventionsModule/armGroups/0/type, /protocolSection/armsInterventionsModule/armGroups/1/description, /protocolSection/armsInterventionsModule/armGroups/1/interventionNames/1, /protocolSection/armsInterventionsModule/armGroups/1/label, /protocolSection/armsInterventionsModule/armGroups/2/description, /protocolSection/armsInterventionsModule/armGroups/2/interventionNames/0, /protocolSection/armsInterventionsModule/armGroups/2/interventionNames/1, /protocolSection/armsInterventionsModule/armGroups/2/label, /protocolSection/armsInterventionsModule/armGroups/2/type, /protocolSection/armsInterventionsModule/armGroups/3, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/1, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/2, /protocolSection/armsInterventionsModule/interventions/1/armGroupLabels/0, /protocolSection/armsInterventionsModule/interventions/1/description, /protocolSection/armsInterventionsModule/interventions/1/name, /protocolSection/armsInterventionsModule/interventions/2/armGroupLabels/0, /protocolSection/armsInterventionsModule/interventions/2/armGroupLabels/1, /protocolSection/armsInterventionsModule/interventions/2/description, /protocolSection/armsInterventionsModule/interventions/2/name, /protocolSection/armsInterventionsModule/interventions/3/armGroupLabels/0, /protocolSection/armsInterventionsModule/interventions/3/description, /protocolSection/armsInterventionsModule/interventions/3/name, /protocolSection/armsInterventionsModule/interventions/4, /protocolSection/descriptionModule/briefSummary, /protocolSection/descriptionModule/detailedDescription, /protocolSection/designModule/designInfo/interventionModelDescription, /protocolSection/designModule/enrollmentInfo/count, /protocolSection/eligibilityModule/eligibilityCriteria, /protocolSection/statusModule/completionDateStruct/date, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/primaryCompletionDateStruct/date, /protocolSection/statusModule/statusVerifiedDate.",
+      "The timeline value moved by 366 days.",
+      "The timeline value moved by 365 days."
+    ],
+    "classification": {
+      "categories": [
+        "design_change",
+        "arm_intervention_change",
+        "eligibility_change",
+        "enrollment_change",
+        "timeline_major_slip",
+        "timeline_significant_shift"
+      ],
+      "category": "design_change",
+      "deterministic_rules": [
+        "arms_or_interventions_change",
+        "design_info_change",
+        "eligibility_criteria_change",
+        "enrollment_count_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "early_recruitment",
+      "value_signals": [
+        {
+          "category": "timeline_major_slip",
+          "date_struct": "primaryCompletionDateStruct",
+          "delta_days": 366,
+          "direction": "later",
+          "new_precision": "month",
+          "new_type": "ESTIMATED",
+          "new_value": "2025-02",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2024-02",
+          "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+          "severity": "high",
+          "signal": "timeline_major_slip"
+        },
+        {
+          "category": "timeline_significant_shift",
+          "date_struct": "completionDateStruct",
+          "delta_days": 365,
+          "direction": "later",
+          "new_precision": "month",
+          "new_type": "ESTIMATED",
+          "new_value": "2026-02",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2025-02",
+          "path": "/protocolSection/statusModule/completionDateStruct/date",
+          "severity": "high",
+          "signal": "timeline_significant_shift"
+        }
+      ]
+    },
+    "event_id": "evt_NCT05180006_v2_v3_0f650cd792c4",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2024-04"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+        "value": "2025-02"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/completionDateStruct/date",
+        "value": "2026-02"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2024-04-16"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2024-04-18"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/descriptionModule/briefSummary",
+        "value": "<p>The aim of this study is to determine, using immunohistochemistry (IHC) on biopsies and surgically removed tumor if short-treatment immunotherapy with atezolizumab monotherapy or in combination with other biologic agents (ipatasertib &#x2F; Bevacizumab &#x2F; Trastuzumab &#x2F; Pertuzumab) is associated with increased levels of activated GzmB+ CD8+ T cells from baseline to post treatment sample.</p><p>Moreover, from baseline to post treatment sample, evolution of others biomarkers will be studied : GzmB&#x2F;CD8, CD8&#x2F;FoxP3, CD8&#x2F;CD68 in IHC, cell proliferation, PD-L1, MHC-I, change in gene expression (RNA-Seq).\nTjis study aim also to assess the safety and tolerability of study treatments in this population and to determine the effect of short-term immunotherapy treatment in pCR at surgery.</p><p>Patients will undergo tumor biopsies at screening and 15 days after the beginning of treatment (if they start neoadjuvant chemotherapy) &#x2F; at surgery, in order to evaluate in IHC evolution of activated GzmB+ CD8+ T cells and evaluate other markers</p><p>It targets 2 different cohorts: newly diagnosed, non-metastatic early-stage triple-negative (TNBC) or HER2+ breast cancer.\nTNBC cohort is composed of 2 open-label, randomized arms, HER2+ of 2 arms.</p><p>A maximum of 185 patients will be included in the trial</p><p>Tumor evaluation will be performed by clinical examination and Breast echography at baseline and end of treatment visit.</p><p>The safety of the product will be assessed at each cycle, through complete clinical exams, biological tests and through the collection of ongoing toxicities or adverse events.</p>"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/descriptionModule/detailedDescription",
+        "value": "<p>Cohort 1 In TNBC patients t will be composed of 4 open-label, randomized arms:</p><p>Arm 1A: atezolizumab alone, administered as one single IV infusion on day -15 +&#x2F;- 48 h Arm 1B: atezolizumab and bevacizumab as one single IV infusion on day -15 +&#x2F;- 48 h (D1) prior to the date of surgery or the start of the standard of care neoadjuvant systemic treatment.</p><p>Cohort 2 in HER2-positive patients will be composed of 2 arms:</p><p>Arm 2A: pertuzumab for one IV infusion on day -15 +&#x2F;- 48 h (D1) prior to the date of surgery or the start of the standard of care neoadjuvant systemic treatment.</p><p>Arm 2B: atezolizumab as one single IV infusion in combination with trastuzumab + pertuzumab for one IV infusion on day -15 +&#x2F;- 48 h (D1) prior to the date of surgery or the start of the standard of care neoadjuvant systemic treatment.</p>"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/designModule/designInfo/interventionModelDescription",
+        "value": "The design of this study follows an adaptive, open, prospective randomized model : Cohort 1 TNBC patients: they will be randomized 1:1 to either atezolizumab alone administered as one single IV infusion on day -15 +&#x2F;- 48h prior to the date of surgery or the start of the standard of care neoadjuvant systemic treatment, or atezolizumab and bevacizumab as one single IV infusion on day -15 +&#x2F;- 48h prior to the date of surgery or the start of neoadjuvant treatment Cohort 2 in HER2-positive patients: they will be randomized 1:1 to either trastuzumab and pertuzumab for one IV infusion on day -15 +&#x2F;- 48h prior to the surgery or the start of neoadjuvant treatment, or atezolizumab as one single IV infusion in combination with trastuzumab and pertuzumab for one IV infusion on day -15 +&#x2F;- 48h prior to the surgery or the start of neoadjuvant treatment"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/designModule/enrollmentInfo/count",
+        "value": 185
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/0/label",
+        "value": "Arm 1A: Atezolizumab, in TNBC patients (cohort 1)"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/0/type",
+        "value": "ACTIVE_COMPARATOR"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/0/description",
+        "value": "atezolizumab alone, administered as one single IV infusion on day -15 +&#x2F;- 48 h (D1) prior to the date of surgery or the start of standard of care neoadjuvant systemic treatment."
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames",
+        "value": [
+          "Drug: Atezolizumab Injection"
+        ]
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/1/label",
+        "value": "Arm 1B: Atezolizumab + Bevacizumab, in TNBC patients (cohort 1)"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/1/description",
+        "value": "atezolizumab and bevacizumab as one single IV infusion on day -15 +&#x2F;- 48 h (D1) prior to the date of surgery or the start of standard of care neoadjuvant systemic treatment."
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/1/interventionNames/1",
+        "value": "Drug: Bevacizumab"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/2/label",
+        "value": "Arm 2A: Trastuzumab + Pertuzumab, in HER2+ patients (cohort 2)"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/2/type",
+        "value": "ACTIVE_COMPARATOR"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/2/description",
+        "value": "trastuzumab + pertuzumab for one IV infusion on day -15 +&#x2F;- 48 h (D1) prior to the date of surgery or the start of standard of care neoadjuvant systemic treatment."
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/2/interventionNames/0",
+        "value": "Drug: Pertuzumab"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/2/interventionNames/1",
+        "value": "Drug: Trastuzumab"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/3"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/3"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0",
+        "value": "Arm 1A: Atezolizumab, in TNBC patients (cohort 1)"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/1",
+        "value": "Arm 1B: Atezolizumab + Bevacizumab, in TNBC patients (cohort 1)"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/2"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/1/name",
+        "value": "Bevacizumab"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/1/description",
+        "value": "Patients in the atezolizumab plus bevacizumab arm will receive a unique dose of bevacizumab as 10 mg&#x2F;kg administered by IV infusion over 60 mins on day 1 cycle 1 (15 days before surgery +&#x2F;- 48 h), the same day as atezolizumab."
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/1/armGroupLabels/0",
+        "value": "Arm 1B: Atezolizumab + Bevacizumab, in TNBC patients (cohort 1)"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/2/name",
+        "value": "Pertuzumab"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/2/description",
+        "value": "Patients in the atezolizumab plus trastuzumab plus pertuzumab arm will receive single doses of pertuzumab on day 1 administered IV.\nPertuzumab will be administered IV at a loading dose of 840 mg."
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/2/armGroupLabels/0",
+        "value": "Arm 2A: Trastuzumab + Pertuzumab, in HER2+ patients (cohort 2)"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/interventions/2/armGroupLabels/1",
+        "value": "Arm 2B: Atezolizumab + Trastuzumab + Pertuzumab, in HER2+ patients (cohort 2)"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/3/name",
+        "value": "Trastuzumab"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/3/description",
+        "value": "Patients in the atezolizumab plus trastuzumab plus pertuzumab arm will receive single doses of Trastuzumab on day 1 administered IV.\nTrastuzumab will be given at a loading dose of 8 mg&#x2F;kg."
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/interventions/3/armGroupLabels/0",
+        "value": "Arm 2A: Trastuzumab + Pertuzumab, in HER2+ patients (cohort 2)"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/armsInterventionsModule/interventions/4"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/eligibilityModule/eligibilityCriteria",
+        "value": "<p>Inclusion Criteria:</p><ul><li>Patient should understand, sign, and date the written informed consent form prior to any protocol-specific procedures performed.\nPatient should be able and willing to comply with study visits and procedures as per protocol.</li><li>Female or male patients aged 18 years or older</li><li>Eastern Cooperative Group (ECOG) Performance Status 0-1</li><li>Histologically confirmed female breast cancer with no evidence of metastatic spread</li><li>Candidate to surgery upfront or patients with an indication to standard of care neoadjuvant systemic treatment, assuming that systemic treatment starts after the completion of the pre-operative immunotherapy treatment, biopsies are undertaken before the start of the systemic treatment and the decision to administer neoadjuvant systemic treatment is made before randomization</li><li>At least 11 mm in tumor size as determined by breast ultrasound</li><li><p>ER, PR and HER2 will be locally assessed and defined as per the french national guidelines:</p><ul><li>For the TNBC cohort, ER\u226410%, PR\u226410% and HER2 not overexpressed&#x2F;amplified</li><li>For the HER2-positive cohort, presence of a HER2 overexpression and&#x2F;or amplification as per ASCO&#x2F;CAP guidelines</li></ul></li><li><p>Adequate haematologic and organ function defined by the following:</p><ul><li>ANC \u2265 1,500 cells&#x2F;\u00b5l</li><li>Platelet count \u2265 100,000&#x2F;\u00b5l</li><li>Haemoglobin \u2265 9.0 g&#x2F;dL (90g&#x2F;L)</li><li>Serum albumin \u2265 2.5 g&#x2F;dL</li><li>Creatinine \u2264 1.5 x ULN</li><li>Bilirubin \u2264 1.5 x ULN, AST or ALT &lt; 3 x ULN, ALP &lt; 2.5 x ULN (patients with known Gilbert disease who have serum bilirubin level \u2264 3 \u00d7 the institutional ULN may be enrolled)</li><li>For patients not receiving therapeutic anticoagulation: INR or aPTT \u2264 1.5 x ULN.\nFor patients receiving therapeutic anticoagulation: stable anticoagulant regimen</li></ul></li><li>Patients of child-bearing potential are eligible, provided they have a negative serum \u03b2-HCG pregnancy test within 2 weeks or urine pregnancy test within 48 hours prior to the first dose of study treatment, and agreement to remain abstinent (refrain from heterosexual intercourse) or use contraceptive methods with a failure rate of &lt; 1% per year during the treatment period and for 5 months after the last dose of atezolizumab, 6 months after the last dose of bevacizumab, 28 days after the last dose of ipatasertib and 7 months after the last dose of pertuzumab and&#x2F;or trastuzumab.</li><li>A woman is considered of childbearing potential following menarche and until becoming post-menopausal (\u2265 12 months of non-therapy-induced amenorrhea) unless permanently sterile.\nPermanent sterilization methods include hysterectomy, bilateral oophorectomy and bilateral salpingectomy.</li><li>Sexually active women of childbearing potential must agree to use a highly effective method of contraception supplemented by a barrier method, or to abstain from sexual activity during the study and for at least 5 months after discontinuation of atezolizumab treatment, 6 months after the last dose of bevacizumab, 28 days after the last dose of ipatasertib and 7 months after the last dose of pertuzumab and&#x2F;or trastuzumab.\nFemale subjects should also refrain from breastfeeding throughout this period.</li><li>A highly effective birth control method is a one, which can achieve a failure rate of less than 1% per year when used consistently and correctly.\nSuch methods include: combined (estrogen and progestogen containing) hormonal contraception; progestogen-only hormonal contraception associated with inhibition of ovulation; intrauterine device (IUD); intrauterine hormone-releasing system (IUS); bilateral tubal occlusion; vasectomized partner (on the understanding that this is the only one partner during the whole study duration), and sexual abstinence during the entire period of risk associated with study treatment.\nTo prevent the risk of interaction between the study drug and hormonal contraceptives, hormonal contraceptives should be supplemented with a barrier method (preferably male condom).\nFollowing methods are considered as unacceptable methods (non-exhaustive list): periodic abstinence (calendar, symptothermal, post-ovulation methods) and withdrawal (coitus interruptus).</li><li>Sexually actives males patients must agree to use condom during the study and for at least 5 months after discontinuation of atezolizumab treatment, 6 months after the last dose of bevacizumab, 28 days after the last dose of ipatasertib and 7 months after the last dose of pertuzumab and&#x2F;or trastuzumab.\nAlso, it is recommended their women of childbearing potential partner use a highly effective method of contraception for the same duration.</li><li>Patients must be affiliated to a social security system or beneficiary of the same.</li></ul><p>Exclusion Criteria:</p><p>Patients who meet any of the following exclusion criteria will not be eligible for this study.</p><ul><li>Evidence of metastatic breast cancer</li><li>ER\u226510% or PR\u226510%and&#x2F;or HER2+ (for the TNBC cohort) and HER2- (for the HER2+ cohort)</li><li>Any systemic therapy (e.g, chemotherapy, targeted therapy, immune-therapy) or radiotherapy for current breast cancer disease before study entry</li><li>Previous systemic treatment for other neoplasms within 1 year prior to randomization</li><li>Active malignancy (except for non-melanoma skin cancer, or histologically confirmed complete excision of carcinoma in-situ) within the past 36 months prior to study entry</li><li>Known intolerance to any of the study drugs or any of their excipients</li><li>Patients with prior allogeneic stem cell or solid organ transplantation</li><li>Administration of a live, attenuated vaccine within 4 weeks prior to enrolment or anticipation that such a live, attenuated vaccine will be required during the study or within 5 months after the last dose of atezolizumab</li><li>Treatment with systemic immunostimulatory agents (including but not limited to interferons or interleukin-2) within 4 weeks or five half-lives of the drug, whichever is shorter, prior to enrolment</li><li><p>Treatment with systemic immunosuppressive medication (including, but not limited to, corticosteroids, cyclophosphamide, azathioprine, methotrexate and thalidomide) within 2 weeks prior to initiation of study treatment, or anticipation of need for systemic immunosuppressive medication during study treatment, with the following exceptions:</p><ul><li>Patients who received acute, low-dose systemic immunosuppressant medication or a one-time pulse dose of systemic immunosuppressant medication (e.g., 48 hours of corticosteroids as premedication for hypersensitivity reaction (e.g., CT scan premedication)) are eligible for the study after Medical Monitor approval has been obtained</li><li>Patients who received mineralocorticoids (e.g., fludrocortisone), corticosteroids for chronic obstructive pulmonary disease (COPD) or asthma, or low-dose corticosteroids for orthostatic hypotension or adrenal insufficiency are eligible for the study</li><li>Patients who received intranasal, inhaled, topical or local steroid injections (e.g., intra articular injection)</li></ul></li><li>Active or history of autoimmune disease or immune deficiency, with the exception of history of treated autoimmune-related hypothyroidism and Type 1 diabetes mellitus on insulin regimen</li><li>Symptomatic intrinsic lung disease or with extensive tumor involvement of the lungs, resulting in dyspnea</li><li>History of idio pathic pulmonary fibrosis (including pneumonitis or interstitial lung disease), drug-induced pneumonitis, organizing pneumonia (i.e.\nbronchiolitis obliterans, cryptogenic organizing pneumonia), or evidence of active pneumonitis (history of radiation pneumonitis in the radiation field (fibrosis) is permitted).</li><li>Patients who underwent major surgery within 28 days prior to inclusion or until the surgical wound is fully healed</li><li>History of HIV infection</li><li>Patients with active hepatitis infection (defined as having a positive hepatitis B surface antigen [HBsAg] test at screening) or hepatitis C. Patients with past hepatitis B virus (HBV) infection or resolved HBV infection (defined as having a negative HBsAg test and a positive antibody to hepatitis B core antigen [anti-HBc] antibody test) are eligible.\nPatients positive for hepatitis C virus (HCV) antibody are eligible only if polymerase chain reaction (PCR) is negative for HCV RNA</li><li>Patients with a history cirrhosis</li><li>Active tuberculosis</li><li>Current treatment with anti-viral therapy for HBV</li><li>Prior treatment with CD137 agonists or immune checkpoint blockade therapies, including antiCTLA-4, antiPD-1, and antiPD-L1 therapeutic antibodies</li><li>Psychological, familial, sociological or geographical conditions that do not permit compliance with the study protocol</li><li>Participation in another clinical study with an investigational product during the last 28 days and while on study treatment</li><li>Currently known to have a history or ongoing serious retinopathy and&#x2F;or history of retinal vein occlusion</li><li>History of severe allergic, anaphylactic, or other hypersensitivity reactions to chimeric or humanized antibodies or fusion proteins</li><li>Known hypersensitivity or allergy to biopharmaceuticals produced in Chinese hamster ovary cells or any component of the atezolizumab formulation or to any component of the other drugs on the study</li><li>Severe infection within 4 weeks prior to initiation of study treatment, including, but not limited to, hospitalization for complications of infection, bacteremia, or severe pneumonia</li><li>Treatment with therapeutic oral or IV antibiotics within 2 weeks prior to initiation of study treatment</li><li><p>Significant cardiovascular disease, such as:</p><ul><li>History of myocardial infarction, acute coronary syndromes or coronary angioplasty&#x2F;stenting&#x2F;bypass grafting within the past 6 months,</li><li>Congestive Heart Failure (CHF) NYHA class III or IV or history of CHF NYHA class III or IV, unless an echocardiogram or multi-gated acquisition scan performed within 3 months day 1 reveals a left ventricular ejection fraction \u2265 50%55%</li></ul></li><li>Uncontrolled hypertension defined by systolic pressure &gt; 150 and&#x2F;or diastolic pressure &gt; 110 mmHg, with or without anti-hypertensive medication.\nPatients with initial blood pressure elevations are eligible if initiation or adjustment of anti-hypertensive medication lowers blood pressure to meet entry criteria</li><li>History of stroke or transient ischemic attack within 6 months prior to randomisation</li><li>History of abdominal fistula, gastrointestinal perforation, or intra-abdominal abscess within 6 months prior to randomisation</li><li>History of haemoptysis (&gt; 1&#x2F;2 teaspoon of bright red blood per episode) or other serious haemorrhage or at risk of bleeding (gastrointestinal history of bleeds, gastrointestinal ulcers etc.) within 1 month prior to randomization</li><li>Any other disease, metabolic dysfunction, physical examination finding, or clinical laboratory finding that, in the investigator&#x27;s opinion, gives reasonable suspicion of a disease or condition that contraindicates the use of an investigational drug, may affect the interpretation of the results, render the patient at high risk from treatment complications or interferes with obtaining informed consent.</li><li>Pregnant or breastfeeding women</li><li>Patient under guardianship or deprived of his liberty by a judicial or administrative decision or incapable of giving its consent.</li></ul><p>For the TNBC cohort (exclusion criteria in relation to bevacizumab):</p><ul><li>Uncontrolled hypertension defined by systolic pressure &gt; 150 and&#x2F;or diastolic pressure &gt; 110 mmHg, with or without anti-hypertensive medication.\nPatients with initial blood pressure elevations are eligible if initiation or adjustment of anti-hypertensive medication lowers blood pressure to meet entry criteria</li><li>Currently known to have a history or ongoing serous retinopathy and&#x2F;or history of retinal vein occlusion</li><li>History of stroke or transient ischemic attack within 6 months prior to randomization</li><li>History of abdominal fistula, gastrointestinal perforation, or intra-abdominal abscess within 6 months prior to randomization</li><li>History of haemoptysis (&gt; 1&#x2F;2 teaspoon of bright red blood per episode) or other serious haemorrhage or at risk of bleeding (gastrointestinal history of bleeds, gastrointestinal ulcers etc.) within 1 month prior to randomization</li><li>History of active inflammatory bowel disease (e.g.\nCrohn&#x27;s disease and ulcerative colitis) or active bowel inflammation ( e.g.\ndiverticulitis)</li><li>Grade \u2265 2 uncontrolled or untreated hypercholesterolemia or hypertriglyceridemia</li><li>Lung disease: pneumonitis, interstitial lung disease, idiopathic pulmonary fibrosis, cystic fibrosis, Aspergillosis, active tuberculosis, or history of opportunistic infections (pneumocystis pneumonia or cytomegalovirus pneumonia)</li><li>Known clinically significant history of liver disease consistent with Child Pugh Class B or C, including active viral or other hepatitis (e.g., positive for hepatitis B surface antigen [HBsAg] or hepatitis C virus [HCV] antibody at screening), current drug or alcohol abuse, or cirrhosis</li></ul>"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "7b579e8a15f12ee15a65010d3e24bb8a209ba47ecbd29ed9e46fda0730fb4527",
+      "materiality_event_hash": "5cd2b9e17762513a51cbb79879432a01b94ec3e97b5911dba108511df4356453",
+      "patch_hash": "f44b9307d91ad2a02e511ed50c1519d39c9708a999dd8da99c3305446c9e5527",
+      "patch_raw_hash": "31f9aa24fef1707cf30d6d728b7d075edf63af2ea9e7a14d86f084310100671e",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT05180006/history/2?patchToVersion=3",
+      "to_snapshot_hash": "edaafaec07446a800e2624d063a4ba3316550625325dad56a20efc61402a09f7"
+    },
+    "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT05180006",
+      "nct_id": "NCT05180006"
+    },
+    "versions": {
+      "from_version": 2,
+      "submitted_date": "2024-04-16",
+      "to_version": 3
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/armsInterventionsModule/armGroups/0/description",
+    "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames",
+    "/protocolSection/armsInterventionsModule/armGroups/0/label",
+    "/protocolSection/armsInterventionsModule/armGroups/0/type",
+    "/protocolSection/armsInterventionsModule/armGroups/1/description",
+    "/protocolSection/armsInterventionsModule/armGroups/1/interventionNames/1",
+    "/protocolSection/armsInterventionsModule/armGroups/1/label",
+    "/protocolSection/armsInterventionsModule/armGroups/2/description",
+    "/protocolSection/armsInterventionsModule/armGroups/2/interventionNames/0",
+    "/protocolSection/armsInterventionsModule/armGroups/2/interventionNames/1",
+    "/protocolSection/armsInterventionsModule/armGroups/2/label",
+    "/protocolSection/armsInterventionsModule/armGroups/2/type",
+    "/protocolSection/armsInterventionsModule/armGroups/3",
+    "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0",
+    "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/1",
+    "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/2",
+    "/protocolSection/armsInterventionsModule/interventions/1/armGroupLabels/0",
+    "/protocolSection/armsInterventionsModule/interventions/1/description",
+    "/protocolSection/armsInterventionsModule/interventions/1/name",
+    "/protocolSection/armsInterventionsModule/interventions/2/armGroupLabels/0",
+    "/protocolSection/armsInterventionsModule/interventions/2/armGroupLabels/1",
+    "/protocolSection/armsInterventionsModule/interventions/2/description",
+    "/protocolSection/armsInterventionsModule/interventions/2/name",
+    "/protocolSection/armsInterventionsModule/interventions/3/armGroupLabels/0",
+    "/protocolSection/armsInterventionsModule/interventions/3/description",
+    "/protocolSection/armsInterventionsModule/interventions/3/name",
+    "/protocolSection/armsInterventionsModule/interventions/4",
+    "/protocolSection/descriptionModule/briefSummary",
+    "/protocolSection/descriptionModule/detailedDescription",
+    "/protocolSection/designModule/designInfo/interventionModelDescription",
+    "/protocolSection/designModule/enrollmentInfo/count",
+    "/protocolSection/eligibilityModule/eligibilityCriteria",
+    "/protocolSection/statusModule/completionDateStruct/date",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT05180006_v2_v3_0f650cd792c4. ClinicalTrials.gov NCT05180006, versions 2-3. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 2 to version 3 for NCT05180006.",
+    "The JSON Patch for this comparison has hash f44b9307d91ad2a02e511ed50c1519d39c9708a999dd8da99c3305446c9e5527.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under the study design module changed between ClinicalTrials.gov versions 2 and 3.",
+    "The timing context for the from-version record was early_recruitment.",
+    "The deterministic rules that fired were: arms_or_interventions_change, design_info_change, eligibility_criteria_change, enrollment_count_change.",
+    "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups/0/description, /protocolSection/armsInterventionsModule/armGroups/0/interventionNames, /protocolSection/armsInterventionsModule/armGroups/0/label, /protocolSection/armsInterventionsModule/armGroups/0/type, /protocolSection/armsInterventionsModule/armGroups/1/description, /protocolSection/armsInterventionsModule/armGroups/1/interventionNames/1, /protocolSection/armsInterventionsModule/armGroups/1/label, /protocolSection/armsInterventionsModule/armGroups/2/description, /protocolSection/armsInterventionsModule/armGroups/2/interventionNames/0, /protocolSection/armsInterventionsModule/armGroups/2/interventionNames/1, /protocolSection/armsInterventionsModule/armGroups/2/label, /protocolSection/armsInterventionsModule/armGroups/2/type, /protocolSection/armsInterventionsModule/armGroups/3, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/1, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/2, /protocolSection/armsInterventionsModule/interventions/1/armGroupLabels/0, /protocolSection/armsInterventionsModule/interventions/1/description, /protocolSection/armsInterventionsModule/interventions/1/name, /protocolSection/armsInterventionsModule/interventions/2/armGroupLabels/0, /protocolSection/armsInterventionsModule/interventions/2/armGroupLabels/1, /protocolSection/armsInterventionsModule/interventions/2/description, /protocolSection/armsInterventionsModule/interventions/2/name, /protocolSection/armsInterventionsModule/interventions/3/armGroupLabels/0, /protocolSection/armsInterventionsModule/interventions/3/description, /protocolSection/armsInterventionsModule/interventions/3/name, /protocolSection/armsInterventionsModule/interventions/4, /protocolSection/descriptionModule/briefSummary, /protocolSection/descriptionModule/detailedDescription, /protocolSection/designModule/designInfo/interventionModelDescription, /protocolSection/designModule/enrollmentInfo/count, /protocolSection/eligibilityModule/eligibilityCriteria, /protocolSection/statusModule/completionDateStruct/date, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/primaryCompletionDateStruct/date, /protocolSection/statusModule/statusVerifiedDate.",
+    "The timeline value moved by 366 days.",
+    "The timeline value moved by 365 days."
+  ],
+  "classification": {
+    "categories": [
+      "design_change",
+      "arm_intervention_change",
+      "eligibility_change",
+      "enrollment_change",
+      "timeline_major_slip",
+      "timeline_significant_shift"
+    ],
+    "category": "design_change",
+    "deterministic_rules": [
+      "arms_or_interventions_change",
+      "design_info_change",
+      "eligibility_criteria_change",
+      "enrollment_count_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "early_recruitment",
+    "value_signals": [
+      {
+        "category": "timeline_major_slip",
+        "date_struct": "primaryCompletionDateStruct",
+        "delta_days": 366,
+        "direction": "later",
+        "new_precision": "month",
+        "new_type": "ESTIMATED",
+        "new_value": "2025-02",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2024-02",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+        "severity": "high",
+        "signal": "timeline_major_slip"
+      },
+      {
+        "category": "timeline_significant_shift",
+        "date_struct": "completionDateStruct",
+        "delta_days": 365,
+        "direction": "later",
+        "new_precision": "month",
+        "new_type": "ESTIMATED",
+        "new_value": "2026-02",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2025-02",
+        "path": "/protocolSection/statusModule/completionDateStruct/date",
+        "severity": "high",
+        "signal": "timeline_significant_shift"
+      }
+    ]
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT05180006_v2_v3_0f650cd792c4",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT05180006_v2_v3_0f650cd792c4.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT05180006_v2_v3_0f650cd792c4",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT05180006"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2024-04"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+      "value": "2025-02"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/completionDateStruct/date",
+      "value": "2026-02"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2024-04-16"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2024-04-18"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/descriptionModule/briefSummary",
+      "value": "<p>The aim of this study is to determine, using immunohistochemistry (IHC) on biopsies and surgically removed tumor if short-treatment immunotherapy with atezolizumab monotherapy or in combination with other biologic agents (ipatasertib &#x2F; Bevacizumab &#x2F; Trastuzumab &#x2F; Pertuzumab) is associated with increased levels of activated GzmB+ CD8+ T cells from baseline to post treatment sample.</p><p>Moreover, from baseline to post treatment sample, evolution of others biomarkers will be studied : GzmB&#x2F;CD8, CD8&#x2F;FoxP3, CD8&#x2F;CD68 in IHC, cell proliferation, PD-L1, MHC-I, change in gene expression (RNA-Seq).\nTjis study aim also to assess the safety and tolerability of study treatments in this population and to determine the effect of short-term immunotherapy treatment in pCR at surgery.</p><p>Patients will undergo tumor biopsies at screening and 15 days after the beginning of treatment (if they start neoadjuvant chemotherapy) &#x2F; at surgery, in order to evaluate in IHC evolution of activated GzmB+ CD8+ T cells and evaluate other markers</p><p>It targets 2 different cohorts: newly diagnosed, non-metastatic early-stage triple-negative (TNBC) or HER2+ breast cancer.\nTNBC cohort is composed of 2 open-label, randomized arms, HER2+ of 2 arms.</p><p>A maximum of 185 patients will be included in the trial</p><p>Tumor evaluation will be performed by clinical examination and Breast echography at baseline and end of treatment visit.</p><p>The safety of the product will be assessed at each cycle, through complete clinical exams, biological tests and through the collection of ongoing toxicities or adverse events.</p>"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/descriptionModule/detailedDescription",
+      "value": "<p>Cohort 1 In TNBC patients t will be composed of 4 open-label, randomized arms:</p><p>Arm 1A: atezolizumab alone, administered as one single IV infusion on day -15 +&#x2F;- 48 h Arm 1B: atezolizumab and bevacizumab as one single IV infusion on day -15 +&#x2F;- 48 h (D1) prior to the date of surgery or the start of the standard of care neoadjuvant systemic treatment.</p><p>Cohort 2 in HER2-positive patients will be composed of 2 arms:</p><p>Arm 2A: pertuzumab for one IV infusion on day -15 +&#x2F;- 48 h (D1) prior to the date of surgery or the start of the standard of care neoadjuvant systemic treatment.</p><p>Arm 2B: atezolizumab as one single IV infusion in combination with trastuzumab + pertuzumab for one IV infusion on day -15 +&#x2F;- 48 h (D1) prior to the date of surgery or the start of the standard of care neoadjuvant systemic treatment.</p>"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/designModule/designInfo/interventionModelDescription",
+      "value": "The design of this study follows an adaptive, open, prospective randomized model : Cohort 1 TNBC patients: they will be randomized 1:1 to either atezolizumab alone administered as one single IV infusion on day -15 +&#x2F;- 48h prior to the date of surgery or the start of the standard of care neoadjuvant systemic treatment, or atezolizumab and bevacizumab as one single IV infusion on day -15 +&#x2F;- 48h prior to the date of surgery or the start of neoadjuvant treatment Cohort 2 in HER2-positive patients: they will be randomized 1:1 to either trastuzumab and pertuzumab for one IV infusion on day -15 +&#x2F;- 48h prior to the surgery or the start of neoadjuvant treatment, or atezolizumab as one single IV infusion in combination with trastuzumab and pertuzumab for one IV infusion on day -15 +&#x2F;- 48h prior to the surgery or the start of neoadjuvant treatment"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/designModule/enrollmentInfo/count",
+      "value": 185
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/0/label",
+      "value": "Arm 1A: Atezolizumab, in TNBC patients (cohort 1)"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/0/type",
+      "value": "ACTIVE_COMPARATOR"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/0/description",
+      "value": "atezolizumab alone, administered as one single IV infusion on day -15 +&#x2F;- 48 h (D1) prior to the date of surgery or the start of standard of care neoadjuvant systemic treatment."
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames",
+      "value": [
+        "Drug: Atezolizumab Injection"
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/1/label",
+      "value": "Arm 1B: Atezolizumab + Bevacizumab, in TNBC patients (cohort 1)"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/1/description",
+      "value": "atezolizumab and bevacizumab as one single IV infusion on day -15 +&#x2F;- 48 h (D1) prior to the date of surgery or the start of standard of care neoadjuvant systemic treatment."
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/1/interventionNames/1",
+      "value": "Drug: Bevacizumab"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/2/label",
+      "value": "Arm 2A: Trastuzumab + Pertuzumab, in HER2+ patients (cohort 2)"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/2/type",
+      "value": "ACTIVE_COMPARATOR"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/2/description",
+      "value": "trastuzumab + pertuzumab for one IV infusion on day -15 +&#x2F;- 48 h (D1) prior to the date of surgery or the start of standard of care neoadjuvant systemic treatment."
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/2/interventionNames/0",
+      "value": "Drug: Pertuzumab"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/2/interventionNames/1",
+      "value": "Drug: Trastuzumab"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/3"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/3"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0",
+      "value": "Arm 1A: Atezolizumab, in TNBC patients (cohort 1)"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/1",
+      "value": "Arm 1B: Atezolizumab + Bevacizumab, in TNBC patients (cohort 1)"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/2"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/1/name",
+      "value": "Bevacizumab"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/1/description",
+      "value": "Patients in the atezolizumab plus bevacizumab arm will receive a unique dose of bevacizumab as 10 mg&#x2F;kg administered by IV infusion over 60 mins on day 1 cycle 1 (15 days before surgery +&#x2F;- 48 h), the same day as atezolizumab."
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/1/armGroupLabels/0",
+      "value": "Arm 1B: Atezolizumab + Bevacizumab, in TNBC patients (cohort 1)"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/2/name",
+      "value": "Pertuzumab"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/2/description",
+      "value": "Patients in the atezolizumab plus trastuzumab plus pertuzumab arm will receive single doses of pertuzumab on day 1 administered IV.\nPertuzumab will be administered IV at a loading dose of 840 mg."
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/2/armGroupLabels/0",
+      "value": "Arm 2A: Trastuzumab + Pertuzumab, in HER2+ patients (cohort 2)"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/interventions/2/armGroupLabels/1",
+      "value": "Arm 2B: Atezolizumab + Trastuzumab + Pertuzumab, in HER2+ patients (cohort 2)"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/3/name",
+      "value": "Trastuzumab"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/3/description",
+      "value": "Patients in the atezolizumab plus trastuzumab plus pertuzumab arm will receive single doses of Trastuzumab on day 1 administered IV.\nTrastuzumab will be given at a loading dose of 8 mg&#x2F;kg."
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/interventions/3/armGroupLabels/0",
+      "value": "Arm 2A: Trastuzumab + Pertuzumab, in HER2+ patients (cohort 2)"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/armsInterventionsModule/interventions/4"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/eligibilityModule/eligibilityCriteria",
+      "value": "<p>Inclusion Criteria:</p><ul><li>Patient should understand, sign, and date the written informed consent form prior to any protocol-specific procedures performed.\nPatient should be able and willing to comply with study visits and procedures as per protocol.</li><li>Female or male patients aged 18 years or older</li><li>Eastern Cooperative Group (ECOG) Performance Status 0-1</li><li>Histologically confirmed female breast cancer with no evidence of metastatic spread</li><li>Candidate to surgery upfront or patients with an indication to standard of care neoadjuvant systemic treatment, assuming that systemic treatment starts after the completion of the pre-operative immunotherapy treatment, biopsies are undertaken before the start of the systemic treatment and the decision to administer neoadjuvant systemic treatment is made before randomization</li><li>At least 11 mm in tumor size as determined by breast ultrasound</li><li><p>ER, PR and HER2 will be locally assessed and defined as per the french national guidelines:</p><ul><li>For the TNBC cohort, ER\u226410%, PR\u226410% and HER2 not overexpressed&#x2F;amplified</li><li>For the HER2-positive cohort, presence of a HER2 overexpression and&#x2F;or amplification as per ASCO&#x2F;CAP guidelines</li></ul></li><li><p>Adequate haematologic and organ function defined by the following:</p><ul><li>ANC \u2265 1,500 cells&#x2F;\u00b5l</li><li>Platelet count \u2265 100,000&#x2F;\u00b5l</li><li>Haemoglobin \u2265 9.0 g&#x2F;dL (90g&#x2F;L)</li><li>Serum albumin \u2265 2.5 g&#x2F;dL</li><li>Creatinine \u2264 1.5 x ULN</li><li>Bilirubin \u2264 1.5 x ULN, AST or ALT &lt; 3 x ULN, ALP &lt; 2.5 x ULN (patients with known Gilbert disease who have serum bilirubin level \u2264 3 \u00d7 the institutional ULN may be enrolled)</li><li>For patients not receiving therapeutic anticoagulation: INR or aPTT \u2264 1.5 x ULN.\nFor patients receiving therapeutic anticoagulation: stable anticoagulant regimen</li></ul></li><li>Patients of child-bearing potential are eligible, provided they have a negative serum \u03b2-HCG pregnancy test within 2 weeks or urine pregnancy test within 48 hours prior to the first dose of study treatment, and agreement to remain abstinent (refrain from heterosexual intercourse) or use contraceptive methods with a failure rate of &lt; 1% per year during the treatment period and for 5 months after the last dose of atezolizumab, 6 months after the last dose of bevacizumab, 28 days after the last dose of ipatasertib and 7 months after the last dose of pertuzumab and&#x2F;or trastuzumab.</li><li>A woman is considered of childbearing potential following menarche and until becoming post-menopausal (\u2265 12 months of non-therapy-induced amenorrhea) unless permanently sterile.\nPermanent sterilization methods include hysterectomy, bilateral oophorectomy and bilateral salpingectomy.</li><li>Sexually active women of childbearing potential must agree to use a highly effective method of contraception supplemented by a barrier method, or to abstain from sexual activity during the study and for at least 5 months after discontinuation of atezolizumab treatment, 6 months after the last dose of bevacizumab, 28 days after the last dose of ipatasertib and 7 months after the last dose of pertuzumab and&#x2F;or trastuzumab.\nFemale subjects should also refrain from breastfeeding throughout this period.</li><li>A highly effective birth control method is a one, which can achieve a failure rate of less than 1% per year when used consistently and correctly.\nSuch methods include: combined (estrogen and progestogen containing) hormonal contraception; progestogen-only hormonal contraception associated with inhibition of ovulation; intrauterine device (IUD); intrauterine hormone-releasing system (IUS); bilateral tubal occlusion; vasectomized partner (on the understanding that this is the only one partner during the whole study duration), and sexual abstinence during the entire period of risk associated with study treatment.\nTo prevent the risk of interaction between the study drug and hormonal contraceptives, hormonal contraceptives should be supplemented with a barrier method (preferably male condom).\nFollowing methods are considered as unacceptable methods (non-exhaustive list): periodic abstinence (calendar, symptothermal, post-ovulation methods) and withdrawal (coitus interruptus).</li><li>Sexually actives males patients must agree to use condom during the study and for at least 5 months after discontinuation of atezolizumab treatment, 6 months after the last dose of bevacizumab, 28 days after the last dose of ipatasertib and 7 months after the last dose of pertuzumab and&#x2F;or trastuzumab.\nAlso, it is recommended their women of childbearing potential partner use a highly effective method of contraception for the same duration.</li><li>Patients must be affiliated to a social security system or beneficiary of the same.</li></ul><p>Exclusion Criteria:</p><p>Patients who meet any of the following exclusion criteria will not be eligible for this study.</p><ul><li>Evidence of metastatic breast cancer</li><li>ER\u226510% or PR\u226510%and&#x2F;or HER2+ (for the TNBC cohort) and HER2- (for the HER2+ cohort)</li><li>Any systemic therapy (e.g, chemotherapy, targeted therapy, immune-therapy) or radiotherapy for current breast cancer disease before study entry</li><li>Previous systemic treatment for other neoplasms within 1 year prior to randomization</li><li>Active malignancy (except for non-melanoma skin cancer, or histologically confirmed complete excision of carcinoma in-situ) within the past 36 months prior to study entry</li><li>Known intolerance to any of the study drugs or any of their excipients</li><li>Patients with prior allogeneic stem cell or solid organ transplantation</li><li>Administration of a live, attenuated vaccine within 4 weeks prior to enrolment or anticipation that such a live, attenuated vaccine will be required during the study or within 5 months after the last dose of atezolizumab</li><li>Treatment with systemic immunostimulatory agents (including but not limited to interferons or interleukin-2) within 4 weeks or five half-lives of the drug, whichever is shorter, prior to enrolment</li><li><p>Treatment with systemic immunosuppressive medication (including, but not limited to, corticosteroids, cyclophosphamide, azathioprine, methotrexate and thalidomide) within 2 weeks prior to initiation of study treatment, or anticipation of need for systemic immunosuppressive medication during study treatment, with the following exceptions:</p><ul><li>Patients who received acute, low-dose systemic immunosuppressant medication or a one-time pulse dose of systemic immunosuppressant medication (e.g., 48 hours of corticosteroids as premedication for hypersensitivity reaction (e.g., CT scan premedication)) are eligible for the study after Medical Monitor approval has been obtained</li><li>Patients who received mineralocorticoids (e.g., fludrocortisone), corticosteroids for chronic obstructive pulmonary disease (COPD) or asthma, or low-dose corticosteroids for orthostatic hypotension or adrenal insufficiency are eligible for the study</li><li>Patients who received intranasal, inhaled, topical or local steroid injections (e.g., intra articular injection)</li></ul></li><li>Active or history of autoimmune disease or immune deficiency, with the exception of history of treated autoimmune-related hypothyroidism and Type 1 diabetes mellitus on insulin regimen</li><li>Symptomatic intrinsic lung disease or with extensive tumor involvement of the lungs, resulting in dyspnea</li><li>History of idio pathic pulmonary fibrosis (including pneumonitis or interstitial lung disease), drug-induced pneumonitis, organizing pneumonia (i.e.\nbronchiolitis obliterans, cryptogenic organizing pneumonia), or evidence of active pneumonitis (history of radiation pneumonitis in the radiation field (fibrosis) is permitted).</li><li>Patients who underwent major surgery within 28 days prior to inclusion or until the surgical wound is fully healed</li><li>History of HIV infection</li><li>Patients with active hepatitis infection (defined as having a positive hepatitis B surface antigen [HBsAg] test at screening) or hepatitis C. Patients with past hepatitis B virus (HBV) infection or resolved HBV infection (defined as having a negative HBsAg test and a positive antibody to hepatitis B core antigen [anti-HBc] antibody test) are eligible.\nPatients positive for hepatitis C virus (HCV) antibody are eligible only if polymerase chain reaction (PCR) is negative for HCV RNA</li><li>Patients with a history cirrhosis</li><li>Active tuberculosis</li><li>Current treatment with anti-viral therapy for HBV</li><li>Prior treatment with CD137 agonists or immune checkpoint blockade therapies, including antiCTLA-4, antiPD-1, and antiPD-L1 therapeutic antibodies</li><li>Psychological, familial, sociological or geographical conditions that do not permit compliance with the study protocol</li><li>Participation in another clinical study with an investigational product during the last 28 days and while on study treatment</li><li>Currently known to have a history or ongoing serious retinopathy and&#x2F;or history of retinal vein occlusion</li><li>History of severe allergic, anaphylactic, or other hypersensitivity reactions to chimeric or humanized antibodies or fusion proteins</li><li>Known hypersensitivity or allergy to biopharmaceuticals produced in Chinese hamster ovary cells or any component of the atezolizumab formulation or to any component of the other drugs on the study</li><li>Severe infection within 4 weeks prior to initiation of study treatment, including, but not limited to, hospitalization for complications of infection, bacteremia, or severe pneumonia</li><li>Treatment with therapeutic oral or IV antibiotics within 2 weeks prior to initiation of study treatment</li><li><p>Significant cardiovascular disease, such as:</p><ul><li>History of myocardial infarction, acute coronary syndromes or coronary angioplasty&#x2F;stenting&#x2F;bypass grafting within the past 6 months,</li><li>Congestive Heart Failure (CHF) NYHA class III or IV or history of CHF NYHA class III or IV, unless an echocardiogram or multi-gated acquisition scan performed within 3 months day 1 reveals a left ventricular ejection fraction \u2265 50%55%</li></ul></li><li>Uncontrolled hypertension defined by systolic pressure &gt; 150 and&#x2F;or diastolic pressure &gt; 110 mmHg, with or without anti-hypertensive medication.\nPatients with initial blood pressure elevations are eligible if initiation or adjustment of anti-hypertensive medication lowers blood pressure to meet entry criteria</li><li>History of stroke or transient ischemic attack within 6 months prior to randomisation</li><li>History of abdominal fistula, gastrointestinal perforation, or intra-abdominal abscess within 6 months prior to randomisation</li><li>History of haemoptysis (&gt; 1&#x2F;2 teaspoon of bright red blood per episode) or other serious haemorrhage or at risk of bleeding (gastrointestinal history of bleeds, gastrointestinal ulcers etc.) within 1 month prior to randomization</li><li>Any other disease, metabolic dysfunction, physical examination finding, or clinical laboratory finding that, in the investigator&#x27;s opinion, gives reasonable suspicion of a disease or condition that contraindicates the use of an investigational drug, may affect the interpretation of the results, render the patient at high risk from treatment complications or interferes with obtaining informed consent.</li><li>Pregnant or breastfeeding women</li><li>Patient under guardianship or deprived of his liberty by a judicial or administrative decision or incapable of giving its consent.</li></ul><p>For the TNBC cohort (exclusion criteria in relation to bevacizumab):</p><ul><li>Uncontrolled hypertension defined by systolic pressure &gt; 150 and&#x2F;or diastolic pressure &gt; 110 mmHg, with or without anti-hypertensive medication.\nPatients with initial blood pressure elevations are eligible if initiation or adjustment of anti-hypertensive medication lowers blood pressure to meet entry criteria</li><li>Currently known to have a history or ongoing serous retinopathy and&#x2F;or history of retinal vein occlusion</li><li>History of stroke or transient ischemic attack within 6 months prior to randomization</li><li>History of abdominal fistula, gastrointestinal perforation, or intra-abdominal abscess within 6 months prior to randomization</li><li>History of haemoptysis (&gt; 1&#x2F;2 teaspoon of bright red blood per episode) or other serious haemorrhage or at risk of bleeding (gastrointestinal history of bleeds, gastrointestinal ulcers etc.) within 1 month prior to randomization</li><li>History of active inflammatory bowel disease (e.g.\nCrohn&#x27;s disease and ulcerative colitis) or active bowel inflammation ( e.g.\ndiverticulitis)</li><li>Grade \u2265 2 uncontrolled or untreated hypercholesterolemia or hypertriglyceridemia</li><li>Lung disease: pneumonitis, interstitial lung disease, idiopathic pulmonary fibrosis, cystic fibrosis, Aspergillosis, active tuberculosis, or history of opportunistic infections (pneumocystis pneumonia or cytomegalovirus pneumonia)</li><li>Known clinically significant history of liver disease consistent with Child Pugh Class B or C, including active viral or other hepatitis (e.g., positive for hepatitis B surface antigen [HBsAg] or hepatitis C virus [HCV] antibody at screening), current drug or alcohol abuse, or cirrhosis</li></ul>"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "df1d86f4556dd14528ed0ea766d71dda490b66fe55aff36db4adc18489185874",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT05180006_v2_v3_0f650cd792c4",
+    "evidence_version": 1,
+    "from_snapshot_hash": "7b579e8a15f12ee15a65010d3e24bb8a209ba47ecbd29ed9e46fda0730fb4527",
+    "materiality_event_hash": "5cd2b9e17762513a51cbb79879432a01b94ec3e97b5911dba108511df4356453",
+    "patch_hash": "f44b9307d91ad2a02e511ed50c1519d39c9708a999dd8da99c3305446c9e5527",
+    "patch_raw_hash": "31f9aa24fef1707cf30d6d728b7d075edf63af2ea9e7a14d86f084310100671e",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT05180006/history/2?patchToVersion=3",
+    "to_snapshot_hash": "edaafaec07446a800e2624d063a4ba3316550625325dad56a20efc61402a09f7"
+  },
+  "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT05180006",
+    "current_record_hash": "63d5de01a0a41fdc83bb4ee7606e2675da776f9c96cde1d3428645e92bc485af",
+    "current_record_raw_hash": "63d5de01a0a41fdc83bb4ee7606e2675da776f9c96cde1d3428645e92bc485af",
+    "lead_sponsor": "Gustave Roussy, Cancer Campus, Grand Paris",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT05180006",
+    "official_title": "Impact of Neoadjuvant Immunotherapy in Early Stage Breast Cancer Before Standard Therapy",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT05180006",
+    "title": "Impact of Neoadjuvant Immunotherapy in Early Stage Breast Cancer Before Standard Therapy"
+  },
+  "versions": {
+    "from_version": 2,
+    "submitted_date": "2024-04-16",
+    "to_version": 3
+  }
+}

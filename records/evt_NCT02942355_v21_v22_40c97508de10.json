@@ -1,0 +1,294 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/conditionsModule/conditions/1",
+      "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+      "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+      "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+      "/protocolSection/outcomesModule/secondaryOutcomes",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT02942355_v21_v22_40c97508de10. ClinicalTrials.gov NCT02942355, versions 21-22. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance.",
+      "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 21 to version 22 for NCT02942355.",
+      "The JSON Patch for this comparison has hash d45e315c5b508effc4788315a217fb9f8207f2a5b481e0572949d203a3930aeb.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under the primary outcome module changed between ClinicalTrials.gov versions 21 and 22.",
+      "The timing context for the from-version record was late_recruitment.",
+      "The deterministic rules that fired were: primary_outcome_any_change, secondary_outcome_any_change.",
+      "The changed JSON Pointer paths were: /protocolSection/conditionsModule/conditions/1, /protocolSection/outcomesModule/primaryOutcomes/0/description, /protocolSection/outcomesModule/primaryOutcomes/0/measure, /protocolSection/outcomesModule/primaryOutcomes/0/timeFrame, /protocolSection/outcomesModule/secondaryOutcomes, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+    ],
+    "classification": {
+      "categories": [
+        "primary_outcome_change",
+        "secondary_outcome_change"
+      ],
+      "category": "primary_outcome_change",
+      "deterministic_rules": [
+        "primary_outcome_any_change",
+        "secondary_outcome_any_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "late_recruitment",
+      "value_signals": []
+    },
+    "event_id": "evt_NCT02942355_v21_v22_40c97508de10",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2024-04"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2024-04-18"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2024-04-23"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/conditionsModule/conditions/1",
+        "value": "Breast Cancer"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+        "value": "Number of participants with neutropenia that leads to permanent treatment discontinuation"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+        "value": "Determined for each subject as a binary variable indicating whether or not the participant experienced any neutropenic adverse event (according to NCI Common Terminology for Adverse Events version 4.0) that leads to permanent treatment discontinuation"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+        "value": "From enrollment to treatment discontinuation; participants remain on treatment until disease progression, unacceptable toxicity, participant withdrawal, or investigator decision. Assessed for approximately 4 years."
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes",
+        "value": [
+          {
+            "description": "Defined as the duration from start of first line metastatic chemotherapy to the date of death from any cause.\nParticipants who are alive or lost to follow up at the time of the analysis will be censored at the last known date they were alive.",
+            "measure": "Overall Survival (OS)",
+            "timeFrame": "From date of treatment start to date of death, or censored as described; assessed for approximately 4 years"
+          },
+          {
+            "description": "PFS is defined as the duration of time from the start of first line metastatic chemotherapy to first occurrence of either progressive disease (PD) or death.\nPD must be objectively determined per RECIST 1.1 criteria, where progression date is date of the radiologic assessment that identified PD.\nIf subject died without documented PD, progression date will be death date.\nFor surviving subjects who do not have PD, PFS will be censored at the date of last disease assessment.\nFor subjects who received subsequent anti-cancer therapy prior to documented PD, PFS will be censored at the date of last disease assessment prior to commencement of subsequent therapy.\nSubjects who have an initial PFS event immediately following 2 or more consecutive missed assessments will be censored at date of last assessment prior to missed assessments.",
+            "measure": "Progression Free Survival (PFS)",
+            "timeFrame": "From treatment start date to date of progression&#x2F;death, or censored as described; assessed for approximately 4 years."
+          },
+          {
+            "description": "Objective response will be determined for each subject as a binary variable indicating whether or not the subject achieved a best overall response of complete response (CR) or partial response (PR) as determined by RECIST 1.1 response criteria.\nA CR is indicated by disappearance of all target and non target lesions.\nA PR is indicated by &gt;=30% decrease in sum of longest diameter of target lesions with baseline as reference.",
+            "measure": "Number of participants with an objective response",
+            "timeFrame": "From enrollment to best response while on study treatment; participants remain on treatment until disease progression, unacceptable toxicity, participant withdrawal, or investigator decision. Assessed for approximately 4 years."
+          },
+          {
+            "description": "Clinical benefit will be determined for each subject as a binary variable indicating whether or not the subject achieved a best overall response of complete response (CR), partial response (PR), or stable disease (SD) for &gt;=6 months as determined by RECIST 1.1 response criteria.\nA CR is indicated by disappearance of all target and non target lesions.\nA PR is indicated by &gt;=30% decrease in sum of longest diameter of target lesions with baseline as reference.\nSD is indicated by neither sufficient shrinkage to qualify for PR nor sufficient growth from nadir (&gt;=20%) to indicate progression.",
+            "measure": "Number of participants with clinical benefit",
+            "timeFrame": "From enrollment to best response while on study treatment; participants remain on treatment until disease progression, unacceptable toxicity, participant withdrawal, or investigator decision. Assessed for approximately 4 years."
+          }
+        ]
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "ed05eca20069228cb08f56b982fad1d6d362342d36751eb77d5450bc23cde634",
+      "materiality_event_hash": "ec6dcde9019c671b3b0f08473fe84e8feb848c831410026200bf56de818b2caa",
+      "patch_hash": "d45e315c5b508effc4788315a217fb9f8207f2a5b481e0572949d203a3930aeb",
+      "patch_raw_hash": "14b5fb181258db670dc36cf7cbbfd86bb57ad23e667d9bbe2cd0cd29133ca4fe",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT02942355/history/21?patchToVersion=22",
+      "to_snapshot_hash": "3744663dabac6435ea69dd2a2a6821f67447a83b1f2a6862b405cacda9a90413"
+    },
+    "review_question": "What did the primary outcome field say before and after the amendment, and is there a public protocol, statistical analysis plan, or manuscript explaining the change?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT02942355",
+      "nct_id": "NCT02942355"
+    },
+    "versions": {
+      "from_version": 21,
+      "submitted_date": "2024-04-18",
+      "to_version": 22
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/conditionsModule/conditions/1",
+    "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+    "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+    "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+    "/protocolSection/outcomesModule/secondaryOutcomes",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT02942355_v21_v22_40c97508de10. ClinicalTrials.gov NCT02942355, versions 21-22. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance.",
+    "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 21 to version 22 for NCT02942355.",
+    "The JSON Patch for this comparison has hash d45e315c5b508effc4788315a217fb9f8207f2a5b481e0572949d203a3930aeb.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under the primary outcome module changed between ClinicalTrials.gov versions 21 and 22.",
+    "The timing context for the from-version record was late_recruitment.",
+    "The deterministic rules that fired were: primary_outcome_any_change, secondary_outcome_any_change.",
+    "The changed JSON Pointer paths were: /protocolSection/conditionsModule/conditions/1, /protocolSection/outcomesModule/primaryOutcomes/0/description, /protocolSection/outcomesModule/primaryOutcomes/0/measure, /protocolSection/outcomesModule/primaryOutcomes/0/timeFrame, /protocolSection/outcomesModule/secondaryOutcomes, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+  ],
+  "classification": {
+    "categories": [
+      "primary_outcome_change",
+      "secondary_outcome_change"
+    ],
+    "category": "primary_outcome_change",
+    "deterministic_rules": [
+      "primary_outcome_any_change",
+      "secondary_outcome_any_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "late_recruitment",
+    "value_signals": []
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT02942355_v21_v22_40c97508de10",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT02942355_v21_v22_40c97508de10.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT02942355_v21_v22_40c97508de10",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT02942355"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2024-04"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2024-04-18"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2024-04-23"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/conditionsModule/conditions/1",
+      "value": "Breast Cancer"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+      "value": "Number of participants with neutropenia that leads to permanent treatment discontinuation"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+      "value": "Determined for each subject as a binary variable indicating whether or not the participant experienced any neutropenic adverse event (according to NCI Common Terminology for Adverse Events version 4.0) that leads to permanent treatment discontinuation"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+      "value": "From enrollment to treatment discontinuation; participants remain on treatment until disease progression, unacceptable toxicity, participant withdrawal, or investigator decision. Assessed for approximately 4 years."
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes",
+      "value": [
+        {
+          "description": "Defined as the duration from start of first line metastatic chemotherapy to the date of death from any cause.\nParticipants who are alive or lost to follow up at the time of the analysis will be censored at the last known date they were alive.",
+          "measure": "Overall Survival (OS)",
+          "timeFrame": "From date of treatment start to date of death, or censored as described; assessed for approximately 4 years"
+        },
+        {
+          "description": "PFS is defined as the duration of time from the start of first line metastatic chemotherapy to first occurrence of either progressive disease (PD) or death.\nPD must be objectively determined per RECIST 1.1 criteria, where progression date is date of the radiologic assessment that identified PD.\nIf subject died without documented PD, progression date will be death date.\nFor surviving subjects who do not have PD, PFS will be censored at the date of last disease assessment.\nFor subjects who received subsequent anti-cancer therapy prior to documented PD, PFS will be censored at the date of last disease assessment prior to commencement of subsequent therapy.\nSubjects who have an initial PFS event immediately following 2 or more consecutive missed assessments will be censored at date of last assessment prior to missed assessments.",
+          "measure": "Progression Free Survival (PFS)",
+          "timeFrame": "From treatment start date to date of progression&#x2F;death, or censored as described; assessed for approximately 4 years."
+        },
+        {
+          "description": "Objective response will be determined for each subject as a binary variable indicating whether or not the subject achieved a best overall response of complete response (CR) or partial response (PR) as determined by RECIST 1.1 response criteria.\nA CR is indicated by disappearance of all target and non target lesions.\nA PR is indicated by &gt;=30% decrease in sum of longest diameter of target lesions with baseline as reference.",
+          "measure": "Number of participants with an objective response",
+          "timeFrame": "From enrollment to best response while on study treatment; participants remain on treatment until disease progression, unacceptable toxicity, participant withdrawal, or investigator decision. Assessed for approximately 4 years."
+        },
+        {
+          "description": "Clinical benefit will be determined for each subject as a binary variable indicating whether or not the subject achieved a best overall response of complete response (CR), partial response (PR), or stable disease (SD) for &gt;=6 months as determined by RECIST 1.1 response criteria.\nA CR is indicated by disappearance of all target and non target lesions.\nA PR is indicated by &gt;=30% decrease in sum of longest diameter of target lesions with baseline as reference.\nSD is indicated by neither sufficient shrinkage to qualify for PR nor sufficient growth from nadir (&gt;=20%) to indicate progression.",
+          "measure": "Number of participants with clinical benefit",
+          "timeFrame": "From enrollment to best response while on study treatment; participants remain on treatment until disease progression, unacceptable toxicity, participant withdrawal, or investigator decision. Assessed for approximately 4 years."
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "6310fdb14adff873b8382f17af9247884f46b1aa0952c1650612d8398c97244a",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT02942355_v21_v22_40c97508de10",
+    "evidence_version": 1,
+    "from_snapshot_hash": "ed05eca20069228cb08f56b982fad1d6d362342d36751eb77d5450bc23cde634",
+    "materiality_event_hash": "ec6dcde9019c671b3b0f08473fe84e8feb848c831410026200bf56de818b2caa",
+    "patch_hash": "d45e315c5b508effc4788315a217fb9f8207f2a5b481e0572949d203a3930aeb",
+    "patch_raw_hash": "14b5fb181258db670dc36cf7cbbfd86bb57ad23e667d9bbe2cd0cd29133ca4fe",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT02942355/history/21?patchToVersion=22",
+    "to_snapshot_hash": "3744663dabac6435ea69dd2a2a6821f67447a83b1f2a6862b405cacda9a90413"
+  },
+  "review_question": "What did the primary outcome field say before and after the amendment, and is there a public protocol, statistical analysis plan, or manuscript explaining the change?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT02942355",
+    "current_record_hash": "f6a0f337fcf6b9dde815cafab6a90b7d1926993e4b3373fcaba06238a6a7357a",
+    "current_record_raw_hash": "f6a0f337fcf6b9dde815cafab6a90b7d1926993e4b3373fcaba06238a6a7357a",
+    "lead_sponsor": "Wake Forest University Health Sciences",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT02942355",
+    "official_title": "Pilot Trial of Anastrozole and Palbociclib as First-Line Therapy and as Maintenance Therapy After First Line Chemotherapy in Hormone Receptor Positive, HER2-Negative Postmenopausal Metastatic Breast Cancer",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT02942355",
+    "title": "Trial of Anastrozole and Palbociclib in Metastatic HER2-Negative Breast Cancer"
+  },
+  "versions": {
+    "from_version": 21,
+    "submitted_date": "2024-04-18",
+    "to_version": 22
+  }
+}

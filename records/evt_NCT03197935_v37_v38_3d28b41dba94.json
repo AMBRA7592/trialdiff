@@ -1,0 +1,388 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/annotationSection",
+      "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+      "/protocolSection/outcomesModule/primaryOutcomes/0/reviewUnit",
+      "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+      "/protocolSection/outcomesModule/primaryOutcomes/1/description",
+      "/protocolSection/outcomesModule/primaryOutcomes/1/reviewUnit",
+      "/protocolSection/outcomesModule/primaryOutcomes/1/timeFrame",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/resultsFirstPostDateStruct",
+      "/protocolSection/statusModule/resultsFirstSubmitQcDate",
+      "/protocolSection/statusModule/statusVerifiedDate",
+      "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/description",
+      "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/reviewUnit",
+      "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/timeFrame",
+      "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/unitOfMeasure",
+      "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/description",
+      "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/reviewUnit",
+      "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/timeFrame",
+      "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/unitOfMeasure"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT03197935_v37_v38_3d28b41dba94. ClinicalTrials.gov NCT03197935, versions 37-38. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance.",
+      "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 37 to version 38 for NCT03197935.",
+      "The JSON Patch for this comparison has hash 9a1dfa34046fe0beffa8ae65f56c8842647ac9d36318409af7e7eeacd9f097f5.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under the primary outcome module changed between ClinicalTrials.gov versions 37 and 38.",
+      "The timing context for the from-version record was late_recruitment.",
+      "The deterministic rules that fired were: primary_outcome_any_change.",
+      "The changed JSON Pointer paths were: /annotationSection, /protocolSection/outcomesModule/primaryOutcomes/0/description, /protocolSection/outcomesModule/primaryOutcomes/0/reviewUnit, /protocolSection/outcomesModule/primaryOutcomes/0/timeFrame, /protocolSection/outcomesModule/primaryOutcomes/1/description, /protocolSection/outcomesModule/primaryOutcomes/1/reviewUnit, /protocolSection/outcomesModule/primaryOutcomes/1/timeFrame, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/resultsFirstPostDateStruct, /protocolSection/statusModule/resultsFirstSubmitQcDate, /protocolSection/statusModule/statusVerifiedDate, /resultsSection/outcomeMeasuresModule/outcomeMeasures/0/description, /resultsSection/outcomeMeasuresModule/outcomeMeasures/0/reviewUnit, /resultsSection/outcomeMeasuresModule/outcomeMeasures/0/timeFrame, /resultsSection/outcomeMeasuresModule/outcomeMeasures/0/unitOfMeasure, /resultsSection/outcomeMeasuresModule/outcomeMeasures/1/description, /resultsSection/outcomeMeasuresModule/outcomeMeasures/1/reviewUnit, /resultsSection/outcomeMeasuresModule/outcomeMeasures/1/timeFrame, /resultsSection/outcomeMeasuresModule/outcomeMeasures/1/unitOfMeasure."
+    ],
+    "classification": {
+      "categories": [
+        "primary_outcome_change"
+      ],
+      "category": "primary_outcome_change",
+      "deterministic_rules": [
+        "primary_outcome_any_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "late_recruitment",
+      "value_signals": []
+    },
+    "event_id": "evt_NCT03197935_v37_v38_3d28b41dba94",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2021-05"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2021-05-07"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2021-06-02"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/statusModule/resultsFirstSubmitQcDate",
+        "value": "2021-05-07"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/statusModule/resultsFirstPostDateStruct",
+        "value": {
+          "date": "2021-06-02",
+          "type": "ACTUAL"
+        }
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+        "value": "Number of participants with Pathologic Complete Response (pCR) Using American Joint Committee on Cancer (AJCC) Staging System in ITT Population.\npCR is defined as eradication of invasive tumor from both breast and lymph nodes (ypT0&#x2F;is ypN0).\npCR was evaluated for each participant after neoadjuvant study treatment and surgery.\nParticipants whose pCR assessment was missing will be counted as not achieving a pCR."
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+        "value": "After neoadjuvant study treatment and surgery, up to data cut-off on 03 ApriI 2020"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/0/reviewUnit"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/1/description",
+        "value": "Number of participants with Pathologic Complete Response (pCR) Using American Joint Committee on Cancer (AJCC) Staging System in the subpopulation with programmed death-ligand1 (PD-L1)-positive tumor status(tumor-infiltrating immune cell [IC] IC1&#x2F;2&#x2F;3) .\npCR is defined as eradication of invasive tumor from both breast and lymph nodes (ypT0&#x2F;is ypN0).\npCR was evaluated for each participant after neoadjuvant study treatment and surgery.\nParticipants whose pCR assessment was missing will be counted as not achieving a pCR."
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/1/timeFrame",
+        "value": "After neoadjuvant study treatment and surgery, up to data cut-off on 03 ApriI 2020"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/1/reviewUnit"
+      },
+      {
+        "op": "replace",
+        "path": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/description",
+        "value": "Number of participants with Pathologic Complete Response (pCR) Using American Joint Committee on Cancer (AJCC) Staging System in ITT Population.\npCR is defined as eradication of invasive tumor from both breast and lymph nodes (ypT0&#x2F;is ypN0).\npCR was evaluated for each participant after neoadjuvant study treatment and surgery.\nParticipants whose pCR assessment was missing will be counted as not achieving a pCR."
+      },
+      {
+        "op": "replace",
+        "path": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/unitOfMeasure",
+        "value": "Number of Participants"
+      },
+      {
+        "op": "replace",
+        "path": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/timeFrame",
+        "value": "After neoadjuvant study treatment and surgery, up to data cut-off on 03 ApriI 2020"
+      },
+      {
+        "op": "remove",
+        "path": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/reviewUnit"
+      },
+      {
+        "op": "replace",
+        "path": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/description",
+        "value": "Number of participants with Pathologic Complete Response (pCR) Using American Joint Committee on Cancer (AJCC) Staging System in the subpopulation with programmed death-ligand1 (PD-L1)-positive tumor status(tumor-infiltrating immune cell [IC] IC1&#x2F;2&#x2F;3) .\npCR is defined as eradication of invasive tumor from both breast and lymph nodes (ypT0&#x2F;is ypN0).\npCR was evaluated for each participant after neoadjuvant study treatment and surgery.\nParticipants whose pCR assessment was missing will be counted as not achieving a pCR."
+      },
+      {
+        "op": "replace",
+        "path": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/unitOfMeasure",
+        "value": "Number of Participants"
+      },
+      {
+        "op": "replace",
+        "path": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/timeFrame",
+        "value": "After neoadjuvant study treatment and surgery, up to data cut-off on 03 ApriI 2020"
+      },
+      {
+        "op": "remove",
+        "path": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/reviewUnit"
+      },
+      {
+        "op": "remove",
+        "path": "/annotationSection"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "1d1d56e13b8987a01ad274074dd101f202bf5fe0dd6d2043024b7c5870891000",
+      "materiality_event_hash": "2d198fdb792ab5b51bfdc247f39e71f42eaaeb1735ff3b3095f67c35ffd0076d",
+      "patch_hash": "9a1dfa34046fe0beffa8ae65f56c8842647ac9d36318409af7e7eeacd9f097f5",
+      "patch_raw_hash": "7de413335b013aa40505f64a151eed3c19d5e7a87fe51af00c471de22aa8b1f0",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT03197935/history/37?patchToVersion=38",
+      "to_snapshot_hash": "9b547efe3d9abbc10f54a6a1603082e26c9039b1c099e07b63b2c4e596962d95"
+    },
+    "review_question": "What did the primary outcome field say before and after the amendment, and is there a public protocol, statistical analysis plan, or manuscript explaining the change?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT03197935",
+      "nct_id": "NCT03197935"
+    },
+    "versions": {
+      "from_version": 37,
+      "submitted_date": "2021-05-07",
+      "to_version": 38
+    }
+  },
+  "changed_paths": [
+    "/annotationSection",
+    "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+    "/protocolSection/outcomesModule/primaryOutcomes/0/reviewUnit",
+    "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+    "/protocolSection/outcomesModule/primaryOutcomes/1/description",
+    "/protocolSection/outcomesModule/primaryOutcomes/1/reviewUnit",
+    "/protocolSection/outcomesModule/primaryOutcomes/1/timeFrame",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/resultsFirstPostDateStruct",
+    "/protocolSection/statusModule/resultsFirstSubmitQcDate",
+    "/protocolSection/statusModule/statusVerifiedDate",
+    "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/description",
+    "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/reviewUnit",
+    "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/timeFrame",
+    "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/unitOfMeasure",
+    "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/description",
+    "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/reviewUnit",
+    "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/timeFrame",
+    "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/unitOfMeasure"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT03197935_v37_v38_3d28b41dba94. ClinicalTrials.gov NCT03197935, versions 37-38. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance.",
+    "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 37 to version 38 for NCT03197935.",
+    "The JSON Patch for this comparison has hash 9a1dfa34046fe0beffa8ae65f56c8842647ac9d36318409af7e7eeacd9f097f5.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under the primary outcome module changed between ClinicalTrials.gov versions 37 and 38.",
+    "The timing context for the from-version record was late_recruitment.",
+    "The deterministic rules that fired were: primary_outcome_any_change.",
+    "The changed JSON Pointer paths were: /annotationSection, /protocolSection/outcomesModule/primaryOutcomes/0/description, /protocolSection/outcomesModule/primaryOutcomes/0/reviewUnit, /protocolSection/outcomesModule/primaryOutcomes/0/timeFrame, /protocolSection/outcomesModule/primaryOutcomes/1/description, /protocolSection/outcomesModule/primaryOutcomes/1/reviewUnit, /protocolSection/outcomesModule/primaryOutcomes/1/timeFrame, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/resultsFirstPostDateStruct, /protocolSection/statusModule/resultsFirstSubmitQcDate, /protocolSection/statusModule/statusVerifiedDate, /resultsSection/outcomeMeasuresModule/outcomeMeasures/0/description, /resultsSection/outcomeMeasuresModule/outcomeMeasures/0/reviewUnit, /resultsSection/outcomeMeasuresModule/outcomeMeasures/0/timeFrame, /resultsSection/outcomeMeasuresModule/outcomeMeasures/0/unitOfMeasure, /resultsSection/outcomeMeasuresModule/outcomeMeasures/1/description, /resultsSection/outcomeMeasuresModule/outcomeMeasures/1/reviewUnit, /resultsSection/outcomeMeasuresModule/outcomeMeasures/1/timeFrame, /resultsSection/outcomeMeasuresModule/outcomeMeasures/1/unitOfMeasure."
+  ],
+  "classification": {
+    "categories": [
+      "primary_outcome_change"
+    ],
+    "category": "primary_outcome_change",
+    "deterministic_rules": [
+      "primary_outcome_any_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "late_recruitment",
+    "value_signals": []
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT03197935_v37_v38_3d28b41dba94",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT03197935_v37_v38_3d28b41dba94.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT03197935_v37_v38_3d28b41dba94",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT03197935"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2021-05"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2021-05-07"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2021-06-02"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/statusModule/resultsFirstSubmitQcDate",
+      "value": "2021-05-07"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/statusModule/resultsFirstPostDateStruct",
+      "value": {
+        "date": "2021-06-02",
+        "type": "ACTUAL"
+      }
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+      "value": "Number of participants with Pathologic Complete Response (pCR) Using American Joint Committee on Cancer (AJCC) Staging System in ITT Population.\npCR is defined as eradication of invasive tumor from both breast and lymph nodes (ypT0&#x2F;is ypN0).\npCR was evaluated for each participant after neoadjuvant study treatment and surgery.\nParticipants whose pCR assessment was missing will be counted as not achieving a pCR."
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+      "value": "After neoadjuvant study treatment and surgery, up to data cut-off on 03 ApriI 2020"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/0/reviewUnit"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/1/description",
+      "value": "Number of participants with Pathologic Complete Response (pCR) Using American Joint Committee on Cancer (AJCC) Staging System in the subpopulation with programmed death-ligand1 (PD-L1)-positive tumor status(tumor-infiltrating immune cell [IC] IC1&#x2F;2&#x2F;3) .\npCR is defined as eradication of invasive tumor from both breast and lymph nodes (ypT0&#x2F;is ypN0).\npCR was evaluated for each participant after neoadjuvant study treatment and surgery.\nParticipants whose pCR assessment was missing will be counted as not achieving a pCR."
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/1/timeFrame",
+      "value": "After neoadjuvant study treatment and surgery, up to data cut-off on 03 ApriI 2020"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/1/reviewUnit"
+    },
+    {
+      "op": "replace",
+      "path": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/description",
+      "value": "Number of participants with Pathologic Complete Response (pCR) Using American Joint Committee on Cancer (AJCC) Staging System in ITT Population.\npCR is defined as eradication of invasive tumor from both breast and lymph nodes (ypT0&#x2F;is ypN0).\npCR was evaluated for each participant after neoadjuvant study treatment and surgery.\nParticipants whose pCR assessment was missing will be counted as not achieving a pCR."
+    },
+    {
+      "op": "replace",
+      "path": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/unitOfMeasure",
+      "value": "Number of Participants"
+    },
+    {
+      "op": "replace",
+      "path": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/timeFrame",
+      "value": "After neoadjuvant study treatment and surgery, up to data cut-off on 03 ApriI 2020"
+    },
+    {
+      "op": "remove",
+      "path": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/reviewUnit"
+    },
+    {
+      "op": "replace",
+      "path": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/description",
+      "value": "Number of participants with Pathologic Complete Response (pCR) Using American Joint Committee on Cancer (AJCC) Staging System in the subpopulation with programmed death-ligand1 (PD-L1)-positive tumor status(tumor-infiltrating immune cell [IC] IC1&#x2F;2&#x2F;3) .\npCR is defined as eradication of invasive tumor from both breast and lymph nodes (ypT0&#x2F;is ypN0).\npCR was evaluated for each participant after neoadjuvant study treatment and surgery.\nParticipants whose pCR assessment was missing will be counted as not achieving a pCR."
+    },
+    {
+      "op": "replace",
+      "path": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/unitOfMeasure",
+      "value": "Number of Participants"
+    },
+    {
+      "op": "replace",
+      "path": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/timeFrame",
+      "value": "After neoadjuvant study treatment and surgery, up to data cut-off on 03 ApriI 2020"
+    },
+    {
+      "op": "remove",
+      "path": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/reviewUnit"
+    },
+    {
+      "op": "remove",
+      "path": "/annotationSection"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "5d02b16fe0e08b4f7fd0b68a10caaad3fa855d1507ba94413588424e447cf2be",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT03197935_v37_v38_3d28b41dba94",
+    "evidence_version": 1,
+    "from_snapshot_hash": "1d1d56e13b8987a01ad274074dd101f202bf5fe0dd6d2043024b7c5870891000",
+    "materiality_event_hash": "2d198fdb792ab5b51bfdc247f39e71f42eaaeb1735ff3b3095f67c35ffd0076d",
+    "patch_hash": "9a1dfa34046fe0beffa8ae65f56c8842647ac9d36318409af7e7eeacd9f097f5",
+    "patch_raw_hash": "7de413335b013aa40505f64a151eed3c19d5e7a87fe51af00c471de22aa8b1f0",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT03197935/history/37?patchToVersion=38",
+    "to_snapshot_hash": "9b547efe3d9abbc10f54a6a1603082e26c9039b1c099e07b63b2c4e596962d95"
+  },
+  "review_question": "What did the primary outcome field say before and after the amendment, and is there a public protocol, statistical analysis plan, or manuscript explaining the change?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT03197935",
+    "current_record_hash": "ad6f7235e2e469b296500aa4f68712613b12c32ab5eb5603f0d38f799c5c98a5",
+    "current_record_raw_hash": "ad6f7235e2e469b296500aa4f68712613b12c32ab5eb5603f0d38f799c5c98a5",
+    "lead_sponsor": "Hoffmann-La Roche",
+    "lead_sponsor_class": "INDUSTRY",
+    "nct_id": "NCT03197935",
+    "official_title": "A Phase III Randomized Study to Investigate the Efficacy and Safety of Atezolizumab (Anti-PD-L1 Antibody) in Combination With Neoadjuvant Anthracycline/Nab-Paclitaxel-Based Chemotherapy Compared With Placebo and Chemotherapy in Patients With Primary Invasive Triple-Negative Breast Cancer",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT03197935",
+    "title": "A Study to Investigate Atezolizumab and Chemotherapy Compared With Placebo and Chemotherapy in the Neoadjuvant Setting in Participants With Early Stage Triple Negative Breast Cancer"
+  },
+  "versions": {
+    "from_version": 37,
+    "submitted_date": "2021-05-07",
+    "to_version": 38
+  }
+}

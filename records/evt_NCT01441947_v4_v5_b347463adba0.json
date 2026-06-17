@@ -1,0 +1,250 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/armsInterventionsModule/interventions/0/description",
+      "/protocolSection/armsInterventionsModule/interventions/0/name",
+      "/protocolSection/descriptionModule/briefSummary",
+      "/protocolSection/descriptionModule/detailedDescription",
+      "/protocolSection/eligibilityModule/eligibilityCriteria",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT01441947_v4_v5_b347463adba0. ClinicalTrials.gov NCT01441947, versions 4-5. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 4 to version 5 for NCT01441947.",
+      "The JSON Patch for this comparison has hash f3cced9c22711415d825484eb39142c9caa42a0ec89b7ddba6830c688ccf9a6a.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under an arm or intervention module changed between ClinicalTrials.gov versions 4 and 5.",
+      "The timing context for the from-version record was early_recruitment.",
+      "The deterministic rules that fired were: arms_or_interventions_change, eligibility_criteria_change.",
+      "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/interventions/0/description, /protocolSection/armsInterventionsModule/interventions/0/name, /protocolSection/descriptionModule/briefSummary, /protocolSection/descriptionModule/detailedDescription, /protocolSection/eligibilityModule/eligibilityCriteria, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+    ],
+    "classification": {
+      "categories": [
+        "arm_intervention_change",
+        "eligibility_change"
+      ],
+      "category": "arm_intervention_change",
+      "deterministic_rules": [
+        "arms_or_interventions_change",
+        "eligibility_criteria_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "early_recruitment",
+      "value_signals": []
+    },
+    "event_id": "evt_NCT01441947_v4_v5_b347463adba0",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2013-06"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2013-06-10"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2013-06-11"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/descriptionModule/briefSummary",
+        "value": "<p>The study drug cabozantinib works by inhibiting several different proteins which are believed to be involved in breast cancer tumor growth, its ability to spread, and its ability to form new blood vessels.\nThis drug has been used in other research studies and information from those other research studies suggests that this drug may help to prevent cancer growth.</p><p>The single agent portion of this study is now closed to accrual.\nThis research study is now examining the efficacy of cabozantinib in combination with fulvestrant for treatment of hormone-receptor-positive breast cancer that has spread to bone.</p>"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/descriptionModule/detailedDescription",
+        "value": "<p>Cabozantinib will be taken orally once a day in cycles of 28 days (4 weeks).\nFulvestrant will be given intramuscularly on days 1 and 15 of cycle 1 and on day 1 of all subsequent cycles.</p><p>On Day 1 of each cycle subjects will have the following tests and procedures:</p><ul><li>Performance status</li><li>Physical exam</li><li>Vital signs</li><li>Routine blood samples</li><li>Blood and urine samples to look at bone markers (Cycle 1 through 6 only)</li></ul><p>Subjects will also have the following additional tests and procedures:</p><ul><li>Tumor assessment by CT scan and bone scan at Cycle 3, then every 12 weeks</li><li>Blood or urine pregnancy test (if applicable) on Day 1 of Cycles 1, 2, 4, then every 12 weeks</li><li>Urine sample and blood test for thyroid function (Cycle 1, 3, 5, then every 6 weeks)</li><li>Blood test for breast cancer tumor marker (Cycle 1 and 4, then every 6 weeks)</li><li>Pain questionnaire and painkiller medication diary at 7-day intervals during Week 3, Week 6, and every 6 weeks thereafter.</li></ul>"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/name",
+        "value": "Cabozantinib and fulvestrant"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/description",
+        "value": "cabozantinib, orally 100 mg daily in 28 day cycles Fulvestrant, intramuscularly on days 1 and 15 of cycle 1, on day 1 of each subsequent cycle"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/eligibilityModule/eligibilityCriteria",
+        "value": "<p>Inclusion Criteria:</p><ul><li>Clear evidence of metastases to bone on isotope bone scan</li><li>Histologically or cytologically confirmed metastatic Estrogen-receptor-positive (ER+) and&#x2F;or Progesterone-receptor-positive (PR+) and HER2 negative breast cancer</li><li>Received at least one prior line of hormonal or chemo-therapy for metastatic disease</li><li>must be post menopausal</li><li>Recovered from toxicities related to prior treatment, except alopecia, lymphopenia, or other non-clinically significant Adverse Events (AEs)</li><li>Life expectancy &gt; 3 months</li><li>Adequate organ and marrow function</li><li>Sexually active fertile subjects and their partners must agree to use medically accepted methods of contraception</li><li>Able to lie flat for up to 45 minutes for imaging studies</li><li>Able to swallow capsules or tablets</li></ul><p>Exclusion Criteria:</p><ul><li>Pregnant or breast-feeding</li><li>Has experienced clinically-significant hematemesis or hemoptysis of &gt; 0.5 teaspoons of red blood, or other signs indicative of pulmonary hemorrhage within 3 months before the first dose of study treatment</li><li>Untreated, symptomatic or uncontrolled brain metastasis requiring current treatment including steroids and anti-convulsants</li><li>more than 1 prior line of chemotherapy for treatment of metastatic breast cancer</li><li>prior treatment with fulvestrant</li><li>Requires concomitant treatment, in therapeutic doses, with anticoagulants such as warfarin or coumadin-related agents, thrombin or FXa inhibitors, and antiplatelet agents (eg, clopidogrel)</li><li>Uncontrolled or significant intercurrent illness</li><li>Gastrointestinal disorders, particularly those associated with a high risk of perforation or fistula formation</li><li>Active infection requiring systemic treatment</li><li>Serious non-healing wound&#x2F;ulcer&#x2F;bone fracture</li><li>History of organ transplant</li><li>Concurrent uncompensated hypothyroidism or thyroid dysfunction</li><li>Previously-identified allergy or hypersensitivity to components of the study treatment formulation</li><li>Diagnosis of another malignancy, requiring systemic treatment, within the last 2 years, unless non-melanoma skin cancer, in-situ carcinoma of the cervix, or superficial bladder cancer</li></ul>"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "d7346d255ec9502a84d88a160ddf0a27c9d7e8559872cd19159dc104bda1357d",
+      "materiality_event_hash": "a397010b43136d499045559e2bde0c1d1703d033c0e94c69534d32ea96040ba6",
+      "patch_hash": "f3cced9c22711415d825484eb39142c9caa42a0ec89b7ddba6830c688ccf9a6a",
+      "patch_raw_hash": "89ef9dcbc238145f41ed9b7b1b8741a015baf621424d757069c2d0f008b3e4b1",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT01441947/history/4?patchToVersion=5",
+      "to_snapshot_hash": "ec4eafeae89647dbf265a987820c3250d68e1afb4be91aa7231cd7523156940a"
+    },
+    "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT01441947",
+      "nct_id": "NCT01441947"
+    },
+    "versions": {
+      "from_version": 4,
+      "submitted_date": "2013-06-10",
+      "to_version": 5
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/armsInterventionsModule/interventions/0/description",
+    "/protocolSection/armsInterventionsModule/interventions/0/name",
+    "/protocolSection/descriptionModule/briefSummary",
+    "/protocolSection/descriptionModule/detailedDescription",
+    "/protocolSection/eligibilityModule/eligibilityCriteria",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT01441947_v4_v5_b347463adba0. ClinicalTrials.gov NCT01441947, versions 4-5. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 4 to version 5 for NCT01441947.",
+    "The JSON Patch for this comparison has hash f3cced9c22711415d825484eb39142c9caa42a0ec89b7ddba6830c688ccf9a6a.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under an arm or intervention module changed between ClinicalTrials.gov versions 4 and 5.",
+    "The timing context for the from-version record was early_recruitment.",
+    "The deterministic rules that fired were: arms_or_interventions_change, eligibility_criteria_change.",
+    "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/interventions/0/description, /protocolSection/armsInterventionsModule/interventions/0/name, /protocolSection/descriptionModule/briefSummary, /protocolSection/descriptionModule/detailedDescription, /protocolSection/eligibilityModule/eligibilityCriteria, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+  ],
+  "classification": {
+    "categories": [
+      "arm_intervention_change",
+      "eligibility_change"
+    ],
+    "category": "arm_intervention_change",
+    "deterministic_rules": [
+      "arms_or_interventions_change",
+      "eligibility_criteria_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "early_recruitment",
+    "value_signals": []
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT01441947_v4_v5_b347463adba0",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT01441947_v4_v5_b347463adba0.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT01441947_v4_v5_b347463adba0",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT01441947"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2013-06"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2013-06-10"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2013-06-11"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/descriptionModule/briefSummary",
+      "value": "<p>The study drug cabozantinib works by inhibiting several different proteins which are believed to be involved in breast cancer tumor growth, its ability to spread, and its ability to form new blood vessels.\nThis drug has been used in other research studies and information from those other research studies suggests that this drug may help to prevent cancer growth.</p><p>The single agent portion of this study is now closed to accrual.\nThis research study is now examining the efficacy of cabozantinib in combination with fulvestrant for treatment of hormone-receptor-positive breast cancer that has spread to bone.</p>"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/descriptionModule/detailedDescription",
+      "value": "<p>Cabozantinib will be taken orally once a day in cycles of 28 days (4 weeks).\nFulvestrant will be given intramuscularly on days 1 and 15 of cycle 1 and on day 1 of all subsequent cycles.</p><p>On Day 1 of each cycle subjects will have the following tests and procedures:</p><ul><li>Performance status</li><li>Physical exam</li><li>Vital signs</li><li>Routine blood samples</li><li>Blood and urine samples to look at bone markers (Cycle 1 through 6 only)</li></ul><p>Subjects will also have the following additional tests and procedures:</p><ul><li>Tumor assessment by CT scan and bone scan at Cycle 3, then every 12 weeks</li><li>Blood or urine pregnancy test (if applicable) on Day 1 of Cycles 1, 2, 4, then every 12 weeks</li><li>Urine sample and blood test for thyroid function (Cycle 1, 3, 5, then every 6 weeks)</li><li>Blood test for breast cancer tumor marker (Cycle 1 and 4, then every 6 weeks)</li><li>Pain questionnaire and painkiller medication diary at 7-day intervals during Week 3, Week 6, and every 6 weeks thereafter.</li></ul>"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/name",
+      "value": "Cabozantinib and fulvestrant"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/description",
+      "value": "cabozantinib, orally 100 mg daily in 28 day cycles Fulvestrant, intramuscularly on days 1 and 15 of cycle 1, on day 1 of each subsequent cycle"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/eligibilityModule/eligibilityCriteria",
+      "value": "<p>Inclusion Criteria:</p><ul><li>Clear evidence of metastases to bone on isotope bone scan</li><li>Histologically or cytologically confirmed metastatic Estrogen-receptor-positive (ER+) and&#x2F;or Progesterone-receptor-positive (PR+) and HER2 negative breast cancer</li><li>Received at least one prior line of hormonal or chemo-therapy for metastatic disease</li><li>must be post menopausal</li><li>Recovered from toxicities related to prior treatment, except alopecia, lymphopenia, or other non-clinically significant Adverse Events (AEs)</li><li>Life expectancy &gt; 3 months</li><li>Adequate organ and marrow function</li><li>Sexually active fertile subjects and their partners must agree to use medically accepted methods of contraception</li><li>Able to lie flat for up to 45 minutes for imaging studies</li><li>Able to swallow capsules or tablets</li></ul><p>Exclusion Criteria:</p><ul><li>Pregnant or breast-feeding</li><li>Has experienced clinically-significant hematemesis or hemoptysis of &gt; 0.5 teaspoons of red blood, or other signs indicative of pulmonary hemorrhage within 3 months before the first dose of study treatment</li><li>Untreated, symptomatic or uncontrolled brain metastasis requiring current treatment including steroids and anti-convulsants</li><li>more than 1 prior line of chemotherapy for treatment of metastatic breast cancer</li><li>prior treatment with fulvestrant</li><li>Requires concomitant treatment, in therapeutic doses, with anticoagulants such as warfarin or coumadin-related agents, thrombin or FXa inhibitors, and antiplatelet agents (eg, clopidogrel)</li><li>Uncontrolled or significant intercurrent illness</li><li>Gastrointestinal disorders, particularly those associated with a high risk of perforation or fistula formation</li><li>Active infection requiring systemic treatment</li><li>Serious non-healing wound&#x2F;ulcer&#x2F;bone fracture</li><li>History of organ transplant</li><li>Concurrent uncompensated hypothyroidism or thyroid dysfunction</li><li>Previously-identified allergy or hypersensitivity to components of the study treatment formulation</li><li>Diagnosis of another malignancy, requiring systemic treatment, within the last 2 years, unless non-melanoma skin cancer, in-situ carcinoma of the cervix, or superficial bladder cancer</li></ul>"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "bc213569325aee4dee55fa221db87fb664915baa1f02425c7453a8a219239649",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT01441947_v4_v5_b347463adba0",
+    "evidence_version": 1,
+    "from_snapshot_hash": "d7346d255ec9502a84d88a160ddf0a27c9d7e8559872cd19159dc104bda1357d",
+    "materiality_event_hash": "a397010b43136d499045559e2bde0c1d1703d033c0e94c69534d32ea96040ba6",
+    "patch_hash": "f3cced9c22711415d825484eb39142c9caa42a0ec89b7ddba6830c688ccf9a6a",
+    "patch_raw_hash": "89ef9dcbc238145f41ed9b7b1b8741a015baf621424d757069c2d0f008b3e4b1",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT01441947/history/4?patchToVersion=5",
+    "to_snapshot_hash": "ec4eafeae89647dbf265a987820c3250d68e1afb4be91aa7231cd7523156940a"
+  },
+  "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT01441947",
+    "current_record_hash": "c55f5fa065637193e9b1e93d3ba8d5e856f335e738dac7b8db817572613a37d9",
+    "current_record_raw_hash": "c55f5fa065637193e9b1e93d3ba8d5e856f335e738dac7b8db817572613a37d9",
+    "lead_sponsor": "Massachusetts General Hospital",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT01441947",
+    "official_title": "A Phase II Trial of Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer With Involvement of Bone",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT01441947",
+    "title": "Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer"
+  },
+  "versions": {
+    "from_version": 4,
+    "submitted_date": "2013-06-10",
+    "to_version": 5
+  }
+}

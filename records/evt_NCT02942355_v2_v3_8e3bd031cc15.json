@@ -1,0 +1,236 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+      "/protocolSection/oversightModule/isFdaRegulatedDevice",
+      "/protocolSection/oversightModule/isFdaRegulatedDrug",
+      "/protocolSection/oversightModule/isUsExport",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT02942355_v2_v3_8e3bd031cc15. ClinicalTrials.gov NCT02942355, versions 2-3. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance.",
+      "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 2 to version 3 for NCT02942355.",
+      "The JSON Patch for this comparison has hash a09b04de89cfb40676fe52bfa9fd9bcc6d543a6e06ff11e412fb2809bf02c9e4.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under the primary outcome module changed between ClinicalTrials.gov versions 2 and 3.",
+      "The timing context for the from-version record was early_recruitment.",
+      "The deterministic rules that fired were: primary_outcome_any_change.",
+      "The changed JSON Pointer paths were: /protocolSection/outcomesModule/primaryOutcomes/0/description, /protocolSection/oversightModule/isFdaRegulatedDevice, /protocolSection/oversightModule/isFdaRegulatedDrug, /protocolSection/oversightModule/isUsExport, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+    ],
+    "classification": {
+      "categories": [
+        "primary_outcome_change"
+      ],
+      "category": "primary_outcome_change",
+      "deterministic_rules": [
+        "primary_outcome_any_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "early_recruitment",
+      "value_signals": []
+    },
+    "event_id": "evt_NCT02942355_v2_v3_8e3bd031cc15",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2017-10"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2017-10-24"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2017-10-26"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/oversightModule/isFdaRegulatedDrug",
+        "value": true
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/oversightModule/isFdaRegulatedDevice",
+        "value": false
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/oversightModule/isUsExport",
+        "value": false
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+        "value": "Number of partial responses and complete responses"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "43e5e8866fba9e69f559fa630080c2ce094e5f356e1aad30dd703d08c30d9770",
+      "materiality_event_hash": "b9aa7dc4205b504c7efc307736122bf3955f0f66b6c27f9ded07005a8c929abc",
+      "patch_hash": "a09b04de89cfb40676fe52bfa9fd9bcc6d543a6e06ff11e412fb2809bf02c9e4",
+      "patch_raw_hash": "13b0cafe57bec84d609042ab77c96cd8afee424a9facae235fefa2a4d42d0c09",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT02942355/history/2?patchToVersion=3",
+      "to_snapshot_hash": "55ce286a2f19ab668fe3a42d547ee5c9f94a9984e1f02f570bcbdd2581b60e9c"
+    },
+    "review_question": "What did the primary outcome field say before and after the amendment, and is there a public protocol, statistical analysis plan, or manuscript explaining the change?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT02942355",
+      "nct_id": "NCT02942355"
+    },
+    "versions": {
+      "from_version": 2,
+      "submitted_date": "2017-10-24",
+      "to_version": 3
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+    "/protocolSection/oversightModule/isFdaRegulatedDevice",
+    "/protocolSection/oversightModule/isFdaRegulatedDrug",
+    "/protocolSection/oversightModule/isUsExport",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT02942355_v2_v3_8e3bd031cc15. ClinicalTrials.gov NCT02942355, versions 2-3. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance.",
+    "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 2 to version 3 for NCT02942355.",
+    "The JSON Patch for this comparison has hash a09b04de89cfb40676fe52bfa9fd9bcc6d543a6e06ff11e412fb2809bf02c9e4.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under the primary outcome module changed between ClinicalTrials.gov versions 2 and 3.",
+    "The timing context for the from-version record was early_recruitment.",
+    "The deterministic rules that fired were: primary_outcome_any_change.",
+    "The changed JSON Pointer paths were: /protocolSection/outcomesModule/primaryOutcomes/0/description, /protocolSection/oversightModule/isFdaRegulatedDevice, /protocolSection/oversightModule/isFdaRegulatedDrug, /protocolSection/oversightModule/isUsExport, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+  ],
+  "classification": {
+    "categories": [
+      "primary_outcome_change"
+    ],
+    "category": "primary_outcome_change",
+    "deterministic_rules": [
+      "primary_outcome_any_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "early_recruitment",
+    "value_signals": []
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT02942355_v2_v3_8e3bd031cc15",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT02942355_v2_v3_8e3bd031cc15.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT02942355_v2_v3_8e3bd031cc15",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT02942355"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2017-10"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2017-10-24"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2017-10-26"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/oversightModule/isFdaRegulatedDrug",
+      "value": true
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/oversightModule/isFdaRegulatedDevice",
+      "value": false
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/oversightModule/isUsExport",
+      "value": false
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+      "value": "Number of partial responses and complete responses"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "c0d7ac38bc615331c2f2009c36292df93d5a101f63403315551cfa84c9e137e6",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT02942355_v2_v3_8e3bd031cc15",
+    "evidence_version": 1,
+    "from_snapshot_hash": "43e5e8866fba9e69f559fa630080c2ce094e5f356e1aad30dd703d08c30d9770",
+    "materiality_event_hash": "b9aa7dc4205b504c7efc307736122bf3955f0f66b6c27f9ded07005a8c929abc",
+    "patch_hash": "a09b04de89cfb40676fe52bfa9fd9bcc6d543a6e06ff11e412fb2809bf02c9e4",
+    "patch_raw_hash": "13b0cafe57bec84d609042ab77c96cd8afee424a9facae235fefa2a4d42d0c09",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT02942355/history/2?patchToVersion=3",
+    "to_snapshot_hash": "55ce286a2f19ab668fe3a42d547ee5c9f94a9984e1f02f570bcbdd2581b60e9c"
+  },
+  "review_question": "What did the primary outcome field say before and after the amendment, and is there a public protocol, statistical analysis plan, or manuscript explaining the change?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT02942355",
+    "current_record_hash": "f6a0f337fcf6b9dde815cafab6a90b7d1926993e4b3373fcaba06238a6a7357a",
+    "current_record_raw_hash": "f6a0f337fcf6b9dde815cafab6a90b7d1926993e4b3373fcaba06238a6a7357a",
+    "lead_sponsor": "Wake Forest University Health Sciences",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT02942355",
+    "official_title": "Pilot Trial of Anastrozole and Palbociclib as First-Line Therapy and as Maintenance Therapy After First Line Chemotherapy in Hormone Receptor Positive, HER2-Negative Postmenopausal Metastatic Breast Cancer",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT02942355",
+    "title": "Trial of Anastrozole and Palbociclib in Metastatic HER2-Negative Breast Cancer"
+  },
+  "versions": {
+    "from_version": 2,
+    "submitted_date": "2017-10-24",
+    "to_version": 3
+  }
+}

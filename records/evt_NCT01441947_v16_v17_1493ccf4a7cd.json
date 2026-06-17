@@ -1,0 +1,260 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/annotationSection",
+      "/protocolSection/outcomesModule/secondaryOutcomes/3",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT01441947_v16_v17_1493ccf4a7cd. ClinicalTrials.gov NCT01441947, versions 16-17. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance.",
+      "That this post-completion change reflects outcome switching rather than a legitimate registry correction.",
+      "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 16 to version 17 for NCT01441947.",
+      "The JSON Patch for this comparison has hash 24334e62db3c941ab353edc5eecc11b6724d48d824ddca01009997db97522632.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was high.",
+      "A registry field under the secondary outcome module changed between ClinicalTrials.gov versions 16 and 17.",
+      "The timing context for the from-version record was late_recruitment.",
+      "The deterministic rules that fired were: secondary_outcome_any_change.",
+      "The changed JSON Pointer paths were: /annotationSection, /protocolSection/outcomesModule/secondaryOutcomes/3, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+    ],
+    "classification": {
+      "categories": [
+        "secondary_outcome_change"
+      ],
+      "category": "secondary_outcome_change",
+      "deterministic_rules": [
+        "secondary_outcome_any_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "high",
+      "timing_context": "late_recruitment",
+      "value_signals": []
+    },
+    "event_id": "evt_NCT01441947_v16_v17_1493ccf4a7cd",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2023-01"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2023-01-07"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2023-01-10"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/3"
+      },
+      {
+        "op": "add",
+        "path": "/annotationSection",
+        "value": {
+          "annotationModule": {
+            "unpostedAnnotation": {
+              "unpostedEvents": [
+                {
+                  "date": "2025-02-25",
+                  "type": "RELEASE"
+                },
+                {
+                  "date": "2025-03-12",
+                  "type": "RESET"
+                },
+                {
+                  "date": "2025-05-05",
+                  "type": "RELEASE"
+                },
+                {
+                  "date": "2025-05-20",
+                  "type": "RESET"
+                }
+              ],
+              "unpostedResponsibleParty": "Steven J Isakoff, MD, PhD, Principal Investigator, Attending Physician in Medical Oncology, Massachusetts General Hospital"
+            }
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "8d7523c7629510f2906161bd6f460f58a84dd4e9c70de5459c0703f35014f05b",
+      "materiality_event_hash": "2ca25286ae763374d907fbbcc392f65a0bd03d745545c6c839fee04fc1eebb9a",
+      "patch_hash": "24334e62db3c941ab353edc5eecc11b6724d48d824ddca01009997db97522632",
+      "patch_raw_hash": "0af9559e8408aec1dc2d2a32af5936895a42cc17543b85cbbb311fbe1751c48d",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT01441947/history/16?patchToVersion=17",
+      "to_snapshot_hash": "c78c4c73723548111550e7d74ab6462e71567acee14c9fa3c936869f64596297"
+    },
+    "review_question": "What did the secondary outcome field say before and after the amendment, and what contemporaneous public document explains the change?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT01441947",
+      "nct_id": "NCT01441947"
+    },
+    "versions": {
+      "from_version": 16,
+      "submitted_date": "2023-01-07",
+      "to_version": 17
+    }
+  },
+  "changed_paths": [
+    "/annotationSection",
+    "/protocolSection/outcomesModule/secondaryOutcomes/3",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT01441947_v16_v17_1493ccf4a7cd. ClinicalTrials.gov NCT01441947, versions 16-17. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance.",
+    "That this post-completion change reflects outcome switching rather than a legitimate registry correction.",
+    "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 16 to version 17 for NCT01441947.",
+    "The JSON Patch for this comparison has hash 24334e62db3c941ab353edc5eecc11b6724d48d824ddca01009997db97522632.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was high.",
+    "A registry field under the secondary outcome module changed between ClinicalTrials.gov versions 16 and 17.",
+    "The timing context for the from-version record was late_recruitment.",
+    "The deterministic rules that fired were: secondary_outcome_any_change.",
+    "The changed JSON Pointer paths were: /annotationSection, /protocolSection/outcomesModule/secondaryOutcomes/3, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+  ],
+  "classification": {
+    "categories": [
+      "secondary_outcome_change"
+    ],
+    "category": "secondary_outcome_change",
+    "deterministic_rules": [
+      "secondary_outcome_any_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "high",
+    "timing_context": "late_recruitment",
+    "value_signals": []
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT01441947_v16_v17_1493ccf4a7cd",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT01441947_v16_v17_1493ccf4a7cd.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT01441947_v16_v17_1493ccf4a7cd",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT01441947"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2023-01"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2023-01-07"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2023-01-10"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/3"
+    },
+    {
+      "op": "add",
+      "path": "/annotationSection",
+      "value": {
+        "annotationModule": {
+          "unpostedAnnotation": {
+            "unpostedEvents": [
+              {
+                "date": "2025-02-25",
+                "type": "RELEASE"
+              },
+              {
+                "date": "2025-03-12",
+                "type": "RESET"
+              },
+              {
+                "date": "2025-05-05",
+                "type": "RELEASE"
+              },
+              {
+                "date": "2025-05-20",
+                "type": "RESET"
+              }
+            ],
+            "unpostedResponsibleParty": "Steven J Isakoff, MD, PhD, Principal Investigator, Attending Physician in Medical Oncology, Massachusetts General Hospital"
+          }
+        }
+      }
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "27488b4aae8a05f0436e74ad81f72002a7f3cbc42aa56abf4e31d01422012f7b",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT01441947_v16_v17_1493ccf4a7cd",
+    "evidence_version": 1,
+    "from_snapshot_hash": "8d7523c7629510f2906161bd6f460f58a84dd4e9c70de5459c0703f35014f05b",
+    "materiality_event_hash": "2ca25286ae763374d907fbbcc392f65a0bd03d745545c6c839fee04fc1eebb9a",
+    "patch_hash": "24334e62db3c941ab353edc5eecc11b6724d48d824ddca01009997db97522632",
+    "patch_raw_hash": "0af9559e8408aec1dc2d2a32af5936895a42cc17543b85cbbb311fbe1751c48d",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT01441947/history/16?patchToVersion=17",
+    "to_snapshot_hash": "c78c4c73723548111550e7d74ab6462e71567acee14c9fa3c936869f64596297"
+  },
+  "review_question": "What did the secondary outcome field say before and after the amendment, and what contemporaneous public document explains the change?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT01441947",
+    "current_record_hash": "c55f5fa065637193e9b1e93d3ba8d5e856f335e738dac7b8db817572613a37d9",
+    "current_record_raw_hash": "c55f5fa065637193e9b1e93d3ba8d5e856f335e738dac7b8db817572613a37d9",
+    "lead_sponsor": "Massachusetts General Hospital",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT01441947",
+    "official_title": "A Phase II Trial of Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer With Involvement of Bone",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT01441947",
+    "title": "Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer"
+  },
+  "versions": {
+    "from_version": 16,
+    "submitted_date": "2023-01-07",
+    "to_version": 17
+  }
+}

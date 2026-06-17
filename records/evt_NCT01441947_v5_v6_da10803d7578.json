@@ -1,0 +1,290 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/armsInterventionsModule/interventions/0/description",
+      "/protocolSection/statusModule/completionDateStruct/date",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT01441947_v5_v6_da10803d7578. ClinicalTrials.gov NCT01441947, versions 5-6. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 5 to version 6 for NCT01441947.",
+      "The JSON Patch for this comparison has hash 8f3ae9cdb3e55d34f78d999b45fb8ffac6183617f536042ccaaccf6dca8e10fb.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under an arm or intervention module changed between ClinicalTrials.gov versions 5 and 6.",
+      "The timing context for the from-version record was early_recruitment.",
+      "The deterministic rules that fired were: arms_or_interventions_change.",
+      "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/interventions/0/description, /protocolSection/statusModule/completionDateStruct/date, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/primaryCompletionDateStruct/date, /protocolSection/statusModule/statusVerifiedDate.",
+      "The timeline value moved by 212 days.",
+      "The timeline value moved by 335 days."
+    ],
+    "classification": {
+      "categories": [
+        "arm_intervention_change",
+        "timeline_significant_shift"
+      ],
+      "category": "arm_intervention_change",
+      "deterministic_rules": [
+        "arms_or_interventions_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "early_recruitment",
+      "value_signals": [
+        {
+          "category": "timeline_significant_shift",
+          "date_struct": "primaryCompletionDateStruct",
+          "delta_days": 212,
+          "direction": "later",
+          "new_precision": "month",
+          "new_type": "ESTIMATED",
+          "new_value": "2014-06",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2013-11",
+          "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+          "severity": "high",
+          "signal": "timeline_significant_shift"
+        },
+        {
+          "category": "timeline_significant_shift",
+          "date_struct": "completionDateStruct",
+          "delta_days": 335,
+          "direction": "later",
+          "new_precision": "month",
+          "new_type": "ESTIMATED",
+          "new_value": "2014-11",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2013-12",
+          "path": "/protocolSection/statusModule/completionDateStruct/date",
+          "severity": "high",
+          "signal": "timeline_significant_shift"
+        }
+      ]
+    },
+    "event_id": "evt_NCT01441947_v5_v6_da10803d7578",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2013-12"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+        "value": "2014-06"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/completionDateStruct/date",
+        "value": "2014-11"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2013-12-16"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2013-12-17"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/description",
+        "value": "cabozantinib, orally 60 mg daily in 28 day cycles Fulvestrant, intramuscularly on days 1 and 15 of cycle 1, on day 1 of each subsequent cycle"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "ec4eafeae89647dbf265a987820c3250d68e1afb4be91aa7231cd7523156940a",
+      "materiality_event_hash": "492675bd50786926981a1c8df3d3a1caf1ecf7ba3855393a0f03f555c86b3144",
+      "patch_hash": "8f3ae9cdb3e55d34f78d999b45fb8ffac6183617f536042ccaaccf6dca8e10fb",
+      "patch_raw_hash": "956c93c981799561b98fde14604f0e5a719c542ee5d4c65fcb716a87b10ddf3e",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT01441947/history/5?patchToVersion=6",
+      "to_snapshot_hash": "bf876ba470ba674effe2162f8774008ba3fd2fe309f789e4f8f819e818d9c8ba"
+    },
+    "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT01441947",
+      "nct_id": "NCT01441947"
+    },
+    "versions": {
+      "from_version": 5,
+      "submitted_date": "2013-12-16",
+      "to_version": 6
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/armsInterventionsModule/interventions/0/description",
+    "/protocolSection/statusModule/completionDateStruct/date",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT01441947_v5_v6_da10803d7578. ClinicalTrials.gov NCT01441947, versions 5-6. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 5 to version 6 for NCT01441947.",
+    "The JSON Patch for this comparison has hash 8f3ae9cdb3e55d34f78d999b45fb8ffac6183617f536042ccaaccf6dca8e10fb.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under an arm or intervention module changed between ClinicalTrials.gov versions 5 and 6.",
+    "The timing context for the from-version record was early_recruitment.",
+    "The deterministic rules that fired were: arms_or_interventions_change.",
+    "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/interventions/0/description, /protocolSection/statusModule/completionDateStruct/date, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/primaryCompletionDateStruct/date, /protocolSection/statusModule/statusVerifiedDate.",
+    "The timeline value moved by 212 days.",
+    "The timeline value moved by 335 days."
+  ],
+  "classification": {
+    "categories": [
+      "arm_intervention_change",
+      "timeline_significant_shift"
+    ],
+    "category": "arm_intervention_change",
+    "deterministic_rules": [
+      "arms_or_interventions_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "early_recruitment",
+    "value_signals": [
+      {
+        "category": "timeline_significant_shift",
+        "date_struct": "primaryCompletionDateStruct",
+        "delta_days": 212,
+        "direction": "later",
+        "new_precision": "month",
+        "new_type": "ESTIMATED",
+        "new_value": "2014-06",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2013-11",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+        "severity": "high",
+        "signal": "timeline_significant_shift"
+      },
+      {
+        "category": "timeline_significant_shift",
+        "date_struct": "completionDateStruct",
+        "delta_days": 335,
+        "direction": "later",
+        "new_precision": "month",
+        "new_type": "ESTIMATED",
+        "new_value": "2014-11",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2013-12",
+        "path": "/protocolSection/statusModule/completionDateStruct/date",
+        "severity": "high",
+        "signal": "timeline_significant_shift"
+      }
+    ]
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT01441947_v5_v6_da10803d7578",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT01441947_v5_v6_da10803d7578.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT01441947_v5_v6_da10803d7578",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT01441947"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2013-12"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+      "value": "2014-06"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/completionDateStruct/date",
+      "value": "2014-11"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2013-12-16"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2013-12-17"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/description",
+      "value": "cabozantinib, orally 60 mg daily in 28 day cycles Fulvestrant, intramuscularly on days 1 and 15 of cycle 1, on day 1 of each subsequent cycle"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "ba5a2b03dbaed45ded590dc1ac37e99b0772c43dc6680c0f3bd2a27f89dbb171",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT01441947_v5_v6_da10803d7578",
+    "evidence_version": 1,
+    "from_snapshot_hash": "ec4eafeae89647dbf265a987820c3250d68e1afb4be91aa7231cd7523156940a",
+    "materiality_event_hash": "492675bd50786926981a1c8df3d3a1caf1ecf7ba3855393a0f03f555c86b3144",
+    "patch_hash": "8f3ae9cdb3e55d34f78d999b45fb8ffac6183617f536042ccaaccf6dca8e10fb",
+    "patch_raw_hash": "956c93c981799561b98fde14604f0e5a719c542ee5d4c65fcb716a87b10ddf3e",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT01441947/history/5?patchToVersion=6",
+    "to_snapshot_hash": "bf876ba470ba674effe2162f8774008ba3fd2fe309f789e4f8f819e818d9c8ba"
+  },
+  "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT01441947",
+    "current_record_hash": "c55f5fa065637193e9b1e93d3ba8d5e856f335e738dac7b8db817572613a37d9",
+    "current_record_raw_hash": "c55f5fa065637193e9b1e93d3ba8d5e856f335e738dac7b8db817572613a37d9",
+    "lead_sponsor": "Massachusetts General Hospital",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT01441947",
+    "official_title": "A Phase II Trial of Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer With Involvement of Bone",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT01441947",
+    "title": "Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer"
+  },
+  "versions": {
+    "from_version": 5,
+    "submitted_date": "2013-12-16",
+    "to_version": 6
+  }
+}

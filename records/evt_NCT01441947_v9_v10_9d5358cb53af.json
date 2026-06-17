@@ -1,0 +1,414 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/armsInterventionsModule/armGroups/0/description",
+      "/protocolSection/conditionsModule/keywords/2",
+      "/protocolSection/contactsLocationsModule/centralContacts",
+      "/protocolSection/contactsLocationsModule/locations/0/contacts",
+      "/protocolSection/contactsLocationsModule/locations/0/status",
+      "/protocolSection/contactsLocationsModule/locations/1/contacts",
+      "/protocolSection/contactsLocationsModule/locations/1/status",
+      "/protocolSection/contactsLocationsModule/locations/2/contacts",
+      "/protocolSection/contactsLocationsModule/locations/2/status",
+      "/protocolSection/contactsLocationsModule/locations/3/status",
+      "/protocolSection/descriptionModule/detailedDescription",
+      "/protocolSection/designModule/enrollmentInfo/count",
+      "/protocolSection/designModule/enrollmentInfo/type",
+      "/protocolSection/eligibilityModule/eligibilityCriteria",
+      "/protocolSection/outcomesModule/secondaryOutcomes/5/measure",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/type",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/overallStatus",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT01441947_v9_v10_9d5358cb53af. ClinicalTrials.gov NCT01441947, versions 9-10. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 9 to version 10 for NCT01441947.",
+      "The JSON Patch for this comparison has hash dc213d002496f1306873e725ab10699077345c1ab1cd9f4f174fb0e1f1cd7273.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under an arm or intervention module changed between ClinicalTrials.gov versions 9 and 10.",
+      "The timing context for the from-version record was early_recruitment.",
+      "The deterministic rules that fired were: arms_or_interventions_change, contact_admin_change, eligibility_criteria_change, enrollment_count_change, enrollment_type_change, secondary_outcome_any_change.",
+      "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups/0/description, /protocolSection/conditionsModule/keywords/2, /protocolSection/contactsLocationsModule/centralContacts, /protocolSection/contactsLocationsModule/locations/0/contacts, /protocolSection/contactsLocationsModule/locations/0/status, /protocolSection/contactsLocationsModule/locations/1/contacts, /protocolSection/contactsLocationsModule/locations/1/status, /protocolSection/contactsLocationsModule/locations/2/contacts, /protocolSection/contactsLocationsModule/locations/2/status, /protocolSection/contactsLocationsModule/locations/3/status, /protocolSection/descriptionModule/detailedDescription, /protocolSection/designModule/enrollmentInfo/count, /protocolSection/designModule/enrollmentInfo/type, /protocolSection/eligibilityModule/eligibilityCriteria, /protocolSection/outcomesModule/secondaryOutcomes/5/measure, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdatePostDateStruct/type, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/overallStatus, /protocolSection/statusModule/statusVerifiedDate.",
+      "The enrollment count changed by at least 20 percent."
+    ],
+    "classification": {
+      "categories": [
+        "arm_intervention_change",
+        "secondary_outcome_change",
+        "eligibility_change",
+        "enrollment_change",
+        "administrative_contact_change"
+      ],
+      "category": "arm_intervention_change",
+      "deterministic_rules": [
+        "arms_or_interventions_change",
+        "contact_admin_change",
+        "eligibility_criteria_change",
+        "enrollment_count_change",
+        "enrollment_type_change",
+        "secondary_outcome_any_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "early_recruitment",
+      "value_signals": [
+        {
+          "category": "enrollment_change",
+          "new_value": 68,
+          "old_value": 50,
+          "path": "/protocolSection/designModule/enrollmentInfo/count",
+          "pct_change": 0.36,
+          "severity": "high",
+          "signal": "enrollment_count_change_ge_20pct"
+        }
+      ]
+    },
+    "event_id": "evt_NCT01441947_v9_v10_9d5358cb53af",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2017-04"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/overallStatus",
+        "value": "ACTIVE_NOT_RECRUITING"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2017-04-13"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2017-04-17"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/type",
+        "value": "ACTUAL"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/descriptionModule/detailedDescription",
+        "value": "<p>Cabozantinib will be taken orally once a day in cycles of 28 days (4 weeks).\nFulvestrant will be given intramuscularly on days 1 and 15 of cycle 1 and on day 1 of all subsequent cycles.</p><p>On Day 1 of each cycle subjects will have the following tests and procedures:</p><ul><li>Performance status</li><li>Physical exam</li><li>Vital signs</li><li>Routine blood samples</li><li>Blood and urine samples to look at bone markers (Cycle 1 through 6 only)</li></ul><p>Subjects will also have the following additional tests and procedures:</p><ul><li>Tumor assessment by Computed Tomography (CT) scan and bone scan at Cycle 3, then every 12 weeks</li><li>Blood or urine pregnancy test (if applicable) on Day 1 of Cycles 1, 2, 4, then every 12 weeks</li><li>Urine sample and blood test for thyroid function (Cycle 1, 3, 5, then every 6 weeks)</li><li>Blood test for breast cancer tumor marker (Cycle 1 and 4, then every 6 weeks)</li><li>Pain questionnaire and painkiller medication diary at 7-day intervals during Week 3, Week 6, and every 6 weeks thereafter.</li></ul>"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/conditionsModule/keywords/2",
+        "value": "Human Epidermal Growth Factor Receptor (HER) 2 negative"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/designModule/enrollmentInfo/count",
+        "value": 68
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/designModule/enrollmentInfo/type",
+        "value": "ACTUAL"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/0/description",
+        "value": "Combination therapy with cabozantinib 60 mg daily plus fulvestrant 500 mg monthly Intramuscularly (IM)"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/5/measure",
+        "value": "Fluorodeoxyglucose Positron Emission Tomography(FDG-PET) Response Rate"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/eligibilityModule/eligibilityCriteria",
+        "value": "<p>Inclusion Criteria:</p><ul><li>Clear evidence of metastases to bone on isotope bone scan</li><li>Histologically or cytologically confirmed metastatic Estrogen-receptor-positive (ER+) and&#x2F;or Progesterone-receptor-positive (PR+) and Human Epidermal Growth Factor Receptor (HER) 2 negative breast cancer</li><li>Received at least one prior line of hormonal or chemo-therapy for metastatic disease</li><li>must be post menopausal</li><li>Recovered from toxicities related to prior treatment, except alopecia, lymphopenia, or other non-clinically significant Adverse Events (AEs)</li><li>Life expectancy &gt; 3 months</li><li>Adequate organ and marrow function</li><li>Sexually active fertile subjects and their partners must agree to use medically accepted methods of contraception</li><li>Able to lie flat for up to 45 minutes for imaging studies</li><li>Able to swallow capsules or tablets</li></ul><p>Exclusion Criteria:</p><ul><li>Pregnant or breast-feeding</li><li>Has experienced clinically-significant hematemesis or hemoptysis of &gt; 0.5 teaspoons of red blood, or other signs indicative of pulmonary hemorrhage within 3 months before the first dose of study treatment</li><li>Untreated, symptomatic or uncontrolled brain metastasis requiring current treatment including steroids and anti-convulsants</li><li>more than 1 prior line of chemotherapy for treatment of metastatic breast cancer</li><li>prior treatment with fulvestrant</li><li>Requires concomitant treatment, in therapeutic doses, with anticoagulants such as warfarin or coumadin-related agents, thrombin or Factor Xa inhibitors, and antiplatelet agents (eg, clopidogrel)</li><li>Uncontrolled or significant intercurrent illness</li><li>Gastrointestinal disorders, particularly those associated with a high risk of perforation or fistula formation</li><li>Active infection requiring systemic treatment</li><li>Serious non-healing wound&#x2F;ulcer&#x2F;bone fracture</li><li>History of organ transplant</li><li>Concurrent uncompensated hypothyroidism or thyroid dysfunction</li><li>Previously-identified allergy or hypersensitivity to components of the study treatment formulation</li><li>Diagnosis of another malignancy, requiring systemic treatment, within the last 2 years, unless non-melanoma skin cancer, in-situ carcinoma of the cervix, or superficial bladder cancer</li></ul>"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/centralContacts"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/locations/0/status"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/locations/0/contacts"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/locations/1/status"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/locations/1/contacts"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/locations/2/status"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/locations/2/contacts"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/locations/3/status"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "8dcce4a56ad59f96eac1409e462f8384aab1f09a84cbd07795169c38e8cc86bb",
+      "materiality_event_hash": "b5e15de5f5691d60ef1da728e6d62a0977d7b390f4e85b5b4b09b965feef75f2",
+      "patch_hash": "dc213d002496f1306873e725ab10699077345c1ab1cd9f4f174fb0e1f1cd7273",
+      "patch_raw_hash": "b6758bbe2567b519d5e9153ea508021acc3749112f90f21676f906662ed0acfa",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT01441947/history/9?patchToVersion=10",
+      "to_snapshot_hash": "3d247d2125c834d8ab44e711a2e2e705e3a772a270bfea21d211925adf91f2c2"
+    },
+    "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT01441947",
+      "nct_id": "NCT01441947"
+    },
+    "versions": {
+      "from_version": 9,
+      "submitted_date": "2017-04-13",
+      "to_version": 10
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/armsInterventionsModule/armGroups/0/description",
+    "/protocolSection/conditionsModule/keywords/2",
+    "/protocolSection/contactsLocationsModule/centralContacts",
+    "/protocolSection/contactsLocationsModule/locations/0/contacts",
+    "/protocolSection/contactsLocationsModule/locations/0/status",
+    "/protocolSection/contactsLocationsModule/locations/1/contacts",
+    "/protocolSection/contactsLocationsModule/locations/1/status",
+    "/protocolSection/contactsLocationsModule/locations/2/contacts",
+    "/protocolSection/contactsLocationsModule/locations/2/status",
+    "/protocolSection/contactsLocationsModule/locations/3/status",
+    "/protocolSection/descriptionModule/detailedDescription",
+    "/protocolSection/designModule/enrollmentInfo/count",
+    "/protocolSection/designModule/enrollmentInfo/type",
+    "/protocolSection/eligibilityModule/eligibilityCriteria",
+    "/protocolSection/outcomesModule/secondaryOutcomes/5/measure",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/type",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/overallStatus",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT01441947_v9_v10_9d5358cb53af. ClinicalTrials.gov NCT01441947, versions 9-10. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 9 to version 10 for NCT01441947.",
+    "The JSON Patch for this comparison has hash dc213d002496f1306873e725ab10699077345c1ab1cd9f4f174fb0e1f1cd7273.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under an arm or intervention module changed between ClinicalTrials.gov versions 9 and 10.",
+    "The timing context for the from-version record was early_recruitment.",
+    "The deterministic rules that fired were: arms_or_interventions_change, contact_admin_change, eligibility_criteria_change, enrollment_count_change, enrollment_type_change, secondary_outcome_any_change.",
+    "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups/0/description, /protocolSection/conditionsModule/keywords/2, /protocolSection/contactsLocationsModule/centralContacts, /protocolSection/contactsLocationsModule/locations/0/contacts, /protocolSection/contactsLocationsModule/locations/0/status, /protocolSection/contactsLocationsModule/locations/1/contacts, /protocolSection/contactsLocationsModule/locations/1/status, /protocolSection/contactsLocationsModule/locations/2/contacts, /protocolSection/contactsLocationsModule/locations/2/status, /protocolSection/contactsLocationsModule/locations/3/status, /protocolSection/descriptionModule/detailedDescription, /protocolSection/designModule/enrollmentInfo/count, /protocolSection/designModule/enrollmentInfo/type, /protocolSection/eligibilityModule/eligibilityCriteria, /protocolSection/outcomesModule/secondaryOutcomes/5/measure, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdatePostDateStruct/type, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/overallStatus, /protocolSection/statusModule/statusVerifiedDate.",
+    "The enrollment count changed by at least 20 percent."
+  ],
+  "classification": {
+    "categories": [
+      "arm_intervention_change",
+      "secondary_outcome_change",
+      "eligibility_change",
+      "enrollment_change",
+      "administrative_contact_change"
+    ],
+    "category": "arm_intervention_change",
+    "deterministic_rules": [
+      "arms_or_interventions_change",
+      "contact_admin_change",
+      "eligibility_criteria_change",
+      "enrollment_count_change",
+      "enrollment_type_change",
+      "secondary_outcome_any_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "early_recruitment",
+    "value_signals": [
+      {
+        "category": "enrollment_change",
+        "new_value": 68,
+        "old_value": 50,
+        "path": "/protocolSection/designModule/enrollmentInfo/count",
+        "pct_change": 0.36,
+        "severity": "high",
+        "signal": "enrollment_count_change_ge_20pct"
+      }
+    ]
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT01441947_v9_v10_9d5358cb53af",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT01441947_v9_v10_9d5358cb53af.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT01441947_v9_v10_9d5358cb53af",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT01441947"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2017-04"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/overallStatus",
+      "value": "ACTIVE_NOT_RECRUITING"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2017-04-13"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2017-04-17"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/type",
+      "value": "ACTUAL"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/descriptionModule/detailedDescription",
+      "value": "<p>Cabozantinib will be taken orally once a day in cycles of 28 days (4 weeks).\nFulvestrant will be given intramuscularly on days 1 and 15 of cycle 1 and on day 1 of all subsequent cycles.</p><p>On Day 1 of each cycle subjects will have the following tests and procedures:</p><ul><li>Performance status</li><li>Physical exam</li><li>Vital signs</li><li>Routine blood samples</li><li>Blood and urine samples to look at bone markers (Cycle 1 through 6 only)</li></ul><p>Subjects will also have the following additional tests and procedures:</p><ul><li>Tumor assessment by Computed Tomography (CT) scan and bone scan at Cycle 3, then every 12 weeks</li><li>Blood or urine pregnancy test (if applicable) on Day 1 of Cycles 1, 2, 4, then every 12 weeks</li><li>Urine sample and blood test for thyroid function (Cycle 1, 3, 5, then every 6 weeks)</li><li>Blood test for breast cancer tumor marker (Cycle 1 and 4, then every 6 weeks)</li><li>Pain questionnaire and painkiller medication diary at 7-day intervals during Week 3, Week 6, and every 6 weeks thereafter.</li></ul>"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/conditionsModule/keywords/2",
+      "value": "Human Epidermal Growth Factor Receptor (HER) 2 negative"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/designModule/enrollmentInfo/count",
+      "value": 68
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/designModule/enrollmentInfo/type",
+      "value": "ACTUAL"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/0/description",
+      "value": "Combination therapy with cabozantinib 60 mg daily plus fulvestrant 500 mg monthly Intramuscularly (IM)"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/5/measure",
+      "value": "Fluorodeoxyglucose Positron Emission Tomography(FDG-PET) Response Rate"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/eligibilityModule/eligibilityCriteria",
+      "value": "<p>Inclusion Criteria:</p><ul><li>Clear evidence of metastases to bone on isotope bone scan</li><li>Histologically or cytologically confirmed metastatic Estrogen-receptor-positive (ER+) and&#x2F;or Progesterone-receptor-positive (PR+) and Human Epidermal Growth Factor Receptor (HER) 2 negative breast cancer</li><li>Received at least one prior line of hormonal or chemo-therapy for metastatic disease</li><li>must be post menopausal</li><li>Recovered from toxicities related to prior treatment, except alopecia, lymphopenia, or other non-clinically significant Adverse Events (AEs)</li><li>Life expectancy &gt; 3 months</li><li>Adequate organ and marrow function</li><li>Sexually active fertile subjects and their partners must agree to use medically accepted methods of contraception</li><li>Able to lie flat for up to 45 minutes for imaging studies</li><li>Able to swallow capsules or tablets</li></ul><p>Exclusion Criteria:</p><ul><li>Pregnant or breast-feeding</li><li>Has experienced clinically-significant hematemesis or hemoptysis of &gt; 0.5 teaspoons of red blood, or other signs indicative of pulmonary hemorrhage within 3 months before the first dose of study treatment</li><li>Untreated, symptomatic or uncontrolled brain metastasis requiring current treatment including steroids and anti-convulsants</li><li>more than 1 prior line of chemotherapy for treatment of metastatic breast cancer</li><li>prior treatment with fulvestrant</li><li>Requires concomitant treatment, in therapeutic doses, with anticoagulants such as warfarin or coumadin-related agents, thrombin or Factor Xa inhibitors, and antiplatelet agents (eg, clopidogrel)</li><li>Uncontrolled or significant intercurrent illness</li><li>Gastrointestinal disorders, particularly those associated with a high risk of perforation or fistula formation</li><li>Active infection requiring systemic treatment</li><li>Serious non-healing wound&#x2F;ulcer&#x2F;bone fracture</li><li>History of organ transplant</li><li>Concurrent uncompensated hypothyroidism or thyroid dysfunction</li><li>Previously-identified allergy or hypersensitivity to components of the study treatment formulation</li><li>Diagnosis of another malignancy, requiring systemic treatment, within the last 2 years, unless non-melanoma skin cancer, in-situ carcinoma of the cervix, or superficial bladder cancer</li></ul>"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/centralContacts"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/locations/0/status"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/locations/0/contacts"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/locations/1/status"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/locations/1/contacts"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/locations/2/status"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/locations/2/contacts"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/locations/3/status"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "497218c38d28bc5fc8de78edf65d90d7ad9cb1573f65e8ae565e8b1db7bd1b29",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT01441947_v9_v10_9d5358cb53af",
+    "evidence_version": 1,
+    "from_snapshot_hash": "8dcce4a56ad59f96eac1409e462f8384aab1f09a84cbd07795169c38e8cc86bb",
+    "materiality_event_hash": "b5e15de5f5691d60ef1da728e6d62a0977d7b390f4e85b5b4b09b965feef75f2",
+    "patch_hash": "dc213d002496f1306873e725ab10699077345c1ab1cd9f4f174fb0e1f1cd7273",
+    "patch_raw_hash": "b6758bbe2567b519d5e9153ea508021acc3749112f90f21676f906662ed0acfa",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT01441947/history/9?patchToVersion=10",
+    "to_snapshot_hash": "3d247d2125c834d8ab44e711a2e2e705e3a772a270bfea21d211925adf91f2c2"
+  },
+  "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT01441947",
+    "current_record_hash": "c55f5fa065637193e9b1e93d3ba8d5e856f335e738dac7b8db817572613a37d9",
+    "current_record_raw_hash": "c55f5fa065637193e9b1e93d3ba8d5e856f335e738dac7b8db817572613a37d9",
+    "lead_sponsor": "Massachusetts General Hospital",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT01441947",
+    "official_title": "A Phase II Trial of Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer With Involvement of Bone",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT01441947",
+    "title": "Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer"
+  },
+  "versions": {
+    "from_version": 9,
+    "submitted_date": "2017-04-13",
+    "to_version": 10
+  }
+}

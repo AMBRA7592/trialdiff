@@ -1,0 +1,316 @@
+---
+import {
+  Activity,
+  Clock3,
+  Database,
+  ExternalLink,
+  FileSearch,
+  Gauge,
+  ShieldCheck,
+  TriangleAlert,
+} from "@lucide/astro";
+
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { formatNumber, severityClass, titleCase } from "@/lib/format";
+import { getHomeData, normalizeLens } from "@/queries/feed";
+import type { EvidenceRecordRow, Lens, TrialLensRow } from "@/queries/types";
+
+const activeLens = normalizeLens(Astro.url.searchParams.get("lens"));
+const data = await getHomeData();
+
+const lensCopy: Record<Lens, { label: string; description: string; href: string }> = {
+  "post-completion": {
+    label: "Post-completion evidence",
+    description: "High and critical evidence records after recruitment or completion.",
+    href: "/?lens=post-completion",
+  },
+  recent: {
+    label: "Recent material activity",
+    description: "Latest high-signal amendments across the corpus.",
+    href: "/?lens=recent",
+  },
+  "critical-density": {
+    label: "Critical density",
+    description: "Trials where a larger share of amendments are critical.",
+    href: "/?lens=critical-density",
+  },
+  "amendment-intensity": {
+    label: "Amendment intensity",
+    description: "Trials with the heaviest amendment volume.",
+    href: "/?lens=amendment-intensity",
+  },
+};
+
+const activeRows: TrialLensRow[] =
+  activeLens === "amendment-intensity" ? data.amendmentIntensityTrials : data.criticalDensityTrials;
+
+const activeEvidenceRows: EvidenceRecordRow[] = data.postCompletionEvidenceRecords;
+
+const lensIcons = {
+  "post-completion": FileSearch,
+  recent: Clock3,
+  "critical-density": Gauge,
+  "amendment-intensity": Activity,
+};
+
+const lensTitle =
+  activeLens === "critical-density" ? "Trials by critical density" : "Trials by amendment intensity";
+---
+
+<BaseLayout
+  title="TrialDiff"
+  description="Open, reproducible ClinicalTrials.gov amendment evidence records."
+>
+  <main class="page-shell stack">
+    <header class="panel panel-pad">
+      <div class="header-row">
+        <div>
+          <p class="eyebrow">TrialDiff</p>
+          <h1>Open amendment evidence records</h1>
+          <p class="lede">
+            TrialDiff turns ClinicalTrials.gov amendment history into citeable evidence records: exact changed paths,
+            source hashes, deterministic rules, timing context, and explicit claims-supported / claims-not-supported
+            boundaries.
+          </p>
+        </div>
+        <a class="button" href="https://clinicaltrials.gov/">
+          Source registry
+          <ExternalLink size={16} />
+        </a>
+        <a class="button" href="/methodology">
+          Methodology
+        </a>
+      </div>
+    </header>
+
+    <section class="panel panel-pad disclaimer">
+      <div class="disclaimer-inner">
+        <ShieldCheck size={20} />
+        <div>
+          Severity means review priority, not proven wrongdoing. Evidence Records state what the registry history
+          supports and what it does not support.
+        </div>
+      </div>
+    </section>
+
+    <section class="grid stats-grid">
+      <div class="panel panel-pad">
+        <div class="stat-value">{formatNumber(data.summary.trialCount)}</div>
+        <div class="stat-label">Trials</div>
+      </div>
+      <div class="panel panel-pad">
+        <div class="stat-value">{formatNumber(data.summary.patchCount)}</div>
+        <div class="stat-label">Adjacent patches</div>
+      </div>
+      <div class="panel panel-pad">
+        <div class="stat-value">{formatNumber(data.summary.materialEventCount)}</div>
+        <div class="stat-label">Material events</div>
+      </div>
+      <div class="panel panel-pad">
+        <div class="stat-value">{formatNumber(data.summary.criticalCount)}</div>
+        <div class="stat-label">Critical events</div>
+      </div>
+      <div class="panel panel-pad">
+        <div class="stat-value">{formatNumber(data.summary.highCount)}</div>
+        <div class="stat-label">High events</div>
+      </div>
+    </section>
+
+    {
+      !data.databaseReady && (
+        <section class="panel panel-pad notice">
+          <Database size={20} />
+          <div class="notice-title">Database connection pending</div>
+          <div>
+            Point <code>DATABASE_URL</code> at Neon after running the Postgres migrations, then the feed will render
+            live corpus data.
+          </div>
+          {data.databaseError && <div>{data.databaseError}</div>}
+        </section>
+      )
+    }
+
+    <section class="grid lens-grid">
+      {
+        (Object.keys(lensCopy) as Lens[]).map((lens) => {
+          const Icon = lensIcons[lens];
+          return (
+            <a class={`panel lens ${activeLens === lens ? "lens-active" : ""}`} href={lensCopy[lens].href}>
+              <span class="lens-content">
+                <Icon size={20} />
+                <span>
+                  <span class="lens-title">{lensCopy[lens].label}</span>
+                  <span class="lens-description">{lensCopy[lens].description}</span>
+                </span>
+              </span>
+            </a>
+          );
+        })
+      }
+    </section>
+
+    {
+      data.severityCounts.length > 0 && (
+        <section class="grid severity-grid">
+          {data.severityCounts.map((row) => (
+            <div class="panel panel-pad">
+              <span class={severityClass(row.severity)}>{titleCase(row.severity)}</span>
+              <div class="stat-value" style="margin-top: 12px">{formatNumber(row.count)}</div>
+            </div>
+          ))}
+        </section>
+      )
+    }
+
+    {
+      activeLens === "post-completion" && (
+        <section class="panel">
+          <div class="section-head">
+            <h2>Post-completion Evidence Records</h2>
+            <span class="section-count">{activeEvidenceRows.length} shown</span>
+          </div>
+          <div>
+            {activeEvidenceRows.map((record) => (
+              <article class="event evidence-event">
+                <div>
+                  <span class={severityClass(record.severity)}>{titleCase(record.severity)}</span>
+                  <div class="event-date">{record.submittedDate ?? "Date unavailable"}</div>
+                </div>
+                <div>
+                  <div class="event-title">
+                    <a href={`/events/${record.eventId}`}>{record.eventId}</a>
+                  </div>
+                  <div class="lede">
+                    <a href={`/trials/${record.nctId}`}>{record.nctId}</a>
+                    {" · "}
+                    {record.briefTitle ?? "Untitled study"}
+                  </div>
+                  <div class="event-meta" style="margin-top: 10px">
+                    <span>{titleCase(record.category)}</span>
+                    <span>v{record.fromVersion} to v{record.toVersion}</span>
+                    {record.timingContext && <span>{titleCase(record.timingContext)}</span>}
+                    <span>Evidence v{record.evidenceVersion}</span>
+                  </div>
+                </div>
+                <div class="path-list">
+                  {record.changedPaths.slice(0, 2).map((path) => (
+                    <div class="path-item" title={path}>{path}</div>
+                  ))}
+                  {record.changedPaths.length > 2 && <div>{record.changedPaths.length - 2} more paths</div>}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      activeLens !== "recent" && activeLens !== "post-completion" && (
+        <section class="panel">
+          <div class="section-head">
+            <h2>{lensTitle}</h2>
+            <span class="section-count">{activeRows.length} shown</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Trial</th>
+                  <th>Sponsor</th>
+                  <th class="right">Patches</th>
+                  <th class="right">Critical</th>
+                  <th class="right">High</th>
+                  <th class="right">Critical density</th>
+                </tr>
+              </thead>
+              <tbody>
+                {activeRows.map((row) => (
+                  <tr>
+                    <td>
+                      <a href={`/trials/${row.nctId}`}><strong>{row.nctId}</strong></a>
+                      <div class="trial-title">{row.briefTitle ?? "Untitled study"}</div>
+                    </td>
+                    <td>{row.leadSponsor ?? "Unknown"}</td>
+                    <td class="right">{formatNumber(row.patchCount)}</td>
+                    <td class="right">{formatNumber(row.criticalCount)}</td>
+                    <td class="right">{formatNumber(row.highCount)}</td>
+                    <td class="right">
+                      {row.criticalDensityPct.toFixed(2)}%
+                      <div class="table-note">critical events / patches</div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )
+    }
+
+    <section class="panel">
+      <div class="section-head">
+        <h2>Material event feed</h2>
+        <span class="section-count">{data.recentEvents.length} shown</span>
+      </div>
+      <div>
+        {
+          data.recentEvents.map((event) => (
+            <article class="event">
+              <div>
+                <span class={severityClass(event.severity)}>{titleCase(event.severity)}</span>
+                <div class="event-date">{event.submittedDate ?? "Date unavailable"}</div>
+              </div>
+              <div>
+                <div class="event-title">
+                  <a href={`/trials/${event.nctId}`}>{event.nctId}</a>
+                </div>
+                <div class="lede">{event.briefTitle ?? "Untitled study"}</div>
+                <div class="event-meta" style="margin-top: 10px">
+                  <span>{titleCase(event.category)}</span>
+                  <span>v{event.fromVersion} to v{event.toVersion}</span>
+                  {event.timingContext && <span>{titleCase(event.timingContext)}</span>}
+                  {event.needsHumanReview && <span>Human review</span>}
+                  {event.evidenceEventId && <a href={`/events/${event.evidenceEventId}`}>Evidence Record</a>}
+                </div>
+              </div>
+              <div class="path-list">
+                {event.changedPaths.slice(0, 2).map((path) => (
+                  <div class="path-item" title={path}>{path}</div>
+                ))}
+                {event.changedPaths.length > 2 && <div>{event.changedPaths.length - 2} more paths</div>}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    {
+      data.databaseReady && data.recentEvents.length === 0 && (
+        <section class="panel panel-pad notice">
+          <TriangleAlert size={20} />
+          No materiality events found in the connected database.
+        </section>
+      )
+    }
+  </main>
+</BaseLayout>
+
+<style>
+  .lens-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @media (max-width: 900px) {
+    .lens-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 560px) {
+    .lens-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

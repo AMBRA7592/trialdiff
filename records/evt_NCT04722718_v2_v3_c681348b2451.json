@@ -1,0 +1,356 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/armsInterventionsModule/armGroups/0/description",
+      "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0",
+      "/protocolSection/armsInterventionsModule/armGroups/0/label",
+      "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0",
+      "/protocolSection/armsInterventionsModule/interventions/0/description",
+      "/protocolSection/armsInterventionsModule/interventions/0/name",
+      "/protocolSection/descriptionModule/briefSummary",
+      "/protocolSection/descriptionModule/detailedDescription",
+      "/protocolSection/eligibilityModule/eligibilityCriteria",
+      "/protocolSection/identificationModule/officialTitle",
+      "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+      "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+      "/protocolSection/outcomesModule/secondaryOutcomes/4/measure",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT04722718_v2_v3_c681348b2451. ClinicalTrials.gov NCT04722718, versions 2-3. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance.",
+      "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 2 to version 3 for NCT04722718.",
+      "The JSON Patch for this comparison has hash e11e3915067dc569495fc6b6d541cc2b9c2cadee9e256296ef202d71deaaf009.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under the primary outcome module changed between ClinicalTrials.gov versions 2 and 3.",
+      "The timing context for the from-version record was early_recruitment.",
+      "The deterministic rules that fired were: arms_or_interventions_change, eligibility_criteria_change, primary_outcome_any_change, secondary_outcome_any_change.",
+      "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups/0/description, /protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0, /protocolSection/armsInterventionsModule/armGroups/0/label, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0, /protocolSection/armsInterventionsModule/interventions/0/description, /protocolSection/armsInterventionsModule/interventions/0/name, /protocolSection/descriptionModule/briefSummary, /protocolSection/descriptionModule/detailedDescription, /protocolSection/eligibilityModule/eligibilityCriteria, /protocolSection/identificationModule/officialTitle, /protocolSection/outcomesModule/primaryOutcomes/0/description, /protocolSection/outcomesModule/primaryOutcomes/0/timeFrame, /protocolSection/outcomesModule/secondaryOutcomes/4/measure, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+    ],
+    "classification": {
+      "categories": [
+        "primary_outcome_change",
+        "arm_intervention_change",
+        "secondary_outcome_change",
+        "eligibility_change"
+      ],
+      "category": "primary_outcome_change",
+      "deterministic_rules": [
+        "arms_or_interventions_change",
+        "eligibility_criteria_change",
+        "primary_outcome_any_change",
+        "secondary_outcome_any_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "early_recruitment",
+      "value_signals": []
+    },
+    "event_id": "evt_NCT04722718_v2_v3_c681348b2451",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/identificationModule/officialTitle",
+        "value": "Efficacy and Safety of Neoadjuvant Therapy With Sintilimab and Apatinib Combined Chemotherapy in Triple-negative Breast Cancer"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2021-05"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2021-05-11"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2021-05-13"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/descriptionModule/briefSummary",
+        "value": "<ol><li>The efficacy and safety of immunotherapy and antiangiotherapy in combination with chemotherapy in neoadjuvant therapy for triple-negative breast cancer (TNBC) were determined by the addition of sintilimab and apatinib to neoadjuvant chemotherapy</li><li>To clarify the breast-conserving rate, toxicity, difference in pathologic complete response (pCR) rate of patients with PD-L1 (+) and PD-L1 (-) after neoadjuvant treatment of TNBC with immunotherapy and anti-vascular therapy combined with chemotherapy and the relationship between pCR rate of immunomodulated type (IM) and non-immunomodulated type patients in &quot;Fudan classification&quot;.</li><li>Through post-treatment efficacy evaluation and safety analysis, we provide new treatment strategies for TNBC patients, increase the pCR rate of TNBC patients, and ultimately improve the long-term survival of patients.</li></ol>"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/descriptionModule/detailedDescription",
+        "value": "<p>In the past decades, the incidence of breast cancer in humans has continued to rise, posing a huge threat to the lives and health of patients worldwide.\nAccording to statistics released by the American Cancer Society,In 2019, there were more than 271,000 new cases of breast cancer and about 42260 deaths in the United States.\nAs a highly heterogeneous disease, breast cancer can be based on estrogen receptor (ER), progesterone receptor (PR) and human epidermal growth factor receptor 2 (HER-2) and antigen Ki-67 is divided into several subtypes.\nTNBC is one of the subtypes of breast cancer, which is characterized by the lack of protein expression of ER, PR and HER-2.\nClinically, TNBC is a very aggressive subtype of breast cancer, accounting for about 12% to 17% of all breast cancers.\nDue to its aggressiveness and lack of drug targets, compared with other subtypes of breast cancer, TNBC patients have a shorter overall survival (OS) and the median OS of metastatic TNBC is only 8-15 months.\nChemotherapy is still the main systemic treatment for TNBC, but drug resistance develops rapidly and is poorly tolerated.\nTherefore, there is an urgent need to develop new treatment strategies for these patients.</p><p>The clinical and molecular heterogeneity of TNBC is now well understood.\nGene expression analysis showed that immune markers, androgen receptors, mesenchymal phenotypes, stem cell markers and basic markers are all related to TNBC subtypes .With reference to previous studies, according to the results of transcriptomics research, and based on transcriptome data, China&#x27;s &quot;Fudan Classification&quot; divides TNBC into 4 subtypes: (1) luminal androgen receptor (LAR), (2) Immunomodulatory (IM), (3) basal-like and immune-suppressed (BLIS) and (4) mesenchymal-like (MES).\nPossible therapeutic targets or biomarkers have been identified for each subtype.</p><p>To date, neoadjuvant chemotherapy has played an important role in the treatment of locally advanced TNBC patients.\nThrough neoadjuvant chemotherapy, tumor shrinkage and stage reduction can improve the surgical radical cure rate and breast conserving rate.\nPostoperative pCR rate is of great significance in predicting the prognosis of patients, and those who achieve pCR tend to have better prognosis.\nA meta-analysis of 52 studies showed that the availability of pCR for neoadjuvant therapy in TNBC patients was significantly associated with event-free survival (EFS), with a 5-year EFS of 90% in the pCR group and only 57% in tumor survivors (HR=0.18).\nThe prognosis of non-pCR or drug-resistant patients is relatively poor, and in order to reduce the recurrence and metastasis rate and improve the prognosis, intensive chemotherapy is often needed.\nCurrently, there is no standard treatment regimen for TNBC.\nPrevious studies have shown that the pCR rate of traditional anthracyclines followed by sequenzine therapy for TNBC can reach 25%-40%, but there are still nearly 20% patients with recent recurrence.\nTherefore, the optimization of TNBC treatment regimen is still a hot spot and difficulty in current clinical studies.</p><p>In recent years, platinum drugs have attracted more and more attention in the neoadjuvant therapy of TNBC due to their ability to significantly improve pCR rate.\nCarboplatin can kill cancer cells by destroying their DNA.\nCurrently, it has become an important neoadjuvant chemotherapy drug in the treatment of TNBC.\nStudies have shown that adding the DNA damage agent carboplatin to the neoadjuvant regimen can improve the pCR rate of TNBC.\nIn 2020, the latest studies showed that carboplatin combined with nab-paclitaxel showed good anti-tumor activity and a high PCR rate of 48%.</p><p>In addition, antiangiogenic therapy has been considered as a potential therapeutic strategy for patients with TNBC.\nIn 2008, bevacizumab was approved by the US Food and Drug Administration (FDA) for significantly increasing patients&#x27; PFS in combination with chemotherapy.\nMesylate path is for our country to develop a new type of oral small molecule anti angiogenesis inhibitors, mainly through highly selective inhibition of vascular endothelial growth factor receptor 2 (VEGFR - 2) the activity of tyrosine kinase, blocking vascular endothelial growth factor (VEGF) and its receptor signal transduction pathways, thus potent inhibition of tumor angiogenesis, play a role of anti-tumor.\nIn addition, preclinical studies have shown that anti-angiogenic therapy can improve the sensitivity of anti-PD-1 &#x2F;PD-L1 therapy by increasing PD-L1 expression and CD8+ T cell infiltration in the tumor microenvironment.\nTherefore, anti-angiogenic therapy may enhance the response to PD-1&#x2F;PD-L1 blockade and improve survival.</p><p>Currently, blocking of programmed death protein 1(PD-1) and programmed death ligand 1(PD-L1) is an attractive treatment option for TNBC, since stromal infiltrating lymphocytes (TILS) and PD-L1 are associated with favorable outcomes for TNBC.\nImpassion130 showed that first-line treatment with albumin paclitaxel combined with atzumab (anti-PD-L1 antibody) increased PFS by 2.2 months in patients with PD-L1 positive advanced TNBC, and increased OS by 7 months compared with placebo plus albumin paclitaxel.\nTherefore, the combination of chemotherapy and immunotherapy was proved to be effective.\nMeanwhile, in 2020, Impassion031 and Keynote-522 published the results of two classic studies: the pCR rate after immunotherapy combined with chemotherapy neoadjuvant therapy reached 58% and 64.8%, respectively, further confirming the high efficacy of immunotherapy combined with chemotherapy.</p><p>TNBC as one of a kind of high heterogeneity of breast cancer subtypes, its aggressive is strong, postoperative recurrence occurred more transfer, lack of effective treatment of molecular therapeutic targets, endocrine therapy and its ehrs resistance - 2 treatment often invalid, therefore, compared with other subtypes of breast cancer, TNBC after neoadjuvant chemotherapy to pCR has more significant prognostic value.\nCurrently, there is no standard treatment for TNBC except traditional anthracycline and taxane chemotherapy regimens.\nTherefore, it is critical to optimize the neoadjuvant chemotherapy regimens for TNBC to increase the pCR rate and improve the long-term prognosis of patients.</p><p>So far, 6 clinical trials of apatinib combined with neoadjuvant chemotherapy for TNBC have been registered in China.\nHowever, there are no relevant reports on immunotherapy and antiangiogenesis therapy combined with chemotherapy in the neoadjuvant treatment of TNBC at home and abroad.\nBased on the results of previous classic studies and preclinical studies, the researchers initiated this clinical study to clarify the efficacy and safety of sintilimab and apatinib combined with chemotherapy in the neoadjuvant treatment of TNBC, in order to provide treatment for TNBC patients Strategy.</p>"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/0/label",
+        "value": "Sintilimab+Apatinib+Albumin-Bound Paclitaxel(Nab-Paclitaxel)+Carboplatin"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/0/description",
+        "value": "Drug:Sintilimab;Drug:Apatinib;Drug:Albumin-Bound Paclitaxel(Nab-Paclitaxel);Drug:Carboplatin"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0",
+        "value": "Drug: Sintilimab+Apatinib+Albumin-Bound Paclitaxel(Nab-Paclitaxel)+Carboplatin"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/name",
+        "value": "Sintilimab+Apatinib+Albumin-Bound Paclitaxel(Nab-Paclitaxel)+Carboplatin"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/description",
+        "value": "Sintilimab:200mg,ivgtt,d1,21days&#x2F;cycle;Apatinib:250mg po,d1-14days,21days&#x2F;cycle;Albumin-Bound Paclitaxel(Nab-Paclitaxel):125mg&#x2F;m2,ivgtt,d1,d8,21days&#x2F;cycle;Carboplatin:AUC=1.5,ivgtt,d1,d8, 21days&#x2F;cycle.Monitoring of blood routine, biochemical and urine routine, electrocardiogram, and record the patient&#x27;s drug-related adverse reactions every cycle,according to the curative effect of patients, compliance and tolerance, neoadjuvant therapy 6 cycles,every 2 cycles to evaluate curative effect (ultrasonic, breast X-ray CT, bone scan, brain, lungs, assessment and breast MRI imaging)."
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0",
+        "value": "Sintilimab+Apatinib+Albumin-Bound Paclitaxel(Nab-Paclitaxel)+Carboplatin"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+        "value": "Pathological complete response (pCR) rate: using the definition of ypT0&#x2F;Tis ypN0 ( namely:no invasive residual in breast or nodes; noninvasive breast residuals allowed) at the time of definitive surgery according to American Joint Committee on Cancer (AJCC) Staging System."
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+        "value": "4-6 months"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/4/measure",
+        "value": "The difference of pCR rates among different subtypes in TNBC"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/eligibilityModule/eligibilityCriteria",
+        "value": "<p>Inclusion Criteria:</p><ol><li>The Eastern Cooperative Oncology Group (ECOG) scores ranged from 0 to 1 in women aged 18 to 70 years.</li><li>Pathologically confirmed patients with TNBC(negative human epidermal growth factor receptor 2 [HER2], estrogen receptor [ER], and progesterone receptor [PgR] status), clinical stage II and III (T stage: T1c, N stage: N1-2, or T stage: T2-4, N stage: N0-2),newly treated patients who have not received surgery or chemotherapy.</li><li>According to response evaluation criteria in solid tumors (RECIST) version 1.1, it was confirmed by MRI or CT that at least one measurable lesion was the target lesion and the target lesion was not suitable for surgical treatment.\nIf the target lesion was lymph node, the short diameter was &gt; 1.5cm.</li><li>Confirmed tumor programmed death-ligand 1 (PD-L1) evaluation as documented through central testing of a representative tumor tissue specimen.</li><li>Baseline left ventricular ejection fraction (LVEF) greater than or equal to (&gt;=) 53 percent (%) measured by echocardiogram (ECHO) or multiple-gated acquisition (MUGA) scans.</li><li>Adequate hematologic and end-organ function.</li><li>Baseline laboratory tests, such as blood routine, biochemical and electrocardiogram, were normal, without chemotherapy contraindication.</li><li>Representative formalin-fixed, paraffin-embedded (FFPE) tumor specimen in paraffin blocks (preferred) or at least 20 unstained slides, with an associated pathology report documenting ER, PgR, and HER2 negativity.</li><li>For women of childbearing potential: agreement to remain abstinent (refrain from heterosexual intercourse) or use contraceptive methods, and agreement to refrain from donating eggs.</li><li>Women who are not postmenopausal or have undergone a sterilization procedure must have a negative serum pregnancy test result within 14 days prior to initiation of study drug</li><li>Participant agreement to undergo appropriate surgical management including axillary lymph node surgery and partial or total mastectomy after completion of neoadjuvant treatment.</li></ol><p>Exclusion Criteria:</p><ol><li>Prior history of invasive breast cancer.</li><li>Prior systemic therapy for treatment and prevention of breast cancer.</li><li>History of ductal carcinoma in situ (DCIS), except for participants treated exclusively with mastectomy &gt;5 years prior to diagnosis of current breast cancer.</li><li>History of pleomorphic lobular carcinoma in situ (LCIS), except for participants surgically managed &gt;5 years prior to diagnosis of current breast cancer.</li><li>Bilateral breast cancer.</li><li>Undergone incisional and&#x2F;or excisional biopsy of primary tumor and&#x2F;or axillary lymph nodes.</li><li>Axillary lymph node dissection prior to initiation of neoadjuvant therapy.</li><li>Have uncontrolled clinical symptoms or diseases of the heart, such as:</li></ol><p>(1) heart failure above NYHA 2 (2) unstable angina pectoris (3) myocardial infarction occurred within 1 year (4) supraventricular or ventricular arrhythmia of clinical significance requires treatment or intervention.</p><p>9.Urine routine test indicates urine protein \u2265 ++, or confirmed 24-hour urine protein \u2265 1.0 g.</p><p>10.Patients with hypertension (systolic blood pressure &gt; 140mmHg, diastolic blood pressure &gt;90mmHg) and unsatisfactory drug control.</p><p>11.Have bleeding tendency, or combined with venous thrombosis to receive anticoagulant therapy, urine protein positive.</p><p>12.Significant abnormalities of the digestive system, such as inability to swallow, chronic diarrhea, intestinal obstruction, etc., may affect the intake, transport, or absorption of oral drugs.</p><p>13.Had major surgery within 4 weeks, or had a major traumatic injury, fracture, or poor healing wound.</p><p>14.Systemic therapy 2 years of active autoimmune disease(such as the following, but not limited to: autoimmune hepatitis, interstitial pneumonia, uveitis, enteritis, hepatitis, hypophysitis, vasculitis, nephritis , hyperthyroidism, decreased thyroid function; subjects suffering from vitiligo or asthma in childhood has been completely relieved, and adults without any intervention can be included; subjects requiring bronchodilators for medical intervention can not be included), diagnosis of immune deficiency in 1 weeks or the use of immunosuppressive therapy, the history of human immunodeficiency virus (HIV) infection, had glucocorticoid treatment history of non infectious pneumonia, suffering from pneumonia, active tuberculosis, active hepatitis b or hepatitis c virus (HCV) infection, and is being treated for a whole body of any active infection.</p><p>15.History of severe allergic, anaphylactic, or other hypersensitivity reactions to chimeric or humanized antibodies or fusion proteins.</p><p>16.Known hypersensitivity to biopharmaceuticals produced in Chinese hamster ovary cells.</p><p>17.Known allergy or hypersensitivity to the components of the formulations of sintilimab, appatinib,albumin paclitaxel or carboplatin.</p><p>18.Prior allogeneic stem cell or solid organ transplantation.</p><p>19.Administration of a live attenuated vaccine within 4 weeks prior to initiation of study treatment or anticipation of need for such a vaccine during the study.</p><p>20.Patients who have previously received CTLA-4, Tim3, LAG3 and other antibodies or T cell costimulation therapy (previous use of PD-1 or PD-L1 antibodies is allowed).</p><p>21.Any other disease, metabolic dysfunction, physical examination finding, or clinical laboratory finding giving reasonable suspicion of a disease or condition that contraindicates the use of an investigational drug or that may affect the interpretation of the results or render the participant at high risk from treatment complications.</p><p>22.History of cerebrovascular accident within 12 months.</p><p>23.Pregnant or lactating, or intending to become pregnant during the study.</p><p>24.Patients diagnosed with inflammatory breast cancer.</p><p>25.Patients with a second primary tumor at the same time.</p><p>26.The doctor considers that she is not suitable for enrollment.</p>"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "6c699acd56006622da23bd9c5a74d4bcb115edc7b0a51bfb63edb9f80683f3ee",
+      "materiality_event_hash": "e7081120a63edae3e14b75b16b6fd1aaa17a984c4d9f16f4e1572d6f181b764b",
+      "patch_hash": "e11e3915067dc569495fc6b6d541cc2b9c2cadee9e256296ef202d71deaaf009",
+      "patch_raw_hash": "b928fbb3bdd709d190f2eb5f840c3659d142d73b45b66528295e0633f5a5170e",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT04722718/history/2?patchToVersion=3",
+      "to_snapshot_hash": "6ad5f830998bc151e70cd95ed2caffb5589e454c165a2814d161ac019d338979"
+    },
+    "review_question": "What did the primary outcome field say before and after the amendment, and is there a public protocol, statistical analysis plan, or manuscript explaining the change?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT04722718",
+      "nct_id": "NCT04722718"
+    },
+    "versions": {
+      "from_version": 2,
+      "submitted_date": "2021-05-11",
+      "to_version": 3
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/armsInterventionsModule/armGroups/0/description",
+    "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0",
+    "/protocolSection/armsInterventionsModule/armGroups/0/label",
+    "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0",
+    "/protocolSection/armsInterventionsModule/interventions/0/description",
+    "/protocolSection/armsInterventionsModule/interventions/0/name",
+    "/protocolSection/descriptionModule/briefSummary",
+    "/protocolSection/descriptionModule/detailedDescription",
+    "/protocolSection/eligibilityModule/eligibilityCriteria",
+    "/protocolSection/identificationModule/officialTitle",
+    "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+    "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+    "/protocolSection/outcomesModule/secondaryOutcomes/4/measure",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT04722718_v2_v3_c681348b2451. ClinicalTrials.gov NCT04722718, versions 2-3. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance.",
+    "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 2 to version 3 for NCT04722718.",
+    "The JSON Patch for this comparison has hash e11e3915067dc569495fc6b6d541cc2b9c2cadee9e256296ef202d71deaaf009.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under the primary outcome module changed between ClinicalTrials.gov versions 2 and 3.",
+    "The timing context for the from-version record was early_recruitment.",
+    "The deterministic rules that fired were: arms_or_interventions_change, eligibility_criteria_change, primary_outcome_any_change, secondary_outcome_any_change.",
+    "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups/0/description, /protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0, /protocolSection/armsInterventionsModule/armGroups/0/label, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0, /protocolSection/armsInterventionsModule/interventions/0/description, /protocolSection/armsInterventionsModule/interventions/0/name, /protocolSection/descriptionModule/briefSummary, /protocolSection/descriptionModule/detailedDescription, /protocolSection/eligibilityModule/eligibilityCriteria, /protocolSection/identificationModule/officialTitle, /protocolSection/outcomesModule/primaryOutcomes/0/description, /protocolSection/outcomesModule/primaryOutcomes/0/timeFrame, /protocolSection/outcomesModule/secondaryOutcomes/4/measure, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+  ],
+  "classification": {
+    "categories": [
+      "primary_outcome_change",
+      "arm_intervention_change",
+      "secondary_outcome_change",
+      "eligibility_change"
+    ],
+    "category": "primary_outcome_change",
+    "deterministic_rules": [
+      "arms_or_interventions_change",
+      "eligibility_criteria_change",
+      "primary_outcome_any_change",
+      "secondary_outcome_any_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "early_recruitment",
+    "value_signals": []
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT04722718_v2_v3_c681348b2451",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT04722718_v2_v3_c681348b2451.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT04722718_v2_v3_c681348b2451",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT04722718"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/identificationModule/officialTitle",
+      "value": "Efficacy and Safety of Neoadjuvant Therapy With Sintilimab and Apatinib Combined Chemotherapy in Triple-negative Breast Cancer"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2021-05"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2021-05-11"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2021-05-13"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/descriptionModule/briefSummary",
+      "value": "<ol><li>The efficacy and safety of immunotherapy and antiangiotherapy in combination with chemotherapy in neoadjuvant therapy for triple-negative breast cancer (TNBC) were determined by the addition of sintilimab and apatinib to neoadjuvant chemotherapy</li><li>To clarify the breast-conserving rate, toxicity, difference in pathologic complete response (pCR) rate of patients with PD-L1 (+) and PD-L1 (-) after neoadjuvant treatment of TNBC with immunotherapy and anti-vascular therapy combined with chemotherapy and the relationship between pCR rate of immunomodulated type (IM) and non-immunomodulated type patients in &quot;Fudan classification&quot;.</li><li>Through post-treatment efficacy evaluation and safety analysis, we provide new treatment strategies for TNBC patients, increase the pCR rate of TNBC patients, and ultimately improve the long-term survival of patients.</li></ol>"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/descriptionModule/detailedDescription",
+      "value": "<p>In the past decades, the incidence of breast cancer in humans has continued to rise, posing a huge threat to the lives and health of patients worldwide.\nAccording to statistics released by the American Cancer Society,In 2019, there were more than 271,000 new cases of breast cancer and about 42260 deaths in the United States.\nAs a highly heterogeneous disease, breast cancer can be based on estrogen receptor (ER), progesterone receptor (PR) and human epidermal growth factor receptor 2 (HER-2) and antigen Ki-67 is divided into several subtypes.\nTNBC is one of the subtypes of breast cancer, which is characterized by the lack of protein expression of ER, PR and HER-2.\nClinically, TNBC is a very aggressive subtype of breast cancer, accounting for about 12% to 17% of all breast cancers.\nDue to its aggressiveness and lack of drug targets, compared with other subtypes of breast cancer, TNBC patients have a shorter overall survival (OS) and the median OS of metastatic TNBC is only 8-15 months.\nChemotherapy is still the main systemic treatment for TNBC, but drug resistance develops rapidly and is poorly tolerated.\nTherefore, there is an urgent need to develop new treatment strategies for these patients.</p><p>The clinical and molecular heterogeneity of TNBC is now well understood.\nGene expression analysis showed that immune markers, androgen receptors, mesenchymal phenotypes, stem cell markers and basic markers are all related to TNBC subtypes .With reference to previous studies, according to the results of transcriptomics research, and based on transcriptome data, China&#x27;s &quot;Fudan Classification&quot; divides TNBC into 4 subtypes: (1) luminal androgen receptor (LAR), (2) Immunomodulatory (IM), (3) basal-like and immune-suppressed (BLIS) and (4) mesenchymal-like (MES).\nPossible therapeutic targets or biomarkers have been identified for each subtype.</p><p>To date, neoadjuvant chemotherapy has played an important role in the treatment of locally advanced TNBC patients.\nThrough neoadjuvant chemotherapy, tumor shrinkage and stage reduction can improve the surgical radical cure rate and breast conserving rate.\nPostoperative pCR rate is of great significance in predicting the prognosis of patients, and those who achieve pCR tend to have better prognosis.\nA meta-analysis of 52 studies showed that the availability of pCR for neoadjuvant therapy in TNBC patients was significantly associated with event-free survival (EFS), with a 5-year EFS of 90% in the pCR group and only 57% in tumor survivors (HR=0.18).\nThe prognosis of non-pCR or drug-resistant patients is relatively poor, and in order to reduce the recurrence and metastasis rate and improve the prognosis, intensive chemotherapy is often needed.\nCurrently, there is no standard treatment regimen for TNBC.\nPrevious studies have shown that the pCR rate of traditional anthracyclines followed by sequenzine therapy for TNBC can reach 25%-40%, but there are still nearly 20% patients with recent recurrence.\nTherefore, the optimization of TNBC treatment regimen is still a hot spot and difficulty in current clinical studies.</p><p>In recent years, platinum drugs have attracted more and more attention in the neoadjuvant therapy of TNBC due to their ability to significantly improve pCR rate.\nCarboplatin can kill cancer cells by destroying their DNA.\nCurrently, it has become an important neoadjuvant chemotherapy drug in the treatment of TNBC.\nStudies have shown that adding the DNA damage agent carboplatin to the neoadjuvant regimen can improve the pCR rate of TNBC.\nIn 2020, the latest studies showed that carboplatin combined with nab-paclitaxel showed good anti-tumor activity and a high PCR rate of 48%.</p><p>In addition, antiangiogenic therapy has been considered as a potential therapeutic strategy for patients with TNBC.\nIn 2008, bevacizumab was approved by the US Food and Drug Administration (FDA) for significantly increasing patients&#x27; PFS in combination with chemotherapy.\nMesylate path is for our country to develop a new type of oral small molecule anti angiogenesis inhibitors, mainly through highly selective inhibition of vascular endothelial growth factor receptor 2 (VEGFR - 2) the activity of tyrosine kinase, blocking vascular endothelial growth factor (VEGF) and its receptor signal transduction pathways, thus potent inhibition of tumor angiogenesis, play a role of anti-tumor.\nIn addition, preclinical studies have shown that anti-angiogenic therapy can improve the sensitivity of anti-PD-1 &#x2F;PD-L1 therapy by increasing PD-L1 expression and CD8+ T cell infiltration in the tumor microenvironment.\nTherefore, anti-angiogenic therapy may enhance the response to PD-1&#x2F;PD-L1 blockade and improve survival.</p><p>Currently, blocking of programmed death protein 1(PD-1) and programmed death ligand 1(PD-L1) is an attractive treatment option for TNBC, since stromal infiltrating lymphocytes (TILS) and PD-L1 are associated with favorable outcomes for TNBC.\nImpassion130 showed that first-line treatment with albumin paclitaxel combined with atzumab (anti-PD-L1 antibody) increased PFS by 2.2 months in patients with PD-L1 positive advanced TNBC, and increased OS by 7 months compared with placebo plus albumin paclitaxel.\nTherefore, the combination of chemotherapy and immunotherapy was proved to be effective.\nMeanwhile, in 2020, Impassion031 and Keynote-522 published the results of two classic studies: the pCR rate after immunotherapy combined with chemotherapy neoadjuvant therapy reached 58% and 64.8%, respectively, further confirming the high efficacy of immunotherapy combined with chemotherapy.</p><p>TNBC as one of a kind of high heterogeneity of breast cancer subtypes, its aggressive is strong, postoperative recurrence occurred more transfer, lack of effective treatment of molecular therapeutic targets, endocrine therapy and its ehrs resistance - 2 treatment often invalid, therefore, compared with other subtypes of breast cancer, TNBC after neoadjuvant chemotherapy to pCR has more significant prognostic value.\nCurrently, there is no standard treatment for TNBC except traditional anthracycline and taxane chemotherapy regimens.\nTherefore, it is critical to optimize the neoadjuvant chemotherapy regimens for TNBC to increase the pCR rate and improve the long-term prognosis of patients.</p><p>So far, 6 clinical trials of apatinib combined with neoadjuvant chemotherapy for TNBC have been registered in China.\nHowever, there are no relevant reports on immunotherapy and antiangiogenesis therapy combined with chemotherapy in the neoadjuvant treatment of TNBC at home and abroad.\nBased on the results of previous classic studies and preclinical studies, the researchers initiated this clinical study to clarify the efficacy and safety of sintilimab and apatinib combined with chemotherapy in the neoadjuvant treatment of TNBC, in order to provide treatment for TNBC patients Strategy.</p>"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/0/label",
+      "value": "Sintilimab+Apatinib+Albumin-Bound Paclitaxel(Nab-Paclitaxel)+Carboplatin"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/0/description",
+      "value": "Drug:Sintilimab;Drug:Apatinib;Drug:Albumin-Bound Paclitaxel(Nab-Paclitaxel);Drug:Carboplatin"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0",
+      "value": "Drug: Sintilimab+Apatinib+Albumin-Bound Paclitaxel(Nab-Paclitaxel)+Carboplatin"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/name",
+      "value": "Sintilimab+Apatinib+Albumin-Bound Paclitaxel(Nab-Paclitaxel)+Carboplatin"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/description",
+      "value": "Sintilimab:200mg,ivgtt,d1,21days&#x2F;cycle;Apatinib:250mg po,d1-14days,21days&#x2F;cycle;Albumin-Bound Paclitaxel(Nab-Paclitaxel):125mg&#x2F;m2,ivgtt,d1,d8,21days&#x2F;cycle;Carboplatin:AUC=1.5,ivgtt,d1,d8, 21days&#x2F;cycle.Monitoring of blood routine, biochemical and urine routine, electrocardiogram, and record the patient&#x27;s drug-related adverse reactions every cycle,according to the curative effect of patients, compliance and tolerance, neoadjuvant therapy 6 cycles,every 2 cycles to evaluate curative effect (ultrasonic, breast X-ray CT, bone scan, brain, lungs, assessment and breast MRI imaging)."
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0",
+      "value": "Sintilimab+Apatinib+Albumin-Bound Paclitaxel(Nab-Paclitaxel)+Carboplatin"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+      "value": "Pathological complete response (pCR) rate: using the definition of ypT0&#x2F;Tis ypN0 ( namely:no invasive residual in breast or nodes; noninvasive breast residuals allowed) at the time of definitive surgery according to American Joint Committee on Cancer (AJCC) Staging System."
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+      "value": "4-6 months"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/4/measure",
+      "value": "The difference of pCR rates among different subtypes in TNBC"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/eligibilityModule/eligibilityCriteria",
+      "value": "<p>Inclusion Criteria:</p><ol><li>The Eastern Cooperative Oncology Group (ECOG) scores ranged from 0 to 1 in women aged 18 to 70 years.</li><li>Pathologically confirmed patients with TNBC(negative human epidermal growth factor receptor 2 [HER2], estrogen receptor [ER], and progesterone receptor [PgR] status), clinical stage II and III (T stage: T1c, N stage: N1-2, or T stage: T2-4, N stage: N0-2),newly treated patients who have not received surgery or chemotherapy.</li><li>According to response evaluation criteria in solid tumors (RECIST) version 1.1, it was confirmed by MRI or CT that at least one measurable lesion was the target lesion and the target lesion was not suitable for surgical treatment.\nIf the target lesion was lymph node, the short diameter was &gt; 1.5cm.</li><li>Confirmed tumor programmed death-ligand 1 (PD-L1) evaluation as documented through central testing of a representative tumor tissue specimen.</li><li>Baseline left ventricular ejection fraction (LVEF) greater than or equal to (&gt;=) 53 percent (%) measured by echocardiogram (ECHO) or multiple-gated acquisition (MUGA) scans.</li><li>Adequate hematologic and end-organ function.</li><li>Baseline laboratory tests, such as blood routine, biochemical and electrocardiogram, were normal, without chemotherapy contraindication.</li><li>Representative formalin-fixed, paraffin-embedded (FFPE) tumor specimen in paraffin blocks (preferred) or at least 20 unstained slides, with an associated pathology report documenting ER, PgR, and HER2 negativity.</li><li>For women of childbearing potential: agreement to remain abstinent (refrain from heterosexual intercourse) or use contraceptive methods, and agreement to refrain from donating eggs.</li><li>Women who are not postmenopausal or have undergone a sterilization procedure must have a negative serum pregnancy test result within 14 days prior to initiation of study drug</li><li>Participant agreement to undergo appropriate surgical management including axillary lymph node surgery and partial or total mastectomy after completion of neoadjuvant treatment.</li></ol><p>Exclusion Criteria:</p><ol><li>Prior history of invasive breast cancer.</li><li>Prior systemic therapy for treatment and prevention of breast cancer.</li><li>History of ductal carcinoma in situ (DCIS), except for participants treated exclusively with mastectomy &gt;5 years prior to diagnosis of current breast cancer.</li><li>History of pleomorphic lobular carcinoma in situ (LCIS), except for participants surgically managed &gt;5 years prior to diagnosis of current breast cancer.</li><li>Bilateral breast cancer.</li><li>Undergone incisional and&#x2F;or excisional biopsy of primary tumor and&#x2F;or axillary lymph nodes.</li><li>Axillary lymph node dissection prior to initiation of neoadjuvant therapy.</li><li>Have uncontrolled clinical symptoms or diseases of the heart, such as:</li></ol><p>(1) heart failure above NYHA 2 (2) unstable angina pectoris (3) myocardial infarction occurred within 1 year (4) supraventricular or ventricular arrhythmia of clinical significance requires treatment or intervention.</p><p>9.Urine routine test indicates urine protein \u2265 ++, or confirmed 24-hour urine protein \u2265 1.0 g.</p><p>10.Patients with hypertension (systolic blood pressure &gt; 140mmHg, diastolic blood pressure &gt;90mmHg) and unsatisfactory drug control.</p><p>11.Have bleeding tendency, or combined with venous thrombosis to receive anticoagulant therapy, urine protein positive.</p><p>12.Significant abnormalities of the digestive system, such as inability to swallow, chronic diarrhea, intestinal obstruction, etc., may affect the intake, transport, or absorption of oral drugs.</p><p>13.Had major surgery within 4 weeks, or had a major traumatic injury, fracture, or poor healing wound.</p><p>14.Systemic therapy 2 years of active autoimmune disease(such as the following, but not limited to: autoimmune hepatitis, interstitial pneumonia, uveitis, enteritis, hepatitis, hypophysitis, vasculitis, nephritis , hyperthyroidism, decreased thyroid function; subjects suffering from vitiligo or asthma in childhood has been completely relieved, and adults without any intervention can be included; subjects requiring bronchodilators for medical intervention can not be included), diagnosis of immune deficiency in 1 weeks or the use of immunosuppressive therapy, the history of human immunodeficiency virus (HIV) infection, had glucocorticoid treatment history of non infectious pneumonia, suffering from pneumonia, active tuberculosis, active hepatitis b or hepatitis c virus (HCV) infection, and is being treated for a whole body of any active infection.</p><p>15.History of severe allergic, anaphylactic, or other hypersensitivity reactions to chimeric or humanized antibodies or fusion proteins.</p><p>16.Known hypersensitivity to biopharmaceuticals produced in Chinese hamster ovary cells.</p><p>17.Known allergy or hypersensitivity to the components of the formulations of sintilimab, appatinib,albumin paclitaxel or carboplatin.</p><p>18.Prior allogeneic stem cell or solid organ transplantation.</p><p>19.Administration of a live attenuated vaccine within 4 weeks prior to initiation of study treatment or anticipation of need for such a vaccine during the study.</p><p>20.Patients who have previously received CTLA-4, Tim3, LAG3 and other antibodies or T cell costimulation therapy (previous use of PD-1 or PD-L1 antibodies is allowed).</p><p>21.Any other disease, metabolic dysfunction, physical examination finding, or clinical laboratory finding giving reasonable suspicion of a disease or condition that contraindicates the use of an investigational drug or that may affect the interpretation of the results or render the participant at high risk from treatment complications.</p><p>22.History of cerebrovascular accident within 12 months.</p><p>23.Pregnant or lactating, or intending to become pregnant during the study.</p><p>24.Patients diagnosed with inflammatory breast cancer.</p><p>25.Patients with a second primary tumor at the same time.</p><p>26.The doctor considers that she is not suitable for enrollment.</p>"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "82f1c6ab5cc7d8c376ac9497eb4ead1cce3865614b16574c2ca27ecba7a04dff",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT04722718_v2_v3_c681348b2451",
+    "evidence_version": 1,
+    "from_snapshot_hash": "6c699acd56006622da23bd9c5a74d4bcb115edc7b0a51bfb63edb9f80683f3ee",
+    "materiality_event_hash": "e7081120a63edae3e14b75b16b6fd1aaa17a984c4d9f16f4e1572d6f181b764b",
+    "patch_hash": "e11e3915067dc569495fc6b6d541cc2b9c2cadee9e256296ef202d71deaaf009",
+    "patch_raw_hash": "b928fbb3bdd709d190f2eb5f840c3659d142d73b45b66528295e0633f5a5170e",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT04722718/history/2?patchToVersion=3",
+    "to_snapshot_hash": "6ad5f830998bc151e70cd95ed2caffb5589e454c165a2814d161ac019d338979"
+  },
+  "review_question": "What did the primary outcome field say before and after the amendment, and is there a public protocol, statistical analysis plan, or manuscript explaining the change?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT04722718",
+    "current_record_hash": "d0bb235bf4c2d42154361a0c2d013b68fa489c06099cba7ec4f1bb0cce0ddd9e",
+    "current_record_raw_hash": "d0bb235bf4c2d42154361a0c2d013b68fa489c06099cba7ec4f1bb0cce0ddd9e",
+    "lead_sponsor": "Jiuda Zhao",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT04722718",
+    "official_title": "Efficacy and Safety of Neoadjuvant Therapy With Sintilimab and Apatinib Combined Chemotherapy in Triple-negative Breast Cancer",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT04722718",
+    "title": "Efficacy and Safety of Sintilimab and Apatinib Combined Chemotherapy in Breast Cancer"
+  },
+  "versions": {
+    "from_version": 2,
+    "submitted_date": "2021-05-11",
+    "to_version": 3
+  }
+}

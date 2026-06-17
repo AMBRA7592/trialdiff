@@ -1,0 +1,372 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/armsInterventionsModule/armGroups/1/label",
+      "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/1",
+      "/protocolSection/armsInterventionsModule/interventions/1/armGroupLabels/1",
+      "/protocolSection/statusModule/completionDateStruct/date",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+      "/protocolSection/statusModule/startDateStruct/date",
+      "/protocolSection/statusModule/startDateStruct/type",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT02942355_v4_v5_1624b8a0021f. ClinicalTrials.gov NCT02942355, versions 4-5. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 4 to version 5 for NCT02942355.",
+      "The JSON Patch for this comparison has hash 7809015033039e9468325f206711cb4aec6e7efcc30a62f374521cb3afc83344.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under an arm or intervention module changed between ClinicalTrials.gov versions 4 and 5.",
+      "The timing context for the from-version record was early_recruitment.",
+      "The deterministic rules that fired were: arms_or_interventions_change.",
+      "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups/1/label, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/1, /protocolSection/armsInterventionsModule/interventions/1/armGroupLabels/1, /protocolSection/statusModule/completionDateStruct/date, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/primaryCompletionDateStruct/date, /protocolSection/statusModule/startDateStruct/date, /protocolSection/statusModule/startDateStruct/type, /protocolSection/statusModule/statusVerifiedDate.",
+      "The timeline value moved by 6 days.",
+      "The timeline value moved by 457 days.",
+      "The timeline value moved by 1400 days."
+    ],
+    "classification": {
+      "categories": [
+        "arm_intervention_change",
+        "timeline_major_slip",
+        "timeline_minor_adjustment"
+      ],
+      "category": "arm_intervention_change",
+      "deterministic_rules": [
+        "arms_or_interventions_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "early_recruitment",
+      "value_signals": [
+        {
+          "category": "timeline_minor_adjustment",
+          "date_struct": "startDateStruct",
+          "delta_days": 6,
+          "direction": "earlier",
+          "new_precision": "day",
+          "new_type": "ACTUAL",
+          "new_value": "2016-10-26",
+          "old_precision": "month",
+          "old_type": null,
+          "old_value": "2016-11",
+          "path": "/protocolSection/statusModule/startDateStruct/date",
+          "severity": "low",
+          "signal": "timeline_minor_adjustment"
+        },
+        {
+          "category": "timeline_major_slip",
+          "date_struct": "primaryCompletionDateStruct",
+          "delta_days": 457,
+          "direction": "later",
+          "new_precision": "month",
+          "new_type": "ESTIMATED",
+          "new_value": "2019-10",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2018-07",
+          "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+          "severity": "high",
+          "signal": "timeline_major_slip"
+        },
+        {
+          "category": "timeline_major_slip",
+          "date_struct": "completionDateStruct",
+          "delta_days": 1400,
+          "direction": "later",
+          "new_precision": "month",
+          "new_type": "ESTIMATED",
+          "new_value": "2022-10",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2018-12",
+          "path": "/protocolSection/statusModule/completionDateStruct/date",
+          "severity": "high",
+          "signal": "timeline_major_slip"
+        }
+      ]
+    },
+    "event_id": "evt_NCT02942355_v4_v5_1624b8a0021f",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2018-05"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/startDateStruct/date",
+        "value": "2016-10-26"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/statusModule/startDateStruct/type",
+        "value": "ACTUAL"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+        "value": "2019-10"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/completionDateStruct/date",
+        "value": "2022-10"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2018-05-23"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2018-05-24"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/1/label",
+        "value": "Cohort B: Maintenance therapy"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/1",
+        "value": "Cohort B: Maintenance therapy"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/1/armGroupLabels/1",
+        "value": "Cohort B: Maintenance therapy"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "29bb3a437abab5c8cba51712037d2de6f78a938fa6d0475bea3fd9ff37ab5f48",
+      "materiality_event_hash": "f76f56fbd984ca993d72ad70e8a385b5a7c9ab5902b29a3ee0a4d8d08dc25c11",
+      "patch_hash": "7809015033039e9468325f206711cb4aec6e7efcc30a62f374521cb3afc83344",
+      "patch_raw_hash": "e620912307b8c7c851cc7f27b9096ea7bbf48bd188bb17237a96f1b21e170082",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT02942355/history/4?patchToVersion=5",
+      "to_snapshot_hash": "4de6083fde1b09608ca8c855d21cc680a5a8cdf0d10fe852d01cdbf8ff5f18e6"
+    },
+    "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT02942355",
+      "nct_id": "NCT02942355"
+    },
+    "versions": {
+      "from_version": 4,
+      "submitted_date": "2018-05-23",
+      "to_version": 5
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/armsInterventionsModule/armGroups/1/label",
+    "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/1",
+    "/protocolSection/armsInterventionsModule/interventions/1/armGroupLabels/1",
+    "/protocolSection/statusModule/completionDateStruct/date",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+    "/protocolSection/statusModule/startDateStruct/date",
+    "/protocolSection/statusModule/startDateStruct/type",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT02942355_v4_v5_1624b8a0021f. ClinicalTrials.gov NCT02942355, versions 4-5. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 4 to version 5 for NCT02942355.",
+    "The JSON Patch for this comparison has hash 7809015033039e9468325f206711cb4aec6e7efcc30a62f374521cb3afc83344.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under an arm or intervention module changed between ClinicalTrials.gov versions 4 and 5.",
+    "The timing context for the from-version record was early_recruitment.",
+    "The deterministic rules that fired were: arms_or_interventions_change.",
+    "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups/1/label, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/1, /protocolSection/armsInterventionsModule/interventions/1/armGroupLabels/1, /protocolSection/statusModule/completionDateStruct/date, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/primaryCompletionDateStruct/date, /protocolSection/statusModule/startDateStruct/date, /protocolSection/statusModule/startDateStruct/type, /protocolSection/statusModule/statusVerifiedDate.",
+    "The timeline value moved by 6 days.",
+    "The timeline value moved by 457 days.",
+    "The timeline value moved by 1400 days."
+  ],
+  "classification": {
+    "categories": [
+      "arm_intervention_change",
+      "timeline_major_slip",
+      "timeline_minor_adjustment"
+    ],
+    "category": "arm_intervention_change",
+    "deterministic_rules": [
+      "arms_or_interventions_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "early_recruitment",
+    "value_signals": [
+      {
+        "category": "timeline_minor_adjustment",
+        "date_struct": "startDateStruct",
+        "delta_days": 6,
+        "direction": "earlier",
+        "new_precision": "day",
+        "new_type": "ACTUAL",
+        "new_value": "2016-10-26",
+        "old_precision": "month",
+        "old_type": null,
+        "old_value": "2016-11",
+        "path": "/protocolSection/statusModule/startDateStruct/date",
+        "severity": "low",
+        "signal": "timeline_minor_adjustment"
+      },
+      {
+        "category": "timeline_major_slip",
+        "date_struct": "primaryCompletionDateStruct",
+        "delta_days": 457,
+        "direction": "later",
+        "new_precision": "month",
+        "new_type": "ESTIMATED",
+        "new_value": "2019-10",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2018-07",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+        "severity": "high",
+        "signal": "timeline_major_slip"
+      },
+      {
+        "category": "timeline_major_slip",
+        "date_struct": "completionDateStruct",
+        "delta_days": 1400,
+        "direction": "later",
+        "new_precision": "month",
+        "new_type": "ESTIMATED",
+        "new_value": "2022-10",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2018-12",
+        "path": "/protocolSection/statusModule/completionDateStruct/date",
+        "severity": "high",
+        "signal": "timeline_major_slip"
+      }
+    ]
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT02942355_v4_v5_1624b8a0021f",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT02942355_v4_v5_1624b8a0021f.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT02942355_v4_v5_1624b8a0021f",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT02942355"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2018-05"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/startDateStruct/date",
+      "value": "2016-10-26"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/statusModule/startDateStruct/type",
+      "value": "ACTUAL"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+      "value": "2019-10"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/completionDateStruct/date",
+      "value": "2022-10"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2018-05-23"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2018-05-24"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/1/label",
+      "value": "Cohort B: Maintenance therapy"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/1",
+      "value": "Cohort B: Maintenance therapy"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/1/armGroupLabels/1",
+      "value": "Cohort B: Maintenance therapy"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "e24b9adbb069944b16998c1e3d25a68587bc39881a87829b3a480b5690a0b0dd",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT02942355_v4_v5_1624b8a0021f",
+    "evidence_version": 1,
+    "from_snapshot_hash": "29bb3a437abab5c8cba51712037d2de6f78a938fa6d0475bea3fd9ff37ab5f48",
+    "materiality_event_hash": "f76f56fbd984ca993d72ad70e8a385b5a7c9ab5902b29a3ee0a4d8d08dc25c11",
+    "patch_hash": "7809015033039e9468325f206711cb4aec6e7efcc30a62f374521cb3afc83344",
+    "patch_raw_hash": "e620912307b8c7c851cc7f27b9096ea7bbf48bd188bb17237a96f1b21e170082",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT02942355/history/4?patchToVersion=5",
+    "to_snapshot_hash": "4de6083fde1b09608ca8c855d21cc680a5a8cdf0d10fe852d01cdbf8ff5f18e6"
+  },
+  "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT02942355",
+    "current_record_hash": "f6a0f337fcf6b9dde815cafab6a90b7d1926993e4b3373fcaba06238a6a7357a",
+    "current_record_raw_hash": "f6a0f337fcf6b9dde815cafab6a90b7d1926993e4b3373fcaba06238a6a7357a",
+    "lead_sponsor": "Wake Forest University Health Sciences",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT02942355",
+    "official_title": "Pilot Trial of Anastrozole and Palbociclib as First-Line Therapy and as Maintenance Therapy After First Line Chemotherapy in Hormone Receptor Positive, HER2-Negative Postmenopausal Metastatic Breast Cancer",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT02942355",
+    "title": "Trial of Anastrozole and Palbociclib in Metastatic HER2-Negative Breast Cancer"
+  },
+  "versions": {
+    "from_version": 4,
+    "submitted_date": "2018-05-23",
+    "to_version": 5
+  }
+}

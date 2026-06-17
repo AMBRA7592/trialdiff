@@ -1,0 +1,198 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/designModule/designInfo/allocation",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT04592484_v3_v4_546913b05252. ClinicalTrials.gov NCT04592484, versions 3-4. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 3 to version 4 for NCT04592484.",
+      "The JSON Patch for this comparison has hash ef238460229f2ce5e9df3124b6c186b3957210bab46ec04d4495ba2204f255cf.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under the study design module changed between ClinicalTrials.gov versions 3 and 4.",
+      "The timing context for the from-version record was early_recruitment.",
+      "The deterministic rules that fired were: design_info_change.",
+      "The changed JSON Pointer paths were: /protocolSection/designModule/designInfo/allocation, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+    ],
+    "classification": {
+      "categories": [
+        "design_change"
+      ],
+      "category": "design_change",
+      "deterministic_rules": [
+        "design_info_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "early_recruitment",
+      "value_signals": []
+    },
+    "event_id": "evt_NCT04592484_v3_v4_546913b05252",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2022-05"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2022-05-16"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2022-05-20"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/designModule/designInfo/allocation",
+        "value": "NA"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "2018800b933e82d934547007ca70f1444f7b055c7edc630d2417fd591fb1c91c",
+      "materiality_event_hash": "fb3fffed6691254aa17b8b5f49a210965ede30e87169fbefbeb40bc8471b2b35",
+      "patch_hash": "ef238460229f2ce5e9df3124b6c186b3957210bab46ec04d4495ba2204f255cf",
+      "patch_raw_hash": "435c6433a5887f932be88aa094b4facae10e30c8e2f9c69032b21f790a598ca0",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT04592484/history/3?patchToVersion=4",
+      "to_snapshot_hash": "b4c8715e414e5cfced06eae94c15cda3f8e6a89cfce10b3621ec885da48f2cfe"
+    },
+    "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT04592484",
+      "nct_id": "NCT04592484"
+    },
+    "versions": {
+      "from_version": 3,
+      "submitted_date": "2022-05-16",
+      "to_version": 4
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/designModule/designInfo/allocation",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT04592484_v3_v4_546913b05252. ClinicalTrials.gov NCT04592484, versions 3-4. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 3 to version 4 for NCT04592484.",
+    "The JSON Patch for this comparison has hash ef238460229f2ce5e9df3124b6c186b3957210bab46ec04d4495ba2204f255cf.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under the study design module changed between ClinicalTrials.gov versions 3 and 4.",
+    "The timing context for the from-version record was early_recruitment.",
+    "The deterministic rules that fired were: design_info_change.",
+    "The changed JSON Pointer paths were: /protocolSection/designModule/designInfo/allocation, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+  ],
+  "classification": {
+    "categories": [
+      "design_change"
+    ],
+    "category": "design_change",
+    "deterministic_rules": [
+      "design_info_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "early_recruitment",
+    "value_signals": []
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT04592484_v3_v4_546913b05252",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT04592484_v3_v4_546913b05252.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT04592484_v3_v4_546913b05252",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT04592484"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2022-05"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2022-05-16"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2022-05-20"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/designModule/designInfo/allocation",
+      "value": "NA"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "265d014aabfa4fa702aba309160f0bd51c0ddd3365d1b2af97fdec8ce6169742",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT04592484_v3_v4_546913b05252",
+    "evidence_version": 1,
+    "from_snapshot_hash": "2018800b933e82d934547007ca70f1444f7b055c7edc630d2417fd591fb1c91c",
+    "materiality_event_hash": "fb3fffed6691254aa17b8b5f49a210965ede30e87169fbefbeb40bc8471b2b35",
+    "patch_hash": "ef238460229f2ce5e9df3124b6c186b3957210bab46ec04d4495ba2204f255cf",
+    "patch_raw_hash": "435c6433a5887f932be88aa094b4facae10e30c8e2f9c69032b21f790a598ca0",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT04592484/history/3?patchToVersion=4",
+    "to_snapshot_hash": "b4c8715e414e5cfced06eae94c15cda3f8e6a89cfce10b3621ec885da48f2cfe"
+  },
+  "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT04592484",
+    "current_record_hash": "2ee3ea0ca40dcd207143cf3b4fb1c438c16971dd370f7d0b35e71d49ab3654ee",
+    "current_record_raw_hash": "2ee3ea0ca40dcd207143cf3b4fb1c438c16971dd370f7d0b35e71d49ab3654ee",
+    "lead_sponsor": "Codiak BioSciences",
+    "lead_sponsor_class": "INDUSTRY",
+    "nct_id": "NCT04592484",
+    "official_title": "A First-in-Human Study of CDK-002 (exoSTING) in Subjects With Advanced/Metastatic, Recurrent, Injectable Solid Tumors, With Emphasis on Squamous Cell Carcinoma of the Head and Neck, Triple Negative Breast Cancer, Anaplastic Thyroid Carcinoma, and Cutaneous Squamous Cell Carcinoma",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT04592484",
+    "title": "A First-in-Human Study of CDK-002 (exoSTING) in Subjects With Advanced/Metastatic, Recurrent, Injectable Solid Tumors"
+  },
+  "versions": {
+    "from_version": 3,
+    "submitted_date": "2022-05-16",
+    "to_version": 4
+  }
+}

@@ -1,0 +1,700 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0",
+      "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames/1",
+      "/protocolSection/armsInterventionsModule/armGroups/1/interventionNames",
+      "/protocolSection/armsInterventionsModule/armGroups/1/type",
+      "/protocolSection/armsInterventionsModule/armGroups/2/interventionNames/0",
+      "/protocolSection/armsInterventionsModule/armGroups/2/interventionNames/1",
+      "/protocolSection/armsInterventionsModule/armGroups/3/interventionNames",
+      "/protocolSection/armsInterventionsModule/armGroups/3/type",
+      "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0",
+      "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/2",
+      "/protocolSection/armsInterventionsModule/interventions/0/description",
+      "/protocolSection/armsInterventionsModule/interventions/0/name",
+      "/protocolSection/armsInterventionsModule/interventions/0/otherNames",
+      "/protocolSection/armsInterventionsModule/interventions/0/type",
+      "/protocolSection/armsInterventionsModule/interventions/1",
+      "/protocolSection/conditionsModule/keywords/0",
+      "/protocolSection/conditionsModule/keywords/1",
+      "/protocolSection/conditionsModule/keywords/3",
+      "/protocolSection/conditionsModule/keywords/5",
+      "/protocolSection/designModule/enrollmentInfo/count",
+      "/protocolSection/designModule/phases/0",
+      "/protocolSection/designModule/phases/1",
+      "/protocolSection/eligibilityModule/eligibilityCriteria",
+      "/protocolSection/eligibilityModule/maximumAge",
+      "/protocolSection/identificationModule/secondaryIdInfos",
+      "/protocolSection/outcomesModule/secondaryOutcomes",
+      "/protocolSection/statusModule/completionDateStruct/date",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+      "/protocolSection/statusModule/startDateStruct/date"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT03477019_v1_v2_5943f51f7aeb. ClinicalTrials.gov NCT03477019, versions 1-2. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 1 to version 2 for NCT03477019.",
+      "The JSON Patch for this comparison has hash f81acdbec9cd371009efc279941f0a242f3b16d1cf38473ea5635c4761605c81.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under the study design module changed between ClinicalTrials.gov versions 1 and 2.",
+      "The timing context for the from-version record was pre_recruitment.",
+      "The deterministic rules that fired were: arms_or_interventions_change, eligibility_criteria_change, enrollment_count_change, phase_change, secondary_outcome_any_change.",
+      "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0, /protocolSection/armsInterventionsModule/armGroups/0/interventionNames/1, /protocolSection/armsInterventionsModule/armGroups/1/interventionNames, /protocolSection/armsInterventionsModule/armGroups/1/type, /protocolSection/armsInterventionsModule/armGroups/2/interventionNames/0, /protocolSection/armsInterventionsModule/armGroups/2/interventionNames/1, /protocolSection/armsInterventionsModule/armGroups/3/interventionNames, /protocolSection/armsInterventionsModule/armGroups/3/type, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/2, /protocolSection/armsInterventionsModule/interventions/0/description, /protocolSection/armsInterventionsModule/interventions/0/name, /protocolSection/armsInterventionsModule/interventions/0/otherNames, /protocolSection/armsInterventionsModule/interventions/0/type, /protocolSection/armsInterventionsModule/interventions/1, /protocolSection/conditionsModule/keywords/0, /protocolSection/conditionsModule/keywords/1, /protocolSection/conditionsModule/keywords/3, /protocolSection/conditionsModule/keywords/5, /protocolSection/designModule/enrollmentInfo/count, /protocolSection/designModule/phases/0, /protocolSection/designModule/phases/1, /protocolSection/eligibilityModule/eligibilityCriteria, /protocolSection/eligibilityModule/maximumAge, /protocolSection/identificationModule/secondaryIdInfos, /protocolSection/outcomesModule/secondaryOutcomes, /protocolSection/statusModule/completionDateStruct/date, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/primaryCompletionDateStruct/date, /protocolSection/statusModule/startDateStruct/date.",
+      "The timeline value moved by 31 days.",
+      "The timeline value moved by 30 days.",
+      "The enrollment count changed by at least 20 percent."
+    ],
+    "classification": {
+      "categories": [
+        "design_change",
+        "arm_intervention_change",
+        "secondary_outcome_change",
+        "eligibility_change",
+        "enrollment_change",
+        "timeline_shift"
+      ],
+      "category": "design_change",
+      "deterministic_rules": [
+        "arms_or_interventions_change",
+        "eligibility_criteria_change",
+        "enrollment_count_change",
+        "phase_change",
+        "secondary_outcome_any_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "pre_recruitment",
+      "value_signals": [
+        {
+          "category": "timeline_shift",
+          "date_struct": "startDateStruct",
+          "delta_days": 31,
+          "direction": "earlier",
+          "new_precision": "month",
+          "new_type": "ESTIMATED",
+          "new_value": "2018-10",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2018-11",
+          "path": "/protocolSection/statusModule/startDateStruct/date",
+          "severity": "medium",
+          "signal": "timeline_shift"
+        },
+        {
+          "category": "timeline_shift",
+          "date_struct": "primaryCompletionDateStruct",
+          "delta_days": 30,
+          "direction": "later",
+          "new_precision": "month",
+          "new_type": "ESTIMATED",
+          "new_value": "2020-12",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2020-11",
+          "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+          "severity": "medium",
+          "signal": "timeline_shift"
+        },
+        {
+          "category": "timeline_shift",
+          "date_struct": "completionDateStruct",
+          "delta_days": 30,
+          "direction": "later",
+          "new_precision": "month",
+          "new_type": "ESTIMATED",
+          "new_value": "2020-12",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2020-11",
+          "path": "/protocolSection/statusModule/completionDateStruct/date",
+          "severity": "medium",
+          "signal": "timeline_shift"
+        },
+        {
+          "category": "enrollment_change",
+          "new_value": 60,
+          "old_value": 40,
+          "path": "/protocolSection/designModule/enrollmentInfo/count",
+          "pct_change": 0.5,
+          "severity": "high",
+          "signal": "enrollment_count_change_ge_20pct"
+        }
+      ]
+    },
+    "event_id": "evt_NCT03477019_v1_v2_5943f51f7aeb",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "add",
+        "path": "/protocolSection/identificationModule/secondaryIdInfos",
+        "value": [
+          {
+            "id": "2018-002814-11",
+            "type": "EUDRACT_NUMBER"
+          }
+        ]
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/startDateStruct/date",
+        "value": "2018-10"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+        "value": "2020-12"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/completionDateStruct/date",
+        "value": "2020-12"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2018-09-07"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2018-09-11"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/conditionsModule/keywords/0",
+        "value": "Contrast Agent BR"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/conditionsModule/keywords/1",
+        "value": "SonoVue"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/conditionsModule/keywords/3",
+        "value": "Neoplasm Metastasis"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/conditionsModule/keywords/5",
+        "value": "Microbubbles"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/designModule/phases/0",
+        "value": "PHASE1"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/designModule/phases/1",
+        "value": "PHASE2"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/designModule/enrollmentInfo/count",
+        "value": 60
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0",
+        "value": "Drug: SonoVue"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames/1",
+        "value": "Procedure: Focused Ultrasound"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/1/type",
+        "value": "OTHER"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/1/interventionNames",
+        "value": [
+          "Drug: SonoVue"
+        ]
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/2/interventionNames/0",
+        "value": "Drug: SonoVue"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/2/interventionNames/1",
+        "value": "Procedure: Focused Ultrasound"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/3/type",
+        "value": "OTHER"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/3/interventionNames",
+        "value": [
+          "Drug: SonoVue"
+        ]
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/type",
+        "value": "DRUG"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/name",
+        "value": "SonoVue"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/description",
+        "value": "<p>consists of microbubbles containing sulfur hexafluoride stabilized by phospholipids.</p><p>Bolus doses \u00e0 1,0ml administered every 3.5 minutes , repeated 9 times.\nTotal duration of treatment: 31,5 minutes.\nThis treatment will be repeated maximally 4 times at 2 or 3 week intervals, depending on the patient&#x27;s diagonse and treatment protocol.</p>"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0",
+        "value": "Breast cancer control lesion"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/2",
+        "value": "Colorectal cancer control lesion"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/otherNames"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/interventions/1",
+        "value": {
+          "armGroupLabels": [
+            "Breast cancer target lesion",
+            "Colorectal cancer target lesion"
+          ],
+          "description": "ultrasound pulses will be generated by a clinically approved ultrasound skanner and probe.",
+          "name": "Focused Ultrasound",
+          "type": "PROCEDURE"
+        }
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes",
+        "value": [
+          {
+            "description": "questionnaire &#x27;Common toxicity criteria&#x27;",
+            "measure": "Occurrence of adverse effects",
+            "timeFrame": "8 weeks"
+          }
+        ]
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/eligibilityModule/eligibilityCriteria",
+        "value": "<p>Inclusion Criteria:</p><ul><li>Histologically verified breast carcinoma or colorectal carcinoma</li><li>2 or multiple liver metastases</li><li>considered eligible by a consulting oncologist for first line treatment with chemotherapy in the group of taxanes (patients with breast cancer) or the combination regimen FOLFIRI (patients with colorectal carcinoma)</li><li>Signed informed consent and expected cooperation of the patients for the treatment and follow up must be obtained and documented according to ICH GCP, and national&#x2F;local regulations</li></ul><p>Exclusion Criteria:</p><ul><li>Known contraindications for ultrasound contrast-enhancement agent Sonovue\u00ae (Bracco)</li><li>Hematological bleeding status before experimental treatment: Hb &lt; 8g&#x2F;dL, trc &lt; 80 x109&#x2F;l, APTT\u02c3 45s, INR \u02c3 1,5</li><li>Considered eligible for surgical removal of liver metastases</li><li>Pregnancy</li></ul>"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/eligibilityModule/maximumAge",
+        "value": "90 Years"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "8683ed892e8a3e734e76663521deebbc1b64c333477e756c2f48fc8d1f5adfa2",
+      "materiality_event_hash": "2282199f1c0cb7f14a02af8134aa626345240f5f8c70595cee377b88b5e9c739",
+      "patch_hash": "f81acdbec9cd371009efc279941f0a242f3b16d1cf38473ea5635c4761605c81",
+      "patch_raw_hash": "73a98a9856d9e4bdf0cff5fd4b543b22968e60cee74bd5c42285dccfc4b6076b",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT03477019/history/1?patchToVersion=2",
+      "to_snapshot_hash": "ea142df99eb59286f9e19cd4eeb1c57a8742bbb5c9baebe18d834ccb1ffdfef8"
+    },
+    "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT03477019",
+      "nct_id": "NCT03477019"
+    },
+    "versions": {
+      "from_version": 1,
+      "submitted_date": "2018-09-07",
+      "to_version": 2
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0",
+    "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames/1",
+    "/protocolSection/armsInterventionsModule/armGroups/1/interventionNames",
+    "/protocolSection/armsInterventionsModule/armGroups/1/type",
+    "/protocolSection/armsInterventionsModule/armGroups/2/interventionNames/0",
+    "/protocolSection/armsInterventionsModule/armGroups/2/interventionNames/1",
+    "/protocolSection/armsInterventionsModule/armGroups/3/interventionNames",
+    "/protocolSection/armsInterventionsModule/armGroups/3/type",
+    "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0",
+    "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/2",
+    "/protocolSection/armsInterventionsModule/interventions/0/description",
+    "/protocolSection/armsInterventionsModule/interventions/0/name",
+    "/protocolSection/armsInterventionsModule/interventions/0/otherNames",
+    "/protocolSection/armsInterventionsModule/interventions/0/type",
+    "/protocolSection/armsInterventionsModule/interventions/1",
+    "/protocolSection/conditionsModule/keywords/0",
+    "/protocolSection/conditionsModule/keywords/1",
+    "/protocolSection/conditionsModule/keywords/3",
+    "/protocolSection/conditionsModule/keywords/5",
+    "/protocolSection/designModule/enrollmentInfo/count",
+    "/protocolSection/designModule/phases/0",
+    "/protocolSection/designModule/phases/1",
+    "/protocolSection/eligibilityModule/eligibilityCriteria",
+    "/protocolSection/eligibilityModule/maximumAge",
+    "/protocolSection/identificationModule/secondaryIdInfos",
+    "/protocolSection/outcomesModule/secondaryOutcomes",
+    "/protocolSection/statusModule/completionDateStruct/date",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+    "/protocolSection/statusModule/startDateStruct/date"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT03477019_v1_v2_5943f51f7aeb. ClinicalTrials.gov NCT03477019, versions 1-2. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 1 to version 2 for NCT03477019.",
+    "The JSON Patch for this comparison has hash f81acdbec9cd371009efc279941f0a242f3b16d1cf38473ea5635c4761605c81.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under the study design module changed between ClinicalTrials.gov versions 1 and 2.",
+    "The timing context for the from-version record was pre_recruitment.",
+    "The deterministic rules that fired were: arms_or_interventions_change, eligibility_criteria_change, enrollment_count_change, phase_change, secondary_outcome_any_change.",
+    "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0, /protocolSection/armsInterventionsModule/armGroups/0/interventionNames/1, /protocolSection/armsInterventionsModule/armGroups/1/interventionNames, /protocolSection/armsInterventionsModule/armGroups/1/type, /protocolSection/armsInterventionsModule/armGroups/2/interventionNames/0, /protocolSection/armsInterventionsModule/armGroups/2/interventionNames/1, /protocolSection/armsInterventionsModule/armGroups/3/interventionNames, /protocolSection/armsInterventionsModule/armGroups/3/type, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0, /protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/2, /protocolSection/armsInterventionsModule/interventions/0/description, /protocolSection/armsInterventionsModule/interventions/0/name, /protocolSection/armsInterventionsModule/interventions/0/otherNames, /protocolSection/armsInterventionsModule/interventions/0/type, /protocolSection/armsInterventionsModule/interventions/1, /protocolSection/conditionsModule/keywords/0, /protocolSection/conditionsModule/keywords/1, /protocolSection/conditionsModule/keywords/3, /protocolSection/conditionsModule/keywords/5, /protocolSection/designModule/enrollmentInfo/count, /protocolSection/designModule/phases/0, /protocolSection/designModule/phases/1, /protocolSection/eligibilityModule/eligibilityCriteria, /protocolSection/eligibilityModule/maximumAge, /protocolSection/identificationModule/secondaryIdInfos, /protocolSection/outcomesModule/secondaryOutcomes, /protocolSection/statusModule/completionDateStruct/date, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/primaryCompletionDateStruct/date, /protocolSection/statusModule/startDateStruct/date.",
+    "The timeline value moved by 31 days.",
+    "The timeline value moved by 30 days.",
+    "The enrollment count changed by at least 20 percent."
+  ],
+  "classification": {
+    "categories": [
+      "design_change",
+      "arm_intervention_change",
+      "secondary_outcome_change",
+      "eligibility_change",
+      "enrollment_change",
+      "timeline_shift"
+    ],
+    "category": "design_change",
+    "deterministic_rules": [
+      "arms_or_interventions_change",
+      "eligibility_criteria_change",
+      "enrollment_count_change",
+      "phase_change",
+      "secondary_outcome_any_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "pre_recruitment",
+    "value_signals": [
+      {
+        "category": "timeline_shift",
+        "date_struct": "startDateStruct",
+        "delta_days": 31,
+        "direction": "earlier",
+        "new_precision": "month",
+        "new_type": "ESTIMATED",
+        "new_value": "2018-10",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2018-11",
+        "path": "/protocolSection/statusModule/startDateStruct/date",
+        "severity": "medium",
+        "signal": "timeline_shift"
+      },
+      {
+        "category": "timeline_shift",
+        "date_struct": "primaryCompletionDateStruct",
+        "delta_days": 30,
+        "direction": "later",
+        "new_precision": "month",
+        "new_type": "ESTIMATED",
+        "new_value": "2020-12",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2020-11",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+        "severity": "medium",
+        "signal": "timeline_shift"
+      },
+      {
+        "category": "timeline_shift",
+        "date_struct": "completionDateStruct",
+        "delta_days": 30,
+        "direction": "later",
+        "new_precision": "month",
+        "new_type": "ESTIMATED",
+        "new_value": "2020-12",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2020-11",
+        "path": "/protocolSection/statusModule/completionDateStruct/date",
+        "severity": "medium",
+        "signal": "timeline_shift"
+      },
+      {
+        "category": "enrollment_change",
+        "new_value": 60,
+        "old_value": 40,
+        "path": "/protocolSection/designModule/enrollmentInfo/count",
+        "pct_change": 0.5,
+        "severity": "high",
+        "signal": "enrollment_count_change_ge_20pct"
+      }
+    ]
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT03477019_v1_v2_5943f51f7aeb",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT03477019_v1_v2_5943f51f7aeb.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT03477019_v1_v2_5943f51f7aeb",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT03477019"
+  },
+  "patch": [
+    {
+      "op": "add",
+      "path": "/protocolSection/identificationModule/secondaryIdInfos",
+      "value": [
+        {
+          "id": "2018-002814-11",
+          "type": "EUDRACT_NUMBER"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/startDateStruct/date",
+      "value": "2018-10"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+      "value": "2020-12"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/completionDateStruct/date",
+      "value": "2020-12"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2018-09-07"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2018-09-11"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/conditionsModule/keywords/0",
+      "value": "Contrast Agent BR"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/conditionsModule/keywords/1",
+      "value": "SonoVue"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/conditionsModule/keywords/3",
+      "value": "Neoplasm Metastasis"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/conditionsModule/keywords/5",
+      "value": "Microbubbles"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/designModule/phases/0",
+      "value": "PHASE1"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/designModule/phases/1",
+      "value": "PHASE2"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/designModule/enrollmentInfo/count",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0",
+      "value": "Drug: SonoVue"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames/1",
+      "value": "Procedure: Focused Ultrasound"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/1/type",
+      "value": "OTHER"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/1/interventionNames",
+      "value": [
+        "Drug: SonoVue"
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/2/interventionNames/0",
+      "value": "Drug: SonoVue"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/2/interventionNames/1",
+      "value": "Procedure: Focused Ultrasound"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/3/type",
+      "value": "OTHER"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/3/interventionNames",
+      "value": [
+        "Drug: SonoVue"
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/type",
+      "value": "DRUG"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/name",
+      "value": "SonoVue"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/description",
+      "value": "<p>consists of microbubbles containing sulfur hexafluoride stabilized by phospholipids.</p><p>Bolus doses \u00e0 1,0ml administered every 3.5 minutes , repeated 9 times.\nTotal duration of treatment: 31,5 minutes.\nThis treatment will be repeated maximally 4 times at 2 or 3 week intervals, depending on the patient&#x27;s diagonse and treatment protocol.</p>"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/0",
+      "value": "Breast cancer control lesion"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/armGroupLabels/2",
+      "value": "Colorectal cancer control lesion"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/otherNames"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/interventions/1",
+      "value": {
+        "armGroupLabels": [
+          "Breast cancer target lesion",
+          "Colorectal cancer target lesion"
+        ],
+        "description": "ultrasound pulses will be generated by a clinically approved ultrasound skanner and probe.",
+        "name": "Focused Ultrasound",
+        "type": "PROCEDURE"
+      }
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes",
+      "value": [
+        {
+          "description": "questionnaire &#x27;Common toxicity criteria&#x27;",
+          "measure": "Occurrence of adverse effects",
+          "timeFrame": "8 weeks"
+        }
+      ]
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/eligibilityModule/eligibilityCriteria",
+      "value": "<p>Inclusion Criteria:</p><ul><li>Histologically verified breast carcinoma or colorectal carcinoma</li><li>2 or multiple liver metastases</li><li>considered eligible by a consulting oncologist for first line treatment with chemotherapy in the group of taxanes (patients with breast cancer) or the combination regimen FOLFIRI (patients with colorectal carcinoma)</li><li>Signed informed consent and expected cooperation of the patients for the treatment and follow up must be obtained and documented according to ICH GCP, and national&#x2F;local regulations</li></ul><p>Exclusion Criteria:</p><ul><li>Known contraindications for ultrasound contrast-enhancement agent Sonovue\u00ae (Bracco)</li><li>Hematological bleeding status before experimental treatment: Hb &lt; 8g&#x2F;dL, trc &lt; 80 x109&#x2F;l, APTT\u02c3 45s, INR \u02c3 1,5</li><li>Considered eligible for surgical removal of liver metastases</li><li>Pregnancy</li></ul>"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/eligibilityModule/maximumAge",
+      "value": "90 Years"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "d1dd91ec71cdbe18a00c6bd79894d56358cc1cbdc8b2465c9fc5b14fb95eb724",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT03477019_v1_v2_5943f51f7aeb",
+    "evidence_version": 1,
+    "from_snapshot_hash": "8683ed892e8a3e734e76663521deebbc1b64c333477e756c2f48fc8d1f5adfa2",
+    "materiality_event_hash": "2282199f1c0cb7f14a02af8134aa626345240f5f8c70595cee377b88b5e9c739",
+    "patch_hash": "f81acdbec9cd371009efc279941f0a242f3b16d1cf38473ea5635c4761605c81",
+    "patch_raw_hash": "73a98a9856d9e4bdf0cff5fd4b543b22968e60cee74bd5c42285dccfc4b6076b",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT03477019/history/1?patchToVersion=2",
+    "to_snapshot_hash": "ea142df99eb59286f9e19cd4eeb1c57a8742bbb5c9baebe18d834ccb1ffdfef8"
+  },
+  "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT03477019",
+    "current_record_hash": "4805582b5ada24ded1fa4b95706fe1f16d30c983e1165731e28700b7b55adc02",
+    "current_record_raw_hash": "4805582b5ada24ded1fa4b95706fe1f16d30c983e1165731e28700b7b55adc02",
+    "lead_sponsor": "St. Olavs Hospital",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT03477019",
+    "official_title": "Ultrasound-enhanced Delivery of Chemotherapy to Patients With Liver Metastasis From Breast- and Colorectal Carcinoma- a Randomized Trial",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT03477019",
+    "title": "Ultrasound-enhanced Delivery of Chemotherapy to Patients With Liver Metastasis From Breast- and Colorectal Cancer"
+  },
+  "versions": {
+    "from_version": 1,
+    "submitted_date": "2018-09-07",
+    "to_version": 2
+  }
+}

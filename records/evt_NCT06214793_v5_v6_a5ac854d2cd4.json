@@ -1,0 +1,238 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/oversightModule/isUsExport",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/startDateStruct/date",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT06214793_v5_v6_a5ac854d2cd4. ClinicalTrials.gov NCT06214793, versions 5-6. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 5 to version 6 for NCT06214793.",
+      "The JSON Patch for this comparison has hash db02c619ed79fa2d115af04fca26bffc16ba0b8b0472c34c3e5b3364a15bd887.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as high; before timing adjustment it was high.",
+      "A trial timeline date field moved by more than 90 days between ClinicalTrials.gov versions 5 and 6.",
+      "The timing context for the from-version record was post_recruitment.",
+      "The changed JSON Pointer paths were: /protocolSection/oversightModule/isUsExport, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/startDateStruct/date, /protocolSection/statusModule/statusVerifiedDate.",
+      "The timeline value moved by 365 days."
+    ],
+    "classification": {
+      "categories": [
+        "timeline_significant_shift"
+      ],
+      "category": "timeline_significant_shift",
+      "deterministic_rules": [],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "high",
+      "severity_pre_timing": "high",
+      "timing_context": "post_recruitment",
+      "value_signals": [
+        {
+          "category": "timeline_significant_shift",
+          "date_struct": "startDateStruct",
+          "delta_days": 365,
+          "direction": "later",
+          "new_precision": "month",
+          "new_type": "ESTIMATED",
+          "new_value": "2026-04",
+          "old_precision": "day",
+          "old_type": "ESTIMATED",
+          "old_value": "2025-04-01",
+          "path": "/protocolSection/statusModule/startDateStruct/date",
+          "severity": "high",
+          "signal": "timeline_significant_shift"
+        }
+      ]
+    },
+    "event_id": "evt_NCT06214793_v5_v6_a5ac854d2cd4",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2025-04"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/startDateStruct/date",
+        "value": "2026-04"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2025-04-30"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2025-05-01"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/oversightModule/isUsExport",
+        "value": false
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "5abef3e00420ffb6af45aafa5b7b8f36e37234c145dea1fc9bd9c8bd43c862dc",
+      "materiality_event_hash": "e44c6dbefda03175b0a78362d3dbf35d8274af1f6a768783443e010db32b323f",
+      "patch_hash": "db02c619ed79fa2d115af04fca26bffc16ba0b8b0472c34c3e5b3364a15bd887",
+      "patch_raw_hash": "fdc2cf61f934e13e789436d4dc2b338b2842fa35f719b3737f7a2fd1cd5c7c86",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT06214793/history/5?patchToVersion=6",
+      "to_snapshot_hash": null
+    },
+    "review_question": "What explains the timeline movement, and is it consistent with the trial's recruitment and reporting history?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT06214793",
+      "nct_id": "NCT06214793"
+    },
+    "versions": {
+      "from_version": 5,
+      "submitted_date": "2025-04-30",
+      "to_version": 6
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/oversightModule/isUsExport",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/startDateStruct/date",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT06214793_v5_v6_a5ac854d2cd4. ClinicalTrials.gov NCT06214793, versions 5-6. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 5 to version 6 for NCT06214793.",
+    "The JSON Patch for this comparison has hash db02c619ed79fa2d115af04fca26bffc16ba0b8b0472c34c3e5b3364a15bd887.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as high; before timing adjustment it was high.",
+    "A trial timeline date field moved by more than 90 days between ClinicalTrials.gov versions 5 and 6.",
+    "The timing context for the from-version record was post_recruitment.",
+    "The changed JSON Pointer paths were: /protocolSection/oversightModule/isUsExport, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/startDateStruct/date, /protocolSection/statusModule/statusVerifiedDate.",
+    "The timeline value moved by 365 days."
+  ],
+  "classification": {
+    "categories": [
+      "timeline_significant_shift"
+    ],
+    "category": "timeline_significant_shift",
+    "deterministic_rules": [],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "high",
+    "severity_pre_timing": "high",
+    "timing_context": "post_recruitment",
+    "value_signals": [
+      {
+        "category": "timeline_significant_shift",
+        "date_struct": "startDateStruct",
+        "delta_days": 365,
+        "direction": "later",
+        "new_precision": "month",
+        "new_type": "ESTIMATED",
+        "new_value": "2026-04",
+        "old_precision": "day",
+        "old_type": "ESTIMATED",
+        "old_value": "2025-04-01",
+        "path": "/protocolSection/statusModule/startDateStruct/date",
+        "severity": "high",
+        "signal": "timeline_significant_shift"
+      }
+    ]
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT06214793_v5_v6_a5ac854d2cd4",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT06214793_v5_v6_a5ac854d2cd4.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT06214793_v5_v6_a5ac854d2cd4",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT06214793"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2025-04"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/startDateStruct/date",
+      "value": "2026-04"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2025-04-30"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2025-05-01"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/oversightModule/isUsExport",
+      "value": false
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "33657135c8cfa618b8b0303568ed862154f6798440491149190a849f9b078208",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT06214793_v5_v6_a5ac854d2cd4",
+    "evidence_version": 1,
+    "from_snapshot_hash": "5abef3e00420ffb6af45aafa5b7b8f36e37234c145dea1fc9bd9c8bd43c862dc",
+    "materiality_event_hash": "e44c6dbefda03175b0a78362d3dbf35d8274af1f6a768783443e010db32b323f",
+    "patch_hash": "db02c619ed79fa2d115af04fca26bffc16ba0b8b0472c34c3e5b3364a15bd887",
+    "patch_raw_hash": "fdc2cf61f934e13e789436d4dc2b338b2842fa35f719b3737f7a2fd1cd5c7c86",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT06214793/history/5?patchToVersion=6",
+    "to_snapshot_hash": null
+  },
+  "review_question": "What explains the timeline movement, and is it consistent with the trial's recruitment and reporting history?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT06214793",
+    "current_record_hash": "936f93f63991e4d3a6a427f03dc02ab65d163aee6b7ffb11d6151ee65c67dcb8",
+    "current_record_raw_hash": "936f93f63991e4d3a6a427f03dc02ab65d163aee6b7ffb11d6151ee65c67dcb8",
+    "lead_sponsor": "Megan Kruse, MD",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT06214793",
+    "official_title": "A Phase II Study of Taletrectinib in Previously Treated Metastatic CDH1-mutated Invasive Lobular Cancer (ILC) of the Breast (TaCe)",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT06214793",
+    "title": "Taletrectinib in Previously Treated Metastatic CDH1-mutated Invasive Lobular Cancer (ILC)"
+  },
+  "versions": {
+    "from_version": 5,
+    "submitted_date": "2025-04-30",
+    "to_version": 6
+  }
+}

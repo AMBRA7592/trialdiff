@@ -1,0 +1,181 @@
+---
+import { ExternalLink, ShieldCheck } from "@lucide/astro";
+
+import { formatNumber, severityClass, titleCase } from "@/lib/format";
+import { formatPatchValue, type MaterialityEventDetail, type PatchProvenance } from "@/lib/patchEnrichment";
+import type { EnrichedPatch } from "@/lib/patchEnrichment";
+
+interface Props {
+  nctId: string;
+  fromVersion: number;
+  toVersion: number;
+  events: MaterialityEventDetail[];
+  provenance: PatchProvenance;
+  enriched: EnrichedPatch;
+  rawOperations: unknown[];
+}
+
+const { nctId, fromVersion, toVersion, events, provenance, enriched, rawOperations } = Astro.props;
+
+function valueBlock(value: unknown) {
+  const formatted = formatPatchValue(value);
+  return formatted === undefined ? "" : formatted;
+}
+---
+
+<section class="panel patch-inspector">
+  <div class="patch-header">
+    <div>
+      <p class="eyebrow">Patch inspector</p>
+      <h2>Version {fromVersion} to {toVersion}</h2>
+      <div class="event-meta patch-meta">
+        <span>{formatNumber(enriched.operations.length)} operations</span>
+        <span>{formatNumber(enriched.groups.length)} path groups</span>
+        <span>{provenance.source || "unknown source"}</span>
+      </div>
+    </div>
+    <a class="button" href={`https://clinicaltrials.gov/study/${nctId}`}>
+      ClinicalTrials.gov
+      <ExternalLink size={16} />
+    </a>
+  </div>
+
+  <div class="patch-disclaimer">
+    <ShieldCheck size={18} />
+    <span>Severity means review priority, not proven wrongdoing. Operation-level severity is inferred from deterministic path rules.</span>
+  </div>
+
+  <div class="patch-summary-grid">
+    <div class="patch-summary-cell">
+      <div class="stat-label">Plain-language summary</div>
+      {
+        events.some((event) => event.summary) ? (
+          events.map((event) => event.summary && <p>{event.summary}</p>)
+        ) : (
+          <p>Manual review pending.</p>
+        )
+      }
+    </div>
+    <div class="patch-summary-cell">
+      <div class="stat-label">Rules fired</div>
+      {
+        events.flatMap((event) => event.deterministicRules).length > 0 ? (
+          <div class="token-list">
+            {[...new Set(events.flatMap((event) => event.deterministicRules))].map((rule) => (
+              <code>{rule}</code>
+            ))}
+          </div>
+        ) : (
+          <p>None recorded.</p>
+        )
+      }
+    </div>
+    <div class="patch-summary-cell">
+      <div class="stat-label">Value signals</div>
+      {
+        events.flatMap((event) => event.valueSignals).length > 0 ? (
+          <pre class="compact-json">{JSON.stringify(events.flatMap((event) => event.valueSignals), null, 2)}</pre>
+        ) : (
+          <p>None recorded.</p>
+        )
+      }
+    </div>
+    <div class="patch-summary-cell">
+      <div class="stat-label">Provenance</div>
+      <dl class="provenance-list">
+        <div>
+          <dt>Source</dt>
+          <dd>{provenance.source || "Unknown"}</dd>
+        </div>
+        <div>
+          <dt>Fetched</dt>
+          <dd>{provenance.fetchedAt ?? "Unknown"}</dd>
+        </div>
+        <div>
+          <dt>Raw hash</dt>
+          <dd><code>{provenance.rawHash || "Unknown"}</code></dd>
+        </div>
+        {
+          provenance.sourceUrl && (
+            <div>
+              <dt>Payload</dt>
+              <dd><a href={provenance.sourceUrl}>Source URL</a></dd>
+            </div>
+          )
+        }
+      </dl>
+    </div>
+  </div>
+
+  <div class="patch-groups">
+    {
+      enriched.groups.map((group) => (
+        <details class="patch-group" open={group.defaultOpen || group.severity === "critical" || group.severity === "high"}>
+          <summary>
+            <span>
+              <strong>{group.label}</strong>
+              <span class="group-description">{group.description}</span>
+            </span>
+            <span class="summary-right">
+              <span class={severityClass(group.severity)}>{titleCase(group.severity)}</span>
+              <span>{group.operations.length} ops</span>
+            </span>
+          </summary>
+
+          <div class="operation-list">
+            {group.operations.map((operation) => (
+              <article class="operation">
+                <div class="operation-head">
+                  <div>
+                    <span class="op-code">{operation.op}</span>
+                    <code>{operation.path}</code>
+                  </div>
+                  <span class={severityClass(operation.severity)}>{titleCase(operation.severity)}</span>
+                </div>
+
+                <div class="operation-meta">
+                  <span>{operation.category ? titleCase(operation.category) : "Uncategorized"}</span>
+                  <span>Operation {operation.index + 1}</span>
+                </div>
+
+                {operation.matchedRules.length > 0 && (
+                  <details class="rule-details">
+                    <summary>Matched rules</summary>
+                    <ul>
+                      {operation.matchedRules.map((rule) => (
+                        <li>
+                          <code>{rule.ruleKey}</code>
+                          <span>{rule.description}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
+
+                <div class={`value-grid value-grid-${operation.op}`}>
+                  {operation.op !== "add" && (
+                    <div>
+                      <div class="value-label">Before</div>
+                      <pre>{valueBlock(operation.oldValue)}</pre>
+                    </div>
+                  )}
+                  {operation.op !== "remove" && (
+                    <div>
+                      <div class="value-label">After</div>
+                      <pre>{valueBlock(operation.newValue)}</pre>
+                    </div>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </details>
+      ))
+    }
+  </div>
+
+  <details class="raw-patch">
+    <summary>Raw JSON Patch</summary>
+    <pre>{JSON.stringify(rawOperations, null, 2)}</pre>
+  </details>
+</section>

@@ -1,0 +1,3376 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/annotationSection",
+      "/documentSection",
+      "/hasResults",
+      "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+      "/protocolSection/outcomesModule/secondaryOutcomes/0/measure",
+      "/protocolSection/outcomesModule/secondaryOutcomes/1/measure",
+      "/protocolSection/outcomesModule/secondaryOutcomes/2/measure",
+      "/protocolSection/outcomesModule/secondaryOutcomes/3/measure",
+      "/protocolSection/outcomesModule/secondaryOutcomes/4/measure",
+      "/protocolSection/statusModule/expandedAccessInfo",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/resultsFirstSubmitDate",
+      "/protocolSection/statusModule/statusVerifiedDate",
+      "/resultsSection"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT04754399_v5_v6_b771bc8b911e. ClinicalTrials.gov NCT04754399, versions 5-6. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance.",
+      "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 5 to version 6 for NCT04754399.",
+      "The JSON Patch for this comparison has hash 40f1b909b8bfa7a2634cd41320eca19d3950cf2d105f3337769788a4ed7ec82e.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under the primary outcome module changed between ClinicalTrials.gov versions 5 and 6.",
+      "The timing context for the from-version record was post_recruitment.",
+      "The deterministic rules that fired were: primary_outcome_any_change, secondary_outcome_any_change.",
+      "The changed JSON Pointer paths were: /annotationSection, /documentSection, /hasResults, /protocolSection/outcomesModule/primaryOutcomes/0/measure, /protocolSection/outcomesModule/secondaryOutcomes/0/measure, /protocolSection/outcomesModule/secondaryOutcomes/1/measure, /protocolSection/outcomesModule/secondaryOutcomes/2/measure, /protocolSection/outcomesModule/secondaryOutcomes/3/measure, /protocolSection/outcomesModule/secondaryOutcomes/4/measure, /protocolSection/statusModule/expandedAccessInfo, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/resultsFirstSubmitDate, /protocolSection/statusModule/statusVerifiedDate, /resultsSection."
+    ],
+    "classification": {
+      "categories": [
+        "primary_outcome_change",
+        "secondary_outcome_change"
+      ],
+      "category": "primary_outcome_change",
+      "deterministic_rules": [
+        "primary_outcome_any_change",
+        "secondary_outcome_any_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "post_recruitment",
+      "value_signals": []
+    },
+    "event_id": "evt_NCT04754399_v5_v6_b771bc8b911e",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2024-09"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/statusModule/expandedAccessInfo"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2024-09-26"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2024-10-22"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/statusModule/resultsFirstSubmitDate",
+        "value": "2024-09-26"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+        "value": "Absolute Change in Brief Pain Inventory (BPI) Worst Pain From Baseline to Week 15"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/0/measure",
+        "value": "Number of Patients With at Least a 2-point Reduction in BPI Worst Pain From Baseline to Week 15"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/1/measure",
+        "value": "Number of Patients With at Least a 2-point Reduction in BPI Average Pain From Baseline to Week 15"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/2/measure",
+        "value": "Change in Symptoms From Baseline, as Measured by the PROMIS-29+2 Profile v2.1"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/3/measure",
+        "value": "Number of Treatment Related Adverse Events"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/4/measure",
+        "value": "Number of Participants With Undetectable Levels of Estradiol"
+      },
+      {
+        "op": "replace",
+        "path": "/hasResults",
+        "value": true
+      },
+      {
+        "op": "add",
+        "path": "/resultsSection",
+        "value": {
+          "adverseEventsModule": {
+            "armsReviewUnit": {
+              "resetReasons": [
+                "The arms/groups appear inconsistent with information in other parts of the record. Each arm/group should be described separately, or a valid explanation provided."
+              ]
+            },
+            "eventGroups": [
+              {
+                "deathsNumAffected": 0,
+                "deathsNumAtRisk": 39,
+                "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+                "id": "EG000",
+                "otherNumAffected": 18,
+                "otherNumAtRisk": 39,
+                "seriousNumAffected": 0,
+                "seriousNumAtRisk": 39,
+                "title": "Cannabidiol (CBD)"
+              }
+            ],
+            "frequencyThreshold": "0",
+            "otherEvents": [
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Psychiatric disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Agitation"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Investigations",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Alanine aminotransferase increased"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Metabolism and nutrition disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Anorexia"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Psychiatric disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Anxiety"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Musculoskeletal and connective tissue disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Arthralgia"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Musculoskeletal and connective tissue disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Back pain"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Infections and infestations",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Bladder infection"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Investigations",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Blood bilirubin increased"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Renal and urinary disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Chronic kidney disease"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Investigations",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 2,
+                    "numAtRisk": 39,
+                    "numEvents": 2
+                  }
+                ],
+                "term": "Creatinine increased"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Psychiatric disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Depression"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Gastrointestinal disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 2,
+                    "numAtRisk": 39,
+                    "numEvents": 3
+                  }
+                ],
+                "term": "Diarrhea"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Nervous system disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Dizziness"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "General disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 2,
+                    "numAtRisk": 39,
+                    "numEvents": 2
+                  }
+                ],
+                "term": "Fatigue"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Vascular disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Flushing"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Gastrointestinal disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Gastroesophageal reflux disease"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Nervous system disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 3,
+                    "numAtRisk": 39,
+                    "numEvents": 5
+                  }
+                ],
+                "term": "Headache"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Renal and urinary disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Hematuria"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Metabolism and nutrition disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Hyperglycemia"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Metabolism and nutrition disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Hyponatremia"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Psychiatric disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Insomnia"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Nervous system disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Memory impairment"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Musculoskeletal and connective tissue disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Myalgia"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Gastrointestinal disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 4,
+                    "numAtRisk": 39,
+                    "numEvents": 7
+                  }
+                ],
+                "term": "Nausea"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Musculoskeletal and connective tissue disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 1
+                  }
+                ],
+                "term": "Neck pain"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Gastrointestinal disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 1,
+                    "numAtRisk": 39,
+                    "numEvents": 2
+                  }
+                ],
+                "term": "Oral pain"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Nervous system disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 2,
+                    "numAtRisk": 39,
+                    "numEvents": 2
+                  }
+                ],
+                "term": "Peripheral motor neuropathy"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Skin and subcutaneous tissue disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 2,
+                    "numAtRisk": 39,
+                    "numEvents": 2
+                  }
+                ],
+                "term": "Rash maculo-papular"
+              },
+              {
+                "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+                "organSystem": "Gastrointestinal disorders",
+                "sourceVocabulary": "CTCAE (5.0)",
+                "stats": [
+                  {
+                    "groupId": "EG000",
+                    "numAffected": 3,
+                    "numAtRisk": 39,
+                    "numEvents": 5
+                  }
+                ],
+                "term": "Stomach pain"
+              }
+            ],
+            "reviewUnit": {
+              "resetReasons": [
+                "There does not appear to be sufficient information to understand the Time Frame."
+              ]
+            },
+            "timeFrame": "All adverse event data (serious and non-serious) collected from the time of the initial study treatment administration through 30 days after the last dose of study treatment; additionally, any serious adverse event occurring more than 30 days after the last study treatment if considered to be related to the study treatment. Data was collected during a 2 year period."
+          },
+          "baselineCharacteristicsModule": {
+            "denoms": [
+              {
+                "counts": [
+                  {
+                    "groupId": "BG000",
+                    "value": "39"
+                  }
+                ],
+                "units": "Participants"
+              }
+            ],
+            "groups": [
+              {
+                "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+                "id": "BG000",
+                "title": "Cannabidiol (CBD)"
+              }
+            ],
+            "measures": [
+              {
+                "classes": [
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "BG000",
+                            "value": "0"
+                          }
+                        ],
+                        "title": "&lt;=18 years"
+                      },
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "BG000",
+                            "value": "26"
+                          }
+                        ],
+                        "title": "Between 18 and 65 years"
+                      },
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "BG000",
+                            "value": "13"
+                          }
+                        ],
+                        "title": "&gt;=65 years"
+                      }
+                    ]
+                  }
+                ],
+                "paramType": "COUNT_OF_PARTICIPANTS",
+                "title": "Age, Categorical",
+                "unitOfMeasure": "Participants"
+              },
+              {
+                "classes": [
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "BG000",
+                            "value": "39"
+                          }
+                        ],
+                        "title": "Female"
+                      },
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "BG000",
+                            "value": "0"
+                          }
+                        ],
+                        "title": "Male"
+                      }
+                    ]
+                  }
+                ],
+                "paramType": "COUNT_OF_PARTICIPANTS",
+                "title": "Sex: Female, Male",
+                "unitOfMeasure": "Participants"
+              },
+              {
+                "classes": [
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "BG000",
+                            "value": "1"
+                          }
+                        ],
+                        "title": "Hispanic or Latino"
+                      },
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "BG000",
+                            "value": "37"
+                          }
+                        ],
+                        "title": "Not Hispanic or Latino"
+                      },
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "BG000",
+                            "value": "1"
+                          }
+                        ],
+                        "title": "Unknown or Not Reported"
+                      }
+                    ]
+                  }
+                ],
+                "paramType": "COUNT_OF_PARTICIPANTS",
+                "title": "Ethnicity (NIH&#x2F;OMB)",
+                "unitOfMeasure": "Participants"
+              },
+              {
+                "classes": [
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "BG000",
+                            "value": "0"
+                          }
+                        ],
+                        "title": "American Indian or Alaska Native"
+                      },
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "BG000",
+                            "value": "1"
+                          }
+                        ],
+                        "title": "Asian"
+                      },
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "BG000",
+                            "value": "0"
+                          }
+                        ],
+                        "title": "Native Hawaiian or Other Pacific Islander"
+                      },
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "BG000",
+                            "value": "2"
+                          }
+                        ],
+                        "title": "Black or African American"
+                      },
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "BG000",
+                            "value": "36"
+                          }
+                        ],
+                        "title": "White"
+                      },
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "BG000",
+                            "value": "0"
+                          }
+                        ],
+                        "title": "More than one race"
+                      },
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "BG000",
+                            "value": "0"
+                          }
+                        ],
+                        "title": "Unknown or Not Reported"
+                      }
+                    ]
+                  }
+                ],
+                "paramType": "COUNT_OF_PARTICIPANTS",
+                "title": "Race (NIH&#x2F;OMB)",
+                "unitOfMeasure": "Participants"
+              },
+              {
+                "classes": [
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "BG000",
+                            "value": "39"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "United States"
+                  }
+                ],
+                "paramType": "NUMBER",
+                "title": "Region of Enrollment",
+                "unitOfMeasure": "participants"
+              }
+            ]
+          },
+          "moreInfoModule": {
+            "certainAgreement": {
+              "piSponsorEmployee": true
+            },
+            "pointOfContact": {
+              "email": "ClinicalTrialsgov_CCAdmin@umich.edu",
+              "organization": "University of Michigan Rogel Cancer Center",
+              "phone": "734-936-9499",
+              "title": "University of Michigan Rogel Cancer Center ClinicalTrials.gov Admin"
+            }
+          },
+          "outcomeMeasuresModule": {
+            "outcomeMeasures": [
+              {
+                "classes": [
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "lowerLimit": "-3.22",
+                            "upperLimit": "-1.49",
+                            "value": "-2.4"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "denoms": [
+                  {
+                    "counts": [
+                      {
+                        "groupId": "OG000",
+                        "value": "28"
+                      }
+                    ],
+                    "units": "Participants"
+                  }
+                ],
+                "description": "The BPI is a patient self-rating scale that assesses joint pain and stiffness on a scale of 0 (no pain) to 10 (pain as bad as you can imagine).\nFor the purpose of this measure, absolute change for only one BPI item will be assessed, &quot;joint pain and stiffness at its worst in the last week&quot;.",
+                "dispersionType": "95% Confidence Interval",
+                "groups": [
+                  {
+                    "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+                    "id": "OG000",
+                    "title": "Cannabidiol (CBD)"
+                  }
+                ],
+                "measureCategoriesReviewUnit": {
+                  "resetReasons": [
+                    "The Unit of Measure appears invalid."
+                  ]
+                },
+                "paramType": "MEAN",
+                "populationDescription": "11 patients missing data",
+                "reportingStatus": "POSTED",
+                "timeFrame": "Baseline, week 15",
+                "title": "Absolute Change in Brief Pain Inventory (BPI) Worst Pain From Baseline to Week 15",
+                "type": "PRIMARY",
+                "unitOfMeasure": "Absolute change"
+              },
+              {
+                "classes": [
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "17"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "denoms": [
+                  {
+                    "counts": [
+                      {
+                        "groupId": "OG000",
+                        "value": "28"
+                      }
+                    ],
+                    "units": "Participants"
+                  }
+                ],
+                "description": "The BPI is a patient self-rating scale that assesses joint pain and stiffness on a scale of 0 (no pain) to 10 (pain as bad as you can imagine).\nFor the purpose of this measure, change from baseline to week 15 for only one BPI item, &quot;joint pain and stiffness at its worst in the last week&quot;, will be assessed.",
+                "groups": [
+                  {
+                    "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+                    "id": "OG000",
+                    "title": "Cannabidiol (CBD)"
+                  }
+                ],
+                "paramType": "COUNT_OF_PARTICIPANTS",
+                "populationDescription": "11 patients missing data",
+                "reportingStatus": "POSTED",
+                "timeFrame": "Baseline, week 15",
+                "title": "Number of Patients With at Least a 2-point Reduction in BPI Worst Pain From Baseline to Week 15",
+                "type": "SECONDARY",
+                "unitOfMeasure": "Participants"
+              },
+              {
+                "classes": [
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "14"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "denoms": [
+                  {
+                    "counts": [
+                      {
+                        "groupId": "OG000",
+                        "value": "28"
+                      }
+                    ],
+                    "units": "Participants"
+                  }
+                ],
+                "description": "The BPI is a patient self-rating scale that assesses joint pain and stiffness on a scale of 0 (no pain) to 10 (pain as bad as you can imagine).\nFor the purpose of this measure, change from baseline to week 15 for only one BPI item, &quot;joint pain and stiffness on the average&quot;, will be assessed.",
+                "groups": [
+                  {
+                    "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+                    "id": "OG000",
+                    "title": "Cannabidiol (CBD)"
+                  }
+                ],
+                "paramType": "COUNT_OF_PARTICIPANTS",
+                "populationDescription": "11 patients missing data",
+                "reportingStatus": "POSTED",
+                "timeFrame": "Baseline, week 15",
+                "title": "Number of Patients With at Least a 2-point Reduction in BPI Average Pain From Baseline to Week 15",
+                "type": "SECONDARY",
+                "unitOfMeasure": "Participants"
+              },
+              {
+                "classes": [
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "spread": "7.2",
+                            "value": "-6.5"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Pain interference"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "spread": "2.1",
+                            "value": "-1.9"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Pain intensity"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "spread": "1.2",
+                            "value": "2.0"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Cognitive function"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "spread": "4.5",
+                            "value": "-1.7"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Depression"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "spread": "8.0",
+                            "value": "5.7"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Ability to participate in social roles&#x2F;activities"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "spread": "6.0",
+                            "value": "-3.4"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Anxiety"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "spread": "5.3",
+                            "value": "3.9"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Physical function"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "spread": "6.9",
+                            "value": "-3.3"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Fatigue"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "spread": "6.6",
+                            "value": "-3.7"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Sleep disturbance"
+                  }
+                ],
+                "denoms": [
+                  {
+                    "counts": [
+                      {
+                        "groupId": "OG000",
+                        "value": "28"
+                      }
+                    ],
+                    "units": "Participants"
+                  }
+                ],
+                "description": "The Patient-Reported Outcomes Measurement Information System (PROMIS)-29+2 Profile v2.1 (PROPr) is a validated questionnaire to assess patient-reported symptoms over the past 7 days in 7 PROMIS domains on a scale of 1 (worst) to 5 (best).\nRaw scores for each domain are calculated and then converted to a T-score, with a mean of 50 and a standard deviation of 10.\nHigher T-scores represent more of the concept being measured: for fatigue, sleep disturbance, depression, and anxiety, higher scores represent worse symptoms; for physical functioning, ability to participate in social roles and activities, and cognitive function-abilities, higher scores mean better function.",
+                "dispersionType": "Standard Deviation",
+                "groups": [
+                  {
+                    "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+                    "id": "OG000",
+                    "title": "Cannabidiol (CBD)"
+                  }
+                ],
+                "paramType": "MEAN",
+                "populationDescription": "11 patients missing data",
+                "reportingStatus": "POSTED",
+                "timeFrame": "Baseline, week 15",
+                "title": "Change in Symptoms From Baseline, as Measured by the PROMIS-29+2 Profile v2.1",
+                "type": "SECONDARY",
+                "unitOfMeasure": "score on a scale"
+              },
+              {
+                "classes": [
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Agitation- grade 2- 25mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Nausea- grade 1- 25mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Flushing- grade 1- 25mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Anxiety- grade 1- 50mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "2"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Rash- grade 2- 50mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Nausea- grade 1- 50mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Depression- grade 1- 75 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Stomach Pain- grade 1- 75 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Fatigue- grade 1- 75 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Headache- grade 1- 75 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Hyponatremia- grade 1- 75 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Hyperglycemia- grade 1- 75 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Peripheral motor neuropathy- grade 1- 100 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Peripheral motor neuropathy- grade 2- 100 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Fatigue- grade 1- 100 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Memory impairment- grade 1- 100 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Anorexia- grade 2- 100 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Diarrhea- grade 2- 100 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "2"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Nausea- grade 1 - 100 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "alanine aminotransferase increased- grade 1- 100 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Oral Pain- grade 1- 100 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Gastroesophageal reflux disease- grade1- 100 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Increased creatinine- grade 1- 100 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "stomach pain- grade 1- 100 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "dizziness- grade 1- 100 mg BID dose"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "1"
+                          }
+                        ]
+                      }
+                    ],
+                    "title": "Headache- grade 1- 100 mg BID dose"
+                  }
+                ],
+                "denoms": [
+                  {
+                    "counts": [
+                      {
+                        "groupId": "OG000",
+                        "value": "39"
+                      }
+                    ],
+                    "units": "Participants"
+                  }
+                ],
+                "description": "Treatment related adverse events include those that are determined to be possibly, probably or definitely related to the study drug.\nNumber of events will be reported by dose level and grade, per Common Terminology Criteria for Adverse Events (CTCAE) v.5.",
+                "groups": [
+                  {
+                    "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+                    "id": "OG000",
+                    "title": "Cannabidiol (CBD)"
+                  }
+                ],
+                "paramType": "NUMBER",
+                "reportingStatus": "POSTED",
+                "timeFrame": "End of study (15 weeks)",
+                "title": "Number of Treatment Related Adverse Events",
+                "type": "SECONDARY",
+                "unitOfMeasure": "number of events"
+              },
+              {
+                "classes": [
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "8"
+                          }
+                        ]
+                      }
+                    ],
+                    "denoms": [
+                      {
+                        "counts": [
+                          {
+                            "groupId": "OG000",
+                            "value": "36"
+                          }
+                        ],
+                        "units": "Participants"
+                      }
+                    ],
+                    "title": "Baseline"
+                  },
+                  {
+                    "categories": [
+                      {
+                        "measurements": [
+                          {
+                            "groupId": "OG000",
+                            "value": "4"
+                          }
+                        ]
+                      }
+                    ],
+                    "denoms": [
+                      {
+                        "counts": [
+                          {
+                            "groupId": "OG000",
+                            "value": "30"
+                          }
+                        ],
+                        "units": "Participants"
+                      }
+                    ],
+                    "title": "15 Weeks"
+                  }
+                ],
+                "denoms": [
+                  {
+                    "counts": [
+                      {
+                        "groupId": "OG000",
+                        "value": "39"
+                      }
+                    ],
+                    "units": "Participants"
+                  }
+                ],
+                "description": "The number of participants with undetectable levels of estradiol circulating in blood plasma will be reported at baseline and 15 weeks.",
+                "groups": [
+                  {
+                    "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+                    "id": "OG000",
+                    "title": "Cannabidiol (CBD)"
+                  }
+                ],
+                "measureCategoriesReviewUnit": {
+                  "resetReasons": [
+                    "The number of participants analyzed appears inconsistent with data here or in other parts of the record."
+                  ]
+                },
+                "paramType": "COUNT_OF_PARTICIPANTS",
+                "populationDescription": "All enrolled patients would be analyzed; however, 3 samples are missing for baseline and 9 for week 15",
+                "reportingStatus": "POSTED",
+                "timeFrame": "Baseline and week 15",
+                "title": "Number of Participants With Undetectable Levels of Estradiol",
+                "type": "SECONDARY",
+                "unitOfMeasure": "Participants"
+              }
+            ]
+          },
+          "participantFlowModule": {
+            "groups": [
+              {
+                "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+                "id": "FG000",
+                "title": "Cannabidiol (CBD)"
+              }
+            ],
+            "periods": [
+              {
+                "dropWithdraws": [
+                  {
+                    "reasons": [
+                      {
+                        "groupId": "FG000",
+                        "numSubjects": "5"
+                      }
+                    ],
+                    "type": "Adverse Event"
+                  },
+                  {
+                    "reasons": [
+                      {
+                        "groupId": "FG000",
+                        "numSubjects": "6"
+                      }
+                    ],
+                    "type": "Withdrawal by Subject"
+                  }
+                ],
+                "milestones": [
+                  {
+                    "achievements": [
+                      {
+                        "groupId": "FG000",
+                        "numSubjects": "39"
+                      }
+                    ],
+                    "type": "STARTED"
+                  },
+                  {
+                    "achievements": [
+                      {
+                        "groupId": "FG000",
+                        "numSubjects": "28"
+                      }
+                    ],
+                    "type": "COMPLETED"
+                  },
+                  {
+                    "achievements": [
+                      {
+                        "groupId": "FG000",
+                        "numSubjects": "11"
+                      }
+                    ],
+                    "type": "NOT COMPLETED"
+                  }
+                ],
+                "title": "Overall Study"
+              }
+            ],
+            "preAssignmentDetails": "1 subject was enrolled but deemed ineligible before starting treatment"
+          }
+        }
+      },
+      {
+        "op": "add",
+        "path": "/annotationSection",
+        "value": {
+          "annotationModule": {
+            "unpostedAnnotation": {
+              "unpostedEvents": [
+                {
+                  "date": "2024-10-21",
+                  "type": "RESET"
+                }
+              ],
+              "unpostedResponsibleParty": "University of Michigan Rogel Cancer Center"
+            }
+          }
+        }
+      },
+      {
+        "op": "add",
+        "path": "/documentSection",
+        "value": {
+          "largeDocumentModule": {
+            "largeDocs": [
+              {
+                "date": "2022-07-20",
+                "filename": "Prot_SAP_000.pdf",
+                "hasIcf": false,
+                "hasProtocol": true,
+                "hasSap": true,
+                "label": "Study Protocol and Statistical Analysis Plan",
+                "size": 54365,
+                "typeAbbrev": "Prot_SAP",
+                "uploadDate": "2024-09-24T15:32"
+              },
+              {
+                "date": "2022-08-31",
+                "filename": "ICF_001.pdf",
+                "hasIcf": true,
+                "hasProtocol": false,
+                "hasSap": false,
+                "label": "Informed Consent Form",
+                "size": 545028,
+                "typeAbbrev": "ICF",
+                "uploadDate": "2024-09-24T15:30"
+              }
+            ],
+            "reviewUnit": {
+              "resetReasons": [
+                "Required information appears to be missing."
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "7e8bfd15244d98593847a94c6c39656fae3274002d630344e316995bbc730405",
+      "materiality_event_hash": "41eff0230183158840158e25ab7edce1174a66a49d9a82d9146eb84f09dabec1",
+      "patch_hash": "40f1b909b8bfa7a2634cd41320eca19d3950cf2d105f3337769788a4ed7ec82e",
+      "patch_raw_hash": "22b9d628c8e90b3dec1d784b2fb8de0d823de63152cd8728b32e1d4a0f0cc1ed",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT04754399/history/5?patchToVersion=6",
+      "to_snapshot_hash": "3a848fc030e6ed9b235f1b9ae10ca8473b13bf82d9d872fce3a708b9108fdf93"
+    },
+    "review_question": "What did the primary outcome field say before and after the amendment, and is there a public protocol, statistical analysis plan, or manuscript explaining the change?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT04754399",
+      "nct_id": "NCT04754399"
+    },
+    "versions": {
+      "from_version": 5,
+      "submitted_date": "2024-09-26",
+      "to_version": 6
+    }
+  },
+  "changed_paths": [
+    "/annotationSection",
+    "/documentSection",
+    "/hasResults",
+    "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+    "/protocolSection/outcomesModule/secondaryOutcomes/0/measure",
+    "/protocolSection/outcomesModule/secondaryOutcomes/1/measure",
+    "/protocolSection/outcomesModule/secondaryOutcomes/2/measure",
+    "/protocolSection/outcomesModule/secondaryOutcomes/3/measure",
+    "/protocolSection/outcomesModule/secondaryOutcomes/4/measure",
+    "/protocolSection/statusModule/expandedAccessInfo",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/resultsFirstSubmitDate",
+    "/protocolSection/statusModule/statusVerifiedDate",
+    "/resultsSection"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT04754399_v5_v6_b771bc8b911e. ClinicalTrials.gov NCT04754399, versions 5-6. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance.",
+    "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 5 to version 6 for NCT04754399.",
+    "The JSON Patch for this comparison has hash 40f1b909b8bfa7a2634cd41320eca19d3950cf2d105f3337769788a4ed7ec82e.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under the primary outcome module changed between ClinicalTrials.gov versions 5 and 6.",
+    "The timing context for the from-version record was post_recruitment.",
+    "The deterministic rules that fired were: primary_outcome_any_change, secondary_outcome_any_change.",
+    "The changed JSON Pointer paths were: /annotationSection, /documentSection, /hasResults, /protocolSection/outcomesModule/primaryOutcomes/0/measure, /protocolSection/outcomesModule/secondaryOutcomes/0/measure, /protocolSection/outcomesModule/secondaryOutcomes/1/measure, /protocolSection/outcomesModule/secondaryOutcomes/2/measure, /protocolSection/outcomesModule/secondaryOutcomes/3/measure, /protocolSection/outcomesModule/secondaryOutcomes/4/measure, /protocolSection/statusModule/expandedAccessInfo, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/resultsFirstSubmitDate, /protocolSection/statusModule/statusVerifiedDate, /resultsSection."
+  ],
+  "classification": {
+    "categories": [
+      "primary_outcome_change",
+      "secondary_outcome_change"
+    ],
+    "category": "primary_outcome_change",
+    "deterministic_rules": [
+      "primary_outcome_any_change",
+      "secondary_outcome_any_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "post_recruitment",
+    "value_signals": []
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT04754399_v5_v6_b771bc8b911e",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT04754399_v5_v6_b771bc8b911e.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT04754399_v5_v6_b771bc8b911e",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT04754399"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2024-09"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/statusModule/expandedAccessInfo"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2024-09-26"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2024-10-22"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/statusModule/resultsFirstSubmitDate",
+      "value": "2024-09-26"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+      "value": "Absolute Change in Brief Pain Inventory (BPI) Worst Pain From Baseline to Week 15"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/0/measure",
+      "value": "Number of Patients With at Least a 2-point Reduction in BPI Worst Pain From Baseline to Week 15"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/1/measure",
+      "value": "Number of Patients With at Least a 2-point Reduction in BPI Average Pain From Baseline to Week 15"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/2/measure",
+      "value": "Change in Symptoms From Baseline, as Measured by the PROMIS-29+2 Profile v2.1"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/3/measure",
+      "value": "Number of Treatment Related Adverse Events"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/4/measure",
+      "value": "Number of Participants With Undetectable Levels of Estradiol"
+    },
+    {
+      "op": "replace",
+      "path": "/hasResults",
+      "value": true
+    },
+    {
+      "op": "add",
+      "path": "/resultsSection",
+      "value": {
+        "adverseEventsModule": {
+          "armsReviewUnit": {
+            "resetReasons": [
+              "The arms/groups appear inconsistent with information in other parts of the record. Each arm/group should be described separately, or a valid explanation provided."
+            ]
+          },
+          "eventGroups": [
+            {
+              "deathsNumAffected": 0,
+              "deathsNumAtRisk": 39,
+              "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+              "id": "EG000",
+              "otherNumAffected": 18,
+              "otherNumAtRisk": 39,
+              "seriousNumAffected": 0,
+              "seriousNumAtRisk": 39,
+              "title": "Cannabidiol (CBD)"
+            }
+          ],
+          "frequencyThreshold": "0",
+          "otherEvents": [
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Psychiatric disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Agitation"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Investigations",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Alanine aminotransferase increased"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Metabolism and nutrition disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Anorexia"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Psychiatric disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Anxiety"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Musculoskeletal and connective tissue disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Arthralgia"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Musculoskeletal and connective tissue disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Back pain"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Infections and infestations",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Bladder infection"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Investigations",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Blood bilirubin increased"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Renal and urinary disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Chronic kidney disease"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Investigations",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 2,
+                  "numAtRisk": 39,
+                  "numEvents": 2
+                }
+              ],
+              "term": "Creatinine increased"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Psychiatric disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Depression"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Gastrointestinal disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 2,
+                  "numAtRisk": 39,
+                  "numEvents": 3
+                }
+              ],
+              "term": "Diarrhea"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Nervous system disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Dizziness"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "General disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 2,
+                  "numAtRisk": 39,
+                  "numEvents": 2
+                }
+              ],
+              "term": "Fatigue"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Vascular disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Flushing"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Gastrointestinal disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Gastroesophageal reflux disease"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Nervous system disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 3,
+                  "numAtRisk": 39,
+                  "numEvents": 5
+                }
+              ],
+              "term": "Headache"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Renal and urinary disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Hematuria"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Metabolism and nutrition disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Hyperglycemia"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Metabolism and nutrition disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Hyponatremia"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Psychiatric disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Insomnia"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Nervous system disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Memory impairment"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Musculoskeletal and connective tissue disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Myalgia"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Gastrointestinal disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 4,
+                  "numAtRisk": 39,
+                  "numEvents": 7
+                }
+              ],
+              "term": "Nausea"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Musculoskeletal and connective tissue disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 1
+                }
+              ],
+              "term": "Neck pain"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Gastrointestinal disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 1,
+                  "numAtRisk": 39,
+                  "numEvents": 2
+                }
+              ],
+              "term": "Oral pain"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Nervous system disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 2,
+                  "numAtRisk": 39,
+                  "numEvents": 2
+                }
+              ],
+              "term": "Peripheral motor neuropathy"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Skin and subcutaneous tissue disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 2,
+                  "numAtRisk": 39,
+                  "numEvents": 2
+                }
+              ],
+              "term": "Rash maculo-papular"
+            },
+            {
+              "assessmentType": "NON_SYSTEMATIC_ASSESSMENT",
+              "organSystem": "Gastrointestinal disorders",
+              "sourceVocabulary": "CTCAE (5.0)",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numAffected": 3,
+                  "numAtRisk": 39,
+                  "numEvents": 5
+                }
+              ],
+              "term": "Stomach pain"
+            }
+          ],
+          "reviewUnit": {
+            "resetReasons": [
+              "There does not appear to be sufficient information to understand the Time Frame."
+            ]
+          },
+          "timeFrame": "All adverse event data (serious and non-serious) collected from the time of the initial study treatment administration through 30 days after the last dose of study treatment; additionally, any serious adverse event occurring more than 30 days after the last study treatment if considered to be related to the study treatment. Data was collected during a 2 year period."
+        },
+        "baselineCharacteristicsModule": {
+          "denoms": [
+            {
+              "counts": [
+                {
+                  "groupId": "BG000",
+                  "value": "39"
+                }
+              ],
+              "units": "Participants"
+            }
+          ],
+          "groups": [
+            {
+              "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+              "id": "BG000",
+              "title": "Cannabidiol (CBD)"
+            }
+          ],
+          "measures": [
+            {
+              "classes": [
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "BG000",
+                          "value": "0"
+                        }
+                      ],
+                      "title": "&lt;=18 years"
+                    },
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "BG000",
+                          "value": "26"
+                        }
+                      ],
+                      "title": "Between 18 and 65 years"
+                    },
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "BG000",
+                          "value": "13"
+                        }
+                      ],
+                      "title": "&gt;=65 years"
+                    }
+                  ]
+                }
+              ],
+              "paramType": "COUNT_OF_PARTICIPANTS",
+              "title": "Age, Categorical",
+              "unitOfMeasure": "Participants"
+            },
+            {
+              "classes": [
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "BG000",
+                          "value": "39"
+                        }
+                      ],
+                      "title": "Female"
+                    },
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "BG000",
+                          "value": "0"
+                        }
+                      ],
+                      "title": "Male"
+                    }
+                  ]
+                }
+              ],
+              "paramType": "COUNT_OF_PARTICIPANTS",
+              "title": "Sex: Female, Male",
+              "unitOfMeasure": "Participants"
+            },
+            {
+              "classes": [
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "BG000",
+                          "value": "1"
+                        }
+                      ],
+                      "title": "Hispanic or Latino"
+                    },
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "BG000",
+                          "value": "37"
+                        }
+                      ],
+                      "title": "Not Hispanic or Latino"
+                    },
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "BG000",
+                          "value": "1"
+                        }
+                      ],
+                      "title": "Unknown or Not Reported"
+                    }
+                  ]
+                }
+              ],
+              "paramType": "COUNT_OF_PARTICIPANTS",
+              "title": "Ethnicity (NIH&#x2F;OMB)",
+              "unitOfMeasure": "Participants"
+            },
+            {
+              "classes": [
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "BG000",
+                          "value": "0"
+                        }
+                      ],
+                      "title": "American Indian or Alaska Native"
+                    },
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "BG000",
+                          "value": "1"
+                        }
+                      ],
+                      "title": "Asian"
+                    },
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "BG000",
+                          "value": "0"
+                        }
+                      ],
+                      "title": "Native Hawaiian or Other Pacific Islander"
+                    },
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "BG000",
+                          "value": "2"
+                        }
+                      ],
+                      "title": "Black or African American"
+                    },
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "BG000",
+                          "value": "36"
+                        }
+                      ],
+                      "title": "White"
+                    },
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "BG000",
+                          "value": "0"
+                        }
+                      ],
+                      "title": "More than one race"
+                    },
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "BG000",
+                          "value": "0"
+                        }
+                      ],
+                      "title": "Unknown or Not Reported"
+                    }
+                  ]
+                }
+              ],
+              "paramType": "COUNT_OF_PARTICIPANTS",
+              "title": "Race (NIH&#x2F;OMB)",
+              "unitOfMeasure": "Participants"
+            },
+            {
+              "classes": [
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "BG000",
+                          "value": "39"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "United States"
+                }
+              ],
+              "paramType": "NUMBER",
+              "title": "Region of Enrollment",
+              "unitOfMeasure": "participants"
+            }
+          ]
+        },
+        "moreInfoModule": {
+          "certainAgreement": {
+            "piSponsorEmployee": true
+          },
+          "pointOfContact": {
+            "email": "ClinicalTrialsgov_CCAdmin@umich.edu",
+            "organization": "University of Michigan Rogel Cancer Center",
+            "phone": "734-936-9499",
+            "title": "University of Michigan Rogel Cancer Center ClinicalTrials.gov Admin"
+          }
+        },
+        "outcomeMeasuresModule": {
+          "outcomeMeasures": [
+            {
+              "classes": [
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "lowerLimit": "-3.22",
+                          "upperLimit": "-1.49",
+                          "value": "-2.4"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "denoms": [
+                {
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "28"
+                    }
+                  ],
+                  "units": "Participants"
+                }
+              ],
+              "description": "The BPI is a patient self-rating scale that assesses joint pain and stiffness on a scale of 0 (no pain) to 10 (pain as bad as you can imagine).\nFor the purpose of this measure, absolute change for only one BPI item will be assessed, &quot;joint pain and stiffness at its worst in the last week&quot;.",
+              "dispersionType": "95% Confidence Interval",
+              "groups": [
+                {
+                  "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+                  "id": "OG000",
+                  "title": "Cannabidiol (CBD)"
+                }
+              ],
+              "measureCategoriesReviewUnit": {
+                "resetReasons": [
+                  "The Unit of Measure appears invalid."
+                ]
+              },
+              "paramType": "MEAN",
+              "populationDescription": "11 patients missing data",
+              "reportingStatus": "POSTED",
+              "timeFrame": "Baseline, week 15",
+              "title": "Absolute Change in Brief Pain Inventory (BPI) Worst Pain From Baseline to Week 15",
+              "type": "PRIMARY",
+              "unitOfMeasure": "Absolute change"
+            },
+            {
+              "classes": [
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "17"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "denoms": [
+                {
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "28"
+                    }
+                  ],
+                  "units": "Participants"
+                }
+              ],
+              "description": "The BPI is a patient self-rating scale that assesses joint pain and stiffness on a scale of 0 (no pain) to 10 (pain as bad as you can imagine).\nFor the purpose of this measure, change from baseline to week 15 for only one BPI item, &quot;joint pain and stiffness at its worst in the last week&quot;, will be assessed.",
+              "groups": [
+                {
+                  "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+                  "id": "OG000",
+                  "title": "Cannabidiol (CBD)"
+                }
+              ],
+              "paramType": "COUNT_OF_PARTICIPANTS",
+              "populationDescription": "11 patients missing data",
+              "reportingStatus": "POSTED",
+              "timeFrame": "Baseline, week 15",
+              "title": "Number of Patients With at Least a 2-point Reduction in BPI Worst Pain From Baseline to Week 15",
+              "type": "SECONDARY",
+              "unitOfMeasure": "Participants"
+            },
+            {
+              "classes": [
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "14"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "denoms": [
+                {
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "28"
+                    }
+                  ],
+                  "units": "Participants"
+                }
+              ],
+              "description": "The BPI is a patient self-rating scale that assesses joint pain and stiffness on a scale of 0 (no pain) to 10 (pain as bad as you can imagine).\nFor the purpose of this measure, change from baseline to week 15 for only one BPI item, &quot;joint pain and stiffness on the average&quot;, will be assessed.",
+              "groups": [
+                {
+                  "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+                  "id": "OG000",
+                  "title": "Cannabidiol (CBD)"
+                }
+              ],
+              "paramType": "COUNT_OF_PARTICIPANTS",
+              "populationDescription": "11 patients missing data",
+              "reportingStatus": "POSTED",
+              "timeFrame": "Baseline, week 15",
+              "title": "Number of Patients With at Least a 2-point Reduction in BPI Average Pain From Baseline to Week 15",
+              "type": "SECONDARY",
+              "unitOfMeasure": "Participants"
+            },
+            {
+              "classes": [
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "spread": "7.2",
+                          "value": "-6.5"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Pain interference"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "spread": "2.1",
+                          "value": "-1.9"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Pain intensity"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "spread": "1.2",
+                          "value": "2.0"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Cognitive function"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "spread": "4.5",
+                          "value": "-1.7"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Depression"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "spread": "8.0",
+                          "value": "5.7"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Ability to participate in social roles&#x2F;activities"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "spread": "6.0",
+                          "value": "-3.4"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Anxiety"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "spread": "5.3",
+                          "value": "3.9"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Physical function"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "spread": "6.9",
+                          "value": "-3.3"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Fatigue"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "spread": "6.6",
+                          "value": "-3.7"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Sleep disturbance"
+                }
+              ],
+              "denoms": [
+                {
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "28"
+                    }
+                  ],
+                  "units": "Participants"
+                }
+              ],
+              "description": "The Patient-Reported Outcomes Measurement Information System (PROMIS)-29+2 Profile v2.1 (PROPr) is a validated questionnaire to assess patient-reported symptoms over the past 7 days in 7 PROMIS domains on a scale of 1 (worst) to 5 (best).\nRaw scores for each domain are calculated and then converted to a T-score, with a mean of 50 and a standard deviation of 10.\nHigher T-scores represent more of the concept being measured: for fatigue, sleep disturbance, depression, and anxiety, higher scores represent worse symptoms; for physical functioning, ability to participate in social roles and activities, and cognitive function-abilities, higher scores mean better function.",
+              "dispersionType": "Standard Deviation",
+              "groups": [
+                {
+                  "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+                  "id": "OG000",
+                  "title": "Cannabidiol (CBD)"
+                }
+              ],
+              "paramType": "MEAN",
+              "populationDescription": "11 patients missing data",
+              "reportingStatus": "POSTED",
+              "timeFrame": "Baseline, week 15",
+              "title": "Change in Symptoms From Baseline, as Measured by the PROMIS-29+2 Profile v2.1",
+              "type": "SECONDARY",
+              "unitOfMeasure": "score on a scale"
+            },
+            {
+              "classes": [
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Agitation- grade 2- 25mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Nausea- grade 1- 25mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Flushing- grade 1- 25mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Anxiety- grade 1- 50mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "2"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Rash- grade 2- 50mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Nausea- grade 1- 50mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Depression- grade 1- 75 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Stomach Pain- grade 1- 75 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Fatigue- grade 1- 75 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Headache- grade 1- 75 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Hyponatremia- grade 1- 75 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Hyperglycemia- grade 1- 75 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Peripheral motor neuropathy- grade 1- 100 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Peripheral motor neuropathy- grade 2- 100 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Fatigue- grade 1- 100 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Memory impairment- grade 1- 100 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Anorexia- grade 2- 100 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Diarrhea- grade 2- 100 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "2"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Nausea- grade 1 - 100 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "alanine aminotransferase increased- grade 1- 100 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Oral Pain- grade 1- 100 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Gastroesophageal reflux disease- grade1- 100 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Increased creatinine- grade 1- 100 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "stomach pain- grade 1- 100 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "dizziness- grade 1- 100 mg BID dose"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Headache- grade 1- 100 mg BID dose"
+                }
+              ],
+              "denoms": [
+                {
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "39"
+                    }
+                  ],
+                  "units": "Participants"
+                }
+              ],
+              "description": "Treatment related adverse events include those that are determined to be possibly, probably or definitely related to the study drug.\nNumber of events will be reported by dose level and grade, per Common Terminology Criteria for Adverse Events (CTCAE) v.5.",
+              "groups": [
+                {
+                  "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+                  "id": "OG000",
+                  "title": "Cannabidiol (CBD)"
+                }
+              ],
+              "paramType": "NUMBER",
+              "reportingStatus": "POSTED",
+              "timeFrame": "End of study (15 weeks)",
+              "title": "Number of Treatment Related Adverse Events",
+              "type": "SECONDARY",
+              "unitOfMeasure": "number of events"
+            },
+            {
+              "classes": [
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "8"
+                        }
+                      ]
+                    }
+                  ],
+                  "denoms": [
+                    {
+                      "counts": [
+                        {
+                          "groupId": "OG000",
+                          "value": "36"
+                        }
+                      ],
+                      "units": "Participants"
+                    }
+                  ],
+                  "title": "Baseline"
+                },
+                {
+                  "categories": [
+                    {
+                      "measurements": [
+                        {
+                          "groupId": "OG000",
+                          "value": "4"
+                        }
+                      ]
+                    }
+                  ],
+                  "denoms": [
+                    {
+                      "counts": [
+                        {
+                          "groupId": "OG000",
+                          "value": "30"
+                        }
+                      ],
+                      "units": "Participants"
+                    }
+                  ],
+                  "title": "15 Weeks"
+                }
+              ],
+              "denoms": [
+                {
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "39"
+                    }
+                  ],
+                  "units": "Participants"
+                }
+              ],
+              "description": "The number of participants with undetectable levels of estradiol circulating in blood plasma will be reported at baseline and 15 weeks.",
+              "groups": [
+                {
+                  "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+                  "id": "OG000",
+                  "title": "Cannabidiol (CBD)"
+                }
+              ],
+              "measureCategoriesReviewUnit": {
+                "resetReasons": [
+                  "The number of participants analyzed appears inconsistent with data here or in other parts of the record."
+                ]
+              },
+              "paramType": "COUNT_OF_PARTICIPANTS",
+              "populationDescription": "All enrolled patients would be analyzed; however, 3 samples are missing for baseline and 9 for week 15",
+              "reportingStatus": "POSTED",
+              "timeFrame": "Baseline and week 15",
+              "title": "Number of Participants With Undetectable Levels of Estradiol",
+              "type": "SECONDARY",
+              "unitOfMeasure": "Participants"
+            }
+          ]
+        },
+        "participantFlowModule": {
+          "groups": [
+            {
+              "description": "<p>Oral solution given 2x daily.</p><p>Cannabidiol (CBD): week 1: 25 mg twice daily, approximately 12 hours apart, with food</p><p>week 2: 50 mg twice daily, approximately 12 hours apart, with food</p><p>week 3: 75 mg twice daily, approximately 12 hours apart, with food</p><p>week 4+: 100 mg twice daily, approximately 12 hours apart, with food</p>",
+              "id": "FG000",
+              "title": "Cannabidiol (CBD)"
+            }
+          ],
+          "periods": [
+            {
+              "dropWithdraws": [
+                {
+                  "reasons": [
+                    {
+                      "groupId": "FG000",
+                      "numSubjects": "5"
+                    }
+                  ],
+                  "type": "Adverse Event"
+                },
+                {
+                  "reasons": [
+                    {
+                      "groupId": "FG000",
+                      "numSubjects": "6"
+                    }
+                  ],
+                  "type": "Withdrawal by Subject"
+                }
+              ],
+              "milestones": [
+                {
+                  "achievements": [
+                    {
+                      "groupId": "FG000",
+                      "numSubjects": "39"
+                    }
+                  ],
+                  "type": "STARTED"
+                },
+                {
+                  "achievements": [
+                    {
+                      "groupId": "FG000",
+                      "numSubjects": "28"
+                    }
+                  ],
+                  "type": "COMPLETED"
+                },
+                {
+                  "achievements": [
+                    {
+                      "groupId": "FG000",
+                      "numSubjects": "11"
+                    }
+                  ],
+                  "type": "NOT COMPLETED"
+                }
+              ],
+              "title": "Overall Study"
+            }
+          ],
+          "preAssignmentDetails": "1 subject was enrolled but deemed ineligible before starting treatment"
+        }
+      }
+    },
+    {
+      "op": "add",
+      "path": "/annotationSection",
+      "value": {
+        "annotationModule": {
+          "unpostedAnnotation": {
+            "unpostedEvents": [
+              {
+                "date": "2024-10-21",
+                "type": "RESET"
+              }
+            ],
+            "unpostedResponsibleParty": "University of Michigan Rogel Cancer Center"
+          }
+        }
+      }
+    },
+    {
+      "op": "add",
+      "path": "/documentSection",
+      "value": {
+        "largeDocumentModule": {
+          "largeDocs": [
+            {
+              "date": "2022-07-20",
+              "filename": "Prot_SAP_000.pdf",
+              "hasIcf": false,
+              "hasProtocol": true,
+              "hasSap": true,
+              "label": "Study Protocol and Statistical Analysis Plan",
+              "size": 54365,
+              "typeAbbrev": "Prot_SAP",
+              "uploadDate": "2024-09-24T15:32"
+            },
+            {
+              "date": "2022-08-31",
+              "filename": "ICF_001.pdf",
+              "hasIcf": true,
+              "hasProtocol": false,
+              "hasSap": false,
+              "label": "Informed Consent Form",
+              "size": 545028,
+              "typeAbbrev": "ICF",
+              "uploadDate": "2024-09-24T15:30"
+            }
+          ],
+          "reviewUnit": {
+            "resetReasons": [
+              "Required information appears to be missing."
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "2bad3daa3ae2201a38ee20495bd2de77369b722100e89ae4821902ea4cba4467",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT04754399_v5_v6_b771bc8b911e",
+    "evidence_version": 1,
+    "from_snapshot_hash": "7e8bfd15244d98593847a94c6c39656fae3274002d630344e316995bbc730405",
+    "materiality_event_hash": "41eff0230183158840158e25ab7edce1174a66a49d9a82d9146eb84f09dabec1",
+    "patch_hash": "40f1b909b8bfa7a2634cd41320eca19d3950cf2d105f3337769788a4ed7ec82e",
+    "patch_raw_hash": "22b9d628c8e90b3dec1d784b2fb8de0d823de63152cd8728b32e1d4a0f0cc1ed",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT04754399/history/5?patchToVersion=6",
+    "to_snapshot_hash": "3a848fc030e6ed9b235f1b9ae10ca8473b13bf82d9d872fce3a708b9108fdf93"
+  },
+  "review_question": "What did the primary outcome field say before and after the amendment, and is there a public protocol, statistical analysis plan, or manuscript explaining the change?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT04754399",
+    "current_record_hash": "4c2e041953fd65a1dac26593e83890893187eddcc707371e3281d6b1bc7d778d",
+    "current_record_raw_hash": "4c2e041953fd65a1dac26593e83890893187eddcc707371e3281d6b1bc7d778d",
+    "lead_sponsor": "University of Michigan Rogel Cancer Center",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT04754399",
+    "official_title": "Phase 2 Trial of Cannabidiol (CBD) for Treatment of Aromatase Inhibitor-Associated Arthralgias",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT04754399",
+    "title": "Cannabidiol (CBD) for Treatment of Aromatase Inhibitor-Associated Arthralgias"
+  },
+  "versions": {
+    "from_version": 5,
+    "submitted_date": "2024-09-26",
+    "to_version": 6
+  }
+}

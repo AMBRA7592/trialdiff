@@ -1,0 +1,173 @@
+INSERT INTO classifier_rules (
+  rule_key, path_pattern, op_filter_json, value_filter_json, severity,
+  category, timing_sensitive, description, active, created_at
+) VALUES
+(
+  'primary_outcome_any_change',
+  '/protocolSection/outcomesModule/primaryOutcomes/**',
+  '["add","remove","replace"]'::jsonb,
+  '{}'::jsonb,
+  'critical',
+  'primary_outcome_change',
+  true,
+  'Any add/remove/replace under primary outcome measures is critical review priority.',
+  true,
+  now()
+),
+(
+  'secondary_outcome_any_change',
+  '/protocolSection/outcomesModule/secondaryOutcomes/**',
+  '["add","remove","replace"]'::jsonb,
+  '{}'::jsonb,
+  'high',
+  'secondary_outcome_change',
+  true,
+  'Any add/remove/replace under secondary outcome measures is high review priority.',
+  true,
+  now()
+),
+(
+  'design_info_change',
+  '/protocolSection/designModule/designInfo/**',
+  '["add","remove","replace"]'::jsonb,
+  '{}'::jsonb,
+  'critical',
+  'design_change',
+  true,
+  'Design information changes can alter allocation, masking, model, or purpose.',
+  true,
+  now()
+),
+(
+  'phase_change',
+  '/protocolSection/designModule/phases/**',
+  '["add","remove","replace"]'::jsonb,
+  '{}'::jsonb,
+  'critical',
+  'design_change',
+  true,
+  'Trial phase changes are critical review-priority design changes.',
+  true,
+  now()
+),
+(
+  'arms_or_interventions_change',
+  '/protocolSection/armsInterventionsModule/**',
+  '["add","remove","replace"]'::jsonb,
+  '{}'::jsonb,
+  'critical',
+  'arm_intervention_change',
+  true,
+  'Arms or interventions changes can alter treatment/comparator structure.',
+  true,
+  now()
+),
+(
+  'terminal_status_change',
+  '/protocolSection/statusModule/overallStatus',
+  '["replace"]'::jsonb,
+  '{"in":["TERMINATED","SUSPENDED","WITHDRAWN"]}'::jsonb,
+  'critical',
+  'status_termination',
+  false,
+  'Status changed to terminated, suspended, or withdrawn.',
+  true,
+  now()
+),
+(
+  'eligibility_criteria_change',
+  '/protocolSection/eligibilityModule/eligibilityCriteria',
+  '["add","remove","replace"]'::jsonb,
+  '{}'::jsonb,
+  'high',
+  'eligibility_change',
+  true,
+  'Eligibility criteria changes can alter the studied population.',
+  true,
+  now()
+),
+(
+  'enrollment_count_change',
+  '/protocolSection/designModule/enrollmentInfo/count',
+  '["replace"]'::jsonb,
+  '{}'::jsonb,
+  'high',
+  'enrollment_change',
+  true,
+  'Enrollment count changes can signal scope or feasibility shifts.',
+  true,
+  now()
+),
+(
+  'enrollment_type_change',
+  '/protocolSection/designModule/enrollmentInfo/type',
+  '["replace"]'::jsonb,
+  '{}'::jsonb,
+  'high',
+  'enrollment_change',
+  true,
+  'Enrollment type changes from anticipated to actual or similar are high review priority.',
+  true,
+  now()
+),
+(
+  'why_stopped_change',
+  '/protocolSection/statusModule/whyStopped',
+  '["add","remove","replace"]'::jsonb,
+  '{}'::jsonb,
+  'high',
+  'status_termination',
+  false,
+  'Why-stopped changes explain discontinuation and need review.',
+  true,
+  now()
+),
+(
+  'primary_completion_timeline_change',
+  '/protocolSection/statusModule/primaryCompletionDateStruct/**',
+  '["add","remove","replace"]'::jsonb,
+  '{}'::jsonb,
+  'medium',
+  'timeline_shift',
+  false,
+  'Primary completion date changes are operational timeline signals.',
+  true,
+  now()
+),
+(
+  'completion_timeline_change',
+  '/protocolSection/statusModule/completionDateStruct/**',
+  '["add","remove","replace"]'::jsonb,
+  '{}'::jsonb,
+  'medium',
+  'timeline_shift',
+  false,
+  'Completion date changes are operational timeline signals.',
+  true,
+  now()
+),
+(
+  'start_timeline_change',
+  '/protocolSection/statusModule/startDateStruct/**',
+  '["add","remove","replace"]'::jsonb,
+  '{}'::jsonb,
+  'medium',
+  'timeline_shift',
+  false,
+  'Start date changes are operational timeline signals.',
+  true,
+  now()
+),
+(
+  'contact_admin_change',
+  '/protocolSection/contactsLocationsModule/centralContacts/**',
+  '["add","remove","replace"]'::jsonb,
+  '{}'::jsonb,
+  'low',
+  'administrative_contact_change',
+  false,
+  'Central contact updates are usually administrative.',
+  true,
+  now()
+)
+ON CONFLICT (rule_key) DO NOTHING;

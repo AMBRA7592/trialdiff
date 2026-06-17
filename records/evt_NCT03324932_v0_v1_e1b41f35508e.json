@@ -1,0 +1,202 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/armsInterventionsModule/armGroups/0/description",
+      "/protocolSection/armsInterventionsModule/interventions/0/otherNames",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT03324932_v0_v1_e1b41f35508e. ClinicalTrials.gov NCT03324932, versions 0-1. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 0 to version 1 for NCT03324932.",
+      "The JSON Patch for this comparison has hash 8a0aadc23f33fb74818830f658c6aa8178032e2185fe67351797859efdf6d915.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under an arm or intervention module changed between ClinicalTrials.gov versions 0 and 1.",
+      "The timing context for the from-version record was early_recruitment.",
+      "The deterministic rules that fired were: arms_or_interventions_change.",
+      "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups/0/description, /protocolSection/armsInterventionsModule/interventions/0/otherNames, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate."
+    ],
+    "classification": {
+      "categories": [
+        "arm_intervention_change"
+      ],
+      "category": "arm_intervention_change",
+      "deterministic_rules": [
+        "arms_or_interventions_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "early_recruitment",
+      "value_signals": []
+    },
+    "event_id": "evt_NCT03324932_v0_v1_e1b41f35508e",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2017-10-27"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2017-10-31"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/0/description",
+        "value": "We compare AI intake+denosumab injection and AI intake only in patients with normal BMD to whom Letrozole or Arimidex will be administered as postoperative endocrine therapy, and we assess the efficacy of denosumab injection on bone loss by adjuvant endocrine therapy."
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/otherNames",
+        "value": [
+          "pralia"
+        ]
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "6e09babab3fe48540d3bf974604610a15329a00cc48000affe85e08b041a90ac",
+      "materiality_event_hash": "059860767cc7bb8a83bad96aa64a92383b1821bcbbc54513bf36c9ab89c2dbde",
+      "patch_hash": "8a0aadc23f33fb74818830f658c6aa8178032e2185fe67351797859efdf6d915",
+      "patch_raw_hash": "1c7b79dd72a0986fd7edc1890be4a456fec832b26727cfdd9bad8f1e989e323e",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT03324932/history/0?patchToVersion=1",
+      "to_snapshot_hash": "6070d01cd0b096181450c73149d0b3839ca58a315be4842eb8197f425a8d2623"
+    },
+    "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT03324932",
+      "nct_id": "NCT03324932"
+    },
+    "versions": {
+      "from_version": 0,
+      "submitted_date": "2017-10-27",
+      "to_version": 1
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/armsInterventionsModule/armGroups/0/description",
+    "/protocolSection/armsInterventionsModule/interventions/0/otherNames",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT03324932_v0_v1_e1b41f35508e. ClinicalTrials.gov NCT03324932, versions 0-1. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 0 to version 1 for NCT03324932.",
+    "The JSON Patch for this comparison has hash 8a0aadc23f33fb74818830f658c6aa8178032e2185fe67351797859efdf6d915.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under an arm or intervention module changed between ClinicalTrials.gov versions 0 and 1.",
+    "The timing context for the from-version record was early_recruitment.",
+    "The deterministic rules that fired were: arms_or_interventions_change.",
+    "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups/0/description, /protocolSection/armsInterventionsModule/interventions/0/otherNames, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate."
+  ],
+  "classification": {
+    "categories": [
+      "arm_intervention_change"
+    ],
+    "category": "arm_intervention_change",
+    "deterministic_rules": [
+      "arms_or_interventions_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "early_recruitment",
+    "value_signals": []
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT03324932_v0_v1_e1b41f35508e",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT03324932_v0_v1_e1b41f35508e.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT03324932_v0_v1_e1b41f35508e",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT03324932"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2017-10-27"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2017-10-31"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/0/description",
+      "value": "We compare AI intake+denosumab injection and AI intake only in patients with normal BMD to whom Letrozole or Arimidex will be administered as postoperative endocrine therapy, and we assess the efficacy of denosumab injection on bone loss by adjuvant endocrine therapy."
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/otherNames",
+      "value": [
+        "pralia"
+      ]
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "3687b6d8f42e6ce774b9c368dfb199c9a34af1105ba5a927444a144fd2dfe376",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT03324932_v0_v1_e1b41f35508e",
+    "evidence_version": 1,
+    "from_snapshot_hash": "6e09babab3fe48540d3bf974604610a15329a00cc48000affe85e08b041a90ac",
+    "materiality_event_hash": "059860767cc7bb8a83bad96aa64a92383b1821bcbbc54513bf36c9ab89c2dbde",
+    "patch_hash": "8a0aadc23f33fb74818830f658c6aa8178032e2185fe67351797859efdf6d915",
+    "patch_raw_hash": "1c7b79dd72a0986fd7edc1890be4a456fec832b26727cfdd9bad8f1e989e323e",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT03324932/history/0?patchToVersion=1",
+    "to_snapshot_hash": "6070d01cd0b096181450c73149d0b3839ca58a315be4842eb8197f425a8d2623"
+  },
+  "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT03324932",
+    "current_record_hash": "d1b2e3345ce87a7963fb4d79b98225b08efa8c7b6ad5ae61b49e69edf6eeab6f",
+    "current_record_raw_hash": "d1b2e3345ce87a7963fb4d79b98225b08efa8c7b6ad5ae61b49e69edf6eeab6f",
+    "lead_sponsor": "Kyoto Prefectural University of Medicine",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT03324932",
+    "official_title": "A Multicenter, Randomized, Comparative Study Regarding the Efficacy of Denosumab on Normal Bone Mineral Density in Women Receiving Adjuvant Aromatase Inhibitors for Early Breast Cancer (ENDEAVOR Trial)",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT03324932",
+    "title": "Efficacy of Denosumab on Normal BMD in Women Receiving Adjuvant Aromatase Inhibitors for Early Breast Cancer"
+  },
+  "versions": {
+    "from_version": 0,
+    "submitted_date": "2017-10-27",
+    "to_version": 1
+  }
+}

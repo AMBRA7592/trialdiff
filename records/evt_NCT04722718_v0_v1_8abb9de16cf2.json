@@ -1,0 +1,360 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0",
+      "/protocolSection/armsInterventionsModule/interventions/0/name",
+      "/protocolSection/conditionsModule/keywords/0",
+      "/protocolSection/designModule/enrollmentInfo/count",
+      "/protocolSection/eligibilityModule/eligibilityCriteria",
+      "/protocolSection/outcomesModule/secondaryOutcomes/3/description",
+      "/protocolSection/outcomesModule/secondaryOutcomes/3/measure",
+      "/protocolSection/outcomesModule/secondaryOutcomes/4/description",
+      "/protocolSection/outcomesModule/secondaryOutcomes/4/measure",
+      "/protocolSection/outcomesModule/secondaryOutcomes/5/description",
+      "/protocolSection/outcomesModule/secondaryOutcomes/5/measure",
+      "/protocolSection/outcomesModule/secondaryOutcomes/6",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT04722718_v0_v1_8abb9de16cf2. ClinicalTrials.gov NCT04722718, versions 0-1. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 0 to version 1 for NCT04722718.",
+      "The JSON Patch for this comparison has hash c955565230a7669c5199ad147f28cb29396823a5a6a3517cd57a7d2dc9cf24e6.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under an arm or intervention module changed between ClinicalTrials.gov versions 0 and 1.",
+      "The timing context for the from-version record was early_recruitment.",
+      "The deterministic rules that fired were: arms_or_interventions_change, eligibility_criteria_change, enrollment_count_change, secondary_outcome_any_change.",
+      "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0, /protocolSection/armsInterventionsModule/interventions/0/name, /protocolSection/conditionsModule/keywords/0, /protocolSection/designModule/enrollmentInfo/count, /protocolSection/eligibilityModule/eligibilityCriteria, /protocolSection/outcomesModule/secondaryOutcomes/3/description, /protocolSection/outcomesModule/secondaryOutcomes/3/measure, /protocolSection/outcomesModule/secondaryOutcomes/4/description, /protocolSection/outcomesModule/secondaryOutcomes/4/measure, /protocolSection/outcomesModule/secondaryOutcomes/5/description, /protocolSection/outcomesModule/secondaryOutcomes/5/measure, /protocolSection/outcomesModule/secondaryOutcomes/6, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate.",
+      "The enrollment count changed by at least 20 percent."
+    ],
+    "classification": {
+      "categories": [
+        "arm_intervention_change",
+        "secondary_outcome_change",
+        "eligibility_change",
+        "enrollment_change"
+      ],
+      "category": "arm_intervention_change",
+      "deterministic_rules": [
+        "arms_or_interventions_change",
+        "eligibility_criteria_change",
+        "enrollment_count_change",
+        "secondary_outcome_any_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "early_recruitment",
+      "value_signals": [
+        {
+          "category": "enrollment_change",
+          "new_value": 34,
+          "old_value": 26,
+          "path": "/protocolSection/designModule/enrollmentInfo/count",
+          "pct_change": 0.3077,
+          "severity": "high",
+          "signal": "enrollment_count_change_ge_20pct"
+        }
+      ]
+    },
+    "event_id": "evt_NCT04722718_v0_v1_8abb9de16cf2",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2021-01-31"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2021-02-03"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/conditionsModule/keywords/0",
+        "value": "Breast Cancer;Neoadjuvant Therapy"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/designModule/enrollmentInfo/count",
+        "value": 34
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0",
+        "value": "Drug: Sintilimab+Apatinib+Albumin paclitaxel+Carboplatin"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/name",
+        "value": "Sintilimab+Apatinib+Albumin paclitaxel+Carboplatin"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/3/measure",
+        "value": "Difference in pCR rate due to the state of PD-L1 expression"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/3/description",
+        "value": "Difference in pCR rate between PDL-1 (+) and PDL-1 (-) patients"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/4/measure",
+        "value": "Difference in pCR rate"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/4/description",
+        "value": "Difference in pCR rate between IM type and non-IM type patients\uff08Fudan classification\uff09"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/5/measure",
+        "value": "Side effects of neoadjuvant therapy(CTCAE.V5.0)"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/5/description",
+        "value": "Side effects of neoadjuvant therapy(CTCAE.V5.0)"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes/6",
+        "value": {
+          "description": "The correlation between TMB(Tumor Mutation Burden) and pCR",
+          "measure": "The correlation between TMB and pCR",
+          "timeFrame": "4 months"
+        }
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/eligibilityModule/eligibilityCriteria",
+        "value": "<p>Inclusion Criteria:</p><ol><li>The Eastern Cooperative Oncology Group (ECOG) scores ranged from 0 to 1 in women aged 18 to 70 years.</li><li>Pathologically confirmed patients with TNBC(negative human epidermal growth factor receptor 2 [HER2], estrogen receptor [ER], and progesterone receptor [PgR] status), clinical stage II and III (T stage: T1c, N stage: N1-2, or T stage: T2-4, N stage: N0-2),Newly treated patients who have not received surgery or chemotherapy.</li><li>According to response evaluation criteria in solid tumors (RECIST) version 1.1, it was confirmed by MRI or CT that at least one measurable lesion was the target lesion and the target lesion was not suitable for surgical treatment.\nIf the target lesion was lymph node, the short diameter &gt; was 1.5cm.</li><li>Confirmed tumor programmed death-ligand 1 (PD-L1) evaluation as documented through central testing of a representative tumor tissue specimen.</li><li>Baseline left ventricular ejection fraction (LVEF) greater than or equal to (&gt;=) 53 percent (%) measured by echocardiogram (ECHO) or multiple-gated acquisition (MUGA) scans.</li><li>Adequate hematologic and end-organ function.</li><li>Baseline laboratory tests, such as blood routine, biochemical and electrocardiogram, were normal, without chemotherapy contraindication.</li><li>Representative formalin-fixed, paraffin-embedded (FFPE) tumor specimen in paraffin blocks (preferred) or at least 20 unstained slides, with an associated pathology report documenting ER, PgR, and HER2 negativity.</li><li>For women of childbearing potential: agreement to remain abstinent (refrain from heterosexual intercourse) or use contraceptive methods, and agreement to refrain from donating eggs.</li><li>Women who are not postmenopausal or have undergone a sterilization procedure must have a negative serum pregnancy test result within 14 days prior to initiation of study drug</li><li>Participant agreement to undergo appropriate surgical management including axillary lymph node surgery and partial or total mastectomy after completion of neoadjuvant treatment.</li></ol><p>Exclusion Criteria:</p><ol><li>Prior history of invasive breast cancer.</li><li>Prior systemic therapy for treatment and prevention of breast cancer.</li><li>History of ductal carcinoma in situ (DCIS), except for participants treated exclusively with mastectomy &gt;5 years prior to diagnosis of current breast cancer.</li><li>History of pleomorphic lobular carcinoma in situ (LCIS), except for participants surgically managed &gt;5 years prior to diagnosis of current breast cancer.</li><li>Bilateral breast cancer.</li><li>Undergone incisional and&#x2F;or excisional biopsy of primary tumor and&#x2F;or axillary lymph nodes.</li><li>Axillary lymph node dissection prior to initiation of neoadjuvant therapy.</li><li>Have uncontrolled clinical symptoms or diseases of the heart, such as:</li></ol><p>(1) Heart failure above NYHA 2 (2) Unstable angina pectoris (3) Myocardial infarction occurred within 1 year (4) Supraventricular or ventricular arrhythmia of clinical significance requires treatment or intervention.</p><p>9.Urine routine test indicates urine protein \u2265 ++, or confirmed 24-hour urine protein \u2265 1.0 g.</p><p>10.Patients with hypertension (systolic blood pressure &gt; 140mmHg, diastolic blood pressure &gt;90mmHg) and unsatisfactory drug control.</p><p>11.Have bleeding tendency, or combined with venous thrombosis to receive anticoagulant therapy, urine protein positive.</p><p>12.Significant abnormalities of the digestive system, such as inability to swallow, chronic diarrhea, intestinal obstruction, etc., may affect the intake, transport, or absorption of oral drugs.</p><p>13.Had major surgery within 4 weeks, or had a major traumatic injury, fracture, or poor healing wound.</p><p>14.Systemic therapy 2 years of active autoimmune disease(such as the following, but not limited to: autoimmune hepatitis, interstitial pneumonia, uveitis, enteritis, hepatitis, hypophysitis, vasculitis, nephritis , Hyperthyroidism, decreased thyroid function; subjects suffering from vitiligo or asthma in childhood has been completely relieved, and adults without any intervention can be included; subjects requiring bronchodilators for medical intervention can not be included), diagnosis of immune deficiency in 1 weeks or the use of immunosuppressive therapy, the history of human immunodeficiency virus (HIV) infection, had glucocorticoid treatment history of non infectious pneumonia, suffering from pneumonia, active tuberculosis, active hepatitis b or hepatitis c virus (HCV) infection, and is being treated for a whole body of any active infection.</p><p>15.History of severe allergic, anaphylactic, or other hypersensitivity reactions to chimeric or humanized antibodies or fusion proteins.</p><p>16.Known hypersensitivity to biopharmaceuticals produced in Chinese hamster ovary cells.</p><p>17.Known allergy or hypersensitivity to the components of the formulations of sintilimab, appatinib,albumin paclitaxel or carboplatin.</p><p>18.Prior allogeneic stem cell or solid organ transplantation.\n19.Administration of a live attenuated vaccine within 4 weeks prior to initiation of study treatment or anticipation of need for such a vaccine during the study.</p><p>20.Patients who have previously received CTLA-4, Tim3, LAG3 and other antibodies or T cell costimulation therapy (previous use of PD-1 or PD-L1 antibodies is allowed).</p><p>21.Any other disease, metabolic dysfunction, physical examination finding, or clinical laboratory finding giving reasonable suspicion of a disease or condition that contraindicates the use of an investigational drug or that may affect the interpretation of the results or render the participant at high risk from treatment complications.</p><p>22.History of cerebrovascular accident within 12 months.\n23.Pregnant or lactating, or intending to become pregnant during the study.\n24.Patients diagnosed with inflammatory breast cancer.\n25.Patients with a second primary tumor at the same time.\n26.The doctor considers that she is not suitable for enrollment.</p>"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "cfb62ff4b5498b29ebc01a4b77d8ddcc579171679b20d398873db7502d3734ae",
+      "materiality_event_hash": "061b3557620972377ca6d28211c2cc9469092c0f55e943cb2093fca6fef77bcd",
+      "patch_hash": "c955565230a7669c5199ad147f28cb29396823a5a6a3517cd57a7d2dc9cf24e6",
+      "patch_raw_hash": "c03582f2ef4343b5c1f3a04a7ea77bf49661303916bab8b8d3a14a5c05265dd8",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT04722718/history/0?patchToVersion=1",
+      "to_snapshot_hash": "806eb4a16f121b10f225329c168299f348f932146f1bb02868d2989d1d27e49d"
+    },
+    "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT04722718",
+      "nct_id": "NCT04722718"
+    },
+    "versions": {
+      "from_version": 0,
+      "submitted_date": "2021-01-31",
+      "to_version": 1
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0",
+    "/protocolSection/armsInterventionsModule/interventions/0/name",
+    "/protocolSection/conditionsModule/keywords/0",
+    "/protocolSection/designModule/enrollmentInfo/count",
+    "/protocolSection/eligibilityModule/eligibilityCriteria",
+    "/protocolSection/outcomesModule/secondaryOutcomes/3/description",
+    "/protocolSection/outcomesModule/secondaryOutcomes/3/measure",
+    "/protocolSection/outcomesModule/secondaryOutcomes/4/description",
+    "/protocolSection/outcomesModule/secondaryOutcomes/4/measure",
+    "/protocolSection/outcomesModule/secondaryOutcomes/5/description",
+    "/protocolSection/outcomesModule/secondaryOutcomes/5/measure",
+    "/protocolSection/outcomesModule/secondaryOutcomes/6",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT04722718_v0_v1_8abb9de16cf2. ClinicalTrials.gov NCT04722718, versions 0-1. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 0 to version 1 for NCT04722718.",
+    "The JSON Patch for this comparison has hash c955565230a7669c5199ad147f28cb29396823a5a6a3517cd57a7d2dc9cf24e6.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under an arm or intervention module changed between ClinicalTrials.gov versions 0 and 1.",
+    "The timing context for the from-version record was early_recruitment.",
+    "The deterministic rules that fired were: arms_or_interventions_change, eligibility_criteria_change, enrollment_count_change, secondary_outcome_any_change.",
+    "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0, /protocolSection/armsInterventionsModule/interventions/0/name, /protocolSection/conditionsModule/keywords/0, /protocolSection/designModule/enrollmentInfo/count, /protocolSection/eligibilityModule/eligibilityCriteria, /protocolSection/outcomesModule/secondaryOutcomes/3/description, /protocolSection/outcomesModule/secondaryOutcomes/3/measure, /protocolSection/outcomesModule/secondaryOutcomes/4/description, /protocolSection/outcomesModule/secondaryOutcomes/4/measure, /protocolSection/outcomesModule/secondaryOutcomes/5/description, /protocolSection/outcomesModule/secondaryOutcomes/5/measure, /protocolSection/outcomesModule/secondaryOutcomes/6, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate.",
+    "The enrollment count changed by at least 20 percent."
+  ],
+  "classification": {
+    "categories": [
+      "arm_intervention_change",
+      "secondary_outcome_change",
+      "eligibility_change",
+      "enrollment_change"
+    ],
+    "category": "arm_intervention_change",
+    "deterministic_rules": [
+      "arms_or_interventions_change",
+      "eligibility_criteria_change",
+      "enrollment_count_change",
+      "secondary_outcome_any_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "early_recruitment",
+    "value_signals": [
+      {
+        "category": "enrollment_change",
+        "new_value": 34,
+        "old_value": 26,
+        "path": "/protocolSection/designModule/enrollmentInfo/count",
+        "pct_change": 0.3077,
+        "severity": "high",
+        "signal": "enrollment_count_change_ge_20pct"
+      }
+    ]
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT04722718_v0_v1_8abb9de16cf2",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT04722718_v0_v1_8abb9de16cf2.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT04722718_v0_v1_8abb9de16cf2",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT04722718"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2021-01-31"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2021-02-03"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/conditionsModule/keywords/0",
+      "value": "Breast Cancer;Neoadjuvant Therapy"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/designModule/enrollmentInfo/count",
+      "value": 34
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/armGroups/0/interventionNames/0",
+      "value": "Drug: Sintilimab+Apatinib+Albumin paclitaxel+Carboplatin"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/name",
+      "value": "Sintilimab+Apatinib+Albumin paclitaxel+Carboplatin"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/3/measure",
+      "value": "Difference in pCR rate due to the state of PD-L1 expression"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/3/description",
+      "value": "Difference in pCR rate between PDL-1 (+) and PDL-1 (-) patients"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/4/measure",
+      "value": "Difference in pCR rate"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/4/description",
+      "value": "Difference in pCR rate between IM type and non-IM type patients\uff08Fudan classification\uff09"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/5/measure",
+      "value": "Side effects of neoadjuvant therapy(CTCAE.V5.0)"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/5/description",
+      "value": "Side effects of neoadjuvant therapy(CTCAE.V5.0)"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes/6",
+      "value": {
+        "description": "The correlation between TMB(Tumor Mutation Burden) and pCR",
+        "measure": "The correlation between TMB and pCR",
+        "timeFrame": "4 months"
+      }
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/eligibilityModule/eligibilityCriteria",
+      "value": "<p>Inclusion Criteria:</p><ol><li>The Eastern Cooperative Oncology Group (ECOG) scores ranged from 0 to 1 in women aged 18 to 70 years.</li><li>Pathologically confirmed patients with TNBC(negative human epidermal growth factor receptor 2 [HER2], estrogen receptor [ER], and progesterone receptor [PgR] status), clinical stage II and III (T stage: T1c, N stage: N1-2, or T stage: T2-4, N stage: N0-2),Newly treated patients who have not received surgery or chemotherapy.</li><li>According to response evaluation criteria in solid tumors (RECIST) version 1.1, it was confirmed by MRI or CT that at least one measurable lesion was the target lesion and the target lesion was not suitable for surgical treatment.\nIf the target lesion was lymph node, the short diameter &gt; was 1.5cm.</li><li>Confirmed tumor programmed death-ligand 1 (PD-L1) evaluation as documented through central testing of a representative tumor tissue specimen.</li><li>Baseline left ventricular ejection fraction (LVEF) greater than or equal to (&gt;=) 53 percent (%) measured by echocardiogram (ECHO) or multiple-gated acquisition (MUGA) scans.</li><li>Adequate hematologic and end-organ function.</li><li>Baseline laboratory tests, such as blood routine, biochemical and electrocardiogram, were normal, without chemotherapy contraindication.</li><li>Representative formalin-fixed, paraffin-embedded (FFPE) tumor specimen in paraffin blocks (preferred) or at least 20 unstained slides, with an associated pathology report documenting ER, PgR, and HER2 negativity.</li><li>For women of childbearing potential: agreement to remain abstinent (refrain from heterosexual intercourse) or use contraceptive methods, and agreement to refrain from donating eggs.</li><li>Women who are not postmenopausal or have undergone a sterilization procedure must have a negative serum pregnancy test result within 14 days prior to initiation of study drug</li><li>Participant agreement to undergo appropriate surgical management including axillary lymph node surgery and partial or total mastectomy after completion of neoadjuvant treatment.</li></ol><p>Exclusion Criteria:</p><ol><li>Prior history of invasive breast cancer.</li><li>Prior systemic therapy for treatment and prevention of breast cancer.</li><li>History of ductal carcinoma in situ (DCIS), except for participants treated exclusively with mastectomy &gt;5 years prior to diagnosis of current breast cancer.</li><li>History of pleomorphic lobular carcinoma in situ (LCIS), except for participants surgically managed &gt;5 years prior to diagnosis of current breast cancer.</li><li>Bilateral breast cancer.</li><li>Undergone incisional and&#x2F;or excisional biopsy of primary tumor and&#x2F;or axillary lymph nodes.</li><li>Axillary lymph node dissection prior to initiation of neoadjuvant therapy.</li><li>Have uncontrolled clinical symptoms or diseases of the heart, such as:</li></ol><p>(1) Heart failure above NYHA 2 (2) Unstable angina pectoris (3) Myocardial infarction occurred within 1 year (4) Supraventricular or ventricular arrhythmia of clinical significance requires treatment or intervention.</p><p>9.Urine routine test indicates urine protein \u2265 ++, or confirmed 24-hour urine protein \u2265 1.0 g.</p><p>10.Patients with hypertension (systolic blood pressure &gt; 140mmHg, diastolic blood pressure &gt;90mmHg) and unsatisfactory drug control.</p><p>11.Have bleeding tendency, or combined with venous thrombosis to receive anticoagulant therapy, urine protein positive.</p><p>12.Significant abnormalities of the digestive system, such as inability to swallow, chronic diarrhea, intestinal obstruction, etc., may affect the intake, transport, or absorption of oral drugs.</p><p>13.Had major surgery within 4 weeks, or had a major traumatic injury, fracture, or poor healing wound.</p><p>14.Systemic therapy 2 years of active autoimmune disease(such as the following, but not limited to: autoimmune hepatitis, interstitial pneumonia, uveitis, enteritis, hepatitis, hypophysitis, vasculitis, nephritis , Hyperthyroidism, decreased thyroid function; subjects suffering from vitiligo or asthma in childhood has been completely relieved, and adults without any intervention can be included; subjects requiring bronchodilators for medical intervention can not be included), diagnosis of immune deficiency in 1 weeks or the use of immunosuppressive therapy, the history of human immunodeficiency virus (HIV) infection, had glucocorticoid treatment history of non infectious pneumonia, suffering from pneumonia, active tuberculosis, active hepatitis b or hepatitis c virus (HCV) infection, and is being treated for a whole body of any active infection.</p><p>15.History of severe allergic, anaphylactic, or other hypersensitivity reactions to chimeric or humanized antibodies or fusion proteins.</p><p>16.Known hypersensitivity to biopharmaceuticals produced in Chinese hamster ovary cells.</p><p>17.Known allergy or hypersensitivity to the components of the formulations of sintilimab, appatinib,albumin paclitaxel or carboplatin.</p><p>18.Prior allogeneic stem cell or solid organ transplantation.\n19.Administration of a live attenuated vaccine within 4 weeks prior to initiation of study treatment or anticipation of need for such a vaccine during the study.</p><p>20.Patients who have previously received CTLA-4, Tim3, LAG3 and other antibodies or T cell costimulation therapy (previous use of PD-1 or PD-L1 antibodies is allowed).</p><p>21.Any other disease, metabolic dysfunction, physical examination finding, or clinical laboratory finding giving reasonable suspicion of a disease or condition that contraindicates the use of an investigational drug or that may affect the interpretation of the results or render the participant at high risk from treatment complications.</p><p>22.History of cerebrovascular accident within 12 months.\n23.Pregnant or lactating, or intending to become pregnant during the study.\n24.Patients diagnosed with inflammatory breast cancer.\n25.Patients with a second primary tumor at the same time.\n26.The doctor considers that she is not suitable for enrollment.</p>"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "c1b820459fa429b3f9df4a6251a3296811008f6f88bdbd6113959345f815eb70",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT04722718_v0_v1_8abb9de16cf2",
+    "evidence_version": 1,
+    "from_snapshot_hash": "cfb62ff4b5498b29ebc01a4b77d8ddcc579171679b20d398873db7502d3734ae",
+    "materiality_event_hash": "061b3557620972377ca6d28211c2cc9469092c0f55e943cb2093fca6fef77bcd",
+    "patch_hash": "c955565230a7669c5199ad147f28cb29396823a5a6a3517cd57a7d2dc9cf24e6",
+    "patch_raw_hash": "c03582f2ef4343b5c1f3a04a7ea77bf49661303916bab8b8d3a14a5c05265dd8",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT04722718/history/0?patchToVersion=1",
+    "to_snapshot_hash": "806eb4a16f121b10f225329c168299f348f932146f1bb02868d2989d1d27e49d"
+  },
+  "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT04722718",
+    "current_record_hash": "d0bb235bf4c2d42154361a0c2d013b68fa489c06099cba7ec4f1bb0cce0ddd9e",
+    "current_record_raw_hash": "d0bb235bf4c2d42154361a0c2d013b68fa489c06099cba7ec4f1bb0cce0ddd9e",
+    "lead_sponsor": "Jiuda Zhao",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT04722718",
+    "official_title": "Efficacy and Safety of Neoadjuvant Therapy With Sintilimab and Apatinib Combined Chemotherapy in Triple-negative Breast Cancer",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT04722718",
+    "title": "Efficacy and Safety of Sintilimab and Apatinib Combined Chemotherapy in Breast Cancer"
+  },
+  "versions": {
+    "from_version": 0,
+    "submitted_date": "2021-01-31",
+    "to_version": 1
+  }
+}

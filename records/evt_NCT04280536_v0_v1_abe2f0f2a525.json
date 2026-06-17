@@ -1,0 +1,354 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/armsInterventionsModule/interventions/0/description",
+      "/protocolSection/armsInterventionsModule/interventions/1/description",
+      "/protocolSection/conditionsModule/keywords/2",
+      "/protocolSection/descriptionModule/briefSummary",
+      "/protocolSection/descriptionModule/detailedDescription",
+      "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+      "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+      "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+      "/protocolSection/outcomesModule/primaryOutcomes/1",
+      "/protocolSection/outcomesModule/secondaryOutcomes",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT04280536_v0_v1_abe2f0f2a525. ClinicalTrials.gov NCT04280536, versions 0-1. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance.",
+      "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 0 to version 1 for NCT04280536.",
+      "The JSON Patch for this comparison has hash fa8d293606a783bb403afa41f939ee0e3d74a900e9782428fd6ffcdadfbed74f.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under the primary outcome module changed between ClinicalTrials.gov versions 0 and 1.",
+      "The timing context for the from-version record was early_recruitment.",
+      "The deterministic rules that fired were: arms_or_interventions_change, primary_outcome_any_change, secondary_outcome_any_change.",
+      "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/interventions/0/description, /protocolSection/armsInterventionsModule/interventions/1/description, /protocolSection/conditionsModule/keywords/2, /protocolSection/descriptionModule/briefSummary, /protocolSection/descriptionModule/detailedDescription, /protocolSection/outcomesModule/primaryOutcomes/0/description, /protocolSection/outcomesModule/primaryOutcomes/0/measure, /protocolSection/outcomesModule/primaryOutcomes/0/timeFrame, /protocolSection/outcomesModule/primaryOutcomes/1, /protocolSection/outcomesModule/secondaryOutcomes, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+    ],
+    "classification": {
+      "categories": [
+        "primary_outcome_change",
+        "arm_intervention_change",
+        "secondary_outcome_change"
+      ],
+      "category": "primary_outcome_change",
+      "deterministic_rules": [
+        "arms_or_interventions_change",
+        "primary_outcome_any_change",
+        "secondary_outcome_any_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "early_recruitment",
+      "value_signals": []
+    },
+    "event_id": "evt_NCT04280536_v0_v1_abe2f0f2a525",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2020-08"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2020-08-11"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2020-08-13"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/descriptionModule/briefSummary",
+        "value": "This is a single arm, open-label, lead in phase Ib dose confirmation, followed by phase II study with 2 parallel study cohorts."
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/descriptionModule/detailedDescription",
+        "value": "<p>Phase Ib Patients will be treated with twice-daily dosing of FTD&#x2F;TPI in a 3+3 dose escalation design Phase II</p><p>Oral FTD&#x2F;TPI at RP2D will be administered until disease progression, intolerable toxicity or patient withdrawal.</p><p>2 parallel cohorts of patients will be enrolled : Cohort A : patients with prior exposure to fluoropyrimidines Cohort B : patients without prior exposure to fluoropyrimidines</p>"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/conditionsModule/keywords/2",
+        "value": "Trifluridine"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/0/description",
+        "value": "Oral FTD&#x2F;TPI at RP2D will be administered until disease progression, intolerable toxicity or patient withdrawal."
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/armsInterventionsModule/interventions/1/description",
+        "value": "Oral FTD&#x2F;TPI at RP2D will be administered until disease progression, intolerable toxicity or patient withdrawal."
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+        "value": "Progression Free Survival (PFS)"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+        "value": "Primary endpoint is proportion of patients who are PFS at 4 months in Cohort A"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+        "value": "4 months"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/1"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/outcomesModule/primaryOutcomes/1"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/outcomesModule/secondaryOutcomes",
+        "value": [
+          {
+            "description": "The death of any patient in the trial from any cause will be recorded and the amount of time from enrollment in the trial until death will be recorded in weeks.",
+            "measure": "Overall Response",
+            "timeFrame": "5 years"
+          },
+          {
+            "description": "Proportion of patients who are PFS at 6 months in Cohort B",
+            "measure": "Progression Free Survival (PFS)",
+            "timeFrame": "6 months"
+          },
+          {
+            "description": "All adverse events experienced by all patients (in both cohort , RP2D of FTD&#x2F;TPI in MBC Patients) exposed to Trifluridine&#x2F;tipiracil will be recorded and graded according to CTCAE version 5.",
+            "measure": "Safety and Efficacy",
+            "timeFrame": "5 years"
+          }
+        ]
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "9bdc8b327c9cd7902032c736d1a2642e5fe3fef7ff9cd6cd95c8b78e12ad1827",
+      "materiality_event_hash": "64e6578b25da94c82b9c5006015cf5e7fe2bbc62994d932d523ba08666cfaa9e",
+      "patch_hash": "fa8d293606a783bb403afa41f939ee0e3d74a900e9782428fd6ffcdadfbed74f",
+      "patch_raw_hash": "ab672b7a2a2a09a1c957096b2ead7ee0cae2c6ff0276ce4e943bf3c04bc60440",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT04280536/history/0?patchToVersion=1",
+      "to_snapshot_hash": "2cef86724b957f4ce8527dcdc976b3538ae97102a15208d48aac1c93816cada0"
+    },
+    "review_question": "What did the primary outcome field say before and after the amendment, and is there a public protocol, statistical analysis plan, or manuscript explaining the change?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT04280536",
+      "nct_id": "NCT04280536"
+    },
+    "versions": {
+      "from_version": 0,
+      "submitted_date": "2020-08-11",
+      "to_version": 1
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/armsInterventionsModule/interventions/0/description",
+    "/protocolSection/armsInterventionsModule/interventions/1/description",
+    "/protocolSection/conditionsModule/keywords/2",
+    "/protocolSection/descriptionModule/briefSummary",
+    "/protocolSection/descriptionModule/detailedDescription",
+    "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+    "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+    "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+    "/protocolSection/outcomesModule/primaryOutcomes/1",
+    "/protocolSection/outcomesModule/secondaryOutcomes",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT04280536_v0_v1_abe2f0f2a525. ClinicalTrials.gov NCT04280536, versions 0-1. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance.",
+    "That the outcome change was inconsistent with the protocol or statistical analysis plan."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 0 to version 1 for NCT04280536.",
+    "The JSON Patch for this comparison has hash fa8d293606a783bb403afa41f939ee0e3d74a900e9782428fd6ffcdadfbed74f.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under the primary outcome module changed between ClinicalTrials.gov versions 0 and 1.",
+    "The timing context for the from-version record was early_recruitment.",
+    "The deterministic rules that fired were: arms_or_interventions_change, primary_outcome_any_change, secondary_outcome_any_change.",
+    "The changed JSON Pointer paths were: /protocolSection/armsInterventionsModule/interventions/0/description, /protocolSection/armsInterventionsModule/interventions/1/description, /protocolSection/conditionsModule/keywords/2, /protocolSection/descriptionModule/briefSummary, /protocolSection/descriptionModule/detailedDescription, /protocolSection/outcomesModule/primaryOutcomes/0/description, /protocolSection/outcomesModule/primaryOutcomes/0/measure, /protocolSection/outcomesModule/primaryOutcomes/0/timeFrame, /protocolSection/outcomesModule/primaryOutcomes/1, /protocolSection/outcomesModule/secondaryOutcomes, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+  ],
+  "classification": {
+    "categories": [
+      "primary_outcome_change",
+      "arm_intervention_change",
+      "secondary_outcome_change"
+    ],
+    "category": "primary_outcome_change",
+    "deterministic_rules": [
+      "arms_or_interventions_change",
+      "primary_outcome_any_change",
+      "secondary_outcome_any_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "early_recruitment",
+    "value_signals": []
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT04280536_v0_v1_abe2f0f2a525",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT04280536_v0_v1_abe2f0f2a525.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT04280536_v0_v1_abe2f0f2a525",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT04280536"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2020-08"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2020-08-11"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2020-08-13"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/descriptionModule/briefSummary",
+      "value": "This is a single arm, open-label, lead in phase Ib dose confirmation, followed by phase II study with 2 parallel study cohorts."
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/descriptionModule/detailedDescription",
+      "value": "<p>Phase Ib Patients will be treated with twice-daily dosing of FTD&#x2F;TPI in a 3+3 dose escalation design Phase II</p><p>Oral FTD&#x2F;TPI at RP2D will be administered until disease progression, intolerable toxicity or patient withdrawal.</p><p>2 parallel cohorts of patients will be enrolled : Cohort A : patients with prior exposure to fluoropyrimidines Cohort B : patients without prior exposure to fluoropyrimidines</p>"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/conditionsModule/keywords/2",
+      "value": "Trifluridine"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/0/description",
+      "value": "Oral FTD&#x2F;TPI at RP2D will be administered until disease progression, intolerable toxicity or patient withdrawal."
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/armsInterventionsModule/interventions/1/description",
+      "value": "Oral FTD&#x2F;TPI at RP2D will be administered until disease progression, intolerable toxicity or patient withdrawal."
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+      "value": "Progression Free Survival (PFS)"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/0/description",
+      "value": "Primary endpoint is proportion of patients who are PFS at 4 months in Cohort A"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/0/timeFrame",
+      "value": "4 months"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/1"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/outcomesModule/primaryOutcomes/1"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/outcomesModule/secondaryOutcomes",
+      "value": [
+        {
+          "description": "The death of any patient in the trial from any cause will be recorded and the amount of time from enrollment in the trial until death will be recorded in weeks.",
+          "measure": "Overall Response",
+          "timeFrame": "5 years"
+        },
+        {
+          "description": "Proportion of patients who are PFS at 6 months in Cohort B",
+          "measure": "Progression Free Survival (PFS)",
+          "timeFrame": "6 months"
+        },
+        {
+          "description": "All adverse events experienced by all patients (in both cohort , RP2D of FTD&#x2F;TPI in MBC Patients) exposed to Trifluridine&#x2F;tipiracil will be recorded and graded according to CTCAE version 5.",
+          "measure": "Safety and Efficacy",
+          "timeFrame": "5 years"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "4a7e7a3bcd621a6d2721985b83b1a0d8af2d6899b714f0fa125edc4ad3f4471f",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT04280536_v0_v1_abe2f0f2a525",
+    "evidence_version": 1,
+    "from_snapshot_hash": "9bdc8b327c9cd7902032c736d1a2642e5fe3fef7ff9cd6cd95c8b78e12ad1827",
+    "materiality_event_hash": "64e6578b25da94c82b9c5006015cf5e7fe2bbc62994d932d523ba08666cfaa9e",
+    "patch_hash": "fa8d293606a783bb403afa41f939ee0e3d74a900e9782428fd6ffcdadfbed74f",
+    "patch_raw_hash": "ab672b7a2a2a09a1c957096b2ead7ee0cae2c6ff0276ce4e943bf3c04bc60440",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT04280536/history/0?patchToVersion=1",
+    "to_snapshot_hash": "2cef86724b957f4ce8527dcdc976b3538ae97102a15208d48aac1c93816cada0"
+  },
+  "review_question": "What did the primary outcome field say before and after the amendment, and is there a public protocol, statistical analysis plan, or manuscript explaining the change?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT04280536",
+    "current_record_hash": "c3559e9756b3a8a2b6fdf20cf4b335b518f10fb095c9a7bfc7f6d67e254b28e9",
+    "current_record_raw_hash": "c3559e9756b3a8a2b6fdf20cf4b335b518f10fb095c9a7bfc7f6d67e254b28e9",
+    "lead_sponsor": "National University Hospital, Singapore",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT04280536",
+    "official_title": "Phase II Study of FTD/TPI (Lonsurf) in Metastatic Breast Cancers With or Without Prior Exposure to Fluoropyrimidines (LONBRECA)",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT04280536",
+    "title": "Phase II Study of FTD/TPI (Lonsurf) in Metastatic Breast Cancers With or Without Prior Exposure to Fluoropyrimidines (LONBRECA)"
+  },
+  "versions": {
+    "from_version": 0,
+    "submitted_date": "2020-08-11",
+    "to_version": 1
+  }
+}

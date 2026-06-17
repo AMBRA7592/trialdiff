@@ -1,0 +1,106 @@
+---
+import { ArrowLeft, ExternalLink } from "@lucide/astro";
+
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { formatNumber, severityClass, titleCase } from "@/lib/format";
+import { getTrialDetail } from "@/queries/trials";
+
+const nctId = String(Astro.params.nctId ?? "").toUpperCase();
+const data = await getTrialDetail(nctId);
+const trial = data.trial;
+const title = trial ? `${trial.nctId} | TrialDiff` : "TrialDiff trial detail";
+---
+
+<BaseLayout title={title}>
+  <main class="page-shell stack">
+    <a class="button" href="/">
+      <ArrowLeft size={16} />
+      Back to feed
+    </a>
+
+    {
+      data.databaseReady && trial ? (
+        <>
+          <header class="panel panel-pad">
+            <div class="header-row">
+              <div>
+                <p class="eyebrow">{trial.nctId}</p>
+                <h1>{trial.briefTitle ?? "Untitled study"}</h1>
+                {trial.officialTitle && <p class="lede">{trial.officialTitle}</p>}
+              </div>
+              <a class="button" href={`https://clinicaltrials.gov/study/${trial.nctId}`}>
+                ClinicalTrials.gov
+                <ExternalLink size={16} />
+              </a>
+            </div>
+          </header>
+
+          <section class="grid trial-summary-grid">
+            <div class="panel panel-pad">
+              <div class="stat-label">Sponsor</div>
+              <div class="event-title">{trial.leadSponsor ?? "Unknown"}</div>
+            </div>
+            <div class="panel panel-pad">
+              <div class="stat-label">Status</div>
+              <div class="event-title">{trial.overallStatus ? titleCase(trial.overallStatus) : "Unknown"}</div>
+            </div>
+            <div class="panel panel-pad">
+              <div class="stat-label">Versions</div>
+              <div class="stat-value">{formatNumber(data.versionCount)}</div>
+            </div>
+            <div class="panel panel-pad">
+              <div class="stat-label">Adjacent patches</div>
+              <div class="stat-value">{formatNumber(data.patchCount)}</div>
+            </div>
+          </section>
+
+          <section class="panel panel-pad disclaimer">
+            Severity means review priority, not proven wrongdoing. Evidence Records are generated for high and critical
+            events only.
+          </section>
+
+          <section class="panel">
+            <div class="section-head">
+              <h2>Material event timeline</h2>
+              <span class="section-count">{data.events.length} shown</span>
+            </div>
+            <div>
+              {data.events.map((event) => (
+                <article class="event">
+                  <div>
+                    <span class={severityClass(event.severity)}>{titleCase(event.severity)}</span>
+                    <div class="event-date">{event.submittedDate ?? "Date unavailable"}</div>
+                  </div>
+                  <div>
+                    <div class="event-title">{titleCase(event.category)}</div>
+                    <div class="event-meta">
+                      <span>v{event.fromVersion} to v{event.toVersion}</span>
+                      {event.timingContext && <span>{titleCase(event.timingContext)}</span>}
+                      {event.severity !== event.severityPreTiming && (
+                        <span>Base {titleCase(event.severityPreTiming)}</span>
+                      )}
+                      <a href={`/trials/${trial.nctId}/patches/${event.fromVersion}-to-${event.toVersion}`}>
+                        Inspect patch
+                      </a>
+                      {event.evidenceEventId && <a href={`/events/${event.evidenceEventId}`}>Evidence Record</a>}
+                    </div>
+                  </div>
+                  <div class="path-list">
+                    {event.changedPaths.slice(0, 3).map((path) => (
+                      <div class="path-item" title={path}>{path}</div>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        </>
+      ) : (
+        <section class="panel panel-pad notice">
+          <div class="notice-title">{data.databaseReady ? "Trial not found" : "Database connection pending"}</div>
+          <div>{data.databaseError ?? "No trial record exists for this NCT ID."}</div>
+        </section>
+      )
+    }
+  </main>
+</BaseLayout>

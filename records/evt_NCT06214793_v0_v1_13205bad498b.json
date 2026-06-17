@@ -1,0 +1,210 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/descriptionModule/detailedDescription",
+      "/protocolSection/designModule/designInfo/interventionModelDescription",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT06214793_v0_v1_13205bad498b. ClinicalTrials.gov NCT06214793, versions 0-1. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 0 to version 1 for NCT06214793.",
+      "The JSON Patch for this comparison has hash 9226fb955616dbe03a9ec98dc8a9e7aee23e61511b0ff14ff1386af2de97f040.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was critical.",
+      "A registry field under the study design module changed between ClinicalTrials.gov versions 0 and 1.",
+      "The timing context for the from-version record was pre_recruitment.",
+      "The deterministic rules that fired were: design_info_change.",
+      "The changed JSON Pointer paths were: /protocolSection/descriptionModule/detailedDescription, /protocolSection/designModule/designInfo/interventionModelDescription, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+    ],
+    "classification": {
+      "categories": [
+        "design_change"
+      ],
+      "category": "design_change",
+      "deterministic_rules": [
+        "design_info_change"
+      ],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "critical",
+      "timing_context": "pre_recruitment",
+      "value_signals": []
+    },
+    "event_id": "evt_NCT06214793_v0_v1_13205bad498b",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2024-02"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2024-02-21"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2024-02-23"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/descriptionModule/detailedDescription",
+        "value": "Invasive lobular cancer (ILC) represents 10-15% of all breast cancers, up to 75% of ILCs carry a mutation in CDH1 gene which encodes for e-cadherin (ECAD), which is a cell adhesion glycoprotein.\nPreclinical data using patient derived xenografts have shown loss of ECAD due to CDH1 mutation is associated with an upregulation ROS1 activity, and ROS1 inhibitors have demonstrated synthetic lethality in CDH1-mutated cell lines.\nTaletrectinib is a novel ROS1&#x2F;NTRK inhibitor with demonstrated activity in ROS1 mutated non-small cell lung cancer.\nThe purpose of the trial is to estimate the activity of taletrectinib in previously treated CDH1-mutated metastatic breast ILC."
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/designModule/designInfo/interventionModelDescription",
+        "value": "Single arm, prospective phase II study of taletrectinib in participants with CDH1-mutated breast metastatic ILC"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "b82498a79cd3205cf8459dae39ed9d80c9e79ca3e531ea6684d31675df92669c",
+      "materiality_event_hash": "e9be60f6b3ca8f1dff9caae12e7c24418fb327243483582ae32e134c40abe78b",
+      "patch_hash": "9226fb955616dbe03a9ec98dc8a9e7aee23e61511b0ff14ff1386af2de97f040",
+      "patch_raw_hash": "4fc3f94de2c972cebd8fe9a1df25c0eabc203b277c503a190a86837f4585d3fd",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT06214793/history/0?patchToVersion=1",
+      "to_snapshot_hash": "8987a933251710821c9fbaa3f3368cdb81ead8256b6e09c6e6e7955285e270ff"
+    },
+    "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT06214793",
+      "nct_id": "NCT06214793"
+    },
+    "versions": {
+      "from_version": 0,
+      "submitted_date": "2024-02-21",
+      "to_version": 1
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/descriptionModule/detailedDescription",
+    "/protocolSection/designModule/designInfo/interventionModelDescription",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT06214793_v0_v1_13205bad498b. ClinicalTrials.gov NCT06214793, versions 0-1. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 0 to version 1 for NCT06214793.",
+    "The JSON Patch for this comparison has hash 9226fb955616dbe03a9ec98dc8a9e7aee23e61511b0ff14ff1386af2de97f040.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was critical.",
+    "A registry field under the study design module changed between ClinicalTrials.gov versions 0 and 1.",
+    "The timing context for the from-version record was pre_recruitment.",
+    "The deterministic rules that fired were: design_info_change.",
+    "The changed JSON Pointer paths were: /protocolSection/descriptionModule/detailedDescription, /protocolSection/designModule/designInfo/interventionModelDescription, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/statusVerifiedDate."
+  ],
+  "classification": {
+    "categories": [
+      "design_change"
+    ],
+    "category": "design_change",
+    "deterministic_rules": [
+      "design_info_change"
+    ],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "critical",
+    "timing_context": "pre_recruitment",
+    "value_signals": []
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT06214793_v0_v1_13205bad498b",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT06214793_v0_v1_13205bad498b.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT06214793_v0_v1_13205bad498b",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT06214793"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2024-02"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2024-02-21"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2024-02-23"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/descriptionModule/detailedDescription",
+      "value": "Invasive lobular cancer (ILC) represents 10-15% of all breast cancers, up to 75% of ILCs carry a mutation in CDH1 gene which encodes for e-cadherin (ECAD), which is a cell adhesion glycoprotein.\nPreclinical data using patient derived xenografts have shown loss of ECAD due to CDH1 mutation is associated with an upregulation ROS1 activity, and ROS1 inhibitors have demonstrated synthetic lethality in CDH1-mutated cell lines.\nTaletrectinib is a novel ROS1&#x2F;NTRK inhibitor with demonstrated activity in ROS1 mutated non-small cell lung cancer.\nThe purpose of the trial is to estimate the activity of taletrectinib in previously treated CDH1-mutated metastatic breast ILC."
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/designModule/designInfo/interventionModelDescription",
+      "value": "Single arm, prospective phase II study of taletrectinib in participants with CDH1-mutated breast metastatic ILC"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "b7f0903fb6ddb2fa1cda22cb1b8f5507d6593bb2585ffbc02e90ba42834e926d",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT06214793_v0_v1_13205bad498b",
+    "evidence_version": 1,
+    "from_snapshot_hash": "b82498a79cd3205cf8459dae39ed9d80c9e79ca3e531ea6684d31675df92669c",
+    "materiality_event_hash": "e9be60f6b3ca8f1dff9caae12e7c24418fb327243483582ae32e134c40abe78b",
+    "patch_hash": "9226fb955616dbe03a9ec98dc8a9e7aee23e61511b0ff14ff1386af2de97f040",
+    "patch_raw_hash": "4fc3f94de2c972cebd8fe9a1df25c0eabc203b277c503a190a86837f4585d3fd",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT06214793/history/0?patchToVersion=1",
+    "to_snapshot_hash": "8987a933251710821c9fbaa3f3368cdb81ead8256b6e09c6e6e7955285e270ff"
+  },
+  "review_question": "What source document explains this registry amendment, and does it change interpretation of the trial record?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT06214793",
+    "current_record_hash": "936f93f63991e4d3a6a427f03dc02ab65d163aee6b7ffb11d6151ee65c67dcb8",
+    "current_record_raw_hash": "936f93f63991e4d3a6a427f03dc02ab65d163aee6b7ffb11d6151ee65c67dcb8",
+    "lead_sponsor": "Megan Kruse, MD",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT06214793",
+    "official_title": "A Phase II Study of Taletrectinib in Previously Treated Metastatic CDH1-mutated Invasive Lobular Cancer (ILC) of the Breast (TaCe)",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT06214793",
+    "title": "Taletrectinib in Previously Treated Metastatic CDH1-mutated Invasive Lobular Cancer (ILC)"
+  },
+  "versions": {
+    "from_version": 0,
+    "submitted_date": "2024-02-21",
+    "to_version": 1
+  }
+}

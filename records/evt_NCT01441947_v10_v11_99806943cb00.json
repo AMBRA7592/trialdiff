@@ -1,0 +1,354 @@
+{
+  "canonical_evidence_record": {
+    "changed_paths": [
+      "/protocolSection/contactsLocationsModule/locations/0",
+      "/protocolSection/contactsLocationsModule/locations/1",
+      "/protocolSection/contactsLocationsModule/locations/3",
+      "/protocolSection/statusModule/completionDateStruct/date",
+      "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+      "/protocolSection/statusModule/statusVerifiedDate"
+    ],
+    "citation_text": "TrialDiff Evidence Record evt_NCT01441947_v10_v11_99806943cb00. ClinicalTrials.gov NCT01441947, versions 10-11. Evidence version 1.",
+    "claims_not_supported": [
+      "That the amendment was scientifically unjustified.",
+      "That the change constitutes misconduct or wrongdoing.",
+      "That sponsor intent can be inferred from this registry change.",
+      "That the change caused or altered the trial's results.",
+      "That the change was or was not disclosed in a manuscript.",
+      "That TrialDiff determines regulatory compliance or non-compliance."
+    ],
+    "claims_supported": [
+      "TrialDiff compared ClinicalTrials.gov record version 10 to version 11 for NCT01441947.",
+      "The JSON Patch for this comparison has hash 46104aa6c44e0f391dc726d88d2a0005a07bb5694327357a46254f4c1344e21e.",
+      "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+      "The event was classified as critical; before timing adjustment it was high.",
+      "A trial timeline date field moved by more than 365 days between ClinicalTrials.gov versions 10 and 11.",
+      "The timing context for the from-version record was late_recruitment.",
+      "The changed JSON Pointer paths were: /protocolSection/contactsLocationsModule/locations/0, /protocolSection/contactsLocationsModule/locations/1, /protocolSection/contactsLocationsModule/locations/3, /protocolSection/statusModule/completionDateStruct/date, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/primaryCompletionDateStruct/date, /protocolSection/statusModule/statusVerifiedDate.",
+      "The timeline value moved by 365 days.",
+      "The timeline value moved by 366 days."
+    ],
+    "classification": {
+      "categories": [
+        "timeline_major_slip",
+        "timeline_significant_shift"
+      ],
+      "category": "timeline_major_slip",
+      "deterministic_rules": [],
+      "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+      "severity": "critical",
+      "severity_pre_timing": "high",
+      "timing_context": "late_recruitment",
+      "value_signals": [
+        {
+          "category": "timeline_significant_shift",
+          "date_struct": "primaryCompletionDateStruct",
+          "delta_days": 365,
+          "direction": "later",
+          "new_precision": "month",
+          "new_type": "ESTIMATED",
+          "new_value": "2019-06",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2018-06",
+          "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+          "severity": "high",
+          "signal": "timeline_significant_shift"
+        },
+        {
+          "category": "timeline_major_slip",
+          "date_struct": "completionDateStruct",
+          "delta_days": 366,
+          "direction": "later",
+          "new_precision": "month",
+          "new_type": "ESTIMATED",
+          "new_value": "2020-12",
+          "old_precision": "month",
+          "old_type": "ESTIMATED",
+          "old_value": "2019-12",
+          "path": "/protocolSection/statusModule/completionDateStruct/date",
+          "severity": "high",
+          "signal": "timeline_major_slip"
+        }
+      ]
+    },
+    "event_id": "evt_NCT01441947_v10_v11_99806943cb00",
+    "evidence_version": 1,
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/statusVerifiedDate",
+        "value": "2017-07"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+        "value": "2019-06"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/completionDateStruct/date",
+        "value": "2020-12"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+        "value": "2017-07-25"
+      },
+      {
+        "op": "replace",
+        "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+        "value": "2017-07-27"
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/contactsLocationsModule/locations/0",
+        "value": {
+          "city": "Boston",
+          "country": "United States",
+          "facility": "Beth Israel Deaconess Medical Center",
+          "geoPoint": {
+            "lat": 42.35843,
+            "lon": -71.05977
+          },
+          "state": "Massachusetts",
+          "zip": "02115"
+        }
+      },
+      {
+        "op": "add",
+        "path": "/protocolSection/contactsLocationsModule/locations/1",
+        "value": {
+          "city": "Boston",
+          "country": "United States",
+          "facility": "Dana Farber Cancer Institute",
+          "geoPoint": {
+            "lat": 42.35843,
+            "lon": -71.05977
+          },
+          "state": "Massachusetts",
+          "zip": "02115"
+        }
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/locations/3"
+      },
+      {
+        "op": "remove",
+        "path": "/protocolSection/contactsLocationsModule/locations/3"
+      }
+    ],
+    "provenance": {
+      "from_snapshot_hash": "3d247d2125c834d8ab44e711a2e2e705e3a772a270bfea21d211925adf91f2c2",
+      "materiality_event_hash": "dc4924901b581a993059d56c43b480ee422b6c27c6cb22eda1e5c18440a5ef9a",
+      "patch_hash": "46104aa6c44e0f391dc726d88d2a0005a07bb5694327357a46254f4c1344e21e",
+      "patch_raw_hash": "43e367af6064bc42480b87d6c5d8dc1788813a2f9e9c5f626e2f3ba225b3c910",
+      "patch_source": "ctgov_internal_history",
+      "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT01441947/history/10?patchToVersion=11",
+      "to_snapshot_hash": "5204329958e1c1ad3304a92e735bffc670faf67fd4f6010702696e445d1388ed"
+    },
+    "review_question": "What explains the major timeline movement, and does the amendment represent a delay, a backfill, or a correction?",
+    "schema": "trialdiff.evidence_record",
+    "trial": {
+      "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT01441947",
+      "nct_id": "NCT01441947"
+    },
+    "versions": {
+      "from_version": 10,
+      "submitted_date": "2017-07-25",
+      "to_version": 11
+    }
+  },
+  "changed_paths": [
+    "/protocolSection/contactsLocationsModule/locations/0",
+    "/protocolSection/contactsLocationsModule/locations/1",
+    "/protocolSection/contactsLocationsModule/locations/3",
+    "/protocolSection/statusModule/completionDateStruct/date",
+    "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+    "/protocolSection/statusModule/lastUpdateSubmitDate",
+    "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+    "/protocolSection/statusModule/statusVerifiedDate"
+  ],
+  "citation_text": "TrialDiff Evidence Record evt_NCT01441947_v10_v11_99806943cb00. ClinicalTrials.gov NCT01441947, versions 10-11. Evidence version 1.",
+  "claims_not_supported": [
+    "That the amendment was scientifically unjustified.",
+    "That the change constitutes misconduct or wrongdoing.",
+    "That sponsor intent can be inferred from this registry change.",
+    "That the change caused or altered the trial's results.",
+    "That the change was or was not disclosed in a manuscript.",
+    "That TrialDiff determines regulatory compliance or non-compliance."
+  ],
+  "claims_supported": [
+    "TrialDiff compared ClinicalTrials.gov record version 10 to version 11 for NCT01441947.",
+    "The JSON Patch for this comparison has hash 46104aa6c44e0f391dc726d88d2a0005a07bb5694327357a46254f4c1344e21e.",
+    "The active deterministic rule set hash was 09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a.",
+    "The event was classified as critical; before timing adjustment it was high.",
+    "A trial timeline date field moved by more than 365 days between ClinicalTrials.gov versions 10 and 11.",
+    "The timing context for the from-version record was late_recruitment.",
+    "The changed JSON Pointer paths were: /protocolSection/contactsLocationsModule/locations/0, /protocolSection/contactsLocationsModule/locations/1, /protocolSection/contactsLocationsModule/locations/3, /protocolSection/statusModule/completionDateStruct/date, /protocolSection/statusModule/lastUpdatePostDateStruct/date, /protocolSection/statusModule/lastUpdateSubmitDate, /protocolSection/statusModule/primaryCompletionDateStruct/date, /protocolSection/statusModule/statusVerifiedDate.",
+    "The timeline value moved by 365 days.",
+    "The timeline value moved by 366 days."
+  ],
+  "classification": {
+    "categories": [
+      "timeline_major_slip",
+      "timeline_significant_shift"
+    ],
+    "category": "timeline_major_slip",
+    "deterministic_rules": [],
+    "rule_set_hash": "09e7137c5c0bae54b15b69576b395f28dfbfc3206521ff3e376cc423d6fa788a",
+    "severity": "critical",
+    "severity_pre_timing": "high",
+    "timing_context": "late_recruitment",
+    "value_signals": [
+      {
+        "category": "timeline_significant_shift",
+        "date_struct": "primaryCompletionDateStruct",
+        "delta_days": 365,
+        "direction": "later",
+        "new_precision": "month",
+        "new_type": "ESTIMATED",
+        "new_value": "2019-06",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2018-06",
+        "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+        "severity": "high",
+        "signal": "timeline_significant_shift"
+      },
+      {
+        "category": "timeline_major_slip",
+        "date_struct": "completionDateStruct",
+        "delta_days": 366,
+        "direction": "later",
+        "new_precision": "month",
+        "new_type": "ESTIMATED",
+        "new_value": "2020-12",
+        "old_precision": "month",
+        "old_type": "ESTIMATED",
+        "old_value": "2019-12",
+        "path": "/protocolSection/statusModule/completionDateStruct/date",
+        "severity": "high",
+        "signal": "timeline_major_slip"
+      }
+    ]
+  },
+  "demo_version": "v0.1-alpha",
+  "event_id": "evt_NCT01441947_v10_v11_99806943cb00",
+  "live_urls": {
+    "canonical_json": "https://trialdiff.vercel.app/events/evt_NCT01441947_v10_v11_99806943cb00.json",
+    "evidence_page": "https://trialdiff.vercel.app/events/evt_NCT01441947_v10_v11_99806943cb00",
+    "trial_page": "https://trialdiff.vercel.app/trials/NCT01441947"
+  },
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/statusVerifiedDate",
+      "value": "2017-07"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/primaryCompletionDateStruct/date",
+      "value": "2019-06"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/completionDateStruct/date",
+      "value": "2020-12"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdateSubmitDate",
+      "value": "2017-07-25"
+    },
+    {
+      "op": "replace",
+      "path": "/protocolSection/statusModule/lastUpdatePostDateStruct/date",
+      "value": "2017-07-27"
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/contactsLocationsModule/locations/0",
+      "value": {
+        "city": "Boston",
+        "country": "United States",
+        "facility": "Beth Israel Deaconess Medical Center",
+        "geoPoint": {
+          "lat": 42.35843,
+          "lon": -71.05977
+        },
+        "state": "Massachusetts",
+        "zip": "02115"
+      }
+    },
+    {
+      "op": "add",
+      "path": "/protocolSection/contactsLocationsModule/locations/1",
+      "value": {
+        "city": "Boston",
+        "country": "United States",
+        "facility": "Dana Farber Cancer Institute",
+        "geoPoint": {
+          "lat": 42.35843,
+          "lon": -71.05977
+        },
+        "state": "Massachusetts",
+        "zip": "02115"
+      }
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/locations/3"
+    },
+    {
+      "op": "remove",
+      "path": "/protocolSection/contactsLocationsModule/locations/3"
+    }
+  ],
+  "provenance": {
+    "evidence_canonical_hash": "2d4a59d15bd0f2fbafcbaebd2904b931a24cd7e7b5923d6306e11ae89eb2f813",
+    "evidence_source": "derived_evidence_record",
+    "evidence_source_url": "trialdiff://evidence-record/evt_NCT01441947_v10_v11_99806943cb00",
+    "evidence_version": 1,
+    "from_snapshot_hash": "3d247d2125c834d8ab44e711a2e2e705e3a772a270bfea21d211925adf91f2c2",
+    "materiality_event_hash": "dc4924901b581a993059d56c43b480ee422b6c27c6cb22eda1e5c18440a5ef9a",
+    "patch_hash": "46104aa6c44e0f391dc726d88d2a0005a07bb5694327357a46254f4c1344e21e",
+    "patch_raw_hash": "43e367af6064bc42480b87d6c5d8dc1788813a2f9e9c5f626e2f3ba225b3c910",
+    "patch_source": "ctgov_internal_history",
+    "patch_source_url": "https://clinicaltrials.gov/api/int/studies/NCT01441947/history/10?patchToVersion=11",
+    "to_snapshot_hash": "5204329958e1c1ad3304a92e735bffc670faf67fd4f6010702696e445d1388ed"
+  },
+  "review_question": "What explains the major timeline movement, and does the amendment represent a delay, a backfill, or a correction?",
+  "schema": "trialdiff.alpha_demo_record",
+  "source_corpus": {
+    "counts": {
+      "evidence_records": 86,
+      "materiality_events": 122,
+      "patches": 280,
+      "trials": 25
+    },
+    "database": "trialdiff_breast_cancer_limit25.sqlite3",
+    "name": "TrialDiff v0.1-alpha 25-study breast cancer corpus",
+    "note": "The originally planned 100-study corpus remains a later expansion because the local 100-study SQLite file was not reliably readable during alpha freeze.",
+    "selection": "All critical Evidence Records first, followed by highest-priority high Evidence Records ordered by post/late/early/pre timing and submitted date, capped at 40 records."
+  },
+  "study": {
+    "clinicaltrials_gov_url": "https://clinicaltrials.gov/study/NCT01441947",
+    "current_record_hash": "c55f5fa065637193e9b1e93d3ba8d5e856f335e738dac7b8db817572613a37d9",
+    "current_record_raw_hash": "c55f5fa065637193e9b1e93d3ba8d5e856f335e738dac7b8db817572613a37d9",
+    "lead_sponsor": "Massachusetts General Hospital",
+    "lead_sponsor_class": "OTHER",
+    "nct_id": "NCT01441947",
+    "official_title": "A Phase II Trial of Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer With Involvement of Bone",
+    "official_v2_api_url": "https://clinicaltrials.gov/api/v2/studies/NCT01441947",
+    "title": "Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer"
+  },
+  "versions": {
+    "from_version": 10,
+    "submitted_date": "2017-07-25",
+    "to_version": 11
+  }
+}

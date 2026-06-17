@@ -1,0 +1,62 @@
+---
+import { ArrowLeft } from "@lucide/astro";
+
+import PatchInspector from "@/components/PatchInspector.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getPatchInspection } from "@/queries/patches";
+import type { PatchInspectionData } from "@/queries/patches";
+
+const nctId = String(Astro.params.nctId ?? "").toUpperCase();
+const range = String(Astro.params.range ?? "");
+const match = range.match(/^(\d+)-to-(\d+)$/);
+const fromVersion = match ? Number(match[1]) : Number.NaN;
+const toVersion = match ? Number(match[2]) : Number.NaN;
+const data: PatchInspectionData = Number.isFinite(fromVersion) && Number.isFinite(toVersion)
+  ? await getPatchInspection(nctId, fromVersion, toVersion)
+  : {
+      databaseReady: true,
+      fromVersion: 0,
+      toVersion: 0,
+      events: [],
+      databaseError: "Invalid patch range.",
+    };
+---
+
+<BaseLayout title={`${nctId} patch ${range} | TrialDiff`}>
+  <main class="page-shell stack">
+    <a class="button" href={`/trials/${nctId}`}>
+      <ArrowLeft size={16} />
+      Back to trial
+    </a>
+
+    {
+      data.databaseReady && data.patch ? (
+        <>
+          <header class="panel panel-pad">
+            <p class="eyebrow">{data.trial?.nctId ?? nctId}</p>
+            <h1>{data.trial?.briefTitle ?? "Patch inspection"}</h1>
+            <p class="lede">
+              Version {data.fromVersion} to {data.toVersion}
+              {data.trial?.leadSponsor ? ` · ${data.trial.leadSponsor}` : ""}
+            </p>
+          </header>
+
+          <PatchInspector
+            nctId={data.trial?.nctId ?? nctId}
+            fromVersion={data.fromVersion}
+            toVersion={data.toVersion}
+            events={data.events}
+            provenance={data.patch.provenance}
+            enriched={data.patch.enriched}
+            rawOperations={data.patch.operations}
+          />
+        </>
+      ) : (
+        <section class="panel panel-pad notice">
+          <div class="notice-title">{data.databaseReady ? "Patch not found" : "Database connection pending"}</div>
+          <div>{data.databaseError ?? "No patch record exists for this version range."}</div>
+        </section>
+      )
+    }
+  </main>
+</BaseLayout>

@@ -1,0 +1,248 @@
+---
+import { ArrowLeft, ExternalLink, ShieldCheck } from "@lucide/astro";
+
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { severityClass, titleCase } from "@/lib/format";
+import { getEvidenceRecord } from "@/queries/evidence";
+
+const eventId = String(Astro.params.event_id ?? "");
+const data = await getEvidenceRecord(eventId);
+const record = data.record;
+const title = record ? `${record.eventId} | TrialDiff Evidence Record` : "TrialDiff Evidence Record";
+---
+
+<BaseLayout title={title} description="Citeable TrialDiff amendment evidence record.">
+  <main class="page-shell stack evidence-page">
+    <a class="button" href="/">
+      <ArrowLeft size={16} />
+      Back to feed
+    </a>
+
+    {
+      data.databaseReady && record ? (
+        <>
+          <header class="panel panel-pad">
+            <div class="header-row">
+              <div>
+                <p class="eyebrow">Evidence Record</p>
+                <h1>{record.eventId}</h1>
+                <p class="lede">
+                  <a href={`/trials/${record.nctId}`}>{record.nctId}</a>
+                  {" · "}
+                  {record.briefTitle ?? "Untitled study"}
+                </p>
+              </div>
+              <div class="button-stack">
+                <a class="button" href={`/events/${record.eventId}.json`}>Canonical JSON</a>
+                <a class="button" href={`https://clinicaltrials.gov/study/${record.nctId}`}>
+                  ClinicalTrials.gov
+                  <ExternalLink size={16} />
+                </a>
+              </div>
+            </div>
+          </header>
+
+          <section class="panel panel-pad disclaimer">
+            <div class="disclaimer-inner">
+              <ShieldCheck size={20} />
+              <div>
+                Severity means review priority, not proven wrongdoing. This page states what the registry evidence
+                supports and what it does not support.
+              </div>
+            </div>
+          </section>
+
+          <section class="grid evidence-summary-grid">
+            <div class="panel panel-pad">
+              <div class="stat-label">Severity</div>
+              <span class={severityClass(record.severity)}>{titleCase(record.severity)}</span>
+            </div>
+            <div class="panel panel-pad">
+              <div class="stat-label">Category</div>
+              <div class="event-title">{titleCase(record.category)}</div>
+            </div>
+            <div class="panel panel-pad">
+              <div class="stat-label">Versions</div>
+              <div class="event-title">v{record.fromVersion} to v{record.toVersion}</div>
+            </div>
+            <div class="panel panel-pad">
+              <div class="stat-label">Timing</div>
+              <div class="event-title">{record.timingContext ? titleCase(record.timingContext) : "Unknown"}</div>
+            </div>
+          </section>
+
+          <section class="grid evidence-claims-grid">
+            <div class="panel panel-pad">
+              <h2>Claims Supported</h2>
+              <ul class="claim-list">
+                {record.claimsSupported.map((claim) => <li>{claim}</li>)}
+              </ul>
+            </div>
+            <div class="panel panel-pad">
+              <h2>Claims Not Supported</h2>
+              <ul class="claim-list">
+                {record.claimsNotSupported.map((claim) => <li>{claim}</li>)}
+              </ul>
+            </div>
+          </section>
+
+          <section class="panel panel-pad">
+            <h2>Neutral Review Question</h2>
+            <p class="lede">{record.reviewQuestion}</p>
+          </section>
+
+          <section class="panel panel-pad">
+            <h2>Citation</h2>
+            <p class="citation">{record.citationText}</p>
+          </section>
+
+          <section class="panel panel-pad">
+            <h2>Changed Paths</h2>
+            <div class="path-list evidence-path-list">
+              {record.changedPaths.map((path) => <div class="path-item" title={path}>{path}</div>)}
+            </div>
+          </section>
+
+          <section class="panel panel-pad">
+            <h2>Deterministic Rules</h2>
+            {
+              record.deterministicRules.length > 0 ? (
+                <div class="token-list">
+                  {record.deterministicRules.map((rule) => <code>{rule}</code>)}
+                </div>
+              ) : (
+                <p class="lede">No deterministic rules recorded.</p>
+              )
+            }
+          </section>
+
+          <section class="panel panel-pad">
+            <h2>Provenance</h2>
+            <dl class="provenance-list evidence-provenance">
+              <div>
+                <dt>Patch hash</dt>
+                <dd><code>{record.patchHash}</code></dd>
+              </div>
+              <div>
+                <dt>Canonical hash</dt>
+                <dd><code>{record.canonicalHash}</code></dd>
+              </div>
+              <div>
+                <dt>Rule set hash</dt>
+                <dd><code>{record.ruleSetHash}</code></dd>
+              </div>
+              <div>
+                <dt>From snapshot</dt>
+                <dd><code>{record.fromSnapshotHash ?? "Unavailable"}</code></dd>
+              </div>
+              <div>
+                <dt>To snapshot</dt>
+                <dd><code>{record.toSnapshotHash ?? "Unavailable"}</code></dd>
+              </div>
+              <div>
+                <dt>Patch source</dt>
+                <dd>{record.patchSource}</dd>
+              </div>
+              {
+                record.patchSourceUrl && (
+                  <div>
+                    <dt>Source URL</dt>
+                    <dd><a href={record.patchSourceUrl}>Registry payload</a></dd>
+                  </div>
+                )
+              }
+            </dl>
+          </section>
+
+          <section class="panel">
+            <div class="section-head">
+              <h2>Canonical JSON Preview</h2>
+              <span class="section-count">Stored payload</span>
+            </div>
+            <pre class="evidence-json">{JSON.stringify(record.canonicalJson, null, 2)}</pre>
+          </section>
+        </>
+      ) : (
+        <section class="panel panel-pad notice">
+          <div class="notice-title">{data.databaseReady ? "Evidence Record not found" : "Database connection pending"}</div>
+          <div>{data.databaseError ?? "No Evidence Record exists for this ID."}</div>
+        </section>
+      )
+    }
+  </main>
+</BaseLayout>
+
+<style>
+  .button-stack {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .evidence-summary-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .evidence-claims-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .claim-list {
+    display: grid;
+    gap: 10px;
+    margin: 14px 0 0;
+    padding-left: 20px;
+    color: #3a3832;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .citation {
+    margin: 14px 0 0;
+    border: 1px solid #e5e1d7;
+    border-radius: 6px;
+    background: #fbfaf7;
+    padding: 12px;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 0.84rem;
+    line-height: 1.55;
+  }
+
+  .evidence-path-list {
+    margin-top: 14px;
+  }
+
+  .evidence-provenance {
+    margin-top: 14px;
+  }
+
+  .evidence-provenance div {
+    grid-template-columns: 130px minmax(0, 1fr);
+  }
+
+  .evidence-json {
+    overflow: auto;
+    margin: 0;
+    max-height: 620px;
+    border: 0;
+    background: #fbfaf7;
+    padding: 16px;
+    color: #27241f;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+
+  @media (max-width: 900px) {
+    .evidence-summary-grid,
+    .evidence-claims-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .button-stack {
+      justify-content: flex-start;
+    }
+  }
+</style>

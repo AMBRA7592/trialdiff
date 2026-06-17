@@ -1,0 +1,334 @@
+{
+  "candidate_count": 300,
+  "errors": [],
+  "filters": {
+    "allowed_phases": [
+      "PHASE2",
+      "PHASE3"
+    ],
+    "last_update_posted_gte": "2021-05-20",
+    "min_versions": 3,
+    "study_type": "INTERVENTIONAL"
+  },
+  "generated_at": "2026-05-20T04:08:53Z",
+  "locally_eligible_count": 32,
+  "name": "breast_cancer_phase2_3",
+  "query": {
+    "endpoint": "/api/v2/studies",
+    "limit": 25,
+    "max_pages": 25,
+    "query.cond": "breast cancer"
+  },
+  "relaxation": {},
+  "selected_count": 25,
+  "selected_nct_ids": [
+    "NCT02755272",
+    "NCT05780567",
+    "NCT06214793",
+    "NCT03477019",
+    "NCT03820063",
+    "NCT02942355",
+    "NCT05144867",
+    "NCT00337649",
+    "NCT02546232",
+    "NCT04824014",
+    "NCT05180006",
+    "NCT04280536",
+    "NCT03324932",
+    "NCT06389006",
+    "NCT05490472",
+    "NCT06439771",
+    "NCT04754399",
+    "NCT05315687",
+    "NCT05328258",
+    "NCT03197935",
+    "NCT07294508",
+    "NCT05042791",
+    "NCT04722718",
+    "NCT04592484",
+    "NCT01441947"
+  ],
+  "studies": [
+    {
+      "last_update_posted": "2025-07-04",
+      "lead_sponsor": "Fox Chase Cancer Center",
+      "nct_id": "NCT02755272",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "A Study of Pembrolizumab With Carboplatin and Gemcitabine in Patients With Metastatic Triple Negative Breast Cancer",
+      "version_count": 19
+    },
+    {
+      "last_update_posted": "2026-04-17",
+      "lead_sponsor": "Chia Tai Tianqing Pharmaceutical Group Co., Ltd.",
+      "nct_id": "NCT05780567",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Clinical Study on Adjuvant Therapy of TQB3616 Combined With Endocrine Therapy Compared With Placebo Combined With Endocrine Therapy in Patients With Breast Cancer",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2025-05-01",
+      "lead_sponsor": "Megan Kruse, MD",
+      "nct_id": "NCT06214793",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "SUSPENDED",
+      "title": "Taletrectinib in Previously Treated Metastatic CDH1-mutated Invasive Lobular Cancer (ILC)",
+      "version_count": 7
+    },
+    {
+      "last_update_posted": "2023-01-19",
+      "lead_sponsor": "St. Olavs Hospital",
+      "nct_id": "NCT03477019",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Ultrasound-enhanced Delivery of Chemotherapy to Patients With Liver Metastasis From Breast- and Colorectal Cancer",
+      "version_count": 9
+    },
+    {
+      "last_update_posted": "2025-09-19",
+      "lead_sponsor": "Borstkanker Onderzoek Groep",
+      "nct_id": "NCT03820063",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Image-guided De-escalation of Neo-adjuvant Chemotherapy in HER2-positive Breast Cancer: the TRAIN-3 Study",
+      "version_count": 11
+    },
+    {
+      "last_update_posted": "2026-05-05",
+      "lead_sponsor": "Wake Forest University Health Sciences",
+      "nct_id": "NCT02942355",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Trial of Anastrozole and Palbociclib in Metastatic HER2-Negative Breast Cancer",
+      "version_count": 28
+    },
+    {
+      "last_update_posted": "2023-10-17",
+      "lead_sponsor": "Post Graduate Institute of Medical Education and Research, Chandigarh",
+      "nct_id": "NCT05144867",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "UNKNOWN",
+      "title": "Stereotactic Radiosurgery vs Whole Brain Radiotherapy in Breast Cancer With Brain Oligometastasis",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2023-04-28",
+      "lead_sponsor": "Hoffmann-La Roche",
+      "nct_id": "NCT00337649",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "A Study of Epothilone D in Combination With Herceptin (Trastuzumab) in Patients With HER-2 Positive Advanced or Metastatic Breast Cancer",
+      "version_count": 83
+    },
+    {
+      "last_update_posted": "2025-06-04",
+      "lead_sponsor": "Oslo University Hospital",
+      "nct_id": "NCT02546232",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Improved Breast Cancer Therapy (I-BCT-1) in the Neoadjuvant and Metastatic Setting",
+      "version_count": 8
+    },
+    {
+      "last_update_posted": "2024-02-06",
+      "lead_sponsor": "Centre de recherche du Centre hospitalier universitaire de Sherbrooke",
+      "nct_id": "NCT04824014",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "UNKNOWN",
+      "title": "4FMFES-PET Imaging of ER+ Advanced Breast Cancers",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2025-12-01",
+      "lead_sponsor": "Gustave Roussy, Cancer Campus, Grand Paris",
+      "nct_id": "NCT05180006",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "TERMINATED",
+      "title": "Impact of Neoadjuvant Immunotherapy in Early Stage Breast Cancer Before Standard Therapy",
+      "version_count": 5
+    },
+    {
+      "last_update_posted": "2025-09-23",
+      "lead_sponsor": "National University Hospital, Singapore",
+      "nct_id": "NCT04280536",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Phase II Study of FTD/TPI (Lonsurf) in Metastatic Breast Cancers With or Without Prior Exposure to Fluoropyrimidines (LONBRECA)",
+      "version_count": 4
+    },
+    {
+      "last_update_posted": "2023-10-06",
+      "lead_sponsor": "Kyoto Prefectural University of Medicine",
+      "nct_id": "NCT03324932",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "ACTIVE_NOT_RECRUITING",
+      "title": "Efficacy of Denosumab on Normal BMD in Women Receiving Adjuvant Aromatase Inhibitors for Early Breast Cancer",
+      "version_count": 7
+    },
+    {
+      "last_update_posted": "2024-05-23",
+      "lead_sponsor": "RemeGen Co., Ltd.",
+      "nct_id": "NCT06389006",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "To Evaluate the Efficacy and Safety of Disitamab Vedotin Combined With Toripalimab Sequential Chemotherapy as Neoadjuvant Treatment in Patients With HR-positive, HER2-low Breast Cancer",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2026-01-09",
+      "lead_sponsor": "Jacobio Pharmaceuticals Co., Ltd.",
+      "nct_id": "NCT05490472",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "JAB-2485 Activity in Adult Patients With Advanced Solid Tumors",
+      "version_count": 4
+    },
+    {
+      "last_update_posted": "2024-11-15",
+      "lead_sponsor": "MediLink Therapeutics (Suzhou) Co., Ltd.",
+      "nct_id": "NCT06439771",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "RECRUITING",
+      "title": "A Phase 2 Study to Evaluate the Efficacy, Safety and Pharmacokinetics of YL202 in Patients With BC",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2025-05-09",
+      "lead_sponsor": "University of Michigan Rogel Cancer Center",
+      "nct_id": "NCT04754399",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Cannabidiol (CBD) for Treatment of Aromatase Inhibitor-Associated Arthralgias",
+      "version_count": 10
+    },
+    {
+      "last_update_posted": "2024-01-19",
+      "lead_sponsor": "Emory University",
+      "nct_id": "NCT05315687",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "WITHDRAWN",
+      "title": "Radioembolization of Metastatic Breast Cancer to the Liver as a 2nd/3rd Line Therapy",
+      "version_count": 5
+    },
+    {
+      "last_update_posted": "2023-10-27",
+      "lead_sponsor": "Kenny Rodriguez-Wallberg",
+      "nct_id": "NCT05328258",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "RECRUITING",
+      "title": "Use of GnRHa During Chemotherapy for Fertility Protection",
+      "version_count": 4
+    },
+    {
+      "last_update_posted": "2023-10-26",
+      "lead_sponsor": "Hoffmann-La Roche",
+      "nct_id": "NCT03197935",
+      "phases": [
+        "PHASE3"
+      ],
+      "status": "COMPLETED",
+      "title": "A Study to Investigate Atezolizumab and Chemotherapy Compared With Placebo and Chemotherapy in the Neoadjuvant Setting in Participants With Early Stage Triple Negative Breast Cancer",
+      "version_count": 48
+    },
+    {
+      "last_update_posted": "2026-03-20",
+      "lead_sponsor": "Shanghai Henlius Biotech",
+      "nct_id": "NCT07294508",
+      "phases": [
+        "PHASE2",
+        "PHASE3"
+      ],
+      "status": "RECRUITING",
+      "title": "A Study to Evaluate HLX22 in Combination With HLX87 in Patients With HER2-Positive Recurrent or Metastatic Breast Cancer",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2024-02-09",
+      "lead_sponsor": "Jiangxi Provincial Cancer Hospital",
+      "nct_id": "NCT05042791",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "UNKNOWN",
+      "title": "A Study of Pyrotinib Plus Capecitabine Combined With SRT in HER2+ MBC With Brain Metastases",
+      "version_count": 3
+    },
+    {
+      "last_update_posted": "2022-04-28",
+      "lead_sponsor": "Jiuda Zhao",
+      "nct_id": "NCT04722718",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "UNKNOWN",
+      "title": "Efficacy and Safety of Sintilimab and Apatinib Combined Chemotherapy in Breast Cancer",
+      "version_count": 5
+    },
+    {
+      "last_update_posted": "2023-02-08",
+      "lead_sponsor": "Codiak BioSciences",
+      "nct_id": "NCT04592484",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "A First-in-Human Study of CDK-002 (exoSTING) in Subjects With Advanced/Metastatic, Recurrent, Injectable Solid Tumors",
+      "version_count": 8
+    },
+    {
+      "last_update_posted": "2025-05-25",
+      "lead_sponsor": "Massachusetts General Hospital",
+      "nct_id": "NCT01441947",
+      "phases": [
+        "PHASE2"
+      ],
+      "status": "COMPLETED",
+      "title": "Cabozantinib in Women With Metastatic Hormone-Receptor-Positive Breast Cancer",
+      "version_count": 19
+    }
+  ]
+}

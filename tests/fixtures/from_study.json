@@ -1,0 +1,50 @@
+{
+  "protocolSection": {
+    "identificationModule": {
+      "nctId": "NCT00000001",
+      "briefTitle": "Fixture Trial"
+    },
+    "statusModule": {
+      "overallStatus": "RECRUITING",
+      "lastUpdatePostDateStruct": {
+        "date": "2026-01-01"
+      }
+    },
+    "sponsorCollaboratorsModule": {
+      "leadSponsor": {
+        "name": "Fixture Sponsor",
+        "class": "INDUSTRY"
+      }
+    },
+    "conditionsModule": {
+      "conditions": ["Breast Cancer"]
+    },
+    "designModule": {
+      "studyType": "INTERVENTIONAL",
+      "phases": ["PHASE2"],
+      "enrollmentInfo": {
+        "count": 120,
+        "type": "ANTICIPATED"
+      }
+    },
+    "outcomesModule": {
+      "primaryOutcomes": [
+        {
+          "measure": "Overall survival",
+          "timeFrame": "24 months"
+        },
+        {
+          "measure": "Hospitalization",
+          "timeFrame": "12 months"
+        }
+      ],
+      "secondaryOutcomes": [
+        {
+          "measure": "Adverse events",
+          "timeFrame": "24 months"
+        }
+      ]
+    }
+  },
+  "hasResults": false
+}
