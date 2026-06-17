@@ -348,6 +348,15 @@ tbody tr:last-child td {
   gap: 8px;
 }
 
+.event-caveat {
+  margin-top: 10px;
+  border-left: 3px solid #d6d3ca;
+  padding-left: 10px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
 .path-list {
   min-width: 0;
   line-height: 1.55;

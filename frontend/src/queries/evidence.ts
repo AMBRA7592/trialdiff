@@ -29,7 +29,14 @@ export async function getPostCompletionEvidenceRecords(limit = 40): Promise<Evid
     FROM evidence_records er
     LEFT JOIN trials t ON t.nct_id = er.nct_id
     WHERE er.timing_context = 'post_recruitment'
-    ORDER BY CASE er.severity
+    ORDER BY
+      CASE
+        WHEN er.category IN ('primary_outcome_change', 'secondary_outcome_change')
+          AND (er.changed_paths_json ? '/resultsSection' OR er.changed_paths_json ? '/hasResults')
+          THEN 1
+        ELSE 0
+      END,
+      CASE er.severity
       WHEN 'critical' THEN 1
       WHEN 'high' THEN 2
       ELSE 3

@@ -55,6 +55,13 @@ const lensIcons = {
 
 const lensTitle =
   activeLens === "critical-density" ? "Trials by critical density" : "Trials by amendment intensity";
+
+function hasResultsPostingConfound(record: EvidenceRecordRow) {
+  const isOutcomeChange =
+    record.category === "primary_outcome_change" || record.category === "secondary_outcome_change";
+  if (!isOutcomeChange) return false;
+  return record.changedPaths.includes("/resultsSection") || record.changedPaths.includes("/hasResults");
+}
 ---
 
 <BaseLayout
@@ -191,6 +198,14 @@ const lensTitle =
                     {record.timingContext && <span>{titleCase(record.timingContext)}</span>}
                     <span>Evidence v{record.evidenceVersion}</span>
                   </div>
+                  {
+                    hasResultsPostingConfound(record) && (
+                      <div class="event-caveat">
+                        Outcome paths changed while results were added. Treat as a review-priority
+                        results-posting/reconciliation record, not a standalone outcome-switching example.
+                      </div>
+                    )
+                  }
                 </div>
                 <div class="path-list">
                   {record.changedPaths.slice(0, 2).map((path) => (
