@@ -4,7 +4,10 @@ import { ArrowLeft } from "@lucide/astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Methodology | TrialDiff">
+<BaseLayout
+  title="Methodology | TrialDiff"
+  description="How TrialDiff builds deterministic, source-linked ClinicalTrials.gov amendment Evidence Records."
+>
   <main class="page-shell stack methodology-page">
     <a class="button" href="/">
       <ArrowLeft size={16} />
@@ -15,11 +18,56 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       <p class="eyebrow">Methodology</p>
       <h1>How TrialDiff ranks amendment history</h1>
       <p class="lede">
-        TrialDiff treats severity as review priority. It uses structured JSON Patch data from ClinicalTrials.gov
-        history payloads, deterministic path rules, value signals, and timing context to decide which amendments deserve
-        human attention.
+        TrialDiff converts ClinicalTrials.gov amendment history into source-linked Evidence Records. It uses structured
+        JSON Patch payloads, deterministic rules, value signals, timing context, and explicit claim boundaries. Severity
+        means review priority, not proven wrongdoing.
       </p>
     </header>
+
+    <section class="panel panel-pad method-section" id="corpus-scope">
+      <h2>Corpus Scope</h2>
+      <p>
+        This alpha demo uses a 25-study breast-cancer-related corpus selected for amendment density and demonstration
+        value. It is not a representative sample of ClinicalTrials.gov, oncology trials, or breast-cancer trials
+        generally.
+      </p>
+      <p>
+        Counts on the dashboard are therefore evidence-engine outputs for this bounded demo corpus, not population
+        estimates. The original 100-study breast-cancer corpus remains a later expansion; it is not required to evaluate
+        whether the Evidence Record pipeline works.
+      </p>
+    </section>
+
+    <section class="panel panel-pad method-section" id="external-context">
+      <h2>External Context</h2>
+      <p>
+        TrialDiff does not claim to have discovered the problem of trial amendment opacity. Independent literature
+        documents it. Florez MA, Jaoude JA, Patel RR, et al. reported that among 755 active cancer phase 3 randomized
+        clinical trials, 145 trials (19.2%) had primary end point changes, and 102 of those 145 changes (70.3%) were not
+        disclosed in the manuscript.
+      </p>
+      <p>
+        TrialDiff's narrower contribution is inspectability: making individual registry changes citable, replayable, and
+        bounded by explicit claims-supported and claims-not-supported language.
+      </p>
+      <p>
+        Citation: <a href="https://pubmed.ncbi.nlm.nih.gov/37195664/">Florez MA et al. JAMA Netw Open.
+        2023;6(5):e2313819. doi:10.1001/jamanetworkopen.2023.13819.</a>
+      </p>
+    </section>
+
+    <section class="panel panel-pad method-section" id="positioning">
+      <h2>Evidence Records, Not A Closed Feed</h2>
+      <p>
+        Closed commercial monitoring products can answer whether a trial record changed. TrialDiff is intentionally a
+        different surface: it publishes the evidence object itself. Each high/critical Evidence Record exposes the exact
+        changed paths, patch payload, rules or value signals, source links, hashes, timing context, and claim boundaries.
+      </p>
+      <p>
+        The methodology is part of the product. A reader should be able to challenge the classification, inspect the
+        source, and cite the record without trusting a hidden scoring system.
+      </p>
+    </section>
 
     <section class="panel panel-pad method-section" id="critical-density">
       <h2>Critical Density Denominator</h2>
@@ -34,6 +82,19 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       </p>
     </section>
 
+    <section class="panel panel-pad method-section" id="evidence-record-filter">
+      <h2>Evidence Record Filter</h2>
+      <p>
+        Evidence Records are generated as first-class citable artifacts for severity <strong>high</strong> and
+        <strong>critical</strong> events. Medium and low events can still exist in the underlying materiality event feed,
+        but they are not exported as v0.1-alpha Evidence Records.
+      </p>
+      <p>
+        This keeps the citation surface focused on review-priority amendments while preserving lower-severity events for
+        later analysis.
+      </p>
+    </section>
+
     <section class="panel panel-pad method-section">
       <h2>Rule Taxonomy</h2>
       <p>
@@ -41,6 +102,10 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
         design, intervention, eligibility, status, timeline, enrollment, and adverse-event paths are mapped to review
         categories and base severities. Each event stores the rules that fired, the rule set hash, and source
         provenance.
+      </p>
+      <p>
+        Large language models do not set severity. They are not part of the deterministic review-priority decision in
+        v0.1-alpha.
       </p>
     </section>
 
@@ -51,6 +116,33 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
         eligibility change during late recruitment or after completion can carry higher review priority than the same
         change before recruitment begins. The stored event keeps both <code>severity_pre_timing</code> and final
         <code>severity</code>.
+      </p>
+    </section>
+
+    <section class="panel panel-pad method-section">
+      <h2>Source Provenance Caveat</h2>
+      <p>
+        The demo uses public ClinicalTrials.gov study pages and API payloads. Adjacent history patches come from
+        ClinicalTrials.gov history endpoints that expose JSON Patch-like changes between versions. TrialDiff stores the
+        returned patch payload and hashes it so an exported Evidence Record remains inspectable even if a source endpoint
+        later changes.
+      </p>
+      <p>
+        The current alpha is therefore evidence-preserving, not endpoint-independent. Long-term durability would require
+        a broader source archiving strategy.
+      </p>
+    </section>
+
+    <section class="panel panel-pad method-section">
+      <h2>Status And Stopped-Trial Rules</h2>
+      <p>
+        Status and termination rules are treated as review-priority signals because stopped-trial explanations are
+        structured public-record fields. 42 CFR 11.64 references the ClinicalTrials.gov "Why Study Stopped" data element
+        when applicable. TrialDiff can surface whether this field changed, was empty, or matched a low-information value.
+      </p>
+      <p>
+        TrialDiff does not determine whether an explanation satisfies the regulation, whether a sponsor complied with
+        law, or whether a stopped trial was scientifically justified.
       </p>
     </section>
 
