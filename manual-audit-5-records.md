@@ -23,7 +23,9 @@ This audit checks record integrity and claim boundaries. It does not judge scien
 - Patch hash prefix: 40f1b909b8bfa7a2
 - Canonical hash prefix: 2bad3daa3ae2201a
 
-Audit result: record contains study metadata, changed outcome paths, version references, rule attribution, provenance hashes, supported claims, and explicit non-claims.
+Important confound: this patch is not a clean standalone outcome-change example. The changed paths include `/hasResults` and `/resultsSection`, meaning the outcome-field changes are co-incident with results becoming present in the registry record. A plausible interpretation is results-posting or results-reconciliation cleanup rather than prospective outcome switching.
+
+Audit result: record contains study metadata, changed outcome paths, version references, rule attribution, provenance hashes, supported claims, and explicit non-claims. The record is valid as a review-priority Evidence Record, but it should not be used as a flagship example of outcome switching or undisclosed outcome change without separate document review.
 
 ## 2. evt_NCT05180006_v3_v4_3cebafd518aa
 
