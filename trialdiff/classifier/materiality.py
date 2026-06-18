@@ -139,6 +139,7 @@ def classify_patch(
     matched_rules = suppress_review_metadata_rules(matched_rules)
     matched_rules = suppress_results_reconciliation_outcome_rules(matched_rules, contexts)
     matched_rules = suppress_generic_timeline_rules(matched_rules, value_signals)
+    value_signals.extend(results_reconciliation_signals(contexts))
     if not matched_rules and not value_signals:
         return None
 
@@ -255,6 +256,25 @@ def is_results_reconciliation_patch(contexts: list[PatchValueContext]) -> bool:
         if context.path.startswith("/resultsSection/") and context.op in {"add", "replace"}:
             return True
     return False
+
+
+def results_reconciliation_signals(contexts: list[PatchValueContext]) -> list[dict[str, Any]]:
+    if not is_results_reconciliation_patch(contexts):
+        return []
+    outcome_paths = [
+        context.path
+        for context in contexts
+        if "/protocolSection/outcomesModule/primaryOutcomes/" in context.path
+        or "/protocolSection/outcomesModule/secondaryOutcomes/" in context.path
+    ]
+    return [
+        {
+            "signal": "results_reconciliation_outcome_suppression",
+            "severity": "low",
+            "category": "results_reconciliation",
+            "paths": sorted(set(outcome_paths)),
+        }
+    ] if outcome_paths else []
 
 
 def is_timeline_signal(signal: dict[str, Any]) -> bool:

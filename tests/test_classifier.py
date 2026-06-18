@@ -450,7 +450,7 @@ class ClassifierTests(unittest.TestCase):
 
         self.assertIsNone(event)
 
-    def test_results_posting_suppresses_reconciliation_outcome_rules(self) -> None:
+    def test_results_posting_down_tiers_reconciliation_outcome_rules(self) -> None:
         rules = load_seeded_rules()
         from_study = load_fixture("from_study.json")
         from_study["hasResults"] = False
@@ -477,7 +477,12 @@ class ClassifierTests(unittest.TestCase):
             rules=rules,
         )
 
-        self.assertIsNone(event)
+        self.assertIsNotNone(event)
+        assert event is not None
+        self.assertEqual(event.severity, "low")
+        self.assertEqual(event.category, "results_reconciliation")
+        self.assertEqual(event.value_signals[0]["signal"], "results_reconciliation_outcome_suppression")
+        self.assertNotIn("primary_outcome_any_change", event.deterministic_rules)
 
     def test_serious_adverse_event_addition_is_high(self) -> None:
         rules = load_seeded_rules()
