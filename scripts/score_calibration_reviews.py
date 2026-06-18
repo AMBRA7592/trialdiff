@@ -6,12 +6,15 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
 
 HIGH_PLUS = {"critical", "high"}
 ORDER = ["critical", "high", "medium", "low", "insufficient_evidence"]
+
+csv.field_size_limit(sys.maxsize)
 
 
 def load_jsonl(path: Path) -> dict[str, dict]:

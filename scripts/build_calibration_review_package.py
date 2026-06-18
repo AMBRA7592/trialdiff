@@ -16,6 +16,8 @@ from trialdiff.jsonpatch import MISSING, build_value_contexts, resolve_pointer
 
 DEFAULT_SEED = "trialdiff-v0.2-review-order-a764e33"
 
+csv.field_size_limit(sys.maxsize)
+
 
 def missing_to_json(value: Any) -> Any:
     if value is MISSING:
