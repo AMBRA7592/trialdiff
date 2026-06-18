@@ -73,7 +73,7 @@ class ClassifierTests(unittest.TestCase):
         self.assertEqual(event.timing_context, "early_recruitment")
         self.assertTrue(event.rule_set_hash)
 
-    def test_secondary_outcome_late_recruitment_escalates_to_critical(self) -> None:
+    def test_secondary_outcome_late_recruitment_remains_high(self) -> None:
         rules = load_seeded_rules()
         from_study = load_fixture("from_study.json")
         from_study["protocolSection"]["statusModule"]["overallStatus"] = "ACTIVE_NOT_RECRUITING"
@@ -97,7 +97,7 @@ class ClassifierTests(unittest.TestCase):
         self.assertIsNotNone(event)
         assert event is not None
         self.assertEqual(event.severity_pre_timing, "high")
-        self.assertEqual(event.severity, "critical")
+        self.assertEqual(event.severity, "high")
         self.assertEqual(event.timing_context, "late_recruitment")
         self.assertEqual(event.category, "secondary_outcome_change")
 
@@ -231,7 +231,7 @@ class ClassifierTests(unittest.TestCase):
         self.assertEqual(event.category, "timeline_shift")
         self.assertEqual(event.value_signals[0]["delta_days"], 59)
 
-    def test_timeline_90_to_365_day_shift_is_high(self) -> None:
+    def test_timeline_90_to_365_day_shift_is_medium(self) -> None:
         rules = load_seeded_rules()
         from_study = load_fixture("from_study.json")
         from_study["protocolSection"]["statusModule"]["completionDateStruct"] = {
@@ -257,11 +257,11 @@ class ClassifierTests(unittest.TestCase):
 
         self.assertIsNotNone(event)
         assert event is not None
-        self.assertEqual(event.severity, "high")
+        self.assertEqual(event.severity, "medium")
         self.assertEqual(event.category, "timeline_significant_shift")
         self.assertEqual(event.value_signals[0]["delta_days"], 151)
 
-    def test_timeline_major_slip_can_escalate_with_timing(self) -> None:
+    def test_timeline_major_slip_is_high_late_without_critical_escalation(self) -> None:
         rules = load_seeded_rules()
         from_study = load_fixture("from_study.json")
         from_study["protocolSection"]["statusModule"]["overallStatus"] = "ACTIVE_NOT_RECRUITING"
@@ -289,10 +289,41 @@ class ClassifierTests(unittest.TestCase):
         self.assertIsNotNone(event)
         assert event is not None
         self.assertEqual(event.severity_pre_timing, "high")
-        self.assertEqual(event.severity, "critical")
+        self.assertEqual(event.severity, "high")
         self.assertEqual(event.category, "timeline_major_slip")
         self.assertEqual(event.value_signals[0]["delta_days"], 424)
         self.assertEqual(event.value_signals[0]["direction"], "later")
+
+    def test_timeline_major_slip_during_early_recruitment_is_medium(self) -> None:
+        rules = load_seeded_rules()
+        from_study = load_fixture("from_study.json")
+        from_study["protocolSection"]["statusModule"]["overallStatus"] = "RECRUITING"
+        from_study["protocolSection"]["statusModule"]["completionDateStruct"] = {
+            "date": "2026-01-01",
+            "type": "ESTIMATED",
+        }
+        patch = [
+            {
+                "op": "replace",
+                "path": "/protocolSection/statusModule/completionDateStruct/date",
+                "value": "2027-03-01",
+            }
+        ]
+
+        event = classify_patch(
+            nct_id="NCT00000001",
+            from_version=6,
+            to_version=7,
+            from_record=from_study,
+            patch=patch,
+            rules=rules,
+        )
+
+        self.assertIsNotNone(event)
+        assert event is not None
+        self.assertEqual(event.severity, "medium")
+        self.assertEqual(event.category, "timeline_major_slip")
+        self.assertEqual(event.value_signals[0]["delta_days"], 424)
 
     def test_estimated_to_actual_without_date_movement_is_low_milestone(self) -> None:
         rules = load_seeded_rules()
@@ -406,6 +437,35 @@ class ClassifierTests(unittest.TestCase):
                     ]
                 },
             }
+        ]
+
+        event = classify_patch(
+            nct_id="NCT00000001",
+            from_version=6,
+            to_version=7,
+            from_record=from_study,
+            patch=patch,
+            rules=rules,
+        )
+
+        self.assertIsNone(event)
+
+    def test_results_posting_suppresses_reconciliation_outcome_rules(self) -> None:
+        rules = load_seeded_rules()
+        from_study = load_fixture("from_study.json")
+        from_study["hasResults"] = False
+        patch = [
+            {"op": "replace", "path": "/hasResults", "value": True},
+            {
+                "op": "add",
+                "path": "/resultsSection",
+                "value": {"outcomeMeasuresModule": {"outcomeMeasures": []}},
+            },
+            {
+                "op": "replace",
+                "path": "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+                "value": "Overall Response Rate",
+            },
         ]
 
         event = classify_patch(

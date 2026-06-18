@@ -15,15 +15,8 @@ from trialdiff.provenance import Provenance, sha256_json, utc_now_iso
 
 SEVERITY_RANK = {"ignore": 0, "low": 1, "medium": 2, "high": 3, "critical": 4}
 RANK_SEVERITY = {rank: severity for severity, rank in SEVERITY_RANK.items()}
-TIMING_SENSITIVE_CATEGORIES = {
-    "primary_outcome_change",
-    "secondary_outcome_change",
-    "design_change",
-    "arm_intervention_change",
-    "eligibility_change",
-    "enrollment_change",
-    "timeline_major_slip",
-}
+TIMING_SENSITIVE_CATEGORIES: set[str] = set()
+OUTCOME_CHANGE_CATEGORIES = {"primary_outcome_change", "secondary_outcome_change"}
 TIMELINE_RULE_CATEGORY = "timeline_shift"
 TIMELINE_DATE_STRUCTS = {
     "/protocolSection/statusModule/startDateStruct",
@@ -144,6 +137,7 @@ def classify_patch(
                 matched_rules.append((rule, context))
     value_signals = collect_value_signals(contexts, from_record=from_record, patch=patch)
     matched_rules = suppress_review_metadata_rules(matched_rules)
+    matched_rules = suppress_results_reconciliation_outcome_rules(matched_rules, contexts)
     matched_rules = suppress_generic_timeline_rules(matched_rules, value_signals)
     if not matched_rules and not value_signals:
         return None
@@ -235,8 +229,32 @@ def suppress_review_metadata_rules(
     return [(rule, context) for rule, context in matched_rules if not is_review_metadata_path(context.path)]
 
 
+def suppress_results_reconciliation_outcome_rules(
+    matched_rules: list[tuple[ClassifierRule, PatchValueContext]],
+    contexts: list[PatchValueContext],
+) -> list[tuple[ClassifierRule, PatchValueContext]]:
+    if not is_results_reconciliation_patch(contexts):
+        return matched_rules
+    return [
+        (rule, context)
+        for rule, context in matched_rules
+        if rule.category not in OUTCOME_CHANGE_CATEGORIES
+    ]
+
+
 def is_review_metadata_path(path: str) -> bool:
     return path == "/reviewUnit" or "/reviewUnit" in path
+
+
+def is_results_reconciliation_patch(contexts: list[PatchValueContext]) -> bool:
+    for context in contexts:
+        if context.path == "/hasResults" and context.new_value is True:
+            return True
+        if context.path == "/resultsSection" and context.op in {"add", "replace"}:
+            return True
+        if context.path.startswith("/resultsSection/") and context.op in {"add", "replace"}:
+            return True
+    return False
 
 
 def is_timeline_signal(signal: dict[str, Any]) -> bool:
@@ -297,6 +315,7 @@ def timeline_change_signals(
             new_date=new_date,
             old_type=resolve_pointer(from_record, f"{struct_pointer}/type"),
             new_type=resolve_pointer(to_record, f"{struct_pointer}/type"),
+            timing_context=timing_context_from_record(from_record),
         )
         if signal:
             signals.append(signal)
@@ -343,6 +362,7 @@ def timeline_date_signal(
     new_date: Any,
     old_type: Any,
     new_type: Any,
+    timing_context: str,
 ) -> dict[str, Any] | None:
     if old_date is MISSING and new_date is MISSING:
         return None
@@ -376,7 +396,11 @@ def timeline_date_signal(
                 "category": "timeline_actualized_earlier",
             }
         else:
-            signal = timeline_delta_signal(delta_days)
+            signal = timeline_delta_signal(
+                delta_days,
+                direction=timeline_direction(raw_delta_days),
+                timing_context=timing_context,
+            )
         return base_signal | signal | {
             "delta_days": delta_days,
             "direction": timeline_direction(raw_delta_days),
@@ -412,12 +436,24 @@ def parse_ctgov_date(value: Any) -> ParsedCtgovDate | None:
     return None
 
 
-def timeline_delta_signal(delta_days: int) -> dict[str, Any]:
+def timeline_delta_signal(delta_days: int, *, direction: str, timing_context: str) -> dict[str, Any]:
     if delta_days < 30:
         return {
             "signal": "timeline_minor_adjustment",
             "severity": "low",
             "category": "timeline_minor_adjustment",
+        }
+    if direction == "earlier":
+        if delta_days <= 365:
+            return {
+                "signal": "timeline_earlier_adjustment",
+                "severity": "low",
+                "category": "timeline_minor_adjustment",
+            }
+        return {
+            "signal": "timeline_earlier_shift",
+            "severity": "medium",
+            "category": "timeline_shift",
         }
     if delta_days <= 90:
         return {
@@ -428,8 +464,14 @@ def timeline_delta_signal(delta_days: int) -> dict[str, Any]:
     if delta_days <= 365:
         return {
             "signal": "timeline_significant_shift",
-            "severity": "high",
+            "severity": "medium",
             "category": "timeline_significant_shift",
+        }
+    if timing_context not in {LATE_RECRUITMENT, POST_RECRUITMENT}:
+        return {
+            "signal": "timeline_major_slip",
+            "severity": "medium",
+            "category": "timeline_major_slip",
         }
     return {
         "signal": "timeline_major_slip",
