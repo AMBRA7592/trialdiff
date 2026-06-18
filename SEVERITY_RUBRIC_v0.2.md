@@ -1,6 +1,6 @@
 # Severity Rubric - TrialDiff v0.2 Calibration
 
-Status: DRAFT - not yet frozen. Must be pressure-tested for independence and committed before any calibration sample is drawn or reviewed.
+Status: revised for v0.2.1 re-certification; freeze by commit before any fresh review.
 Date: 2026-06-18
 Applies to: TrialDiff v0.2 severity calibration (see `V0.2_SCOPE.md` Sections 4-5)
 
@@ -54,7 +54,7 @@ Apply in order:
 2. Check for results-reconciliation co-incidence. If the patch also sets `/hasResults` true or adds `/resultsSection`, treat co-incident outcome-field text changes as presumptive results-posting or results-reconciliation changes, not prospective outcome changes, unless the payload shows a substantive independent change. Down-weight reconciliation-only changes to administrative or low.
 3. Derive timing context from the FROM-version registry status fields: before recruitment, recruiting, active/not-recruiting, completed, terminated, withdrawn, suspended, or unknown.
 4. Assign a base tier from the change type criteria below.
-5. Apply timing escalation where applicable.
+5. Apply timing context where applicable. Timing can raise or lower priority, but it should not be applied mechanically.
 6. For multi-change patches, the record's tier is the highest tier justified by any single change. Note all changes that contribute to the tier.
 7. Record the rationale, citing the changed paths and values that drove the tier.
 
@@ -81,12 +81,14 @@ Use `high` when the change is consequential for trial design, interpretation, co
 
 Examples:
 
-- Secondary outcome added, removed, or substantively redefined before completion.
+- Secondary outcome removed or substantively redefined before completion in a way that plausibly changes trial interpretation.
+- Secondary outcome added before completion when the addition is central to efficacy, safety, or decision-relevant interpretation rather than routine exploratory, correlative, or biomarker follow-up.
 - Eligibility criteria changed in a way that plausibly shifts the study population after recruitment has begun.
 - Intervention, dose, schedule, comparator, or arm structure changed.
 - Substantial enrollment reduction that plausibly reflects recruitment failure or truncation, short of zeroing.
 - Trial moved to terminal status with a present but low-specificity operational or business explanation.
 - Large slip in primary completion or study completion date at a late stage, on the order of a year or more as a review-priority judgment.
+- Very large slip in primary completion or study completion date during active recruitment, on the order of two years or more, where magnitude alone makes the trial's operational trajectory review-relevant.
 - Serious adverse event results added or substantively modified.
 
 ### Medium
@@ -96,9 +98,11 @@ Use `medium` when the change is substantive and worth recording, but appears rou
 Examples:
 
 - Moderate timeline movement outside a late-stage or post-completion context.
+- Large but not extreme timeline movement during active recruitment, including approximately one-year recruiting-stage slips, unless paired with a stronger substantive design, outcome, enrollment, or terminal-status signal.
 - Minor eligibility refinement that does not clearly shift the study population.
 - Enrollment change too small to plausibly affect interpretation of feasibility or power.
 - Outcome wording refinement that does not change what is measured.
+- Routine exploratory, correlative, biomarker, or follow-up secondary-outcome additions before completion when they do not change the trial's primary evidence interpretation.
 - Non-primary design text clarification that does not change arms, intervention, population, or endpoint interpretation.
 
 ### Low
@@ -111,6 +115,7 @@ Examples:
 - Routine status progression, such as recruiting to active/not recruiting.
 - Peripheral metadata update with limited interpretive value.
 - Results-reconciliation-only outcome text change after `/hasResults` or `/resultsSection` appears, where no independent substantive change is visible.
+- Historical completed-record backfill, migration, reindexing, or results-posting harmonization where the payload appears to populate or reorganize registry fields rather than independently amend trial design.
 
 ### Administrative / Uncategorized
 
@@ -124,9 +129,9 @@ Examples:
 - Formatting-only or non-substantive text updates.
 - Registry housekeeping fields with no substantive interpretive effect.
 
-## Timing Escalation
+## Timing Context
 
-Timing can increase review priority when a sensitive field changes late in the trial lifecycle.
+Timing can increase review priority when a sensitive field changes late in the trial lifecycle, but timing alone should not convert routine or reconciliation-only changes into high-priority records.
 
 Sensitive fields include:
 
@@ -137,12 +142,27 @@ Sensitive fields include:
 - primary completion or study completion dates;
 - intervention or arm structure.
 
-Escalation guidance:
+Timing guidance:
 
-- A sensitive substantive change during active/not-recruiting or late recruitment may escalate one tier.
-- A sensitive substantive change after completion or after a terminal status may escalate to critical.
+- A sensitive substantive change during active/not-recruiting or late recruitment may warrant higher priority when it affects interpretation, conduct, population, intervention, or endpoint meaning.
+- A sensitive substantive change after completion or after a terminal status may be critical when it adds, removes, or redefines information needed to interpret trial evidence.
+- Active-recruitment timeline slips around one year are generally medium unless accompanied by a stronger substantive signal.
+- Active-recruitment timeline slips on the order of two years or more may be high by magnitude alone.
+- Earlier date corrections and estimated-to-actual date finalization should usually be low or medium unless they reveal a substantive interpretability issue.
 - Timing does not escalate purely administrative changes.
 - Timing does not escalate results-reconciliation-only changes unless there is a substantive independent change apart from the results posting.
+
+## Results Posting And Historical Backfill
+
+ClinicalTrials.gov records often change when results are first posted, results sections are populated, old records are migrated, or completed records are backfilled. These patches may touch outcome text, arm labels, adverse-event modules, or result tables without necessarily representing a prospective trial-design amendment.
+
+Apply this rule:
+
+- If `/hasResults` becomes true, `/resultsSection` is added, or a large results-section payload is populated, treat co-incident protocol outcome text edits as results reconciliation unless the record shows an independent substantive design or endpoint change outside the results-posting harmonization.
+- Results-reconciliation-only protocol outcome edits are low.
+- Serious adverse event results added or substantively modified inside first results posting are high only when the change itself creates a review-priority question beyond routine results population.
+- Serious adverse event results removed remain high or critical depending on context.
+- Completed-record backfill or historical migration is not critical unless it visibly removes or redefines information needed to interpret the completed trial.
 
 ## Insufficient Evidence
 
