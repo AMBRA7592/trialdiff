@@ -12,7 +12,7 @@ import {
 } from "@lucide/astro";
 
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { formatNumber, severityClass, titleCase } from "@/lib/format";
+import { formatNumber, severityClass, severityLabel, titleCase } from "@/lib/format";
 import { getHomeData, normalizeLens } from "@/queries/feed";
 import type { EvidenceRecordRow, Lens, TrialLensRow } from "@/queries/types";
 
@@ -22,7 +22,7 @@ const data = await getHomeData();
 const lensCopy: Record<Lens, { label: string; description: string; href: string }> = {
   "post-completion": {
     label: "Post-completion evidence",
-    description: "High and critical evidence records after recruitment or completion.",
+    description: "Evidence records with high/critical triage labels after recruitment or completion.",
     href: "/?lens=post-completion",
   },
   recent: {
@@ -31,8 +31,8 @@ const lensCopy: Record<Lens, { label: string; description: string; href: string 
     href: "/?lens=recent",
   },
   "critical-density": {
-    label: "Critical density",
-    description: "Trials where a larger share of amendments are critical.",
+    label: "Critical-triage density",
+    description: "Trials where a larger share of amendments carry the critical triage label.",
     href: "/?lens=critical-density",
   },
   "amendment-intensity": {
@@ -55,7 +55,7 @@ const lensIcons = {
 };
 
 const lensTitle =
-  activeLens === "critical-density" ? "Trials by critical density" : "Trials by amendment intensity";
+  activeLens === "critical-density" ? "Trials by critical-triage density" : "Trials by amendment intensity";
 
 function hasResultsPostingConfound(record: EvidenceRecordRow) {
   const isOutcomeChange =
@@ -95,8 +95,7 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
       <div class="disclaimer-inner">
         <ShieldCheck size={20} />
         <div>
-          Severity means review priority, not proven wrongdoing. Evidence Records state what the registry history
-          supports and what it does not support.
+          Severity is deterministic, reproducible, uncalibrated triage metadata, not validated review priority or proven wrongdoing. Evidence Records state what the registry history supports and what it does not support.
         </div>
       </div>
     </section>
@@ -116,7 +115,7 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
         <span>
           <span class="lens-title">Case Study B: late-stage timeline movement</span>
           <span class="lens-description">
-            A 731-day timeline movement surfaced as review-priority without asserting intent or wrongdoing.
+            A 731-day timeline movement surfaced by deterministic triage without asserting intent or wrongdoing.
           </span>
         </span>
       </a>
@@ -137,11 +136,11 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
       </div>
       <div class="panel panel-pad">
         <div class="stat-value">{formatNumber(data.summary.criticalCount)}</div>
-        <div class="stat-label">Critical events</div>
+        <div class="stat-label">Critical-triage events</div>
       </div>
       <div class="panel panel-pad">
         <div class="stat-value">{formatNumber(data.summary.highCount)}</div>
-        <div class="stat-label">High events</div>
+        <div class="stat-label">High-triage events</div>
       </div>
     </section>
 
@@ -183,7 +182,7 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
         <section class="grid severity-grid">
           {data.severityCounts.map((row) => (
             <div class="panel panel-pad">
-              <span class={severityClass(row.severity)}>{titleCase(row.severity)}</span>
+              <span class={severityClass(row.severity)}>{severityLabel(row.severity)}</span>
               <div class="stat-value" style="margin-top: 12px">{formatNumber(row.count)}</div>
             </div>
           ))}
@@ -202,7 +201,7 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
             {activeEvidenceRows.map((record) => (
               <article class="event evidence-event">
                 <div>
-                  <span class={severityClass(record.severity)}>{titleCase(record.severity)}</span>
+                  <span class={severityClass(record.severity)}>{severityLabel(record.severity)}</span>
                   <div class="event-date">{record.submittedDate ?? "Date unavailable"}</div>
                 </div>
                 <div>
@@ -223,7 +222,7 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
                   {
                     hasResultsPostingConfound(record) && (
                       <div class="event-caveat">
-                        Outcome paths changed while results were added. Treat as a review-priority
+                        Outcome paths changed while results were added. Treat as a deterministic triage
                         results-posting/reconciliation record, not a standalone outcome-switching example.
                       </div>
                     )
@@ -256,9 +255,9 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
                   <th>Trial</th>
                   <th>Sponsor</th>
                   <th class="right">Patches</th>
-                  <th class="right">Critical</th>
-                  <th class="right">High</th>
-                  <th class="right">Critical density</th>
+                  <th class="right">Critical triage</th>
+                  <th class="right">High triage</th>
+                  <th class="right">Critical-triage density</th>
                 </tr>
               </thead>
               <tbody>
@@ -274,7 +273,7 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
                     <td class="right">{formatNumber(row.highCount)}</td>
                     <td class="right">
                       {row.criticalDensityPct.toFixed(2)}%
-                      <div class="table-note">critical events / patches</div>
+                      <div class="table-note">critical-triage events / patches</div>
                     </td>
                   </tr>
                 ))}
@@ -295,7 +294,7 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
           data.recentEvents.map((event) => (
             <article class="event">
               <div>
-                <span class={severityClass(event.severity)}>{titleCase(event.severity)}</span>
+                <span class={severityClass(event.severity)}>{severityLabel(event.severity)}</span>
                 <div class="event-date">{event.submittedDate ?? "Date unavailable"}</div>
               </div>
               <div>

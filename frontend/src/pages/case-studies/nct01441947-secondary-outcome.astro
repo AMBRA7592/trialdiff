@@ -26,8 +26,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     <section class="panel panel-pad disclaimer">
       <div class="disclaimer-inner">
         <div>
-          Severity means review priority, not proven wrongdoing. This case study explains what the registry record
-          supports and what it does not support.
+          Severity is deterministic, reproducible, uncalibrated triage metadata, not validated review priority or proven wrongdoing. This case study explains what the registry record supports and what it does not support.
         </div>
       </div>
     </section>
@@ -66,19 +65,18 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     </section>
 
     <section class="panel panel-pad method-section">
-      <h2>Why It Was Ranked Critical</h2>
+      <h2>Why It Carried The Critical Triage Label</h2>
       <p>
         The deterministic rule <code>secondary_outcome_any_change</code> fired because a secondary-outcome registry path
-        changed. The base severity was high.
+        changed. The base triage severity was high.
       </p>
       <p>
         The from-version timing context was <code>late_recruitment</code>. TrialDiff's timing modifier escalated the
-        final severity from high to critical because late-stage outcome changes have higher review priority than the
+        final triage severity from high to critical because late-stage outcome changes have a higher triage label than the
         same change before recruitment.
       </p>
       <p>
-        This section describes the classifier output, not an independent validation that critical is the correct
-        severity for every similar amendment. Severity calibration across categories is deferred beyond v0.1-alpha.
+        This section describes the classifier output, not an independent validation that critical is the correct review-priority tier. v0.2.1 calibration failed, so severity is retained only as uncalibrated triage metadata.
       </p>
     </section>
 
@@ -87,7 +85,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       <p>
         This record supports a narrow factual statement: a secondary-outcome registry field changed between versions 16
         and 17, the change occurred in a late-recruitment context, and the stored JSON Patch and rule hash identify why
-        TrialDiff classified it as review-priority.
+        TrialDiff assigned it a deterministic triage label.
       </p>
     </section>
 

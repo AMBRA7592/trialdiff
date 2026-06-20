@@ -2,7 +2,7 @@
 import { ArrowLeft, ExternalLink } from "@lucide/astro";
 
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { formatNumber, severityClass, titleCase } from "@/lib/format";
+import { formatNumber, severityClass, severityLabel, titleCase } from "@/lib/format";
 import { getTrialDetail } from "@/queries/trials";
 
 const nctId = String(Astro.params.nctId ?? "").toUpperCase();
@@ -55,8 +55,7 @@ const title = trial ? `${trial.nctId} | TrialDiff` : "TrialDiff trial detail";
           </section>
 
           <section class="panel panel-pad disclaimer">
-            Severity means review priority, not proven wrongdoing. Evidence Records are generated for high and critical
-            events only.
+            Severity is deterministic, reproducible, uncalibrated triage metadata, not validated review priority or proven wrongdoing. Evidence Records are generated for events carrying high and critical triage labels.
           </section>
 
           <section class="panel">
@@ -68,7 +67,7 @@ const title = trial ? `${trial.nctId} | TrialDiff` : "TrialDiff trial detail";
               {data.events.map((event) => (
                 <article class="event">
                   <div>
-                    <span class={severityClass(event.severity)}>{titleCase(event.severity)}</span>
+                    <span class={severityClass(event.severity)}>{severityLabel(event.severity)}</span>
                     <div class="event-date">{event.submittedDate ?? "Date unavailable"}</div>
                   </div>
                   <div>
@@ -77,7 +76,7 @@ const title = trial ? `${trial.nctId} | TrialDiff` : "TrialDiff trial detail";
                       <span>v{event.fromVersion} to v{event.toVersion}</span>
                       {event.timingContext && <span>{titleCase(event.timingContext)}</span>}
                       {event.severity !== event.severityPreTiming && (
-                        <span>Base {titleCase(event.severityPreTiming)}</span>
+                        <span>Base triage: {titleCase(event.severityPreTiming)}</span>
                       )}
                       <a href={`/trials/${trial.nctId}/patches/${event.fromVersion}-to-${event.toVersion}`}>
                         Inspect patch

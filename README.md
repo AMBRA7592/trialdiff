@@ -1,10 +1,10 @@
 # TrialDiff Evidence Demo v0.1-alpha
 
-TrialDiff v0.1-alpha is a bounded evidence demo showing that public ClinicalTrials.gov record changes can be converted into replayable, source-linked, deterministic Evidence Records with conservative review-priority classifications.
+TrialDiff v0.1-alpha is a bounded evidence demo showing that public ClinicalTrials.gov record changes can be converted into replayable, source-linked, deterministic Evidence Records with deterministic triage classifications.
 
 This is not a product launch, monitoring service, pharma SaaS, misconduct detector, or allegation engine.
 
-> Severity means review priority, not proven wrongdoing.
+> Severity is deterministic, reproducible, uncalibrated triage metadata. It is not validated review priority and not proven wrongdoing.
 
 ## Live Demo
 
@@ -39,12 +39,12 @@ This repository snapshot contains:
 
 The frozen package exports 40 Evidence Records from the 25-study corpus:
 
-1. all critical Evidence Records first;
-2. then the highest-priority high Evidence Records;
+1. all records carrying the critical triage label first;
+2. then records carrying the high triage label;
 3. ordered by timing context, with post-recruitment and late-recruitment records before earlier records;
 4. capped at 40 records.
 
-This produces a high-signal, bounded slice rather than a full product dataset.
+This produces a deterministic, bounded inspection slice rather than a full product dataset or validated priority feed.
 
 ## What A Reviewer Can Inspect
 
@@ -54,7 +54,7 @@ For each exported record, a reviewer can answer:
 2. Where did it change?
 3. When did it change?
 4. Which deterministic rule or value signal classified it?
-5. Why is it review-priority?
+5. Which deterministic triage signal caused it to be selected?
 6. What source/provenance/hash fields support the record?
 7. Can the record be verified against the frozen manifest?
 8. What is explicitly not being claimed?
@@ -91,8 +91,4 @@ records=40
 
 Technical proof cleared; 30-day artifact closed as a v0.1 alpha.
 
-The public methodology and in-corpus case-study narrative are now part of the alpha artifact.
-
-The next appropriate work is v0.2 data expansion: recover or regenerate the 100-study corpus, add stronger deferred
-case-study candidates such as NCT01275677, and run a separate severity-calibration audit. Do not reopen v0.1-alpha
-architecture to do that work.
+The v0.2/v0.2.1 severity calibration failed the review-priority gate. Critical confirmations across fresh rubric applications ranged from 4/30 to 17/30, below the 24/30 required threshold. Severity labels are therefore retained only as deterministic uncalibrated triage metadata. The evidence-record primitive remains supported; the certified-severity claim and buyer-facing priority brief remain blocked. See `SEVERITY_CALIBRATION_v0.2.1.md` and `SEVERITY_DECOUPLING_v0.2.1.md`.

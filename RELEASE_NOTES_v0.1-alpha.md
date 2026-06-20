@@ -4,7 +4,7 @@ Date: 2026-06-17
 
 TrialDiff v0.1-alpha is a bounded Evidence Demo, not a product launch. It demonstrates that public ClinicalTrials.gov record changes can be converted into deterministic, source-linked Evidence Records with explicit claims, non-claims, provenance fields, rule attribution, and canonical JSON.
 
-Severity means review priority, not proven wrongdoing.
+Severity is deterministic, reproducible, uncalibrated triage metadata. It is not validated review priority and not proven wrongdoing.
 
 ## What Exists
 
@@ -24,7 +24,7 @@ Severity means review priority, not proven wrongdoing.
   - `manual-audit-5-records.md`
 - Public methodology page covering:
   - 25-study corpus scope
-  - critical-density denominator
+  - critical-triage density denominator
   - deterministic rule taxonomy
   - timing modifier
   - source provenance caveat
@@ -38,7 +38,7 @@ Severity means review priority, not proven wrongdoing.
 
 - The alpha corpus is not a representative sample of ClinicalTrials.gov, oncology trials, or breast-cancer trials generally.
 - The alpha does not claim misconduct, wrongdoing, sponsor intent, scientific unjustifiability, manuscript non-disclosure, or regulatory non-compliance.
-- Evidence Records are generated only for high and critical events in v0.1-alpha. Medium and low materiality events remain part of the database but are not first-class exported Evidence Records.
+- Evidence Records are generated only for events carrying high and critical triage labels in v0.1-alpha. Medium and low materiality events remain part of the database but are not first-class exported Evidence Records.
 - The five-record manual audit is a structural audit of provenance, rule attribution, source fields, and claim boundaries. It is not a severity-calibration audit.
 - Case studies must use in-corpus Evidence Records unless a future release explicitly imports additional trials.
 
@@ -46,7 +46,7 @@ Severity means review priority, not proven wrongdoing.
 
 - 100-study breast-cancer corpus expansion.
 - NCT01275677 as a stronger post-completion outcome-removal case study.
-- Broader severity-calibration audit across critical, high, medium, and low tiers.
+- Broader severity-calibration audit across critical, high, medium, and low tiers. This later failed to validate severity as review priority; see `SEVERITY_CALIBRATION_v0.2.1.md` and `SEVERITY_DECOUPLING_v0.2.1.md`.
 - Multi-indication expansion.
 - Cross-jurisdiction registry comparison.
 - Phase 2 atlas-style aggregate design-space analysis.
@@ -60,7 +60,7 @@ v0.1-alpha is closed when a reviewer can:
 3. view the canonical JSON endpoint;
 4. see source/provenance/hash fields;
 5. see deterministic rule attribution;
-6. understand severity as review priority;
+6. understand severity as deterministic uncalibrated triage metadata;
 7. read explicit claim and non-claim boundaries;
 8. verify the frozen record package against `MANIFEST.sha256`.
 

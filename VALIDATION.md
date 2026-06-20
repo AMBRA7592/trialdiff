@@ -16,7 +16,7 @@ The validator checks:
 - 20-40 exported Evidence Records are present;
 - every record filename matches its `event_id`;
 - every record uses `schema = trialdiff.alpha_demo_record`;
-- every exported record is high or critical severity;
+- every exported record carries a high or critical triage severity value;
 - study metadata fields are present;
 - classification fields are present;
 - provenance fields are present;
@@ -64,10 +64,14 @@ The audit checked:
 - event ID and filename consistency;
 - NCT ID, title, and sponsor presence;
 - version references;
-- category/severity/timing fields;
+- category/severity/timing fields, with severity interpreted as uncalibrated triage metadata;
 - deterministic rules or value signals;
 - changed paths;
 - patch hash and canonical hash;
 - explicit non-claims.
 
 The audit did not adjudicate scientific justification, misconduct, sponsor intent, publication disclosure, or regulatory compliance.
+
+## Severity Calibration Note
+
+The package validator checks structural consistency and manifest hashes. It does not validate severity as review priority. Later v0.2/v0.2.1 calibration failed that claim, so severity is retained only as deterministic uncalibrated triage metadata.

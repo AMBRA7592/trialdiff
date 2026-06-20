@@ -16,13 +16,36 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 
     <header class="panel panel-pad">
       <p class="eyebrow">Methodology</p>
-      <h1>How TrialDiff ranks amendment history</h1>
+      <h1>How TrialDiff builds amendment Evidence Records</h1>
       <p class="lede">
         TrialDiff converts ClinicalTrials.gov amendment history into source-linked Evidence Records. It uses structured
         JSON Patch payloads, deterministic rules, value signals, timing context, and explicit claim boundaries. Severity
-        means review priority, not proven wrongdoing.
+        is deterministic, reproducible, uncalibrated triage metadata, not validated review priority or proven wrongdoing.
       </p>
     </header>
+
+
+
+    <section class="panel panel-pad method-section" id="severity-calibration-status">
+      <h2>Severity Calibration Status</h2>
+      <p>
+        TrialDiff v0.2.1 failed the blinded review-priority calibration gate. The critical tier needed at least 24 of
+        30 fresh TrialDiff-critical records to be independently confirmed as critical; fresh rubric applications
+        confirmed 4/30, 5/30, 12/30, and 17/30.
+      </p>
+      <p>
+        The finding is that the critical review-priority boundary was not stable enough to validate severity as an
+        external priority standard in this design. Severity is therefore retained only as deterministic uncalibrated
+        triage metadata. The underlying Evidence Records, changed paths, source hashes, canonical JSON, and claim
+        boundaries remain citable and reproducible. The calibration record is published as
+        <a href="https://github.com/AMBRA7592/trialdiff/blob/main/SEVERITY_CALIBRATION_v0.2.1.md">
+          SEVERITY_CALIBRATION_v0.2.1.md
+        </a>, with the decoupling decision recorded in
+        <a href="https://github.com/AMBRA7592/trialdiff/blob/main/SEVERITY_DECOUPLING_v0.2.1.md">
+          SEVERITY_DECOUPLING_v0.2.1.md
+        </a>.
+      </p>
+    </section>
 
     <section class="panel panel-pad method-section" id="corpus-scope">
       <h2>Corpus Scope</h2>
@@ -60,20 +83,19 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       <h2>Evidence Records, Not A Closed Feed</h2>
       <p>
         Closed commercial monitoring products can answer whether a trial record changed. TrialDiff is intentionally a
-        different surface: it publishes the evidence object itself. Each high/critical Evidence Record exposes the exact
+        different surface: it publishes the evidence object itself. Each exported Evidence Record exposes the exact
         changed paths, patch payload, rules or value signals, source links, hashes, timing context, and claim boundaries.
       </p>
       <p>
-        The methodology is part of the product. A reader should be able to challenge the classification, inspect the
+        The methodology is part of the artifact. A reader should be able to challenge the deterministic triage label, inspect the
         source, and cite the record without trusting a hidden scoring system.
       </p>
     </section>
 
     <section class="panel panel-pad method-section" id="critical-density">
-      <h2>Critical Density Denominator</h2>
+      <h2>Critical-Triage Density Denominator</h2>
       <p>
-        Dashboard critical density is computed as <strong>critical events per amendment patch</strong>, not critical
-        events per classified event. The denominator is total adjacent patches for the trial.
+        Dashboard critical-triage density is computed as <strong>critical-triage events per amendment patch</strong>, not validated critical review-priority events. The denominator is total adjacent patches for the trial.
       </p>
       <p>
         This means trials with high administrative-only amendment volume show lower density than trials where most
@@ -85,13 +107,13 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     <section class="panel panel-pad method-section" id="evidence-record-filter">
       <h2>Evidence Record Filter</h2>
       <p>
-        Evidence Records are generated as first-class citable artifacts for severity <strong>high</strong> and
-        <strong>critical</strong> events. Medium and low events can still exist in the underlying materiality event feed,
+        Evidence Records are generated as first-class citable artifacts for events carrying <strong>high</strong> and
+        <strong>critical</strong> triage labels. Medium and low events can still exist in the underlying materiality event feed,
         but they are not exported as v0.1-alpha Evidence Records.
       </p>
       <p>
-        This keeps the citation surface focused on review-priority amendments while preserving lower-severity events for
-        later analysis.
+        This keeps the citation surface focused on deterministic high-signal triage while preserving lower-severity events for
+        later analysis. It does not certify high or critical as validated review-priority judgments.
       </p>
     </section>
 
@@ -100,11 +122,11 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       <p>
         The classifier starts with deterministic JSON Pointer rules over the ClinicalTrials.gov schema. Outcome,
         design, intervention, eligibility, status, timeline, enrollment, and adverse-event paths are mapped to review
-        categories and base severities. Each event stores the rules that fired, the rule set hash, and source
+        categories and base triage severities. Each event stores the rules that fired, the rule set hash, and source
         provenance.
       </p>
       <p>
-        Large language models do not set severity. They are not part of the deterministic review-priority decision in
+        Large language models do not set severity. They are not part of the deterministic triage decision in
         v0.1-alpha.
       </p>
     </section>
@@ -112,8 +134,8 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     <section class="panel panel-pad method-section">
       <h2>Timing Modifier</h2>
       <p>
-        Base severity is computed first, then timing context can escalate sensitive changes. For example, an endpoint or
-        eligibility change during late recruitment or after completion can carry higher review priority than the same
+        Base triage severity is computed first, then timing context can escalate sensitive changes. For example, an endpoint or
+        eligibility change during late recruitment or after completion can carry a higher triage label than the same
         change before recruitment begins. The stored event keeps both <code>severity_pre_timing</code> and final
         <code>severity</code>.
       </p>
@@ -136,7 +158,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     <section class="panel panel-pad method-section">
       <h2>Status And Stopped-Trial Rules</h2>
       <p>
-        Status and termination rules are treated as review-priority signals because stopped-trial explanations are
+        Status and termination rules are treated as triage signals because stopped-trial explanations are
         structured public-record fields. 42 CFR 11.64 references the ClinicalTrials.gov "Why Study Stopped" data element
         when applicable. TrialDiff can surface whether this field changed, was empty, or matched a low-information value.
       </p>
@@ -149,9 +171,9 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     <section class="panel panel-pad method-section">
       <h2>Dual Distribution Finding</h2>
       <p>
-        Amendment volume and critical density answer different questions. Patch volume measures operational activity.
-        Critical density measures how consequential those amendments are. Heavy-amendment platform protocols can have
-        low critical density, while smaller trials can have a high share of consequential changes.
+        Amendment volume and critical-triage density answer different questions. Patch volume measures operational activity.
+        Critical-triage density measures how often the deterministic rules assign the critical triage label. Heavy-amendment platform protocols can have
+        low critical-triage density, while smaller trials can have a high share of critical-triage changes.
       </p>
     </section>
   </main>

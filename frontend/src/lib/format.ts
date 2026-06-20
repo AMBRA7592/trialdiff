@@ -10,6 +10,10 @@ export function titleCase(value: string) {
     .join(" ");
 }
 
+export function severityLabel(severity: string) {
+  return `Triage: ${titleCase(severity)}`;
+}
+
 export function severityClass(severity: string) {
   if (severity === "critical") return "badge badge-critical";
   if (severity === "high") return "badge badge-high";

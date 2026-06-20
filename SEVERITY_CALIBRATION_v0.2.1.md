@@ -144,6 +144,14 @@ The current record should be treated as a useful failed calibration cycle:
    it were certifying data. Any next certification pass requires another fresh
    sample or an explicitly held-out stratum.
 
+## Critical-Stratum Adjudication Addendum
+
+After the failed v0.2.1 pass, additional fresh-context applications of the rubric were run over the full 30-record TrialDiff-critical stratum. Across usable fresh applications, critical confirmations were 4/30, 5/30, 12/30, and 17/30.
+
+The pre-registered critical gate required at least 24/30 confirmations. No application came close to that threshold. The spread also shows that the critical review-priority boundary was not stable enough to serve as a validated reference standard in this design.
+
+This converts the next step from another rule-tightening cycle to decoupling: severity remains deterministic uncalibrated triage metadata, and the citable Evidence Record primitive continues without a certified-severity claim. See `SEVERITY_DECOUPLING_v0.2.1.md`.
+
 ## Non-Claims
 
 This re-certification does not establish:
@@ -154,7 +162,9 @@ This re-certification does not establish:
 - that TrialDiff has been externally clinically validated;
 - that the evidence-record format failed;
 - that the current v0.2.1 severity labels are suitable for a buyer-facing
-  high-priority brief.
+  high-priority brief;
+- that the current severity labels are validated review-priority judgments.
 
 The supported conclusion is limited to severity calibration: v0.2.1 still
-over-fires at the upper tiers under blinded fresh-context model review.
+over-fires at the upper tiers under blinded fresh-context model review, and
+severity should be treated as deterministic uncalibrated triage metadata.

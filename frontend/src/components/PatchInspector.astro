@@ -1,7 +1,7 @@
 ---
 import { ExternalLink, ShieldCheck } from "@lucide/astro";
 
-import { formatNumber, severityClass, titleCase } from "@/lib/format";
+import { formatNumber, severityClass, severityLabel, titleCase } from "@/lib/format";
 import { formatPatchValue, type MaterialityEventDetail, type PatchProvenance } from "@/lib/patchEnrichment";
 import type { EnrichedPatch } from "@/lib/patchEnrichment";
 
@@ -42,7 +42,7 @@ function valueBlock(value: unknown) {
 
   <div class="patch-disclaimer">
     <ShieldCheck size={18} />
-    <span>Severity means review priority, not proven wrongdoing. Operation-level severity is inferred from deterministic path rules.</span>
+    <span>Severity is deterministic uncalibrated triage metadata, not validated review priority. Operation-level severity is inferred from deterministic path rules.</span>
   </div>
 
   <div class="patch-summary-grid">
@@ -117,7 +117,7 @@ function valueBlock(value: unknown) {
               <span class="group-description">{group.description}</span>
             </span>
             <span class="summary-right">
-              <span class={severityClass(group.severity)}>{titleCase(group.severity)}</span>
+              <span class={severityClass(group.severity)}>{severityLabel(group.severity)}</span>
               <span>{group.operations.length} ops</span>
             </span>
           </summary>
@@ -130,7 +130,7 @@ function valueBlock(value: unknown) {
                     <span class="op-code">{operation.op}</span>
                     <code>{operation.path}</code>
                   </div>
-                  <span class={severityClass(operation.severity)}>{titleCase(operation.severity)}</span>
+                  <span class={severityClass(operation.severity)}>{severityLabel(operation.severity)}</span>
                 </div>
 
                 <div class="operation-meta">

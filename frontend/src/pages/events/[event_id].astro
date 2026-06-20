@@ -2,7 +2,7 @@
 import { ArrowLeft, ExternalLink, ShieldCheck } from "@lucide/astro";
 
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { severityClass, titleCase } from "@/lib/format";
+import { severityClass, severityLabel, titleCase } from "@/lib/format";
 import { getEvidenceRecord } from "@/queries/evidence";
 
 const eventId = String(Astro.params.event_id ?? "");
@@ -46,16 +46,15 @@ const title = record ? `${record.eventId} | TrialDiff Evidence Record` : "TrialD
             <div class="disclaimer-inner">
               <ShieldCheck size={20} />
               <div>
-                Severity means review priority, not proven wrongdoing. This page states what the registry evidence
-                supports and what it does not support.
+                Severity is deterministic, reproducible, uncalibrated triage metadata, not validated review priority or proven wrongdoing. This page states what the registry evidence supports and what it does not support.
               </div>
             </div>
           </section>
 
           <section class="grid evidence-summary-grid">
             <div class="panel panel-pad">
-              <div class="stat-label">Severity</div>
-              <span class={severityClass(record.severity)}>{titleCase(record.severity)}</span>
+              <div class="stat-label">Triage severity</div>
+              <span class={severityClass(record.severity)}>{severityLabel(record.severity)}</span>
             </div>
             <div class="panel panel-pad">
               <div class="stat-label">Category</div>
