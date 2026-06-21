@@ -27,6 +27,7 @@ This repository snapshot contains:
 - `records/*.json` - 40 selected self-contained Evidence Records
 - `CLAIMS.md` - what the demo is allowed to claim
 - `NON_CLAIMS.md` - what the demo explicitly does not claim
+- `EVIDENCE_RECORD_PRIMITIVE.md` - operational primitive specification
 - `EVIDENCE_RECORD_SCHEMA.md` - schema description for exported records
 - `VALIDATION.md` - validation and audit status
 - `RELEASE_NOTES_v0.1-alpha.md` - what exists, what is excluded, and what is deferred
@@ -91,4 +92,4 @@ records=40
 
 Technical proof cleared; 30-day artifact closed as a v0.1 alpha.
 
-The v0.2/v0.2.1 severity calibration failed the review-priority gate. Critical confirmations across fresh rubric applications ranged from 4/30 to 17/30, below the 24/30 required threshold. Severity labels are therefore retained only as deterministic uncalibrated triage metadata. The evidence-record primitive remains supported; the certified-severity claim and buyer-facing priority brief remain blocked. See `SEVERITY_CALIBRATION_v0.2.1.md` and `SEVERITY_DECOUPLING_v0.2.1.md`.
+The v0.2/v0.2.1 severity calibration failed the review-priority gate. Critical confirmations across fresh rubric applications ranged from 4/30 to 17/30, below the 24/30 required threshold. Severity labels are therefore retained only as deterministic uncalibrated triage metadata. The evidence-record primitive remains supported; the certified-severity claim and buyer-facing priority brief remain blocked. See `EVIDENCE_RECORD_PRIMITIVE.md`, `SEVERITY_CALIBRATION_v0.2.1.md`, and `SEVERITY_DECOUPLING_v0.2.1.md`.
