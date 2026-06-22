@@ -73,7 +73,7 @@ def event_classes_for_patch(
         classes.append(WHY_STOPPED_REMOVED_TERMINAL)
     if reconciliation_signal and any(is_outcome_path(operation.get("path", "")) for operation in patch):
         classes.append(OUTCOME_EDIT_WITH_RESULTS_SIGNAL)
-    return classes
+    return sorted(classes)
 
 
 def combined_rule_set_hash(*, triage_rule_set_hash: str | None) -> str:

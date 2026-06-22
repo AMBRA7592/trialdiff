@@ -5,6 +5,7 @@ import unittest
 from trialdiff.event_classes import (
     OUTCOME_EDIT_WITH_RESULTS_SIGNAL,
     SECONDARY_OUTCOME_REMOVED,
+    WHY_STOPPED_REMOVED_TERMINAL,
     event_classes_for_patch,
 )
 
@@ -67,6 +68,33 @@ class EventClassTests(unittest.TestCase):
         self.assertIn(
             OUTCOME_EDIT_WITH_RESULTS_SIGNAL,
             event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch),
+        )
+
+    def test_event_classes_are_returned_in_sorted_order(self) -> None:
+        removed = {"measure": "Quality of life", "description": "FACT-B score", "timeFrame": "12 months"}
+        from_record = record(
+            status="TERMINATED",
+            has_results=False,
+            primary_outcomes=[{"measure": "Overall survival"}],
+            secondary_outcomes=[removed],
+        )
+        from_record["protocolSection"]["statusModule"]["whyStopped"] = "Recruitment failed"
+        from_record["protocolSection"]["statusModule"]["primaryCompletionDateStruct"] = {"type": "ACTUAL"}
+        to_record = record(
+            status="TERMINATED",
+            has_results=True,
+            primary_outcomes=[{"measure": "Overall survival"}],
+            secondary_outcomes=[],
+        )
+        patch = [
+            {"op": "remove", "path": "/protocolSection/statusModule/whyStopped"},
+            {"op": "replace", "path": "/hasResults", "value": True},
+            {"op": "remove", "path": "/protocolSection/outcomesModule/secondaryOutcomes/0"},
+        ]
+
+        self.assertEqual(
+            event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch),
+            sorted([OUTCOME_EDIT_WITH_RESULTS_SIGNAL, SECONDARY_OUTCOME_REMOVED, WHY_STOPPED_REMOVED_TERMINAL]),
         )
 
 
