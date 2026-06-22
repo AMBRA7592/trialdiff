@@ -5,6 +5,11 @@ from pathlib import Path
 import sqlite3
 from typing import Any
 
+from trialdiff.event_classes import (
+    EVENT_CLASS_RULE_SET_HASH,
+    combined_rule_set_hash,
+    event_classes_for_patch,
+)
 from trialdiff.provenance import Provenance, canonical_json, sha256_json, utc_now_iso
 
 
@@ -23,9 +28,26 @@ def init_db(db_path: str | Path) -> None:
     try:
         for migration in sorted(MIGRATIONS_DIR.glob("*.sql")):
             connection.executescript(migration.read_text(encoding="utf-8"))
+        ensure_runtime_schema(connection)
         connection.commit()
     finally:
         connection.close()
+
+
+def ensure_runtime_schema(connection: sqlite3.Connection) -> None:
+    tables = {
+        row["name"]
+        for row in connection.execute(
+            "SELECT name FROM sqlite_master WHERE type='table'"
+        ).fetchall()
+    }
+    if "evidence_records" not in tables:
+        return
+    columns = {row["name"] for row in connection.execute("PRAGMA table_info(evidence_records)").fetchall()}
+    if "event_classes_json" not in columns:
+        connection.execute(
+            "ALTER TABLE evidence_records ADD COLUMN event_classes_json TEXT NOT NULL DEFAULT '[]'"
+        )
 
 
 def _json(value: Any) -> str:
@@ -346,58 +368,132 @@ class TrialDiffStore:
         self,
         nct_id: str | None = None,
         *,
-        severities: tuple[str, ...] = ("high", "critical"),
-    ) -> list[sqlite3.Row]:
-        placeholders = ",".join("?" for _item in severities)
-        params: list[Any] = list(severities)
+        severities: tuple[str, ...] | None = None,
+    ) -> list[dict[str, Any]]:
+        materiality_rows = self._materiality_rows_by_patch(nct_id)
+        rows: list[dict[str, Any]] = []
+        params: list[Any] = []
         nct_clause = ""
         if nct_id:
-            nct_clause = "AND e.nct_id=?"
+            nct_clause = "WHERE p.nct_id=?"
             params.append(nct_id)
-        return list(
-            self.connection.execute(
-                f"""
-                SELECT
-                  e.nct_id,
-                  e.from_version,
-                  e.to_version,
-                  e.submitted_date,
-                  e.timing_context,
-                  e.severity_pre_timing,
-                  e.severity,
-                  e.category,
-                  e.categories_json,
-                  e.changed_paths_json,
-                  e.deterministic_rules_json,
-                  e.value_signals_json,
-                  e.needs_human_review,
-                  e.rule_set_hash,
-                  e.raw_hash AS materiality_event_hash,
-                  p.patch_json,
-                  p.patch_hash,
-                  p.source AS patch_source,
-                  p.source_url AS patch_source_url,
-                  p.raw_hash AS patch_raw_hash,
-                  from_version.record_hash AS from_snapshot_hash,
-                  to_version.record_hash AS to_snapshot_hash
-                FROM materiality_events e
-                JOIN trial_patches p
-                  ON p.nct_id=e.nct_id
-                 AND p.from_version=e.from_version
-                 AND p.to_version=e.to_version
-                LEFT JOIN trial_versions from_version
-                  ON from_version.nct_id=e.nct_id
-                 AND from_version.version=e.from_version
-                LEFT JOIN trial_versions to_version
-                  ON to_version.nct_id=e.nct_id
-                 AND to_version.version=e.to_version
-                WHERE e.severity IN ({placeholders})
-                  {nct_clause}
-                ORDER BY e.nct_id, e.from_version, e.to_version, e.category
-                """,
-                params,
+        patch_rows = self.connection.execute(
+            f"""
+            SELECT
+              p.nct_id,
+              p.from_version,
+              p.to_version,
+              p.patch_json,
+              p.patch_hash,
+              p.changed_paths_json,
+              p.source AS patch_source,
+              p.source_url AS patch_source_url,
+              p.raw_hash AS patch_raw_hash,
+              from_version.submitted_date AS from_submitted_date,
+              from_version.record_json AS from_record_json,
+              from_version.record_hash AS from_snapshot_hash,
+              to_version.submitted_date AS to_submitted_date,
+              to_version.record_json AS to_record_json,
+              to_version.record_hash AS to_snapshot_hash
+            FROM trial_patches p
+            LEFT JOIN trial_versions from_version
+              ON from_version.nct_id=p.nct_id
+             AND from_version.version=p.from_version
+            LEFT JOIN trial_versions to_version
+              ON to_version.nct_id=p.nct_id
+             AND to_version.version=p.to_version
+            {nct_clause}
+            ORDER BY p.nct_id, p.from_version, p.to_version
+            """,
+            params,
+        ).fetchall()
+        for patch_row in patch_rows:
+            if not patch_row["from_record_json"]:
+                continue
+            patch = json.loads(patch_row["patch_json"])
+            from_record = json.loads(patch_row["from_record_json"])
+            to_record = json.loads(patch_row["to_record_json"]) if patch_row["to_record_json"] else None
+            event_classes = event_classes_for_patch(
+                from_record=from_record,
+                to_record=to_record,
+                patch=patch,
             )
-        )
+            if not event_classes:
+                continue
+            materiality = materiality_rows.get(
+                (patch_row["nct_id"], patch_row["from_version"], patch_row["to_version"])
+            )
+            if severities and materiality and materiality["severity"] not in severities:
+                continue
+            triage_rule_set_hash = materiality["rule_set_hash"] if materiality else ""
+            rows.append(
+                {
+                    "nct_id": patch_row["nct_id"],
+                    "from_version": patch_row["from_version"],
+                    "to_version": patch_row["to_version"],
+                    "submitted_date": (
+                        materiality["submitted_date"]
+                        if materiality and materiality["submitted_date"]
+                        else patch_row["to_submitted_date"]
+                    ),
+                    "timing_context": materiality["timing_context"] if materiality else None,
+                    "severity_pre_timing": materiality["severity_pre_timing"] if materiality else "uncategorized",
+                    "severity": materiality["severity"] if materiality else "uncategorized",
+                    "category": materiality["category"] if materiality else "event_class_membership",
+                    "categories_json": (
+                        materiality["categories_json"] if materiality else _json(["event_class_membership"])
+                    ),
+                    "changed_paths_json": patch_row["changed_paths_json"],
+                    "deterministic_rules_json": materiality["deterministic_rules_json"] if materiality else _json([]),
+                    "value_signals_json": materiality["value_signals_json"] if materiality else _json([]),
+                    "needs_human_review": materiality["needs_human_review"] if materiality else 0,
+                    "rule_set_hash": combined_rule_set_hash(triage_rule_set_hash=triage_rule_set_hash),
+                    "triage_rule_set_hash": triage_rule_set_hash,
+                    "event_class_rule_set_hash": EVENT_CLASS_RULE_SET_HASH,
+                    "event_classes_json": _json(event_classes),
+                    "materiality_event_hash": materiality["raw_hash"] if materiality else "",
+                    "patch_json": patch_row["patch_json"],
+                    "patch_hash": patch_row["patch_hash"],
+                    "patch_source": patch_row["patch_source"],
+                    "patch_source_url": patch_row["patch_source_url"],
+                    "patch_raw_hash": patch_row["patch_raw_hash"],
+                    "from_snapshot_hash": patch_row["from_snapshot_hash"],
+                    "to_snapshot_hash": patch_row["to_snapshot_hash"],
+                }
+            )
+        return rows
+
+    def _materiality_rows_by_patch(self, nct_id: str | None = None) -> dict[tuple[str, int, int], sqlite3.Row]:
+        params: list[Any] = []
+        nct_clause = ""
+        if nct_id:
+            nct_clause = "WHERE nct_id=?"
+            params.append(nct_id)
+        rows = self.connection.execute(
+            f"""
+            SELECT *
+            FROM materiality_events
+            {nct_clause}
+            ORDER BY
+              nct_id,
+              from_version,
+              to_version,
+              CASE severity
+                WHEN 'critical' THEN 1
+                WHEN 'high' THEN 2
+                WHEN 'medium' THEN 3
+                WHEN 'low' THEN 4
+                ELSE 5
+              END,
+              category
+            """,
+            params,
+        ).fetchall()
+        selected: dict[tuple[str, int, int], sqlite3.Row] = {}
+        for row in rows:
+            key = (row["nct_id"], row["from_version"], row["to_version"])
+            selected.setdefault(key, row)
+        return selected
 
     def evidence_record_exists(
         self,
@@ -428,13 +524,13 @@ class TrialDiffStore:
             INSERT OR IGNORE INTO evidence_records (
               event_id, nct_id, from_version, to_version, submitted_date, timing_context,
               severity_pre_timing, severity, category, categories_json, changed_paths_json,
-              deterministic_rules_json, value_signals_json, claims_supported_json,
+              event_classes_json, deterministic_rules_json, value_signals_json, claims_supported_json,
               claims_not_supported_json, review_question, citation_text, canonical_json,
               canonical_hash, evidence_version, patch_hash, patch_source, patch_source_url,
               patch_raw_hash, from_snapshot_hash, to_snapshot_hash, materiality_event_hash,
               rule_set_hash, source, source_url, generated_at
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 record["event_id"],
@@ -448,6 +544,7 @@ class TrialDiffStore:
                 record["category"],
                 _json(record.get("categories") or []),
                 _json(record.get("changed_paths") or []),
+                _json(record.get("event_classes") or []),
                 _json(record.get("deterministic_rules") or []),
                 _json(record.get("value_signals") or []),
                 _json(record.get("claims_supported") or []),

@@ -14,6 +14,7 @@ An Evidence Record is a deterministic, claim-bounded object that asserts a bound
 - `source` — for each cited source: retrieval URL, content hash at the observed version, and version reference(s) (e.g. from/to).
 - `change` — canonical representation of what changed: the changed paths and their before/after values.
 - `ruleset_hash` — hash of the logic version that produced any derived fields. A logic change yields a new `ruleset_hash`, never a silent edit to existing records.
+- `event_classes` — deterministic set of factual class memberships for the bounded change event. A record is one-per-source-change and can carry multiple classes; class membership is not a priority ranking. The primitive permits an empty class set; TrialDiff's current reference implementation emits only records with at least one event class.
 - `triage_label` — deterministic classification of the change. Uncalibrated: a reproducible heuristic, not a validated priority.
 - `calibration_status` — status of any external validation for `triage_label`, e.g. `uncalibrated`.
 - `claims_supported` — explicit list of what the record asserts.
@@ -38,7 +39,7 @@ Every record states `claims_supported` and `claims_not_supported`. A record asse
 
 ## Worked instance: TrialDiff
 
-TrialDiff is the reference implementation. It produces Evidence Records for ClinicalTrials.gov protocol-amendment changes: deterministic event ids of the form `evt_{nct_id}_v{from}_v{to}_{hash}`, canonical JSON, source URLs and content hashes, explicit claim boundaries, and a `triage_label` (formerly `severity`). That label's calibration was attempted under blinded review and did not pass the pre-registered gate; it is retained as uncalibrated metadata (see `SEVERITY_CALIBRATION_v0.2.1.md` and `SEVERITY_DECOUPLING_v0.2.1.md`).
+TrialDiff is the reference implementation. It produces Evidence Records for ClinicalTrials.gov protocol-amendment changes: deterministic event ids of the form `evt_{nct_id}_v{from}_v{to}_{hash}`, canonical JSON, source URLs and content hashes, explicit claim boundaries, deterministic `event_classes`, and a `triage_label` (formerly `severity`). That label's calibration was attempted under blinded review and did not pass the pre-registered gate; it is retained as uncalibrated metadata (see `SEVERITY_CALIBRATION_v0.2.1.md` and `SEVERITY_DECOUPLING_v0.2.1.md`).
 
 ## Other instantiations
 

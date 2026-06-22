@@ -18,7 +18,7 @@ The live demo is backed by Neon Postgres and currently renders the same 25-study
 - 86 generated Evidence Records
 - 40 selected frozen records in `records/`
 
-The originally planned 100-study breast-cancer corpus remains a later expansion. The alpha is intentionally relabeled as a 25-study demo because the local 100-study SQLite file was not reliably readable during freeze.
+The alpha is intentionally relabeled as a 25-study demo because the local 100-study SQLite file was not reliably readable at freeze time.
 
 ## Frozen Package
 

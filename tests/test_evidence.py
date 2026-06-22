@@ -17,7 +17,14 @@ from trialdiff.provenance import canonical_json, sha256_json, sha256_text
 FETCHED_AT = "2026-05-21T12:00:00Z"
 
 
-def primary_outcome_record(nct_id: str, measure: str, status: str = "COMPLETED") -> dict:
+def primary_outcome_record(
+    nct_id: str,
+    measure: str,
+    status: str = "COMPLETED",
+    *,
+    has_results: bool = False,
+    secondary_outcomes: list[dict] | None = None,
+) -> dict:
     return {
         "protocolSection": {
             "identificationModule": {"nctId": nct_id, "briefTitle": "Evidence Fixture Trial"},
@@ -30,9 +37,12 @@ def primary_outcome_record(nct_id: str, measure: str, status: str = "COMPLETED")
             "conditionsModule": {"conditions": ["Breast Cancer"]},
             "armsInterventionsModule": {"interventions": []},
             "designModule": {"studyType": "INTERVENTIONAL", "phases": ["PHASE3"]},
-            "outcomesModule": {"primaryOutcomes": [{"measure": measure}]},
+            "outcomesModule": {
+                "primaryOutcomes": [{"measure": measure}],
+                "secondaryOutcomes": secondary_outcomes or [],
+            },
         },
-        "hasResults": False,
+        "hasResults": has_results,
     }
 
 
@@ -48,13 +58,16 @@ def insert_evidence_fixture(
     changed_paths: list[str] | None = None,
     deterministic_rules: list[str] | None = None,
     value_signals: list[dict] | None = None,
+    record_v1: dict | None = None,
+    record_v2: dict | None = None,
+    patch: list[dict] | None = None,
 ) -> dict[str, str]:
     changed_paths = changed_paths or ["/protocolSection/outcomesModule/primaryOutcomes/0/measure"]
     deterministic_rules = deterministic_rules or ["primary_outcome_any_change"]
     value_signals = value_signals or []
-    record_v1 = primary_outcome_record(nct_id, "Overall survival")
-    record_v2 = primary_outcome_record(nct_id, "Progression-free survival")
-    patch = [{"op": "replace", "path": changed_paths[0], "value": "Progression-free survival"}]
+    record_v1 = record_v1 or primary_outcome_record(nct_id, "Overall survival")
+    record_v2 = record_v2 or primary_outcome_record(nct_id, "Progression-free survival")
+    patch = patch or [{"op": "replace", "path": changed_paths[0], "value": "Progression-free survival"}]
     record_v1_hash = sha256_json(record_v1)
     record_v2_hash = sha256_json(record_v2)
     patch_hash = sha256_json(patch)
@@ -256,9 +269,15 @@ class EvidenceRecordTests(unittest.TestCase):
                 self.assertEqual(canonical["provenance"]["patch_hash"], hashes["patch_hash"])
                 self.assertEqual(canonical["provenance"]["from_snapshot_hash"], hashes["from_snapshot_hash"])
                 self.assertEqual(canonical["provenance"]["to_snapshot_hash"], hashes["to_snapshot_hash"])
-                self.assertEqual(canonical["classification"]["rule_set_hash"], hashes["rule_set_hash"])
+                self.assertEqual(canonical["classification"]["triage_rule_set_hash"], hashes["rule_set_hash"])
+                self.assertEqual(canonical["classification"]["calibration_status"], "uncalibrated")
+                self.assertEqual(
+                    canonical["classification"]["event_classes"],
+                    ["primary_endpoint_changed_after_primary_completion_without_results_reconciliation"],
+                )
                 self.assertEqual(row["canonical_hash"], sha256_text(row["canonical_json"]))
                 self.assertTrue(any("primary outcome" in claim for claim in supported))
+                self.assertTrue(any("event-class predicates" in claim for claim in supported))
                 self.assertIn("That sponsor intent can be inferred from this registry change.", not_supported)
                 self.assertIn("That the change was or was not disclosed in a manuscript.", not_supported)
                 self.assertIn("That TrialDiff determines regulatory compliance or non-compliance.", not_supported)
@@ -271,13 +290,37 @@ class EvidenceRecordTests(unittest.TestCase):
             init_db(db_path)
             connection = connect(db_path)
             try:
+                record_v1 = primary_outcome_record(
+                    "NCT00000001",
+                    "Overall survival",
+                    secondary_outcomes=[
+                        {
+                            "measure": "Quality of life",
+                            "description": "FACT-B score",
+                            "timeFrame": "12 months",
+                        }
+                    ],
+                )
+                record_v2 = primary_outcome_record(
+                    "NCT00000001",
+                    "Overall survival",
+                    secondary_outcomes=[],
+                )
                 insert_evidence_fixture(
                     connection,
                     category="secondary_outcome_change",
                     severity="critical",
                     severity_pre_timing="high",
-                    changed_paths=["/protocolSection/outcomesModule/secondaryOutcomes/0/measure"],
+                    changed_paths=["/protocolSection/outcomesModule/secondaryOutcomes/0"],
                     deterministic_rules=["secondary_outcome_any_change"],
+                    record_v1=record_v1,
+                    record_v2=record_v2,
+                    patch=[
+                        {
+                            "op": "remove",
+                            "path": "/protocolSection/outcomesModule/secondaryOutcomes/0",
+                        }
+                    ],
                 )
                 store = TrialDiffStore(connection)
                 generate_evidence_records(store)
@@ -286,6 +329,11 @@ class EvidenceRecordTests(unittest.TestCase):
                 row = connection.execute("SELECT * FROM evidence_records").fetchone()
                 supported = json.loads(row["claims_supported_json"])
                 not_supported = json.loads(row["claims_not_supported_json"])
+                canonical = json.loads(row["canonical_json"])
+                self.assertEqual(
+                    canonical["classification"]["event_classes"],
+                    ["secondary_outcome_removed_after_primary_completion"],
+                )
                 self.assertTrue(any("secondary outcome" in claim for claim in supported))
                 self.assertTrue(any("post_recruitment" in claim for claim in supported))
                 self.assertIn("That this registry outcome change reflects outcome switching rather than a legitimate registry correction.", not_supported)
@@ -343,6 +391,63 @@ class EvidenceRecordTests(unittest.TestCase):
 
                 self.assertEqual(result.generated, 0)
                 self.assertEqual(connection.execute("SELECT COUNT(*) FROM evidence_records").fetchone()[0], 0)
+            finally:
+                connection.close()
+
+    def test_results_reconciliation_class_generates_low_triage_record(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            db_path = f"{tmpdir}/trialdiff.sqlite3"
+            init_db(db_path)
+            connection = connect(db_path)
+            try:
+                record_v1 = primary_outcome_record(
+                    "NCT00000001",
+                    "Response rate",
+                    has_results=False,
+                )
+                record_v2 = primary_outcome_record(
+                    "NCT00000001",
+                    "Objective response rate",
+                    has_results=True,
+                )
+                insert_evidence_fixture(
+                    connection,
+                    severity="low",
+                    severity_pre_timing="low",
+                    category="results_reconciliation",
+                    changed_paths=[
+                        "/hasResults",
+                        "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+                    ],
+                    deterministic_rules=["results_reconciliation_outcome_edit"],
+                    record_v1=record_v1,
+                    record_v2=record_v2,
+                    patch=[
+                        {"op": "replace", "path": "/hasResults", "value": True},
+                        {
+                            "op": "replace",
+                            "path": "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+                            "value": "Objective response rate",
+                        },
+                    ],
+                )
+                store = TrialDiffStore(connection)
+                result = generate_evidence_records(store)
+                connection.commit()
+
+                self.assertEqual(result.generated, 1)
+                row = connection.execute("SELECT * FROM evidence_records").fetchone()
+                canonical = json.loads(row["canonical_json"])
+                not_supported = json.loads(row["claims_not_supported_json"])
+                self.assertEqual(canonical["classification"]["severity"], "low")
+                self.assertEqual(
+                    canonical["classification"]["event_classes"],
+                    ["outcome_edit_cooccurs_with_results_posting"],
+                )
+                self.assertIn(
+                    "That co-occurrence with results posting proves the outcome edit was harmless, administrative, or substantively benign.",
+                    not_supported,
+                )
             finally:
                 connection.close()
 

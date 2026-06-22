@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS evidence_records (
   category text NOT NULL,
   categories_json jsonb NOT NULL DEFAULT '[]'::jsonb,
   changed_paths_json jsonb NOT NULL DEFAULT '[]'::jsonb,
+  event_classes_json jsonb NOT NULL DEFAULT '[]'::jsonb,
   deterministic_rules_json jsonb NOT NULL DEFAULT '[]'::jsonb,
   value_signals_json jsonb NOT NULL DEFAULT '[]'::jsonb,
   claims_supported_json jsonb NOT NULL DEFAULT '[]'::jsonb,

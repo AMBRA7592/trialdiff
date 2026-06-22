@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS evidence_records (
   category TEXT NOT NULL,
   categories_json TEXT NOT NULL DEFAULT '[]',
   changed_paths_json TEXT NOT NULL DEFAULT '[]',
+  event_classes_json TEXT NOT NULL DEFAULT '[]',
   deterministic_rules_json TEXT NOT NULL DEFAULT '[]',
   value_signals_json TEXT NOT NULL DEFAULT '[]',
   claims_supported_json TEXT NOT NULL DEFAULT '[]',

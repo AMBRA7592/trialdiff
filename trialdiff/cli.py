@@ -228,7 +228,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     evidence_parser = subparsers.add_parser(
         "generate-evidence",
-        help="Generate citeable Evidence Records from high and critical materiality events.",
+        help="Generate citeable Evidence Records from deterministic event-class membership.",
     )
     evidence_parser.add_argument("--db", default="trialdiff.sqlite3")
     evidence_parser.add_argument("--nct", help="Optional NCT ID to generate.")

@@ -135,6 +135,7 @@ def build_event_id(
     changed_paths: list[str],
     rule_set_hash: str,
     evidence_version: int,
+    event_classes: list[str] | None = None,
 ) -> str:
     digest = sha256_json(
         {
@@ -144,6 +145,7 @@ def build_event_id(
             "patch_hash": patch_hash,
             "category": category,
             "changed_paths": sorted(changed_paths),
+            "event_classes": sorted(event_classes or []),
             "rule_set_hash": rule_set_hash,
             "evidence_version": evidence_version,
         }
@@ -184,6 +186,7 @@ def build_evidence_record(row: Row | dict[str, Any], *, evidence_version: int = 
     changed_paths = load_json(data["changed_paths_json"], [])
     deterministic_rules = load_json(data["deterministic_rules_json"], [])
     value_signals = load_json(data["value_signals_json"], [])
+    event_classes = load_json(data.get("event_classes_json"), [])
     patch = load_json(data["patch_json"], [])
     generated_at = utc_now_iso()
     event_id = build_event_id(
@@ -193,16 +196,18 @@ def build_evidence_record(row: Row | dict[str, Any], *, evidence_version: int = 
         patch_hash=data["patch_hash"],
         category=data["category"],
         changed_paths=changed_paths,
+        event_classes=event_classes,
         rule_set_hash=data["rule_set_hash"],
         evidence_version=evidence_version,
     )
     claims_supported = build_claims_supported(
         data=data,
         changed_paths=changed_paths,
+        event_classes=event_classes,
         deterministic_rules=deterministic_rules,
         value_signals=value_signals,
     )
-    claims_not_supported = build_claims_not_supported(data["category"])
+    claims_not_supported = build_claims_not_supported(data["category"], event_classes=event_classes)
     review_question = review_question_for_category(data["category"])
     citation_text = citation_for_record(
         event_id=event_id,
@@ -227,11 +232,16 @@ def build_evidence_record(row: Row | dict[str, Any], *, evidence_version: int = 
         "classification": {
             "severity_pre_timing": data["severity_pre_timing"],
             "severity": data["severity"],
+            "triage_label": data["severity"],
+            "calibration_status": "uncalibrated",
             "category": data["category"],
             "categories": categories,
+            "event_classes": event_classes,
             "timing_context": data.get("timing_context"),
             "deterministic_rules": deterministic_rules,
             "value_signals": value_signals,
+            "triage_rule_set_hash": data.get("triage_rule_set_hash", data["rule_set_hash"]),
+            "event_class_rule_set_hash": data.get("event_class_rule_set_hash"),
             "rule_set_hash": data["rule_set_hash"],
         },
         "changed_paths": changed_paths,
@@ -262,6 +272,7 @@ def build_evidence_record(row: Row | dict[str, Any], *, evidence_version: int = 
         "severity": data["severity"],
         "category": data["category"],
         "categories": categories,
+        "event_classes": event_classes,
         "changed_paths": changed_paths,
         "deterministic_rules": deterministic_rules,
         "value_signals": value_signals,
@@ -290,6 +301,7 @@ def build_claims_supported(
     *,
     data: dict[str, Any],
     changed_paths: list[str],
+    event_classes: list[str],
     deterministic_rules: list[str],
     value_signals: list[dict[str, Any]],
 ) -> list[str]:
@@ -301,9 +313,16 @@ def build_claims_supported(
         "The JSON Patch for this comparison has hash {patch_hash}.".format(**data),
         "The active deterministic rule set hash was {rule_set_hash}.".format(**data),
         (
-            "The event was classified as {severity}; before timing adjustment it was {severity_pre_timing}."
+            "The deterministic triage label was {severity}; before timing adjustment it was {severity_pre_timing}."
         ).format(**data),
+        "The triage label is uncalibrated metadata, not a validated review-priority finding.",
     ]
+    if event_classes:
+        claims.append(
+            "The patch satisfied these deterministic event-class predicates: {classes}.".format(
+                classes=", ".join(event_classes)
+            )
+        )
     claims.extend(template.format(**data) for template in CATEGORY_CLAIM_TEMPLATES.get(data["category"], []))
     if data.get("timing_context"):
         claims.append(
@@ -314,6 +333,7 @@ def build_claims_supported(
     if changed_paths:
         claims.append("The changed JSON Pointer paths were: {paths}.".format(paths=", ".join(changed_paths)))
     claims.extend(signal_claims(value_signals))
+    claims.extend(event_class_claims(event_classes, data))
     if any(path.endswith("/whyStopped") or "/whyStopped" in path for path in changed_paths):
         claims.append(
             "The changed paths include the ClinicalTrials.gov whyStopped field, a stopped-trial explanation field relevant to 42 CFR 11.64 when applicable."
@@ -321,8 +341,41 @@ def build_claims_supported(
     return unique(claims)
 
 
-def build_claims_not_supported(category: str) -> list[str]:
-    return unique(STANDARD_CLAIMS_NOT_SUPPORTED + CATEGORY_CLAIMS_NOT_SUPPORTED.get(category, []))
+def build_claims_not_supported(category: str, *, event_classes: list[str]) -> list[str]:
+    claims = STANDARD_CLAIMS_NOT_SUPPORTED + CATEGORY_CLAIMS_NOT_SUPPORTED.get(category, [])
+    if "outcome_edit_cooccurs_with_results_posting" in event_classes:
+        claims.append(
+            "That co-occurrence with results posting proves the outcome edit was harmless, administrative, or substantively benign."
+        )
+    if event_classes:
+        claims.append("That event-class membership is a validated global review-priority ranking.")
+    return unique(claims)
+
+
+def event_class_claims(event_classes: list[str], data: dict[str, Any]) -> list[str]:
+    claims: list[str] = []
+    from_version = data["from_version"]
+    to_version = data["to_version"]
+    for event_class in event_classes:
+        if event_class == "primary_endpoint_changed_after_primary_completion_without_results_reconciliation":
+            claims.append(
+                f"A primary outcome definition field changed after primary completion between versions {from_version} and {to_version}, without a results-posting co-occurrence signal."
+            )
+        elif event_class == "secondary_outcome_removed_after_primary_completion":
+            claims.append(
+                f"The JSON Patch removed a whole secondary outcome item after primary completion between versions {from_version} and {to_version}; when a TO-version outcome list is available, reindex-only removals are excluded."
+            )
+        elif event_class == "enrollment_changed_to_zero":
+            claims.append(f"The enrollment count changed from a positive value to zero between versions {from_version} and {to_version}.")
+        elif event_class == "why_stopped_removed_in_terminal_context":
+            claims.append(
+                f"The whyStopped field changed from nonempty to empty or absent in a terminal-status context between versions {from_version} and {to_version}."
+            )
+        elif event_class == "outcome_edit_cooccurs_with_results_posting":
+            claims.append(
+                f"An outcome path changed between versions {from_version} and {to_version} in a patch that also carried a hasResults or resultsSection co-occurrence signal."
+            )
+    return claims
 
 
 def signal_claims(value_signals: list[dict[str, Any]]) -> list[str]:
