@@ -6,23 +6,24 @@ frozen TrialDiff v0.1-alpha `records/` package or its manifest.
 ## Source
 
 - Corpus identifier: `breast-cancer-phase2-3-limit100-v021`
-- Working database: `/Users/amadeusbrandes/dev/trialdiff/trialdiff_breast_cancer_limit100_v021.sqlite3`
+- Working database: `<db_path>` (the regenerated 100-study SQLite database
+  for the corpus above)
 - Generation command:
 
 ```bash
-python3 -m trialdiff.cli generate-evidence --db /Users/amadeusbrandes/dev/trialdiff/trialdiff_breast_cancer_limit100_v021.sqlite3 --force
+python3 -m trialdiff.cli generate-evidence --db <db_path> --force
 ```
 
 - Export command:
 
 ```bash
-python3 scripts/export_event_class_package.py --db /Users/amadeusbrandes/dev/trialdiff/trialdiff_breast_cancer_limit100_v021.sqlite3 --out <package_dir> --corpus-label breast-cancer-phase2-3-limit100-v021 --force
+python3 scripts/export_event_class_package.py --db <db_path> --out <package_dir> --corpus-label breast-cancer-phase2-3-limit100-v021 --force
 ```
 
 - Validation command:
 
 ```bash
-python3 scripts/validate_event_class_package.py --package <package_dir> --db /Users/amadeusbrandes/dev/trialdiff/trialdiff_breast_cancer_limit100_v021.sqlite3
+python3 scripts/validate_event_class_package.py --package <package_dir> --db <db_path>
 ```
 
 ## Rule Sets
@@ -31,6 +32,14 @@ python3 scripts/validate_event_class_package.py --package <package_dir> --db /Us
 - Combined rule set hash(es): `d789a605fe5bcdf98a6703791c1db7d9c6d332fc039293c5d0ee253ef3d10d60, fda3c8331ce1074d3566d02a035a60d1b422f1bfcfac8798072414cccaf3f8a2`
 - Triage rule set hash(es): `6fc6d7533e740cc38ca0ba0425927ade66f2f90b067963c5cf52d08a88f8d883`
 - Triage labels are uncalibrated metadata, not validated review-priority findings.
+- The combined rule-set hash is the hash of the event-class rule set plus the
+  triage-rule component available for that patch. Records without a prior
+  materiality event use an empty triage component.
+
+Combined hash counts:
+
+- `d789a605fe5bcdf98a6703791c1db7d9c6d332fc039293c5d0ee253ef3d10d60`: 3 records; triage component(s): <empty>
+- `fda3c8331ce1074d3566d02a035a60d1b422f1bfcfac8798072414cccaf3f8a2`: 97 records; triage component(s): 6fc6d7533e740cc38ca0ba0425927ade66f2f90b067963c5cf52d08a88f8d883
 
 ## Counts
 

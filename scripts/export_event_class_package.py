@@ -16,6 +16,7 @@ from typing import Any
 PACKAGE_VERSION = "v0.1"
 DEFAULT_PACKAGE_DIR = "event_class_records_v0.1"
 THREE_CLASS_EVENT_ID = "evt_NCT04278144_v33_v34_bdd9f29ed71e"
+DB_PLACEHOLDER = "<db_path>"
 
 
 def main() -> int:
@@ -73,7 +74,7 @@ def main() -> int:
         db_path=db_path,
         corpus_label=args.corpus_label,
         generation_command=args.generation_command
-        or f"python3 -m trialdiff.cli generate-evidence --db {db_path} --force",
+        or f"python3 -m trialdiff.cli generate-evidence --db {DB_PLACEHOLDER} --force",
         summaries=summaries,
     )
     validation_path = package_dir / "VALIDATION.md"
@@ -148,6 +149,17 @@ def package_stats(summaries: list[dict[str, Any]]) -> dict[str, Any]:
         "triage_rule_set_hashes": sorted(
             {summary["triage_rule_set_hash"] for summary in summaries if summary["triage_rule_set_hash"]}
         ),
+        "rule_set_hash_counts": Counter(summary["rule_set_hash"] for summary in summaries),
+        "triage_by_rule_set_hash": {
+            rule_set_hash: sorted(
+                {
+                    summary["triage_rule_set_hash"] or "<empty>"
+                    for summary in summaries
+                    if summary["rule_set_hash"] == rule_set_hash
+                }
+            )
+            for rule_set_hash in sorted({summary["rule_set_hash"] for summary in summaries})
+        },
     }
 
 
@@ -165,6 +177,14 @@ def build_validation_note(
     overlap_counts = "\n".join(
         f"- {size} class(es): {count}" for size, count in sorted(stats["overlap_counts"].items())
     )
+    combined_hash_counts = "\n".join(
+        "- `{rule_set_hash}`: {count} records; triage component(s): {triage_components}".format(
+            rule_set_hash=rule_set_hash,
+            count=count,
+            triage_components=", ".join(stats["triage_by_rule_set_hash"][rule_set_hash]),
+        )
+        for rule_set_hash, count in sorted(stats["rule_set_hash_counts"].items())
+    )
     three_class_summary = next(
         summary for summary in summaries if summary["event_id"] == THREE_CLASS_EVENT_ID
     )
@@ -176,7 +196,8 @@ frozen TrialDiff v0.1-alpha `records/` package or its manifest.
 ## Source
 
 - Corpus identifier: `{corpus_label}`
-- Working database: `{db_path}`
+- Working database: `{DB_PLACEHOLDER}` (the regenerated 100-study SQLite database
+  for the corpus above)
 - Generation command:
 
 ```bash
@@ -186,13 +207,13 @@ frozen TrialDiff v0.1-alpha `records/` package or its manifest.
 - Export command:
 
 ```bash
-python3 scripts/export_event_class_package.py --db {db_path} --out <package_dir> --corpus-label {corpus_label} --force
+python3 scripts/export_event_class_package.py --db {DB_PLACEHOLDER} --out <package_dir> --corpus-label {corpus_label} --force
 ```
 
 - Validation command:
 
 ```bash
-python3 scripts/validate_event_class_package.py --package <package_dir> --db {db_path}
+python3 scripts/validate_event_class_package.py --package <package_dir> --db {DB_PLACEHOLDER}
 ```
 
 ## Rule Sets
@@ -201,6 +222,13 @@ python3 scripts/validate_event_class_package.py --package <package_dir> --db {db
 - Combined rule set hash(es): `{", ".join(stats["rule_set_hashes"])}`
 - Triage rule set hash(es): `{", ".join(stats["triage_rule_set_hashes"])}`
 - Triage labels are uncalibrated metadata, not validated review-priority findings.
+- The combined rule-set hash is the hash of the event-class rule set plus the
+  triage-rule component available for that patch. Records without a prior
+  materiality event use an empty triage component.
+
+Combined hash counts:
+
+{combined_hash_counts}
 
 ## Counts
 
