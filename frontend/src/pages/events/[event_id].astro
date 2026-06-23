@@ -103,7 +103,7 @@ const title = record ? `${record.eventId} | TrialDiff Evidence Record` : "TrialD
                   {record.eventClasses.map((eventClass) => <code>{eventClass}</code>)}
                 </div>
               ) : (
-                <p class="lede">No event classes recorded.</p>
+                <p class="lede">Event-class metadata is not present on this legacy record.</p>
               )
             }
           </section>
