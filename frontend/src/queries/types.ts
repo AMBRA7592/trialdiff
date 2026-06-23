@@ -44,6 +44,7 @@ export type EvidenceRecordRow = {
   severity: string;
   category: string;
   categories: string[];
+  eventClasses: string[];
   changedPaths: string[];
   deterministicRules: string[];
   claimsSupported: string[];

@@ -113,13 +113,14 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     <section class="panel panel-pad method-section" id="evidence-record-filter">
       <h2>Evidence Record Filter</h2>
       <p>
-        Evidence Records are generated as first-class citable artifacts for events carrying <strong>high</strong> and
-        <strong>critical</strong> triage labels. Medium and low events can still exist in the underlying materiality event feed,
-        but they are not exported as v0.1-alpha Evidence Records.
+        New Evidence Records are generated as first-class citable artifacts for patches satisfying deterministic
+        event-class predicates. A record can carry several event classes, and the triage severity remains uncalibrated
+        metadata rather than the inclusion rule.
       </p>
       <p>
-        This keeps the citation surface focused on deterministic high-signal triage while preserving lower-severity events for
-        later analysis. It does not certify high or critical as validated review-priority judgments.
+        The frozen v0.1-alpha package remains a historical high/critical triage slice and is not rewritten. For current
+        generation, event-class membership is the cleaner citation criterion: reconciliation co-occurrence is recorded as a
+        tag, not used to erase the patch or to claim the change was benign.
       </p>
     </section>
 

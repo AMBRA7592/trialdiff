@@ -64,6 +64,7 @@ export function mapEvidenceRecordRow(row: Record<string, unknown>): EvidenceReco
     severity: String(row.severity ?? "unknown"),
     category: String(row.category ?? "unknown_material_change"),
     categories: stringArray(row.categories_json),
+    eventClasses: stringArray(row.event_classes_json),
     changedPaths: stringArray(row.changed_paths_json),
     deterministicRules: stringArray(row.deterministic_rules_json),
     claimsSupported: stringArray(row.claims_supported_json),

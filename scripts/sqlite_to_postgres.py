@@ -33,6 +33,7 @@ JSON_COLUMNS = {
     "changed_modules_json",
     "op_counts_json",
     "categories_json",
+    "event_classes_json",
     "deterministic_rules_json",
     "value_signals_json",
     "claims_supported_json",

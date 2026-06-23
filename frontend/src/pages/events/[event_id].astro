@@ -96,6 +96,19 @@ const title = record ? `${record.eventId} | TrialDiff Evidence Record` : "TrialD
           </section>
 
           <section class="panel panel-pad">
+            <h2>Event Classes</h2>
+            {
+              record.eventClasses.length > 0 ? (
+                <div class="token-list">
+                  {record.eventClasses.map((eventClass) => <code>{eventClass}</code>)}
+                </div>
+              ) : (
+                <p class="lede">No event classes recorded.</p>
+              )
+            }
+          </section>
+
+          <section class="panel panel-pad">
             <h2>Changed Paths</h2>
             <div class="path-list evidence-path-list">
               {record.changedPaths.map((path) => <div class="path-item" title={path}>{path}</div>)}
