@@ -1,7 +1,6 @@
 import postgres from "postgres";
 
 let cachedClient: postgres.Sql | null = null;
-let cachedClientUrl: string | null = null;
 
 // Astro (Vite) exposes .env-file variables to server code on import.meta.env,
 // while hosted runtimes (Vercel) inject them via process.env. Check both so
@@ -23,10 +22,8 @@ function databaseUrl(): string | undefined {
 }
 
 function poolMax(): number {
-  const raw = readEnv("DATABASE_POOL_MAX");
-  const parsed = raw === undefined ? Number.NaN : Number.parseInt(raw, 10);
-  if (Number.isFinite(parsed) && parsed >= 1) return parsed;
-  return 5;
+  const parsed = Number.parseInt(readEnv("DATABASE_POOL_MAX") ?? "", 10);
+  return parsed >= 1 ? parsed : 5;
 }
 
 export function hasDatabaseUrl() {
@@ -39,7 +36,10 @@ export function getSql() {
     throw new Error("DATABASE_URL is not configured");
   }
 
-  if (!cachedClient || cachedClientUrl !== url) {
+  // process.env is fixed for the life of the process, so one pool
+  // suffices; rebuilding on URL change would leak the old pool's
+  // connections (postgres.js pools need .end()).
+  if (!cachedClient) {
     const options: postgres.Options<{}> = {
       connect_timeout: 10,
       idle_timeout: 20,
@@ -53,7 +53,6 @@ export function getSql() {
       options.ssl = "require";
     }
     cachedClient = postgres(url, options);
-    cachedClientUrl = url;
   }
 
   return cachedClient;

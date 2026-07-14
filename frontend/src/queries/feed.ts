@@ -106,7 +106,17 @@ async function getRecentEvents(limit = 40) {
       e.timing_context,
       e.category,
       e.categories_json,
-      e.changed_paths_json,
+      jsonb_array_length(e.changed_paths_json) AS changed_path_count,
+      (
+        SELECT jsonb_agg(p.value)
+        FROM (
+          SELECT value
+          FROM jsonb_array_elements_text(e.changed_paths_json) WITH ORDINALITY AS t(value, ord)
+          ORDER BY ord
+          LIMIT 200
+        ) p
+      ) AS changed_paths_json,
+      (e.categories_json ? 'results_reconciliation') AS results_confound,
       e.needs_human_review
     FROM materiality_events e
     LEFT JOIN trials t ON t.nct_id = e.nct_id
@@ -116,8 +126,7 @@ async function getRecentEvents(limit = 40) {
       WHERE er.nct_id = e.nct_id
         AND er.from_version = e.from_version
         AND er.to_version = e.to_version
-        AND er.rule_set_hash = e.rule_set_hash
-      ORDER BY er.evidence_version DESC
+      ORDER BY er.evidence_version DESC, er.generated_at DESC NULLS LAST
       LIMIT 1
     ) er ON true
     ORDER BY e.submitted_date DESC NULLS LAST, e.id DESC

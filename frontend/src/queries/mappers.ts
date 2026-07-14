@@ -38,6 +38,8 @@ export function recordValue(value: unknown): Record<string, unknown> {
 }
 
 export function mapEventRow(row: Record<string, unknown>): EventRow {
+  const categories = stringArray(row.categories_json);
+  const changedPaths = stringArray(row.changed_paths_json);
   return {
     id: numberValue(row.id),
     evidenceEventId: nullableString(row.evidence_event_id),
@@ -51,13 +53,29 @@ export function mapEventRow(row: Record<string, unknown>): EventRow {
     severityPreTiming: String(row.severity_pre_timing ?? "unknown"),
     timingContext: nullableString(row.timing_context),
     category: String(row.category ?? "unknown_material_change"),
-    categories: stringArray(row.categories_json),
-    changedPaths: stringArray(row.changed_paths_json),
+    categories,
+    changedPaths,
+    changedPathCount: row.changed_path_count != null ? numberValue(row.changed_path_count) : changedPaths.length,
+    resultsConfound:
+      row.results_confound != null ? Boolean(row.results_confound) : categories.includes("results_reconciliation"),
     needsHumanReview: Boolean(row.needs_human_review),
   };
 }
 
+// The results-posting confound is the pipeline's persisted tag, never a
+// re-derived path heuristic: the outcome_edit_cooccurs_with_results_posting
+// event class, or the results_reconciliation category.
+export function resultsConfoundFromTags(eventClasses: string[], categories: string[]): boolean {
+  return (
+    eventClasses.includes("outcome_edit_cooccurs_with_results_posting") ||
+    categories.includes("results_reconciliation")
+  );
+}
+
 export function mapEvidenceRecordRow(row: Record<string, unknown>): EvidenceRecordRow {
+  const categories = stringArray(row.categories_json);
+  const eventClasses = stringArray(row.event_classes_json);
+  const changedPaths = stringArray(row.changed_paths_json);
   return {
     eventId: String(row.event_id ?? ""),
     nctId: String(row.nct_id ?? ""),
@@ -70,9 +88,16 @@ export function mapEvidenceRecordRow(row: Record<string, unknown>): EvidenceReco
     severityPreTiming: String(row.severity_pre_timing ?? "unknown"),
     severity: String(row.severity ?? "unknown"),
     category: String(row.category ?? "unknown_material_change"),
-    categories: stringArray(row.categories_json),
-    eventClasses: stringArray(row.event_classes_json),
-    changedPaths: stringArray(row.changed_paths_json),
+    categories,
+    eventClasses,
+    changedPaths,
+    // Feed queries ship a capped path preview plus the true count; detail
+    // queries (er.*) ship the full array and no count column.
+    changedPathCount: row.changed_path_count != null ? numberValue(row.changed_path_count) : changedPaths.length,
+    resultsConfound:
+      row.results_confound != null
+        ? Boolean(row.results_confound)
+        : resultsConfoundFromTags(eventClasses, categories),
     deterministicRules: stringArray(row.deterministic_rules_json),
     claimsSupported: stringArray(row.claims_supported_json),
     claimsNotSupported: stringArray(row.claims_not_supported_json),

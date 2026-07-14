@@ -94,8 +94,7 @@ export async function getPatchInspection(
           WHERE er.nct_id = e.nct_id
             AND er.from_version = e.from_version
             AND er.to_version = e.to_version
-            AND er.rule_set_hash = e.rule_set_hash
-          ORDER BY er.evidence_version DESC
+          ORDER BY er.evidence_version DESC, er.generated_at DESC NULLS LAST
           LIMIT 1
         ) er ON true
         WHERE e.nct_id = ${nctId}

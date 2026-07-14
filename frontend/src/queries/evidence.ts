@@ -3,12 +3,17 @@ import { getSql, hasDatabaseUrl } from "@/db/client";
 import { mapEvidenceRecordDetail, mapEvidenceRecordRow } from "./mappers";
 import type { EvidenceCanonicalData, EvidenceRecordData, EvidenceRecordRow } from "./types";
 
+// Cards preview at most two paths; shipping full arrays is wasted transfer
+// (one corpus record carries 7,000+ paths). The cap leaves plenty of headroom
+// for ranking signal paths ahead of administrative noise.
+const PATH_PREVIEW_CAP = 200;
+
 export async function getPostRecruitmentEvidenceRecords(limit = 40): Promise<EvidenceRecordRow[]> {
   const sql = getSql();
-  // The results-posting confound check mirrors the pipeline's semantics
-  // (trialdiff/classifier/materiality.py is_results_reconciliation_patch):
-  // "/resultsSection" itself, any nested "/resultsSection/..." path, or
-  // "/hasResults". A jsonb `?` exact match would miss nested paths.
+  // The results-posting confound comes from the pipeline's own persisted
+  // tags (the outcome_edit_cooccurs_with_results_posting event class, or the
+  // results_reconciliation category) — not from a re-derived path heuristic,
+  // which had already drifted from the Python op-level semantics.
   const rows = await sql<Record<string, unknown>[]>`
     SELECT
       er.event_id,
@@ -24,7 +29,20 @@ export async function getPostRecruitmentEvidenceRecords(limit = 40): Promise<Evi
       er.category,
       er.categories_json,
       er.event_classes_json,
-      er.changed_paths_json,
+      jsonb_array_length(er.changed_paths_json) AS changed_path_count,
+      (
+        SELECT jsonb_agg(p.value)
+        FROM (
+          SELECT value
+          FROM jsonb_array_elements_text(er.changed_paths_json) WITH ORDINALITY AS t(value, ord)
+          ORDER BY ord
+          LIMIT ${PATH_PREVIEW_CAP}
+        ) p
+      ) AS changed_paths_json,
+      (
+        er.event_classes_json ? 'outcome_edit_cooccurs_with_results_posting'
+        OR er.categories_json ? 'results_reconciliation'
+      ) AS results_confound,
       er.deterministic_rules_json,
       er.claims_supported_json,
       er.claims_not_supported_json,
@@ -36,14 +54,10 @@ export async function getPostRecruitmentEvidenceRecords(limit = 40): Promise<Evi
     WHERE er.timing_context = 'post_recruitment'
     ORDER BY
       CASE
-        WHEN er.category IN ('primary_outcome_change', 'secondary_outcome_change')
-          AND (
-            EXISTS (
-              SELECT 1 FROM jsonb_array_elements_text(er.changed_paths_json) p
-              WHERE p = '/resultsSection' OR p LIKE '/resultsSection/%'
-            )
-            OR er.changed_paths_json ? '/hasResults'
-          )
+        WHEN (
+          er.event_classes_json ? 'outcome_edit_cooccurs_with_results_posting'
+          OR er.categories_json ? 'results_reconciliation'
+        ) AND er.category IN ('primary_outcome_change', 'secondary_outcome_change')
           THEN 1
         ELSE 0
       END,
@@ -115,18 +129,18 @@ export async function getEvidenceCanonical(eventId: string): Promise<EvidenceCan
       return { databaseReady: true };
     }
 
-    // Since migration 006 canonical_json is a text column, so postgres.js
-    // returns the exact stored string whose bytes hash to canonical_hash.
-    // A legacy jsonb column arrives as a parsed object instead; serving a
-    // re-encoded body then cannot be byte-verified against the hash.
+    // Since migration 006 canonical_json is a text column whose exact bytes
+    // hash to canonical_hash; a legacy jsonb column would arrive as a parsed
+    // object. Whether the text actually hashes to canonical_hash is decided
+    // by the endpoint (a `USING ::text` conversion without the mandated
+    // re-import yields strings that do NOT) — column type alone proves
+    // nothing.
     const raw = row.canonical_json;
-    const canonicalVerifiable = typeof raw === "string";
-    const canonicalText = canonicalVerifiable ? (raw as string) : JSON.stringify(raw ?? null);
+    const canonicalText = typeof raw === "string" ? raw : JSON.stringify(raw ?? null);
 
     return {
       databaseReady: true,
       canonicalText,
-      canonicalVerifiable,
       canonicalHash: String(row.canonical_hash ?? ""),
     };
   } catch (error) {
@@ -135,5 +149,26 @@ export async function getEvidenceCanonical(eventId: string): Promise<EvidenceCan
       databaseReady: false,
       databaseError: error instanceof Error ? error.message : "Database query failed.",
     };
+  }
+}
+
+export async function getEvidenceCanonicalHash(
+  eventId: string,
+): Promise<{ databaseReady: boolean; canonicalHash?: string }> {
+  // Conditional-request precheck: answering an If-None-Match must not pull
+  // the full canonical body (records run to ~2 MB) from the database.
+  if (!hasDatabaseUrl()) {
+    return { databaseReady: false };
+  }
+  try {
+    const sql = getSql();
+    const rows = await sql<Record<string, unknown>[]>`
+      SELECT canonical_hash FROM evidence_records WHERE event_id = ${eventId} LIMIT 1
+    `;
+    const row = rows[0];
+    return { databaseReady: true, canonicalHash: row ? String(row.canonical_hash ?? "") : undefined };
+  } catch (error) {
+    console.error("getEvidenceCanonicalHash failed:", error);
+    return { databaseReady: false };
   }
 }

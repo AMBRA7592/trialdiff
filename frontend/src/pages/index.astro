@@ -66,18 +66,6 @@ const lensTitle =
 
 // Mirrors trialdiff/classifier/materiality.py is_results_reconciliation_patch:
 // "/resultsSection" itself or nested paths under it, or "/hasResults".
-function hasResultsPostingConfound(record: { category: string; categories: string[]; changedPaths: string[] }) {
-  const isOutcomeChange =
-    record.category === "primary_outcome_change" ||
-    record.category === "secondary_outcome_change" ||
-    record.categories.includes("primary_outcome_change") ||
-    record.categories.includes("secondary_outcome_change");
-  if (!isOutcomeChange) return false;
-  return record.changedPaths.some(
-    (path) => path === "/resultsSection" || path.startsWith("/resultsSection/") || path === "/hasResults",
-  );
-}
-
 const ruleSetHashes = data.corpusStamp.ruleSetHashes;
 const firstRuleSetHash = ruleSetHashes.length > 0 ? ruleSetHashes[0] : undefined;
 const ruleSetLabel =
@@ -260,7 +248,7 @@ const ruleSetLabel =
                       <span>v{record.fromVersion} to v{record.toVersion}</span>
                       {record.timingContext && <span>{titleCase(record.timingContext)}</span>}
                       <span>Evidence v{record.evidenceVersion}</span>
-                      {hasResultsPostingConfound(record) && (
+                      {record.resultsConfound && (
                         <span class="chip chip-confound">Results posting co-occurs</span>
                       )}
                     </div>
@@ -272,7 +260,7 @@ const ruleSetLabel =
                       </div>
                     )}
                     {
-                      hasResultsPostingConfound(record) && (
+                      record.resultsConfound && (
                         <div class="event-caveat">
                           Outcome paths changed while results were added. Treat as a deterministic triage
                           results-posting/reconciliation record, not a standalone outcome-switching example.
@@ -284,7 +272,7 @@ const ruleSetLabel =
                     {rankedPaths.slice(0, 2).map((path) => (
                       <div class="path-item" title={path}>{path}</div>
                     ))}
-                    {rankedPaths.length > 2 && <div>{rankedPaths.length - 2} more paths</div>}
+                    {record.changedPathCount > 2 && <div>{record.changedPathCount - 2} more paths</div>}
                   </div>
                 </article>
               );
@@ -362,7 +350,7 @@ const ruleSetLabel =
                     <span>v{event.fromVersion} to v{event.toVersion}</span>
                     {event.timingContext && <span>{titleCase(event.timingContext)}</span>}
                     {event.needsHumanReview && <span>Human review</span>}
-                    {hasResultsPostingConfound(event) && (
+                    {event.resultsConfound && (
                       <span class="chip chip-confound">Results posting co-occurs</span>
                     )}
                     {event.evidenceEventId && <a href={`/events/${event.evidenceEventId}`}>Evidence Record</a>}
@@ -372,7 +360,7 @@ const ruleSetLabel =
                   {rankedPaths.slice(0, 2).map((path) => (
                     <div class="path-item" title={path}>{path}</div>
                   ))}
-                  {rankedPaths.length > 2 && <div>{rankedPaths.length - 2} more paths</div>}
+                  {event.changedPathCount > 2 && <div>{event.changedPathCount - 2} more paths</div>}
                 </div>
               </article>
             );

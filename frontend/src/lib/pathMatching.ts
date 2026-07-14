@@ -87,3 +87,10 @@ export function maxSeverity(severities: Severity[]): Severity {
   }
   return best;
 }
+
+// Shared JSON-pointer prefix predicate: true when `path` IS `prefix` or is
+// nested under it. Segment-aware (avoids matching lookalike segments that
+// merely start with the prefix text).
+export function pointerHasPrefix(path: string, prefix: string): boolean {
+  return path === prefix || path.startsWith(`${prefix}/`);
+}

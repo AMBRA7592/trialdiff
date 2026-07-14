@@ -7,6 +7,8 @@
 // and statusModule submit/post/verify date fields that never carry review
 // signal on their own.
 
+import { pointerHasPrefix } from "./pathMatching";
+
 const ADMINISTRATIVE_SECTION_PREFIXES = [
   "/annotationSection",
   "/documentSection",
@@ -28,15 +30,12 @@ const ADMINISTRATIVE_STATUS_MODULE_FIELDS = [
   "/protocolSection/statusModule/dispFirstPostDateStruct",
 ];
 
-function matchesPrefix(path: string, prefix: string): boolean {
-  return path === prefix || path.startsWith(`${prefix}/`);
-}
 
 export function isAdministrativePath(path: string): boolean {
   // Mirror of trialdiff/classifier/materiality.py is_review_metadata_path().
   if (path.includes("/reviewUnit")) return true;
-  if (ADMINISTRATIVE_SECTION_PREFIXES.some((prefix) => matchesPrefix(path, prefix))) return true;
-  return ADMINISTRATIVE_STATUS_MODULE_FIELDS.some((prefix) => matchesPrefix(path, prefix));
+  if (ADMINISTRATIVE_SECTION_PREFIXES.some((prefix) => pointerHasPrefix(path, prefix))) return true;
+  return ADMINISTRATIVE_STATUS_MODULE_FIELDS.some((prefix) => pointerHasPrefix(path, prefix));
 }
 
 // Stable partition: signal paths first, administrative paths last, preserving
