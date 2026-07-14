@@ -13,10 +13,16 @@ import sqlite3
 from typing import Any
 
 
-PACKAGE_VERSION = "v0.1"
-DEFAULT_PACKAGE_DIR = "event_class_records_v0.1"
-THREE_CLASS_EVENT_ID = "evt_NCT04278144_v33_v34_bdd9f29ed71e"
+DEFAULT_PACKAGE_DIR = "event_class_records_v0.2"
 DB_PLACEHOLDER = "<db_path>"
+
+
+def package_version_from_dir(package_dir: Path) -> str:
+    name = package_dir.name
+    marker = "_v"
+    if marker in name:
+        return "v" + name.rsplit(marker, maxsplit=1)[1]
+    return "unversioned"
 
 
 def main() -> int:
@@ -28,6 +34,11 @@ def main() -> int:
         "--generation-command",
         default=None,
         help="Command recorded in VALIDATION.md as the generation command.",
+    )
+    parser.add_argument(
+        "--package-version",
+        default=None,
+        help="Package version label recorded in VALIDATION.md (default: derived from --out).",
     )
     parser.add_argument("--force", action="store_true", help="Replace an existing package directory.")
     args = parser.parse_args()
@@ -70,15 +81,24 @@ def main() -> int:
             raise SystemExit(f"{event_id}: exported bytes do not match stored canonical_hash")
         summaries.append(summarize_record(record, stored_hash=row["canonical_hash"]))
 
+    package_version = args.package_version or package_version_from_dir(package_dir)
     validation_note = build_validation_note(
         db_path=db_path,
         corpus_label=args.corpus_label,
+        package_version=package_version,
         generation_command=args.generation_command
         or f"python3 -m trialdiff.cli generate-evidence --db {DB_PLACEHOLDER} --force",
         summaries=summaries,
     )
     validation_path = package_dir / "VALIDATION.md"
     validation_path.write_text(validation_note, encoding="utf-8")
+
+    stats = package_stats(summaries)
+    sidecar_path = package_dir / "expected_stats.json"
+    sidecar_path.write_text(
+        json.dumps(expected_stats_sidecar(stats), indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
 
     manifest_path = package_dir / "MANIFEST.sha256"
     manifest_entries = build_manifest_entries(package_dir)
@@ -87,14 +107,24 @@ def main() -> int:
         encoding="utf-8",
     )
 
-    stats = package_stats(summaries)
     print(f"package={package_dir}")
     print(f"records={stats['records']}\ttrials={stats['trials']}\tmemberships={stats['memberships']}")
     print(f"class_counts={dict(sorted(stats['class_counts'].items()))}")
     print(f"overlaps={dict(sorted(stats['overlap_counts'].items()))}")
-    print(f"three_class_record_present={stats['three_class_record_present']}")
+    print(f"max_class_overlap={stats['showcase']['class_count']}")
     print("exported_bytes_match_stored_canonical_hash=True")
     return 0
+
+
+def expected_stats_sidecar(stats: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "records": stats["records"],
+        "trials": stats["trials"],
+        "class_counts": dict(sorted(stats["class_counts"].items())),
+        "overlap_counts": {str(size): count for size, count in sorted(stats["overlap_counts"].items())},
+        "showcase": stats["showcase"],
+        "note": "Frozen-package integrity expectations describing the package as exported.",
+    }
 
 
 def select_records(connection: sqlite3.Connection) -> list[sqlite3.Row]:
@@ -132,16 +162,14 @@ def package_stats(summaries: list[dict[str, Any]]) -> dict[str, Any]:
     for summary in summaries:
         class_counts.update(summary["event_classes"])
         overlap_counts[len(summary["event_classes"])] += 1
+    showcase = max(summaries, key=lambda summary: (len(summary["event_classes"]), summary["event_id"]))
     return {
         "records": len(summaries),
         "trials": len({summary["nct_id"] for summary in summaries}),
         "memberships": sum(len(summary["event_classes"]) for summary in summaries),
         "class_counts": class_counts,
         "overlap_counts": overlap_counts,
-        "three_class_record_present": any(
-            summary["event_id"] == THREE_CLASS_EVENT_ID and len(summary["event_classes"]) == 3
-            for summary in summaries
-        ),
+        "showcase": {"event_id": showcase["event_id"], "class_count": len(showcase["event_classes"])},
         "event_class_rule_set_hashes": sorted(
             {summary["event_class_rule_set_hash"] for summary in summaries}
         ),
@@ -167,6 +195,7 @@ def build_validation_note(
     *,
     db_path: Path,
     corpus_label: str,
+    package_version: str,
     generation_command: str,
     summaries: list[dict[str, Any]],
 ) -> str:
@@ -185,10 +214,8 @@ def build_validation_note(
         )
         for rule_set_hash, count in sorted(stats["rule_set_hash_counts"].items())
     )
-    three_class_summary = next(
-        summary for summary in summaries if summary["event_id"] == THREE_CLASS_EVENT_ID
-    )
-    return f"""# TrialDiff Event-Class Evidence Records {PACKAGE_VERSION}
+    showcase_summary = max(summaries, key=lambda summary: (len(summary["event_classes"]), summary["event_id"]))
+    return f"""# TrialDiff Event-Class Evidence Records {package_version}
 
 This package is a separate event-class Evidence Record export. It does not modify the
 frozen TrialDiff v0.1-alpha `records/` package or its manifest.
@@ -259,11 +286,11 @@ Overlap counts:
 
 ## Multi-Class Worked Record
 
-- Event ID: `{THREE_CLASS_EVENT_ID}`
-- NCT ID: `{three_class_summary["nct_id"]}`
-- Versions: v{three_class_summary["from_version"]}->v{three_class_summary["to_version"]}
-- Canonical hash: `{three_class_summary["canonical_hash"]}`
-- Event classes: `{", ".join(three_class_summary["event_classes"])}`
+- Event ID: `{showcase_summary["event_id"]}`
+- NCT ID: `{showcase_summary["nct_id"]}`
+- Versions: v{showcase_summary["from_version"]}->v{showcase_summary["to_version"]}
+- Canonical hash: `{showcase_summary["canonical_hash"]}`
+- Event classes: `{", ".join(showcase_summary["event_classes"])}`
 
 The reconciliation class is a co-occurrence tag, not a claim that the amendment
 was harmless or purely administrative.
@@ -276,7 +303,11 @@ deposit and DOI remain TODO.
 
 
 def build_manifest_entries(package_dir: Path) -> list[tuple[str, str]]:
-    paths = [package_dir / "VALIDATION.md", *sorted((package_dir / "records").glob("*.json"))]
+    paths = [
+        package_dir / "VALIDATION.md",
+        package_dir / "expected_stats.json",
+        *sorted((package_dir / "records").glob("*.json")),
+    ]
     entries: list[tuple[str, str]] = []
     for path in paths:
         relative_path = path.relative_to(package_dir).as_posix()

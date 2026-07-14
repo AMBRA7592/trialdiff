@@ -38,7 +38,9 @@ def main() -> int:
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    for old in out_dir.glob("*.json"):
+    # Only remove files this exporter could have written; never wipe
+    # arbitrary JSON from a mistyped --out directory.
+    for old in out_dir.glob("evt_*.json"):
         old.unlink()
 
     connection = sqlite3.connect(db_path)

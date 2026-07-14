@@ -1,0 +1,21 @@
+{
+  "class_counts": {
+    "enrollment_changed_to_zero": 1,
+    "outcome_edit_cooccurs_with_results_posting": 80,
+    "primary_endpoint_changed_after_primary_completion_without_results_reconciliation": 10,
+    "secondary_outcome_removed_after_primary_completion": 9,
+    "why_stopped_removed_in_terminal_context": 13
+  },
+  "note": "Frozen-package integrity expectations describing the package as exported. See ERRATA.md for known issues in these frozen counts.",
+  "overlap_counts": {
+    "1": 88,
+    "2": 11,
+    "3": 1
+  },
+  "records": 100,
+  "showcase": {
+    "class_count": 3,
+    "event_id": "evt_NCT04278144_v33_v34_bdd9f29ed71e"
+  },
+  "trials": 52
+}

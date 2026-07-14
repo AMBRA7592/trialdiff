@@ -38,7 +38,9 @@ JSON_COLUMNS = {
     "value_signals_json",
     "claims_supported_json",
     "claims_not_supported_json",
-    "canonical_json",
+    # canonical_json is intentionally NOT in this set: it must be exported as
+    # opaque text so the exact bytes hashing to canonical_hash survive the
+    # copy. Re-encoding (or a jsonb cast) would break hash verification.
     "op_filter_json",
     "value_filter_json",
     "query_json",

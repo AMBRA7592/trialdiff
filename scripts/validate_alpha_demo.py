@@ -54,6 +54,15 @@ REQUIRED_PROVENANCE_KEYS = {
 REQUIRED_NON_CLAIM = "That the change constitutes misconduct or wrongdoing."
 
 
+def canonical_json(value: object) -> str:
+    # Must match trialdiff.provenance.canonical_json byte-for-byte.
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+
+
+def sha256_json(value: object) -> str:
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--records", default="records", help="Directory containing exported record JSON files.")
@@ -107,6 +116,20 @@ def validate_record(path: Path, record: dict) -> None:
         raise SystemExit(f"{path}: missing classification keys")
     if REQUIRED_PROVENANCE_KEYS - set(record["provenance"]):
         raise SystemExit(f"{path}: missing provenance keys")
+    recomputed_patch_hash = sha256_json(record["patch"])
+    if recomputed_patch_hash != record["provenance"]["patch_hash"]:
+        raise SystemExit(
+            f"{path}: patch hash mismatch (stored {record['provenance']['patch_hash']}, recomputed {recomputed_patch_hash})"
+        )
+    canonical_record = record.get("canonical_evidence_record")
+    if canonical_record is None:
+        raise SystemExit(f"{path}: canonical_evidence_record is absent")
+    recomputed_canonical_hash = sha256_json(canonical_record)
+    if recomputed_canonical_hash != record["provenance"]["evidence_canonical_hash"]:
+        raise SystemExit(
+            f"{path}: canonical hash mismatch "
+            f"(stored {record['provenance']['evidence_canonical_hash']}, recomputed {recomputed_canonical_hash})"
+        )
 
 
 def verify_manifest(manifest_path: Path) -> None:
