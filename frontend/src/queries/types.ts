@@ -66,12 +66,18 @@ export type TrialLensRow = {
   latestEventDate: string | null;
 };
 
+export type CorpusStamp = {
+  maxSubmittedDate: string | null;
+  ruleSetHashes: string[];
+};
+
 export type HomeData = {
   databaseReady: boolean;
   databaseError?: string;
   summary: SummaryCounts;
   severityCounts: SeverityCount[];
-  postCompletionEvidenceRecords: EvidenceRecordRow[];
+  corpusStamp: CorpusStamp;
+  postRecruitmentEvidenceRecords: EvidenceRecordRow[];
   recentEvents: EventRow[];
   criticalDensityTrials: TrialLensRow[];
   amendmentIntensityTrials: TrialLensRow[];
@@ -124,6 +130,10 @@ export type EvidenceRecordData = {
 export type EvidenceCanonicalData = {
   databaseReady: boolean;
   databaseError?: string;
-  canonicalJson?: Record<string, unknown>;
+  // Exact stored serialization of the record. When canonicalVerifiable is
+  // true the string's UTF-8 bytes hash to canonicalHash; when false the
+  // value was re-encoded from a legacy jsonb row and cannot be byte-verified.
+  canonicalText?: string;
+  canonicalVerifiable?: boolean;
   canonicalHash?: string;
 };

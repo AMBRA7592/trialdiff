@@ -1,8 +1,8 @@
 import { getSql, hasDatabaseUrl } from "@/db/client";
 
-import { getPostCompletionEvidenceRecords } from "./evidence";
-import { mapEventRow, mapTrialLensRow, numberValue } from "./mappers";
-import type { HomeData, SeverityCount, SummaryCounts } from "./types";
+import { getPostRecruitmentEvidenceRecords } from "./evidence";
+import { mapEventRow, mapTrialLensRow, numberValue, stringArray } from "./mappers";
+import type { CorpusStamp, HomeData, SeverityCount, SummaryCounts } from "./types";
 
 const emptySummary: SummaryCounts = {
   trialCount: 0,
@@ -10,6 +10,11 @@ const emptySummary: SummaryCounts = {
   materialEventCount: 0,
   criticalCount: 0,
   highCount: 0,
+};
+
+const emptyCorpusStamp: CorpusStamp = {
+  maxSubmittedDate: null,
+  ruleSetHashes: [],
 };
 
 export function normalizeLens(value: string | null | undefined) {
@@ -64,6 +69,24 @@ async function getSeverityCounts(): Promise<SeverityCount[]> {
     severity: String(row.severity ?? "unknown"),
     count: numberValue(row.count),
   }));
+}
+
+async function getCorpusStamp(): Promise<CorpusStamp> {
+  const sql = getSql();
+  const rows = await sql<Record<string, unknown>[]>`
+    SELECT
+      (SELECT max(submitted_date) FROM materiality_events) AS max_submitted_date,
+      (
+        SELECT coalesce(json_agg(hash ORDER BY hash), '[]'::json)
+        FROM (SELECT DISTINCT rule_set_hash AS hash FROM evidence_records WHERE rule_set_hash <> '') h
+      ) AS rule_set_hashes
+  `;
+  const row = rows[0] ?? {};
+
+  return {
+    maxSubmittedDate: typeof row.max_submitted_date === "string" ? row.max_submitted_date : null,
+    ruleSetHashes: stringArray(row.rule_set_hashes),
+  };
 }
 
 async function getRecentEvents(limit = 40) {
@@ -188,7 +211,8 @@ export async function getHomeData(): Promise<HomeData> {
       databaseError: "DATABASE_URL is not configured.",
       summary: emptySummary,
       severityCounts: [],
-      postCompletionEvidenceRecords: [],
+      corpusStamp: emptyCorpusStamp,
+      postRecruitmentEvidenceRecords: [],
       recentEvents: [],
       criticalDensityTrials: [],
       amendmentIntensityTrials: [],
@@ -199,14 +223,16 @@ export async function getHomeData(): Promise<HomeData> {
     const [
       summary,
       severityCounts,
-      postCompletionEvidenceRecords,
+      corpusStamp,
+      postRecruitmentEvidenceRecords,
       recentEvents,
       criticalDensityTrials,
       amendmentIntensityTrials,
     ] = await Promise.all([
       getSummary(),
       getSeverityCounts(),
-      getPostCompletionEvidenceRecords(),
+      getCorpusStamp(),
+      getPostRecruitmentEvidenceRecords(),
       getRecentEvents(),
       getCriticalDensityTrials(),
       getAmendmentIntensityTrials(),
@@ -216,18 +242,21 @@ export async function getHomeData(): Promise<HomeData> {
       databaseReady: true,
       summary,
       severityCounts,
-      postCompletionEvidenceRecords,
+      corpusStamp,
+      postRecruitmentEvidenceRecords,
       recentEvents,
       criticalDensityTrials,
       amendmentIntensityTrials,
     };
   } catch (error) {
+    console.error("getHomeData failed:", error);
     return {
       databaseReady: false,
       databaseError: error instanceof Error ? error.message : "Database query failed.",
       summary: emptySummary,
       severityCounts: [],
-      postCompletionEvidenceRecords: [],
+      corpusStamp: emptyCorpusStamp,
+      postRecruitmentEvidenceRecords: [],
       recentEvents: [],
       criticalDensityTrials: [],
       amendmentIntensityTrials: [],

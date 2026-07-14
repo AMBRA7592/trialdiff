@@ -1,10 +1,14 @@
 import { getSql, hasDatabaseUrl } from "@/db/client";
 
-import { mapEvidenceRecordDetail, mapEvidenceRecordRow, recordValue } from "./mappers";
+import { mapEvidenceRecordDetail, mapEvidenceRecordRow } from "./mappers";
 import type { EvidenceCanonicalData, EvidenceRecordData, EvidenceRecordRow } from "./types";
 
-export async function getPostCompletionEvidenceRecords(limit = 40): Promise<EvidenceRecordRow[]> {
+export async function getPostRecruitmentEvidenceRecords(limit = 40): Promise<EvidenceRecordRow[]> {
   const sql = getSql();
+  // The results-posting confound check mirrors the pipeline's semantics
+  // (trialdiff/classifier/materiality.py is_results_reconciliation_patch):
+  // "/resultsSection" itself, any nested "/resultsSection/..." path, or
+  // "/hasResults". A jsonb `?` exact match would miss nested paths.
   const rows = await sql<Record<string, unknown>[]>`
     SELECT
       er.event_id,
@@ -19,6 +23,7 @@ export async function getPostCompletionEvidenceRecords(limit = 40): Promise<Evid
       er.severity,
       er.category,
       er.categories_json,
+      er.event_classes_json,
       er.changed_paths_json,
       er.deterministic_rules_json,
       er.claims_supported_json,
@@ -32,7 +37,13 @@ export async function getPostCompletionEvidenceRecords(limit = 40): Promise<Evid
     ORDER BY
       CASE
         WHEN er.category IN ('primary_outcome_change', 'secondary_outcome_change')
-          AND (er.changed_paths_json ? '/resultsSection' OR er.changed_paths_json ? '/hasResults')
+          AND (
+            EXISTS (
+              SELECT 1 FROM jsonb_array_elements_text(er.changed_paths_json) p
+              WHERE p = '/resultsSection' OR p LIKE '/resultsSection/%'
+            )
+            OR er.changed_paths_json ? '/hasResults'
+          )
           THEN 1
         ELSE 0
       END,
@@ -75,6 +86,7 @@ export async function getEvidenceRecord(eventId: string): Promise<EvidenceRecord
       record: row ? mapEvidenceRecordDetail(row) : undefined,
     };
   } catch (error) {
+    console.error("getEvidenceRecord failed:", error);
     return {
       databaseReady: false,
       databaseError: error instanceof Error ? error.message : "Database query failed.",
@@ -99,12 +111,26 @@ export async function getEvidenceCanonical(eventId: string): Promise<EvidenceCan
       LIMIT 1
     `;
     const row = rows[0];
+    if (!row) {
+      return { databaseReady: true };
+    }
+
+    // Since migration 006 canonical_json is a text column, so postgres.js
+    // returns the exact stored string whose bytes hash to canonical_hash.
+    // A legacy jsonb column arrives as a parsed object instead; serving a
+    // re-encoded body then cannot be byte-verified against the hash.
+    const raw = row.canonical_json;
+    const canonicalVerifiable = typeof raw === "string";
+    const canonicalText = canonicalVerifiable ? (raw as string) : JSON.stringify(raw ?? null);
+
     return {
       databaseReady: true,
-      canonicalJson: row ? recordValue(row.canonical_json) : undefined,
-      canonicalHash: row ? String(row.canonical_hash ?? "") : undefined,
+      canonicalText,
+      canonicalVerifiable,
+      canonicalHash: String(row.canonical_hash ?? ""),
     };
   } catch (error) {
+    console.error("getEvidenceCanonical failed:", error);
     return {
       databaseReady: false,
       databaseError: error instanceof Error ? error.message : "Database query failed.",
