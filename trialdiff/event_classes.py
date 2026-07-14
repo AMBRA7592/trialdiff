@@ -5,7 +5,7 @@ from typing import Any
 from trialdiff.provenance import sha256_json
 
 
-EVENT_CLASS_VERSION = "trialdiff.event_classes.v0.1"
+EVENT_CLASS_VERSION = "trialdiff.event_classes.v0.2"
 
 PRIMARY_ENDPOINT_CLEAN = "primary_endpoint_changed_after_primary_completion_without_results_reconciliation"
 SECONDARY_OUTCOME_REMOVED = "secondary_outcome_removed_after_primary_completion"
@@ -26,8 +26,10 @@ EVENT_CLASS_DEFINITIONS: dict[str, str] = {
     ),
     ENROLLMENT_CHANGED_TO_ZERO: "Enrollment count changes from a positive value to exactly zero.",
     WHY_STOPPED_REMOVED_TERMINAL: (
-        "FROM-version whyStopped is nonempty; TO-version whyStopped is empty or absent; FROM or TO status "
-        "is TERMINATED, WITHDRAWN, or SUSPENDED."
+        "FROM-version whyStopped is nonempty; the stored TO-version record shows whyStopped empty or "
+        "absent, or, when no TO-version record is stored, the patch itself removes or empties whyStopped; "
+        "FROM or TO status is TERMINATED, WITHDRAWN, or SUSPENDED. A missing TO-version record without "
+        "patch evidence does not count as removal."
     ),
     OUTCOME_EDIT_WITH_RESULTS_SIGNAL: (
         "A primary or secondary outcome path changed and the same patch carries a hasResults or "
@@ -69,7 +71,7 @@ def event_classes_for_patch(
         classes.append(SECONDARY_OUTCOME_REMOVED)
     if enrollment_changed_to_zero(from_record, to_record):
         classes.append(ENROLLMENT_CHANGED_TO_ZERO)
-    if why_stopped_removed_in_terminal_context(from_record, to_record):
+    if why_stopped_removed_in_terminal_context(from_record, to_record, patch):
         classes.append(WHY_STOPPED_REMOVED_TERMINAL)
     if reconciliation_signal and any(is_outcome_path(operation.get("path", "")) for operation in patch):
         classes.append(OUTCOME_EDIT_WITH_RESULTS_SIGNAL)
@@ -163,14 +165,34 @@ def enrollment_changed_to_zero(from_record: dict[str, Any], to_record: dict[str,
 def why_stopped_removed_in_terminal_context(
     from_record: dict[str, Any],
     to_record: dict[str, Any] | None,
+    patch: list[dict[str, Any]] | None = None,
 ) -> bool:
     from_why_stopped = get_path(from_record, ["protocolSection", "statusModule", "whyStopped"])
-    to_why_stopped = get_path(to_record, ["protocolSection", "statusModule", "whyStopped"])
     if not (from_why_stopped and str(from_why_stopped).strip()):
         return False
-    if to_why_stopped and str(to_why_stopped).strip():
+    if to_record is not None:
+        to_why_stopped = get_path(to_record, ["protocolSection", "statusModule", "whyStopped"])
+        if to_why_stopped and str(to_why_stopped).strip():
+            return False
+    elif not patch_removes_why_stopped(patch or []):
+        # No stored TO-version record: the removal must be evidenced by the
+        # patch itself. An absent snapshot is a storage gap, not a change.
         return False
     return overall_status(from_record) in TERMINAL_STATUSES or overall_status(to_record) in TERMINAL_STATUSES
+
+
+def patch_removes_why_stopped(patch: list[dict[str, Any]]) -> bool:
+    for operation in patch:
+        if operation.get("path", "") != "/protocolSection/statusModule/whyStopped":
+            continue
+        op = operation.get("op")
+        if op == "remove":
+            return True
+        if op in {"add", "replace"}:
+            value = operation.get("value")
+            if value is None or not str(value).strip():
+                return True
+    return False
 
 
 def overall_status(record: dict[str, Any]) -> str | None:
