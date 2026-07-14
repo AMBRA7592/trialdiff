@@ -2,9 +2,9 @@
 """Validate a TrialDiff event-class Evidence Record package.
 
 Structural checks (schema, event classes, claims, manifest, canonical form)
-always run. Count expectations are read from an ``expected_stats.json``
-sidecar in the package directory when present; without a sidecar the stats
-are printed but not enforced.
+always run. Count expectations come from the mandatory
+``expected_stats.json`` sidecar in the package directory, which must itself
+be pinned by the package manifest.
 """
 
 from __future__ import annotations
@@ -15,12 +15,19 @@ import hashlib
 import json
 from pathlib import Path
 import sqlite3
+import sys
 from typing import Any
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-def canonical_json(value: Any) -> str:
-    # Must match trialdiff.provenance.canonical_json byte-for-byte.
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+from trialdiff.provenance import canonical_json  # noqa: E402
+
+# Immutability pins for known frozen packages: sha256 over the sorted
+# "hash  records/..." lines of the package manifest. Record entries are
+# immutable (ERRATA.md manifest policy); a change here is a defect.
+FROZEN_RECORDS_SECTION_SHA256 = {
+    "event_class_records_v0.1.1": "742ffd5fcc23b5aa2b7710277135b68e4e626da199c96a44360eadccdc6b38fd",
+}
 
 
 def main() -> int:
@@ -59,8 +66,7 @@ def main() -> int:
         raise SystemExit(f"no records found in {records_dir}")
 
     expected = load_expected_stats(package_dir)
-    if expected is not None:
-        validate_counts(records, expected)
+    validate_counts(records, expected)
 
     print(f"records={len(records)}")
     print(f"trials={len({record['trial']['nct_id'] for record in records})}")
@@ -69,7 +75,7 @@ def main() -> int:
     print(f"max_class_overlap={max(overlap_counts(records))}")
     print("manifest_ok=True")
     print("canonical_form_ok=True")
-    print(f"expected_stats={'enforced' if expected is not None else 'absent (stats not enforced)'}")
+    print("expected_stats=enforced")
     if db_hashes:
         print("db_canonical_hashes_ok=True")
     return 0
@@ -92,14 +98,27 @@ def verify_manifest(package_dir: Path, manifest_path: Path) -> None:
             raise SystemExit(f"{manifest_path}:{line_number}: hash mismatch for {relative_path}")
         seen_paths.add(relative_path)
 
-    required_paths = {"VALIDATION.md"} | {
+    required_paths = {"VALIDATION.md", "expected_stats.json"} | {
         f"records/{path.name}" for path in (package_dir / "records").glob("*.json")
     }
-    optional_paths = {"expected_stats.json"}
     missing = required_paths - seen_paths
-    extra = seen_paths - (required_paths | optional_paths)
+    extra = seen_paths - required_paths
     if missing or extra:
         raise SystemExit(f"manifest path mismatch: missing={sorted(missing)} extra={sorted(extra)}")
+
+    record_lines = [
+        line
+        for line in manifest_path.read_text(encoding="utf-8").splitlines()
+        if line.strip() and line.split(maxsplit=1)[1].startswith("records/")
+    ]
+    pinned = FROZEN_RECORDS_SECTION_SHA256.get(package_dir.name)
+    if pinned:
+        section_hash = hashlib.sha256(("\n".join(sorted(record_lines)) + "\n").encode("utf-8")).hexdigest()
+        if section_hash != pinned:
+            raise SystemExit(
+                f"{manifest_path}: frozen record entries changed (section hash {section_hash}, "
+                f"pinned {pinned}). Record entries are immutable; see ERRATA.md."
+            )
 
 
 def load_db_hashes(db_path: Path) -> dict[str, str]:
@@ -111,10 +130,13 @@ def load_db_hashes(db_path: Path) -> dict[str, str]:
     return {str(event_id): str(canonical_hash) for event_id, canonical_hash in rows}
 
 
-def load_expected_stats(package_dir: Path) -> dict[str, Any] | None:
+def load_expected_stats(package_dir: Path) -> dict[str, Any]:
     sidecar = package_dir / "expected_stats.json"
     if not sidecar.is_file():
-        return None
+        raise SystemExit(
+            f"missing {sidecar}: the expected-stats sidecar is mandatory — without it the "
+            "count invariants are unenforced"
+        )
     return json.loads(sidecar.read_text(encoding="utf-8"))
 
 
@@ -144,29 +166,27 @@ def validate_record(path: Path, record: dict[str, Any]) -> None:
 def validate_counts(records: list[dict[str, Any]], expected: dict[str, Any]) -> None:
     counts = class_counts(records)
     overlaps = overlap_counts(records)
-    if "records" in expected and len(records) != expected["records"]:
+    if len(records) != expected["records"]:
         raise SystemExit(f"expected {expected['records']} records, found {len(records)}")
     trials = len({record["trial"]["nct_id"] for record in records})
-    if "trials" in expected and trials != expected["trials"]:
+    if trials != expected["trials"]:
         raise SystemExit(f"expected {expected['trials']} represented trials, found {trials}")
-    if "class_counts" in expected and dict(counts) != dict(expected["class_counts"]):
+    if dict(counts) != dict(expected["class_counts"]):
         raise SystemExit(f"class counts mismatch: {dict(counts)}")
-    if "overlap_counts" in expected:
-        expected_overlaps = {int(size): count for size, count in expected["overlap_counts"].items()}
-        if dict(overlaps) != expected_overlaps:
-            raise SystemExit(f"overlap counts mismatch: {dict(overlaps)}")
-    showcase = expected.get("showcase")
-    if showcase:
-        found = any(
-            record["event_id"] == showcase["event_id"]
-            and len(record["classification"]["event_classes"]) == showcase["class_count"]
-            for record in records
+    expected_overlaps = {int(size): count for size, count in expected["overlap_counts"].items()}
+    if dict(overlaps) != expected_overlaps:
+        raise SystemExit(f"overlap counts mismatch: {dict(overlaps)}")
+    showcase = expected["showcase"]
+    found = any(
+        record["event_id"] == showcase["event_id"]
+        and len(record["classification"]["event_classes"]) == showcase["class_count"]
+        for record in records
+    )
+    if not found:
+        raise SystemExit(
+            f"missing expected showcase record {showcase['event_id']} "
+            f"with {showcase['class_count']} classes"
         )
-        if not found:
-            raise SystemExit(
-                f"missing expected showcase record {showcase['event_id']} "
-                f"with {showcase['class_count']} classes"
-            )
 
 
 def class_counts(records: list[dict[str, Any]]) -> Counter[str]:

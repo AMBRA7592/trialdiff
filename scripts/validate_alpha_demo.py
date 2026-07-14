@@ -8,6 +8,7 @@ from collections import Counter
 import hashlib
 import json
 from pathlib import Path
+import sys
 
 
 REQUIRED_TOP_LEVEL_KEYS = {
@@ -53,14 +54,15 @@ REQUIRED_PROVENANCE_KEYS = {
 
 REQUIRED_NON_CLAIM = "That the change constitutes misconduct or wrongdoing."
 
+# Immutability pin for the frozen record entries in MANIFEST.sha256:
+# sha256 over the sorted "hash  records/..." manifest lines. Documentation
+# and tooling entries may be re-pinned (ERRATA.md manifest policy); the
+# record entries may not — a change here is a defect, full stop.
+FROZEN_RECORDS_SECTION_SHA256 = "603a42af1c25646cb1ad2da02efa74acd05a59331f032a9770e6632373982534"
 
-def canonical_json(value: object) -> str:
-    # Must match trialdiff.provenance.canonical_json byte-for-byte.
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-
-def sha256_json(value: object) -> str:
-    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+from trialdiff.provenance import canonical_json, sha256_json  # noqa: E402
 
 
 def main() -> int:
@@ -133,16 +135,26 @@ def validate_record(path: Path, record: dict) -> None:
 
 
 def verify_manifest(manifest_path: Path) -> None:
+    record_lines: list[str] = []
     for line_number, line in enumerate(manifest_path.read_text(encoding="utf-8").splitlines(), start=1):
         if not line.strip():
             continue
         expected_hash, relative_path = line.split(maxsplit=1)
+        if relative_path.startswith("records/"):
+            record_lines.append(line)
         path = Path(relative_path)
         if not path.exists():
             raise SystemExit(f"{manifest_path}:{line_number}: missing file {relative_path}")
         actual_hash = hashlib.sha256(path.read_bytes()).hexdigest()
         if actual_hash != expected_hash:
             raise SystemExit(f"{manifest_path}:{line_number}: hash mismatch for {relative_path}")
+    section_hash = hashlib.sha256(("\n".join(sorted(record_lines)) + "\n").encode("utf-8")).hexdigest()
+    if section_hash != FROZEN_RECORDS_SECTION_SHA256:
+        raise SystemExit(
+            f"{manifest_path}: frozen record entries changed (section hash {section_hash}, "
+            f"pinned {FROZEN_RECORDS_SECTION_SHA256}). Record entries are immutable; "
+            "see the manifest policy in ERRATA.md."
+        )
 
 
 if __name__ == "__main__":

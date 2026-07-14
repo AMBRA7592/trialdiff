@@ -29,11 +29,17 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from trialdiff.db import connect, init_db  # noqa: E402
-from trialdiff.provenance import canonical_json, sha256_text  # noqa: E402
+from trialdiff.constants import Source  # noqa: E402
+from trialdiff.db import TrialDiffStore, connect, init_db  # noqa: E402
+from trialdiff.provenance import Provenance, canonical_json, sha256_text  # noqa: E402
 
 SEED_TIMESTAMP = "1970-01-01T00:00:00Z"
 KNOWN_SEVERITIES = {"critical", "high", "medium", "low", "ignore"}
+
+
+def record_nct_id(record: dict) -> str:
+    trial = record.get("trial") or record.get("study") or {}
+    return trial["nct_id"]
 
 
 def main() -> int:
@@ -101,19 +107,12 @@ def seed_alpha_record(connection, record: dict, counts: Counter) -> None:
         source_url=study.get("official_v2_api_url") or study.get("clinicaltrials_gov_url") or "",
     )
     insert_versions_and_patch(connection, counts, record=record, nct_id=nct_id, versions=versions, provenance=provenance)
-    insert_materiality_event(connection, counts, record=record, nct_id=nct_id, versions=versions, classification=classification, provenance=provenance)
-
-    canonical_record = record["canonical_evidence_record"]
-    canonical_text = canonical_json(canonical_record)
+    insert_materiality_event(connection, counts, record=record)
     insert_evidence_row(
         connection,
         counts,
         record=record,
-        nct_id=nct_id,
-        classification=classification,
-        provenance=provenance,
-        event_classes=classification.get("event_classes") or [],
-        canonical_text=canonical_text,
+        canonical=record["canonical_evidence_record"],
         canonical_hash=provenance["evidence_canonical_hash"],
         evidence_version=provenance.get("evidence_version") or 1,
         source=provenance.get("evidence_source") or "derived_evidence_record",
@@ -140,16 +139,12 @@ def seed_evidence_record_file(connection, record: dict, raw_text: str, counts: C
         source_url=record["trial"].get("clinicaltrials_gov_url") or "",
     )
     insert_versions_and_patch(connection, counts, record=record, nct_id=nct_id, versions=versions, provenance=provenance)
-    insert_materiality_event(connection, counts, record=record, nct_id=nct_id, versions=versions, classification=classification, provenance=provenance)
+    insert_materiality_event(connection, counts, record=record)
     insert_evidence_row(
         connection,
         counts,
         record=record,
-        nct_id=nct_id,
-        classification=classification,
-        provenance=provenance,
-        event_classes=classification.get("event_classes") or [],
-        canonical_text=raw_text,
+        canonical=record,
         canonical_hash=sha256_text(raw_text),
         evidence_version=record.get("evidence_version") or 1,
         source="derived_evidence_record",
@@ -254,94 +249,89 @@ def insert_versions_and_patch(connection, counts: Counter, *, record: dict, nct_
     counts["patches"] += cursor.rowcount if cursor.rowcount > 0 else 0
 
 
-def insert_materiality_event(connection, counts: Counter, *, record: dict, nct_id: str, versions: dict, classification: dict, provenance: dict) -> None:
+def insert_materiality_event(connection, counts: Counter, *, record: dict) -> None:
+    # Reuse the store's canonical INSERT so the seeded schema can never
+    # drift from what the ingest pipeline writes.
+    classification = record["classification"]
+    versions = record["versions"]
     severity = classification.get("severity")
     if severity not in KNOWN_SEVERITIES:
         return
-    cursor = connection.execute(
-        """
-        INSERT OR IGNORE INTO materiality_events (
-          nct_id, from_version, to_version, submitted_date, timing_context,
-          severity_pre_timing, severity, category, categories_json, changed_paths_json,
-          deterministic_rules_json, value_signals_json, summary, summary_source,
-          needs_human_review, created_at, rule_set_hash, source, source_url, fetched_at,
-          source_version, raw_hash
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '', 'none', ?, ?, ?, 'derived_classifier',
-                  'trialdiff://classifier/materiality', ?, NULL, ?)
-        """,
-        (
-            nct_id,
-            versions["from_version"],
-            versions["to_version"],
-            versions.get("submitted_date"),
-            classification.get("timing_context"),
-            classification.get("severity_pre_timing") or severity,
-            severity,
-            classification.get("category") or "unknown_material_change",
-            canonical_json(classification.get("categories") or []),
-            canonical_json(record.get("changed_paths") or []),
-            canonical_json(classification.get("deterministic_rules") or []),
-            canonical_json(classification.get("value_signals") or []),
-            1 if severity in {"high", "critical"} else 0,
-            SEED_TIMESTAMP,
-            classification.get("triage_rule_set_hash") or classification.get("rule_set_hash") or "",
-            SEED_TIMESTAMP,
-            provenance.get("materiality_event_hash") or "",
-        ),
+    event = {
+        "nct_id": record_nct_id(record),
+        "from_version": versions["from_version"],
+        "to_version": versions["to_version"],
+        "submitted_date": versions.get("submitted_date"),
+        "timing_context": classification.get("timing_context"),
+        "severity_pre_timing": classification.get("severity_pre_timing") or severity,
+        "severity": severity,
+        "category": classification.get("category") or "unknown_material_change",
+        "categories": classification.get("categories") or [],
+        "changed_paths": record.get("changed_paths") or [],
+        "deterministic_rules": classification.get("deterministic_rules") or [],
+        "value_signals": classification.get("value_signals") or [],
+        "needs_human_review": severity in {"high", "critical"},
+        "created_at": SEED_TIMESTAMP,
+        "rule_set_hash": classification.get("triage_rule_set_hash") or classification.get("rule_set_hash") or "",
+    }
+    materiality_hash = record["provenance"].get("materiality_event_hash") or ""
+    provenance = Provenance(
+        source=Source.DERIVED_CLASSIFIER,
+        source_url="trialdiff://classifier/materiality",
+        fetched_at=SEED_TIMESTAMP,
+        raw_hash=materiality_hash,
+        source_version=materiality_hash or None,
     )
-    counts["materiality_events"] += cursor.rowcount if cursor.rowcount > 0 else 0
+    before = connection.total_changes
+    TrialDiffStore(connection).insert_materiality_event(event, provenance)
+    counts["materiality_events"] += connection.total_changes - before
 
 
-def insert_evidence_row(connection, counts: Counter, *, record: dict, nct_id: str, classification: dict, provenance: dict, event_classes: list, canonical_text: str, canonical_hash: str, evidence_version: int, source: str, source_url: str) -> None:
+def insert_evidence_row(connection, counts: Counter, *, record: dict, canonical: dict, canonical_hash: str, evidence_version: int, source: str, source_url: str) -> None:
+    # Reuse the store's canonical INSERT (TrialDiffStore.insert_evidence_record)
+    # so the seeded schema can never drift from the generator's. The store
+    # serializes `canonical` with canonical_json, which reproduces the exact
+    # frozen bytes because those files ARE the canonical serialization.
+    classification = record["classification"]
     versions = record["versions"]
-    cursor = connection.execute(
-        """
-        INSERT OR IGNORE INTO evidence_records (
-          event_id, nct_id, from_version, to_version, submitted_date, timing_context,
-          severity_pre_timing, severity, category, categories_json, changed_paths_json,
-          event_classes_json, deterministic_rules_json, value_signals_json, claims_supported_json,
-          claims_not_supported_json, review_question, citation_text, canonical_json,
-          canonical_hash, evidence_version, patch_hash, patch_source, patch_source_url,
-          patch_raw_hash, from_snapshot_hash, to_snapshot_hash, materiality_event_hash,
-          rule_set_hash, source, source_url, generated_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """,
-        (
-            record["event_id"],
-            nct_id,
-            versions["from_version"],
-            versions["to_version"],
-            versions.get("submitted_date"),
-            classification.get("timing_context"),
-            classification.get("severity_pre_timing") or classification.get("severity") or "uncategorized",
-            classification.get("severity") or "uncategorized",
-            classification.get("category") or "unknown_material_change",
-            canonical_json(classification.get("categories") or []),
-            canonical_json(record.get("changed_paths") or []),
-            canonical_json(event_classes),
-            canonical_json(classification.get("deterministic_rules") or []),
-            canonical_json(classification.get("value_signals") or []),
-            canonical_json(record.get("claims_supported") or []),
-            canonical_json(record.get("claims_not_supported") or []),
-            record.get("review_question") or "",
-            record.get("citation_text") or "",
-            canonical_text,
-            canonical_hash,
-            evidence_version,
-            provenance["patch_hash"],
-            provenance.get("patch_source") or "ctgov_internal_history",
-            provenance.get("patch_source_url") or "",
-            provenance.get("patch_raw_hash") or "",
-            provenance.get("from_snapshot_hash"),
-            provenance.get("to_snapshot_hash"),
-            provenance.get("materiality_event_hash") or "",
-            classification.get("rule_set_hash") or "",
-            source,
-            source_url,
-            SEED_TIMESTAMP,
-        ),
-    )
-    counts["evidence_records"] += cursor.rowcount if cursor.rowcount > 0 else 0
+    provenance = record["provenance"]
+    store_record = {
+        "event_id": record["event_id"],
+        "nct_id": record_nct_id(record),
+        "from_version": versions["from_version"],
+        "to_version": versions["to_version"],
+        "submitted_date": versions.get("submitted_date"),
+        "timing_context": classification.get("timing_context"),
+        "severity_pre_timing": classification.get("severity_pre_timing")
+        or classification.get("severity")
+        or "uncategorized",
+        "severity": classification.get("severity") or "uncategorized",
+        "category": classification.get("category") or "unknown_material_change",
+        "categories": classification.get("categories") or [],
+        "changed_paths": record.get("changed_paths") or [],
+        "event_classes": classification.get("event_classes") or [],
+        "deterministic_rules": classification.get("deterministic_rules") or [],
+        "value_signals": classification.get("value_signals") or [],
+        "claims_supported": record.get("claims_supported") or [],
+        "claims_not_supported": record.get("claims_not_supported") or [],
+        "review_question": record.get("review_question") or "",
+        "citation_text": record.get("citation_text") or "",
+        "canonical": canonical,
+        "canonical_hash": canonical_hash,
+        "evidence_version": evidence_version,
+        "patch_hash": provenance["patch_hash"],
+        "patch_source": provenance.get("patch_source") or "ctgov_internal_history",
+        "patch_source_url": provenance.get("patch_source_url") or "",
+        "patch_raw_hash": provenance.get("patch_raw_hash") or "",
+        "from_snapshot_hash": provenance.get("from_snapshot_hash"),
+        "to_snapshot_hash": provenance.get("to_snapshot_hash"),
+        "materiality_event_hash": provenance.get("materiality_event_hash") or "",
+        "rule_set_hash": classification.get("rule_set_hash") or "",
+        "source": source,
+        "source_url": source_url,
+        "generated_at": SEED_TIMESTAMP,
+    }
+    counts["evidence_records"] += TrialDiffStore(connection).insert_evidence_record(store_record)
 
 
 if __name__ == "__main__":

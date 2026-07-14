@@ -17,14 +17,6 @@ DEFAULT_PACKAGE_DIR = "event_class_records_v0.2"
 DB_PLACEHOLDER = "<db_path>"
 
 
-def package_version_from_dir(package_dir: Path) -> str:
-    name = package_dir.name
-    marker = "_v"
-    if marker in name:
-        return "v" + name.rsplit(marker, maxsplit=1)[1]
-    return "unversioned"
-
-
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--db", required=True, help="SQLite database containing generated Evidence Records.")
@@ -37,8 +29,9 @@ def main() -> int:
     )
     parser.add_argument(
         "--package-version",
-        default=None,
-        help="Package version label recorded in VALIDATION.md (default: derived from --out).",
+        required=True,
+        help="Package version label recorded in VALIDATION.md (e.g. v0.1.2). Explicit on purpose: "
+        "the version stamped into a release document must be a reviewed input, not a guess.",
     )
     parser.add_argument("--force", action="store_true", help="Replace an existing package directory.")
     args = parser.parse_args()
@@ -81,19 +74,18 @@ def main() -> int:
             raise SystemExit(f"{event_id}: exported bytes do not match stored canonical_hash")
         summaries.append(summarize_record(record, stored_hash=row["canonical_hash"]))
 
-    package_version = args.package_version or package_version_from_dir(package_dir)
+    stats = package_stats(summaries)
     validation_note = build_validation_note(
         db_path=db_path,
         corpus_label=args.corpus_label,
-        package_version=package_version,
+        package_version=args.package_version,
         generation_command=args.generation_command
         or f"python3 -m trialdiff.cli generate-evidence --db {DB_PLACEHOLDER} --force",
         summaries=summaries,
+        stats=stats,
     )
     validation_path = package_dir / "VALIDATION.md"
     validation_path.write_text(validation_note, encoding="utf-8")
-
-    stats = package_stats(summaries)
     sidecar_path = package_dir / "expected_stats.json"
     sidecar_path.write_text(
         json.dumps(expected_stats_sidecar(stats), indent=2, sort_keys=True) + "\n",
@@ -198,8 +190,8 @@ def build_validation_note(
     package_version: str,
     generation_command: str,
     summaries: list[dict[str, Any]],
+    stats: dict[str, Any],
 ) -> str:
-    stats = package_stats(summaries)
     class_counts = "\n".join(
         f"- `{name}`: {count}" for name, count in sorted(stats["class_counts"].items())
     )
@@ -214,7 +206,11 @@ def build_validation_note(
         )
         for rule_set_hash, count in sorted(stats["rule_set_hash_counts"].items())
     )
-    showcase_summary = max(summaries, key=lambda summary: (len(summary["event_classes"]), summary["event_id"]))
+    # Single source of truth for the showcase: the selection package_stats
+    # already made (and expected_stats.json enforces).
+    showcase_summary = next(
+        summary for summary in summaries if summary["event_id"] == stats["showcase"]["event_id"]
+    )
     return f"""# TrialDiff Event-Class Evidence Records {package_version}
 
 This package is a separate event-class Evidence Record export. It does not modify the

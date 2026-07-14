@@ -6,7 +6,13 @@ from pathlib import Path
 import sqlite3
 import sys
 
-from trialdiff.classifier.materiality import ClassifierRule, classify_patch, provenance_for_event
+from trialdiff.classifier.materiality import (
+    V021_TRIAGE_RULE_SET_HASH,
+    ClassifierRule,
+    classify_patch,
+    provenance_for_event,
+    rule_set_hash,
+)
 from trialdiff.corpus import select_breast_cancer_corpus, write_corpus
 from trialdiff.db import TrialDiffStore, connect, init_db
 from trialdiff.evidence import EVIDENCE_VERSION, generate_evidence_records
@@ -78,6 +84,15 @@ def cmd_classify(args: argparse.Namespace) -> int:
             deleted = store.delete_materiality_events(args.nct)
             print(f"deleted_existing_events={deleted}")
         rules = [ClassifierRule.from_row(row) for row in store.load_active_rules()]
+        active_hash = rule_set_hash(rules)
+        if active_hash != V021_TRIAGE_RULE_SET_HASH:
+            print(
+                f"WARNING: active rule set hash {active_hash} does not match the committed "
+                f"v0.2.1 rule set {V021_TRIAGE_RULE_SET_HASH}; the rule table has drifted "
+                "from the migrations and generated events will carry the non-standard hash. "
+                "Re-create the database (or restore the seeds) to reconverge.",
+                file=sys.stderr,
+            )
         patch_rows = store.iter_patches(args.nct)
         for patch_row in patch_rows:
             from_record = store.get_version_record(patch_row["nct_id"], patch_row["from_version"])
@@ -208,11 +223,9 @@ def cmd_verify(args: argparse.Namespace) -> int:
             print(f"{status}\t{target}\tschema={result.schema}")
             for name, passed, detail in result.checks:
                 marker = "ok" if passed else "MISMATCH"
-                print(f"  {name}: {marker}" + (f" ({detail})" if detail and not passed else ""))
+                show_detail = detail and (not passed or args.verbose)
+                print(f"  {name}: {marker}" + (f" ({detail})" if show_detail else ""))
             if args.verbose:
-                for name, passed, detail in result.checks:
-                    if passed and detail:
-                        print(f"  {name}: {detail}")
                 for note in result.notes:
                     print(f"  note: {note}")
             if not result.ok:

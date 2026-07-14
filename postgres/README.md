@@ -36,11 +36,13 @@ The exporter is pure Python stdlib. It preserves provenance columns, JSON
 payloads as `jsonb`, booleans, identity IDs, and `canonical_json` as opaque
 text (so evidence records stay byte-verifiable against `canonical_hash`).
 
-After an import, spot-check verifiability:
+After an import, spot-check verifiability (note `convert_to`, not a
+`::bytea` cast — casting text to bytea parses bytea escape syntax and
+errors on the backslash escapes canonical JSON contains):
 
 ```sql
 SELECT count(*) FROM evidence_records
-WHERE encode(sha256(canonical_json::bytea), 'hex') <> canonical_hash;
+WHERE encode(sha256(convert_to(canonical_json, 'UTF8')), 'hex') <> canonical_hash;
 -- must return 0
 ```
 

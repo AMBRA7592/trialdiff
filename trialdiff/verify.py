@@ -13,6 +13,13 @@ database access:
   ``provenance.patch_hash``. Alpha ``event_id`` values were derived by the
   frozen v0.1-alpha generation scheme (before ``event_classes`` entered the
   digest) and are intentionally not re-derived here.
+
+Trust scope: these checks are recomputed from the record's own contents,
+so they prove canonical form and internal self-consistency — not
+authenticity. An edited record that is re-serialized canonically (with
+self-referential hashes re-derived) passes. Authenticity comes from
+comparing the file hash against an external anchor: the package
+``MANIFEST.sha256`` or the database ``canonical_hash``.
 """
 
 from __future__ import annotations
@@ -24,7 +31,7 @@ from pathlib import Path
 from typing import Any
 
 from trialdiff.evidence import build_event_id
-from trialdiff.provenance import canonical_json, sha256_json
+from trialdiff.provenance import canonical_json, sha256_json, sha256_text
 
 
 @dataclass
@@ -51,32 +58,40 @@ def verify_record_file(path: str | Path) -> VerificationResult:
         result.add("readable", False, str(exc))
         return result
     try:
-        record = json.loads(payload)
-    except json.JSONDecodeError as exc:
-        result.add("valid_json", False, str(exc))
+        text = payload.decode("utf-8")
+        record = json.loads(text)
+    except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+        result.add("valid_utf8_json", False, str(exc))
+        return result
+    if not isinstance(record, dict):
+        result.add("valid_utf8_json", False, "top level is not a JSON object")
         return result
 
     schema = record.get("schema")
     result.schema = schema
-    if schema == "trialdiff.evidence_record":
-        verify_evidence_record(result, payload, record)
-    elif schema == "trialdiff.alpha_demo_record":
-        verify_alpha_demo_record(result, record)
-    else:
-        result.add("known_schema", False, f"unrecognized schema {schema!r}")
+    try:
+        if schema == "trialdiff.evidence_record":
+            verify_evidence_record(result, payload, record)
+        elif schema == "trialdiff.alpha_demo_record":
+            verify_alpha_demo_record(result, record)
+        else:
+            result.add("known_schema", False, f"unrecognized schema {schema!r}")
+    except (TypeError, KeyError, AttributeError, ValueError) as exc:
+        # A shape-malformed record must fail its own verification, never
+        # abort the rest of the batch.
+        result.add("well_formed", False, f"{type(exc).__name__}: {exc}")
     return result
 
 
 def verify_evidence_record(result: VerificationResult, payload: bytes, record: dict[str, Any]) -> None:
     canonical_text = canonical_json(record)
     file_hash = hashlib.sha256(payload).hexdigest()
-    canonical_hash = hashlib.sha256(canonical_text.encode("utf-8")).hexdigest()
     result.add(
         "canonical_bytes",
         payload.decode("utf-8") == canonical_text,
         f"file sha256 {file_hash}",
     )
-    result.notes.append(f"record_hash={canonical_hash}")
+    result.notes.append(f"record_hash={sha256_text(canonical_text)}")
 
     provenance = record.get("provenance") or {}
     patch = record.get("patch")

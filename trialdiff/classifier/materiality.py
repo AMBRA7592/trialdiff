@@ -14,6 +14,11 @@ from trialdiff.provenance import Provenance, sha256_json, utc_now_iso
 
 
 SEVERITY_RANK = {"ignore": 0, "low": 1, "medium": 2, "high": 3, "critical": 4}
+# Hash of the committed v0.2.1 rule seeds (migrations 002/003/005) as loaded
+# from a fresh database. Since init_db no longer replays migrations on every
+# command, drift in the rule table is permanent — callers compare against
+# this pin to make drift visible instead of silently re-converged.
+V021_TRIAGE_RULE_SET_HASH = "6fc6d7533e740cc38ca0ba0425927ade66f2f90b067963c5cf52d08a88f8d883"
 RANK_SEVERITY = {rank: severity for severity, rank in SEVERITY_RANK.items()}
 # Intentionally empty since the v0.2.1 rule tightening: blanket timing
 # escalation is disabled, so severity always equals severity_pre_timing.
@@ -587,7 +592,10 @@ def collect_categories(
     categories = {rule.category for rule, _context in matched_rules}
     for signal in value_signals:
         categories.add(signal_category(signal))
-    return sorted(categories, key=lambda category: category_priority(category), reverse=True)
+    # Priority ties (e.g. two categories both outside the priority table)
+    # must break deterministically by name, never by set iteration order,
+    # or the canonical hash becomes PYTHONHASHSEED-dependent.
+    return sorted(categories, key=lambda category: (-category_priority(category), category))
 
 
 def signal_category(signal: dict[str, Any]) -> str:

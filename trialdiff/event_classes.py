@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from trialdiff.jsonpatch import JsonPatchError, apply_patch
 from trialdiff.provenance import sha256_json
 
 
@@ -16,20 +17,24 @@ OUTCOME_EDIT_WITH_RESULTS_SIGNAL = "outcome_edit_cooccurs_with_results_posting"
 EVENT_CLASS_DEFINITIONS: dict[str, str] = {
     PRIMARY_ENDPOINT_CLEAN: (
         "FROM-version is completed or has actual primary completion; a primary outcome measure, "
-        "description, timeFrame, or whole primary-outcome item changed; no hasResults/resultsSection "
-        "co-occurrence signal is present."
+        "description, timeFrame, or whole primary-outcome item changed between the FROM-version record "
+        "and the TO-version view (stored, or derived by replaying the adjacent-version patch); no "
+        "hasResults/resultsSection co-occurrence signal is present."
     ),
     SECONDARY_OUTCOME_REMOVED: (
         "FROM-version is completed or has actual primary completion; a whole secondaryOutcomes item is "
-        "removed; when a TO-version outcome list is available, the normalized removed outcome does not "
-        "reappear elsewhere in that list."
+        "removed; the normalized removed outcome does not reappear elsewhere in the TO-version outcome "
+        "list (stored, or derived by replaying the adjacent-version patch)."
     ),
-    ENROLLMENT_CHANGED_TO_ZERO: "Enrollment count changes from a positive value to exactly zero.",
+    ENROLLMENT_CHANGED_TO_ZERO: (
+        "Enrollment count changes from a positive value in the FROM-version record to exactly zero in "
+        "the TO-version view (stored, or derived by replaying the adjacent-version patch)."
+    ),
     WHY_STOPPED_REMOVED_TERMINAL: (
-        "FROM-version whyStopped is nonempty; the stored TO-version record shows whyStopped empty or "
-        "absent, or, when no TO-version record is stored, the patch itself removes or empties whyStopped; "
-        "FROM or TO status is TERMINATED, WITHDRAWN, or SUSPENDED. A missing TO-version record without "
-        "patch evidence does not count as removal."
+        "FROM-version whyStopped is nonempty; the TO-version view (stored, or derived by replaying the "
+        "adjacent-version patch) shows whyStopped empty or absent; FROM or TO status is TERMINATED, "
+        "WITHDRAWN, or SUSPENDED. A missing TO-version view without patch evidence of the removal does "
+        "not count as removal."
     ),
     OUTCOME_EDIT_WITH_RESULTS_SIGNAL: (
         "A primary or secondary outcome path changed and the same patch carries a hasResults or "
@@ -45,12 +50,32 @@ COMPLETED_STATUSES = {"COMPLETED"}
 TERMINAL_STATUSES = {"TERMINATED", "WITHDRAWN", "SUSPENDED"}
 
 
+def derive_to_record(
+    from_record: dict[str, Any],
+    to_record: dict[str, Any] | None,
+    patch: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    # Shared missing-snapshot policy for every predicate: when no TO-version
+    # record is stored, reconstruct it by replaying the registry's own patch
+    # over the FROM-version record. A storage gap must never be read as a
+    # field change (ERRATA E1); replaying the patch gives all predicates one
+    # consistent, evidence-anchored TO view instead of per-predicate
+    # special cases.
+    if to_record is not None:
+        return to_record
+    try:
+        return apply_patch(from_record, patch)
+    except (JsonPatchError, ValueError, TypeError):
+        return None
+
+
 def event_classes_for_patch(
     *,
     from_record: dict[str, Any],
     to_record: dict[str, Any] | None,
     patch: list[dict[str, Any]],
 ) -> list[str]:
+    to_record = derive_to_record(from_record, to_record, patch)
     classes: list[str] = []
     reconciliation_signal = has_results_reconciliation_signal(
         from_record=from_record,
