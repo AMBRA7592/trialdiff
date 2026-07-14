@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from importlib import resources
 import json
 from pathlib import Path
 import sqlite3
@@ -13,7 +14,16 @@ from trialdiff.event_classes import (
 from trialdiff.provenance import Provenance, canonical_json, sha256_json, utc_now_iso
 
 
-MIGRATIONS_DIR = Path(__file__).resolve().parent.parent / "db" / "migrations"
+def _migration_sources() -> list[tuple[str, str]]:
+    # Load migrations as package data so an installed distribution works the
+    # same as a repo checkout.
+    migrations = resources.files("trialdiff").joinpath("migrations")
+    entries = [
+        (entry.name, entry.read_text(encoding="utf-8"))
+        for entry in migrations.iterdir()
+        if entry.name.endswith(".sql")
+    ]
+    return sorted(entries)
 
 
 def connect(db_path: str | Path) -> sqlite3.Connection:
@@ -26,8 +36,26 @@ def connect(db_path: str | Path) -> sqlite3.Connection:
 def init_db(db_path: str | Path) -> None:
     connection = connect(db_path)
     try:
-        for migration in sorted(MIGRATIONS_DIR.glob("*.sql")):
-            connection.executescript(migration.read_text(encoding="utf-8"))
+        connection.execute(
+            """
+            CREATE TABLE IF NOT EXISTS schema_migrations (
+              filename TEXT PRIMARY KEY,
+              applied_at TEXT NOT NULL
+            )
+            """
+        )
+        applied = {
+            row["filename"]
+            for row in connection.execute("SELECT filename FROM schema_migrations").fetchall()
+        }
+        for name, sql in _migration_sources():
+            if name in applied:
+                continue
+            connection.executescript(sql)
+            connection.execute(
+                "INSERT INTO schema_migrations (filename, applied_at) VALUES (?, ?)",
+                (name, utc_now_iso()),
+            )
         ensure_runtime_schema(connection)
         connection.commit()
     finally:
@@ -589,8 +617,11 @@ def extract_trial_fields(record: dict[str, Any]) -> dict[str, Any]:
     arms = protocol.get("armsInterventionsModule") or {}
     status = protocol.get("statusModule") or {}
     design = protocol.get("designModule") or {}
+    nct_id = identification.get("nctId")
+    if not nct_id:
+        raise ValueError("record is missing protocolSection.identificationModule.nctId")
     return {
-        "nct_id": identification["nctId"],
+        "nct_id": nct_id,
         "brief_title": identification.get("briefTitle"),
         "official_title": identification.get("officialTitle"),
         "lead_sponsor": lead_sponsor.get("name"),
