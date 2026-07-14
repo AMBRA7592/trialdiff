@@ -26,6 +26,17 @@ An Evidence Record is a deterministic, claim-bounded object that asserts a bound
 
 A record is a pure function of cited source content, source-selection rules, canonicalization rules, generator version, and `ruleset_hash`. The same inputs produce byte-identical canonical JSON, and therefore an identical `record_hash` and `record_id`. Canonicalization — stable key ordering and fixed normalization — is what makes the hash reproducible. Regenerating a record from the same inputs is a verification, not a re-derivation.
 
+## Integrity is not correctness
+
+The hash chain proves byte integrity: a record, once published, is
+verifiably unaltered, and any citation to it stays stable. It does not
+prove semantic correctness: a record can verify perfectly and still carry
+a derived claim that its own cited source contradicts, if the generating
+logic was defective. Correctness is governed by the `ruleset_hash`
+discipline (defective logic is corrected in a NEW generation under a new
+hash) and by a published errata record; verification tooling must not be
+described as validating claims. See `ERRATA.md` for the operative example.
+
 ## Provenance and hash rules
 
 - Each source is pinned by content hash at the observed version; the record is derivable from those sources alone.

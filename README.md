@@ -15,6 +15,21 @@ detector, or allegation engine.
 New here? `METHODOLOGY.md` is the documentation map and reading order.
 Known defects in published artifacts are recorded in `ERRATA.md`.
 
+## Repository Authority
+
+**This repository (`AMBRA7592/trialdiff`) is the active, canonical
+repository.** The companion `AMBRA7592/trialdiff-public` repository is the
+immutable historical snapshot backing the published v0.1/v0.1.1 Zenodo
+dataset and is not developed further; its Zenodo linkage is left intact.
+
+Published dataset DOIs (Zenodo): concept DOI
+[10.5281/zenodo.20801956](https://doi.org/10.5281/zenodo.20801956) (always
+resolves to the latest version) · v0.1.1
+[10.5281/zenodo.20816639](https://doi.org/10.5281/zenodo.20816639) · v0.1
+[10.5281/zenodo.20801957](https://doi.org/10.5281/zenodo.20801957).
+Note: the published v0.1.1 dataset carries erratum E1 (`ERRATA.md`); the
+correction ships as v0.1.2 under the same concept DOI.
+
 ## Live Demo
 
 Live site: <https://trialdiff.vercel.app>
@@ -83,6 +98,22 @@ sha256sum -c MANIFEST.calibration.sha256
 `trialdiff verify` recomputes canonical hashes, patch hashes, and (for
 current-format records) the deterministic `event_id` from the record's own
 contents. A record that fails any of these has been altered.
+
+Scope of that guarantee, precisely:
+
+- **`trialdiff verify` alone** proves canonical form and internal
+  self-consistency. Its checks are recomputed from the record's own
+  contents, so an editor who re-serializes canonically (and re-derives the
+  self-referential hashes) can alter fields without failing it. The
+  **authenticity anchors are the manifests** (`MANIFEST.sha256`, the
+  package manifests) and the database `canonical_hash` values — always
+  verify against those when provenance matters.
+- Hashes and manifests together prove **byte integrity** — the artifact is
+  exactly what was published. They do not prove **semantic correctness** —
+  that the claims inside it are true. The published v0.1.1 dataset passes
+  every integrity check and still carries a false class claim in 9 records
+  (`ERRATA.md` E1). Correctness lives in the errata, regeneration, and
+  rule-set-hash discipline, not in the checksums.
 
 ## What A Reviewer Can Inspect
 

@@ -7,13 +7,21 @@ title: "TrialDiff: deterministic Evidence Records for ClinicalTrials.gov amendme
 type: software
 authors:
   - family-names: Brandes
-    given-names: A.
-    # TODO(owner): complete given name, and add ORCID and affiliation if desired.
+    given-names: Amadeus
+    affiliation: Independent researcher
+    # TODO(owner): add ORCID if available.
 repository-code: "https://github.com/AMBRA7592/trialdiff"
 url: "https://trialdiff.vercel.app"
 license: Apache-2.0
 # Data (records/, event_class_records_*, CALIBRATION_*, corpora/) is CC-BY-4.0;
 # see DATA_LICENSE.md.
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.20801956
+    description: >-
+      Concept DOI for the TrialDiff event-class Evidence Record dataset
+      (all versions; v0.1.1 is 10.5281/zenodo.20816639). See ERRATA.md E1
+      for the correction shipping as v0.1.2.
 abstract: >-
   TrialDiff converts public ClinicalTrials.gov record-version history into
   deterministic, hash-verifiable, claim-bounded Evidence Records: exact

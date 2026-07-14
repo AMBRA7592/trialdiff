@@ -36,13 +36,13 @@ historical accident.
 
 | Label | Date | Status |
 | --- | --- | --- |
-| event-class v0.1 | 2026-06-22 | Superseded stub — records were byte-identical to v0.1.1 |
-| event-class v0.1.1 | 2026-06-23 | Frozen; carries erratum E1 (`ERRATA.md`) for the whyStopped class |
-| event-class v0.1.2 | pending | Planned corrected regeneration under `trialdiff.event_classes.v0.2` definitions (see `RELEASING.md`) |
+| event-class v0.1 | 2026-06-22 | Superseded stub — records were byte-identical to v0.1.1. Zenodo DOI [10.5281/zenodo.20801957](https://doi.org/10.5281/zenodo.20801957) |
+| event-class v0.1.1 | 2026-06-23 | Frozen; carries erratum E1 (`ERRATA.md`) for the whyStopped class. Zenodo DOI [10.5281/zenodo.20816639](https://doi.org/10.5281/zenodo.20816639), published from the `trialdiff-public` snapshot |
+| event-class v0.1.2 | pending | Planned corrected regeneration under `trialdiff.event_classes.v0.2` definitions; to be published as a new version under concept DOI [10.5281/zenodo.20801956](https://doi.org/10.5281/zenodo.20801956) (see `RELEASING.md`) |
 
 ## 5. Event-class definitions (code semantics)
 
 | Label | Hash | Status |
 | --- | --- | --- |
 | `trialdiff.event_classes.v0.1` | `a6734d37…` | Produced the v0.1/v0.1.1 packages; whyStopped predicate defect (E1) |
-| `trialdiff.event_classes.v0.2` | `20c8e483…` | Current at HEAD; whyStopped requires observed evidence |
+| `trialdiff.event_classes.v0.2` | `b57fd656…` | Current at HEAD; the TO-version view is derived from the patch when no snapshot is stored, so all classes require observed evidence |
