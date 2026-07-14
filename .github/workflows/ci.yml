@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  python:
+    name: Python ${{ matrix.python-version }} — tests, validators, manifests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install package (with dev extras) and jsonschema
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]" jsonschema
+
+      - name: Unit tests
+        run: pytest -q
+
+      - name: Frozen-package validators (recompute hashes)
+        run: |
+          python scripts/validate_alpha_demo.py
+          python scripts/validate_event_class_package.py --package event_class_records_v0.1.1
+
+      - name: JSON Schema validation of all committed records
+        run: python scripts/validate_schemas.py
+
+      - name: Manifest integrity
+        run: |
+          sha256sum -c --quiet MANIFEST.sha256
+          sha256sum -c --quiet MANIFEST.calibration.sha256
+          (cd event_class_records_v0.1.1 && sha256sum -c --quiet MANIFEST.sha256)
+          # v0.1 is a stub: its record entries must still verify against the
+          # byte-identical v0.1.1 copies (this proves the stub's claim).
+          (cd event_class_records_v0.1 && sed 's#  records/#  ../event_class_records_v0.1.1/records/#' MANIFEST.sha256 | sha256sum -c --quiet)
+
+      - name: Offline record verification (trialdiff verify)
+        run: trialdiff verify records event_class_records_v0.1.1/records | tail -1
+
+      - name: Seed-from-records smoke test
+        run: |
+          python scripts/seed_from_records.py --db /tmp/seed_ci.sqlite3
+          python scripts/sqlite_to_postgres.py /tmp/seed_ci.sqlite3 --truncate --output /tmp/seed_ci.sql
+          test -s /tmp/seed_ci.sql
+
+  frontend:
+    name: Frontend — astro check + build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install
+        run: npm ci --no-audit --no-fund
+
+      - name: Type/diagnostics check
+        run: npx astro check
+
+      - name: Build
+        run: npm run build
