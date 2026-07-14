@@ -83,6 +83,7 @@ export async function getTrialDetail(nctId: string): Promise<TrialDetailData> {
       events: eventRows.map(mapEventRow),
     };
   } catch (error) {
+    console.error("getTrialDetail failed:", error);
     return {
       databaseReady: false,
       databaseError: error instanceof Error ? error.message : "Database query failed.",

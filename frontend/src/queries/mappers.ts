@@ -9,6 +9,13 @@ export function nullableString(value: unknown): string | null {
   return typeof value === "string" && value.length > 0 ? value : null;
 }
 
+// postgres.js returns timestamptz columns as Date instances; plain
+// nullableString() would silently map them to null.
+export function nullableTimestamp(value: unknown): string | null {
+  if (value instanceof Date) return value.toISOString();
+  return nullableString(value);
+}
+
 export function stringArray(value: unknown): string[] {
   const parsed = parseJsonish(value);
   if (Array.isArray(parsed)) {
@@ -91,7 +98,7 @@ export function mapEvidenceRecordDetail(row: Record<string, unknown>): EvidenceR
     ruleSetHash: String(row.rule_set_hash ?? ""),
     source: String(row.source ?? ""),
     sourceUrl: String(row.source_url ?? ""),
-    generatedAt: nullableString(row.generated_at),
+    generatedAt: nullableTimestamp(row.generated_at),
     trial: {
       overallStatus: nullableString(row.overall_status),
       hasResults: Boolean(row.has_results),
