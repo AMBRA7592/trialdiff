@@ -13,6 +13,20 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["3.11", "3.12"]
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: trialdiff
+          POSTGRES_PASSWORD: trialdiff
+          POSTGRES_DB: trialdiff
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U trialdiff"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - uses: actions/checkout@v4
 
@@ -46,6 +60,9 @@ jobs:
           (cd event_class_records_v0.1 && sed 's#  records/#  ../event_class_records_v0.1.1/records/#' MANIFEST.sha256 | sha256sum -c --quiet)
 
       - name: Offline record verification (trialdiff verify)
+        # shell: bash makes GitHub add pipefail, so the verifier's exit code
+        # survives the pipe; without it this gate could never fail.
+        shell: bash
         run: trialdiff verify records event_class_records_v0.1.1/records | tail -1
 
       - name: Seed-from-records smoke test
@@ -53,6 +70,19 @@ jobs:
           python scripts/seed_from_records.py --db /tmp/seed_ci.sqlite3
           python scripts/sqlite_to_postgres.py /tmp/seed_ci.sqlite3 --truncate --output /tmp/seed_ci.sql
           test -s /tmp/seed_ci.sql
+
+      - name: Postgres round-trip — canonical bytes survive import
+        env:
+          PGPASSWORD: trialdiff
+        run: |
+          for f in postgres/migrations/*.sql; do
+            psql -h localhost -U trialdiff -d trialdiff -q -v ON_ERROR_STOP=1 -f "$f"
+          done
+          psql -h localhost -U trialdiff -d trialdiff -q -v ON_ERROR_STOP=1 -f /tmp/seed_ci.sql
+          mismatches=$(psql -h localhost -U trialdiff -d trialdiff -tA -c \
+            "SELECT count(*) FROM evidence_records WHERE encode(sha256(convert_to(canonical_json,'UTF8')),'hex') <> canonical_hash;")
+          echo "canonical hash mismatches after import: $mismatches"
+          test "$mismatches" = "0"
 
   frontend:
     name: Frontend — astro check + build
