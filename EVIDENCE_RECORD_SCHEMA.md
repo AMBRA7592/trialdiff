@@ -1,5 +1,11 @@
 # Evidence Record Schema
 
+> **Scope note (2026-07-14):** this document describes only the frozen
+> v0.1-alpha format (`trialdiff.alpha_demo_record`). The current format
+> (`trialdiff.evidence_record`, used by the event-class packages) is
+> documented in `DATA_DICTIONARY.md`, with machine-readable JSON Schemas for
+> both formats in `schemas/`.
+
 The frozen files in `records/` use:
 
 ```text

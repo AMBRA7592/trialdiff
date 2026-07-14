@@ -1,5 +1,13 @@
 # Manual Audit: 5 Alpha Evidence Records
 
+> **Erratum (2026-07-14, see `ERRATA.md` E3):** the line "Severity means
+> review priority" below reflects the pre-calibration framing under which
+> this audit was written. The v0.2/v0.2.1 calibration subsequently failed
+> its gate and severity was decoupled from review priority
+> (`SEVERITY_DECOUPLING_v0.2.1.md`). Read severity here as deterministic,
+> uncalibrated triage metadata. The audit's structural findings are
+> unaffected.
+
 Audit date: 2026-06-17
 
 Audit scope: five selected records from `records/`, chosen to cover post-recruitment outcome changes, status termination, timeline movement, secondary outcome change, and enrollment change.

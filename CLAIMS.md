@@ -26,4 +26,4 @@ It does not prove that any specific amendment was improper, clinically meaningfu
 
 ## Severity Calibration Status
 
-The v0.2/v0.2.1 calibration did not validate severity as an external review-priority standard. Critical confirmations across fresh rubric applications ranged from 4/30 to 17/30, below the 24/30 required threshold. Severity therefore remains an uncalibrated triage label.
+The v0.2/v0.2.1 calibration did not validate severity as an external review-priority standard. Against the pre-registered gate of at least 24/30 critical confirmations, the observed confirmations were 6/30 and 3/30 (v0.2 reviewers), 17/30 and 4/30 (v0.2.1 re-certification reviewers), and 4/30, 5/30, 12/30, 17/30 across the v0.2.1 critical-stratum fresh applications. Severity therefore remains an uncalibrated triage label. See `SEVERITY_CALIBRATION_v0.2.md`, `SEVERITY_CALIBRATION_v0.2.1.md`, and `SEVERITY_DECOUPLING_v0.2.1.md`.

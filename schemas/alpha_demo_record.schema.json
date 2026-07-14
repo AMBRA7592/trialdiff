@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/AMBRA7592/trialdiff/blob/main/schemas/alpha_demo_record.schema.json",
+  "title": "TrialDiff Alpha Demo Record (trialdiff.alpha_demo_record)",
+  "description": "Frozen v0.1-alpha export wrapper used by records/*.json. The embedded canonical_evidence_record's canonical-JSON sha256 equals provenance.evidence_canonical_hash. This format is frozen; see EVIDENCE_RECORD_SCHEMA.md and DATA_DICTIONARY.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "demo_version",
+    "event_id",
+    "study",
+    "versions",
+    "classification",
+    "changed_paths",
+    "patch",
+    "canonical_evidence_record",
+    "claims_supported",
+    "claims_not_supported",
+    "review_question",
+    "citation_text",
+    "provenance",
+    "live_urls",
+    "source_corpus"
+  ],
+  "properties": {
+    "schema": { "const": "trialdiff.alpha_demo_record" },
+    "demo_version": { "const": "v0.1-alpha" },
+    "event_id": { "$ref": "#/$defs/eventId" },
+    "study": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nct_id", "title", "lead_sponsor", "clinicaltrials_gov_url", "official_v2_api_url"],
+      "properties": {
+        "nct_id": { "$ref": "#/$defs/nctId" },
+        "title": { "type": "string" },
+        "official_title": { "anyOf": [{ "type": "string" }, { "type": "null" }] },
+        "lead_sponsor": { "anyOf": [{ "type": "string" }, { "type": "null" }] },
+        "lead_sponsor_class": { "anyOf": [{ "type": "string" }, { "type": "null" }] },
+        "clinicaltrials_gov_url": { "type": "string", "format": "uri" },
+        "official_v2_api_url": { "type": "string", "format": "uri" },
+        "current_record_hash": { "$ref": "#/$defs/sha256" },
+        "current_record_raw_hash": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "versions": { "$ref": "#/$defs/versions" },
+    "classification": { "$ref": "#/$defs/alphaClassification" },
+    "changed_paths": { "$ref": "#/$defs/changedPaths" },
+    "patch": { "$ref": "#/$defs/patch" },
+    "canonical_evidence_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "evidence_version",
+        "event_id",
+        "trial",
+        "versions",
+        "classification",
+        "changed_paths",
+        "patch",
+        "provenance",
+        "claims_supported",
+        "claims_not_supported",
+        "review_question",
+        "citation_text"
+      ],
+      "properties": {
+        "schema": { "type": "string" },
+        "evidence_version": { "type": "integer", "minimum": 1 },
+        "event_id": { "$ref": "#/$defs/eventId" },
+        "trial": { "type": "object" },
+        "versions": { "$ref": "#/$defs/versions" },
+        "classification": { "$ref": "#/$defs/alphaClassification" },
+        "changed_paths": { "$ref": "#/$defs/changedPaths" },
+        "patch": { "$ref": "#/$defs/patch" },
+        "provenance": { "type": "object" },
+        "claims_supported": { "$ref": "#/$defs/claims" },
+        "claims_not_supported": { "$ref": "#/$defs/claims" },
+        "review_question": { "type": "string" },
+        "citation_text": { "type": "string" }
+      }
+    },
+    "claims_supported": { "$ref": "#/$defs/claims" },
+    "claims_not_supported": { "$ref": "#/$defs/claims" },
+    "review_question": { "type": "string", "minLength": 1 },
+    "citation_text": { "type": "string", "minLength": 1 },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_canonical_hash",
+        "evidence_source",
+        "evidence_source_url",
+        "evidence_version",
+        "patch_hash",
+        "patch_source",
+        "patch_source_url",
+        "materiality_event_hash"
+      ],
+      "properties": {
+        "evidence_canonical_hash": { "$ref": "#/$defs/sha256" },
+        "evidence_source": { "type": "string" },
+        "evidence_source_url": { "type": "string" },
+        "evidence_version": { "type": "integer", "minimum": 1 },
+        "patch_hash": { "$ref": "#/$defs/sha256" },
+        "patch_source": { "type": "string" },
+        "patch_source_url": { "type": "string" },
+        "patch_raw_hash": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "const": "" }] },
+        "from_snapshot_hash": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+        "to_snapshot_hash": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+        "materiality_event_hash": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "const": "" }] }
+      }
+    },
+    "live_urls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_page", "canonical_json", "trial_page"],
+      "properties": {
+        "evidence_page": { "type": "string", "format": "uri" },
+        "canonical_json": { "type": "string", "format": "uri" },
+        "trial_page": { "type": "string", "format": "uri" }
+      }
+    },
+    "source_corpus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "database", "selection", "counts"],
+      "properties": {
+        "name": { "type": "string" },
+        "database": { "type": "string" },
+        "selection": { "type": "string" },
+        "note": { "type": "string" },
+        "counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["trials", "patches", "materiality_events", "evidence_records"],
+          "properties": {
+            "trials": { "type": "integer" },
+            "patches": { "type": "integer" },
+            "materiality_events": { "type": "integer" },
+            "evidence_records": { "type": "integer" }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "nctId": { "type": "string", "pattern": "^NCT[0-9]{8}$" },
+    "eventId": { "type": "string", "pattern": "^evt_NCT[0-9]{8}_v[0-9]+_v[0-9]+_[0-9a-f]{12}$" },
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low", "ignore", "uncategorized"]
+    },
+    "timingContext": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": ["pre_recruitment", "early_recruitment", "late_recruitment", "post_recruitment", "unknown"]
+        },
+        { "type": "null" }
+      ]
+    },
+    "alphaClassification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "severity",
+        "severity_pre_timing",
+        "category",
+        "categories",
+        "timing_context",
+        "deterministic_rules",
+        "rule_set_hash",
+        "value_signals"
+      ],
+      "properties": {
+        "severity": { "$ref": "#/$defs/severity" },
+        "severity_pre_timing": { "$ref": "#/$defs/severity" },
+        "category": { "type": "string", "minLength": 1 },
+        "categories": { "type": "array", "items": { "type": "string" } },
+        "timing_context": { "$ref": "#/$defs/timingContext" },
+        "deterministic_rules": { "type": "array", "items": { "type": "string" } },
+        "rule_set_hash": { "$ref": "#/$defs/sha256" },
+        "value_signals": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "versions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from_version", "to_version"],
+      "properties": {
+        "from_version": { "type": "integer", "minimum": 0 },
+        "to_version": { "type": "integer", "minimum": 1 },
+        "submitted_date": { "anyOf": [{ "type": "string" }, { "type": "null" }] }
+      }
+    },
+    "changedPaths": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "pattern": "^/" }
+    },
+    "patch": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["op", "path"],
+        "properties": {
+          "op": { "type": "string", "enum": ["add", "remove", "replace", "move", "copy", "test"] },
+          "path": { "type": "string" }
+        }
+      }
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

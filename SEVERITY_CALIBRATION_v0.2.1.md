@@ -17,7 +17,7 @@ the v0.2 diagnostic tuning loop.
 - Rubric: `SEVERITY_RUBRIC_v0.2.md`, refined and re-frozen at commit `51befbf`
 - Sample manifest: `CALIBRATION_SAMPLE_v0.2.1.csv`
 - Blinded review package: `CALIBRATION_REVIEW_PACKAGE_v0.2.1.jsonl`
-- Private crosswalk: `CALIBRATION_REVIEW_CROSSWALK_PRIVATE_v0.2.1.csv`
+- Private crosswalk: `CALIBRATION_REVIEW_CROSSWALK_UNBLINDING_KEY_v0.2.1.csv`
 - Scorer: `scripts/score_calibration_reviews.py`
 
 ## Disclosure

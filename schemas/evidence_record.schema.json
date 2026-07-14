@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/AMBRA7592/trialdiff/blob/main/schemas/evidence_record.schema.json",
+  "title": "TrialDiff Evidence Record (trialdiff.evidence_record)",
+  "description": "Current canonical record format, used by the event_class_records packages. The file bytes are the canonical JSON serialization (sorted keys, compact separators, ASCII-escaped); sha256(file bytes) is the citable record hash. See DATA_DICTIONARY.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "evidence_version",
+    "event_id",
+    "trial",
+    "versions",
+    "classification",
+    "changed_paths",
+    "patch",
+    "provenance",
+    "claims_supported",
+    "claims_not_supported",
+    "review_question",
+    "citation_text"
+  ],
+  "properties": {
+    "schema": { "const": "trialdiff.evidence_record" },
+    "evidence_version": { "type": "integer", "minimum": 1 },
+    "event_id": { "$ref": "#/$defs/eventId" },
+    "trial": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nct_id", "clinicaltrials_gov_url"],
+      "properties": {
+        "nct_id": { "$ref": "#/$defs/nctId" },
+        "clinicaltrials_gov_url": { "type": "string", "format": "uri" }
+      }
+    },
+    "versions": { "$ref": "#/$defs/versions" },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "severity_pre_timing",
+        "severity",
+        "triage_label",
+        "calibration_status",
+        "category",
+        "categories",
+        "event_classes",
+        "timing_context",
+        "deterministic_rules",
+        "value_signals",
+        "triage_rule_set_hash",
+        "event_class_rule_set_hash",
+        "rule_set_hash"
+      ],
+      "properties": {
+        "severity_pre_timing": { "$ref": "#/$defs/severity" },
+        "severity": { "$ref": "#/$defs/severity" },
+        "triage_label": { "$ref": "#/$defs/severity" },
+        "calibration_status": { "const": "uncalibrated" },
+        "category": { "type": "string", "minLength": 1 },
+        "categories": { "type": "array", "items": { "type": "string" } },
+        "event_classes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "timing_context": { "$ref": "#/$defs/timingContext" },
+        "deterministic_rules": { "type": "array", "items": { "type": "string" } },
+        "value_signals": { "type": "array", "items": { "type": "object" } },
+        "triage_rule_set_hash": {
+          "anyOf": [{ "$ref": "#/$defs/sha256" }, { "const": "" }]
+        },
+        "event_class_rule_set_hash": { "$ref": "#/$defs/sha256" },
+        "rule_set_hash": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "changed_paths": { "$ref": "#/$defs/changedPaths" },
+    "patch": { "$ref": "#/$defs/patch" },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "patch_hash",
+        "patch_source",
+        "patch_source_url",
+        "patch_raw_hash",
+        "from_snapshot_hash",
+        "to_snapshot_hash",
+        "materiality_event_hash"
+      ],
+      "properties": {
+        "patch_hash": { "$ref": "#/$defs/sha256" },
+        "patch_source": { "type": "string", "minLength": 1 },
+        "patch_source_url": { "type": "string" },
+        "patch_raw_hash": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "const": "" }] },
+        "from_snapshot_hash": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+        "to_snapshot_hash": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+        "materiality_event_hash": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "const": "" }] }
+      }
+    },
+    "claims_supported": { "$ref": "#/$defs/claims" },
+    "claims_not_supported": { "$ref": "#/$defs/claims" },
+    "review_question": { "type": "string", "minLength": 1 },
+    "citation_text": { "type": "string", "minLength": 1 }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "nctId": { "type": "string", "pattern": "^NCT[0-9]{8}$" },
+    "eventId": { "type": "string", "pattern": "^evt_NCT[0-9]{8}_v[0-9]+_v[0-9]+_[0-9a-f]{12}$" },
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low", "ignore", "uncategorized"]
+    },
+    "timingContext": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": ["pre_recruitment", "early_recruitment", "late_recruitment", "post_recruitment", "unknown"]
+        },
+        { "type": "null" }
+      ]
+    },
+    "versions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from_version", "to_version"],
+      "properties": {
+        "from_version": { "type": "integer", "minimum": 0 },
+        "to_version": { "type": "integer", "minimum": 1 },
+        "submitted_date": { "anyOf": [{ "type": "string" }, { "type": "null" }] }
+      }
+    },
+    "changedPaths": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "pattern": "^/" }
+    },
+    "patch": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["op", "path"],
+        "properties": {
+          "op": { "type": "string", "enum": ["add", "remove", "replace", "move", "copy", "test"] },
+          "path": { "type": "string" }
+        }
+      }
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}
