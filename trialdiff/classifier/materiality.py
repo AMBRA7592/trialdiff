@@ -15,6 +15,10 @@ from trialdiff.provenance import Provenance, sha256_json, utc_now_iso
 
 SEVERITY_RANK = {"ignore": 0, "low": 1, "medium": 2, "high": 3, "critical": 4}
 RANK_SEVERITY = {rank: severity for severity, rank in SEVERITY_RANK.items()}
+# Intentionally empty since the v0.2.1 rule tightening: blanket timing
+# escalation is disabled, so severity always equals severity_pre_timing.
+# See V0.2.1_RULE_TIGHTENING_DIAGNOSTIC.md. The mechanism is kept so a
+# future calibrated rule set can re-enable escalation per category.
 TIMING_SENSITIVE_CATEGORIES: set[str] = set()
 OUTCOME_CHANGE_CATEGORIES = {"primary_outcome_change", "secondary_outcome_change"}
 TIMELINE_RULE_CATEGORY = "timeline_shift"
@@ -77,7 +81,12 @@ class ClassifierRule:
         if not match_path(self.path_pattern, context.path):
             return False
         if "in" in self.value_filter:
-            return context.new_value in set(self.value_filter["in"])
+            try:
+                return context.new_value in set(self.value_filter["in"])
+            except TypeError:
+                # Unhashable new values (dicts/lists) can never equal the
+                # scalar values a value_filter enumerates.
+                return False
         return True
 
 
@@ -100,6 +109,12 @@ class MaterialityEvent:
     rule_set_hash: str
 
     def as_dict(self) -> dict[str, Any]:
+        return self.content_dict() | {"created_at": self.created_at}
+
+    def content_dict(self) -> dict[str, Any]:
+        # The deterministic content of the event: everything except the
+        # wall-clock created_at stamp. Hashes must be computed over this dict
+        # so that re-classifying identical inputs reproduces identical hashes.
         return {
             "nct_id": self.nct_id,
             "from_version": self.from_version,
@@ -114,7 +129,6 @@ class MaterialityEvent:
             "deterministic_rules": self.deterministic_rules,
             "value_signals": self.value_signals,
             "needs_human_review": self.needs_human_review,
-            "created_at": self.created_at,
             "rule_set_hash": self.rule_set_hash,
         }
 
@@ -616,7 +630,7 @@ def apply_timing_modifier(severity: str, timing_context: str, category: str) -> 
 
 
 def provenance_for_event(event: MaterialityEvent) -> Provenance:
-    payload = event.as_dict()
+    payload = event.content_dict()
     return Provenance.from_payload(
         source=Source.DERIVED_CLASSIFIER,
         source_url="trialdiff://classifier/materiality",
