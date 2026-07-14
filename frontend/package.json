@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host 0.0.0.0",
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
@@ -10,14 +13,14 @@
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check"
   },
   "dependencies": {
-    "@astrojs/vercel": "latest",
-    "astro": "latest",
-    "@lucide/astro": "latest",
-    "postgres": "latest"
+    "@astrojs/vercel": "^10.0.7",
+    "@lucide/astro": "^1.16.0",
+    "astro": "^6.3.6",
+    "postgres": "^3.4.9"
   },
   "devDependencies": {
-    "@astrojs/check": "latest",
-    "@types/node": "latest",
-    "typescript": "latest"
+    "@astrojs/check": "^0.9.9",
+    "@types/node": "^20.19.41",
+    "typescript": "^5.9.3"
   }
 }
