@@ -17,3 +17,10 @@ ClinicalTrials.gov registry data, which is produced by the U.S. National
 Library of Medicine and study sponsors and is not itself subject to this
 license. This license covers the TrialDiff-generated compilation, structure,
 classifications, and metadata.
+
+Registry contact data: frozen evidence-record packages cite registry
+content verbatim and may therefore contain sponsor- and site-published
+contact details (names, emails, phones) inside cited patches; those files
+are hash-pinned and are not modified. The calibration review packages —
+which are analysis inputs, not cited evidence — had such contact data
+redacted on 2026-07-14 (see `CALIBRATION_DATA.md`).

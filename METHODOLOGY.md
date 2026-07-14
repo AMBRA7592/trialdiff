@@ -37,7 +37,10 @@ decision to stop:
 
 Supporting data for the arc (root `CALIBRATION_*` files): reviewer outputs,
 blinded review packages, samples, and the unblinding-key crosswalks. These
-are anchored by `MANIFEST.calibration.sha256`.
+are anchored by `MANIFEST.calibration.sha256` and indexed — with blinding
+status and the 2026-07-14 personal-data redaction record — in
+`CALIBRATION_DATA.md`. Reviewer-apparatus provenance (what is filed, what
+is prose-only, what was never recorded) is in `CALIBRATION_REVIEWERS.md`.
 
 ## The data packages
 
