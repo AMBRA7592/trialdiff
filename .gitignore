@@ -33,3 +33,7 @@ venv/
 
 # Local caches
 .cache/
+
+# Python build artifacts
+build/
+*.egg-info/
