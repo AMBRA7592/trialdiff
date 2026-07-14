@@ -11,6 +11,7 @@ from trialdiff.corpus import select_breast_cancer_corpus, write_corpus
 from trialdiff.db import TrialDiffStore, connect, init_db
 from trialdiff.evidence import EVIDENCE_VERSION, generate_evidence_records
 from trialdiff.ingest import ingest_nct_ids
+from trialdiff.verify import verify_record_file
 
 
 def read_nct_ids(args: argparse.Namespace) -> list[str]:
@@ -114,7 +115,14 @@ def cmd_inspect(args: argparse.Namespace) -> int:
                    value_signals_json, changed_paths_json
             FROM materiality_events
             WHERE nct_id=?
-            ORDER BY from_version, to_version, severity DESC
+            ORDER BY from_version, to_version,
+              CASE severity
+                WHEN 'critical' THEN 4
+                WHEN 'high' THEN 3
+                WHEN 'medium' THEN 2
+                WHEN 'low' THEN 1
+                ELSE 0
+              END DESC
             """,
             (args.nct,),
         ).fetchall()
@@ -185,6 +193,34 @@ def cmd_generate_evidence(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_verify(args: argparse.Namespace) -> int:
+    failures = 0
+    for raw_path in args.paths:
+        path = Path(raw_path)
+        targets = sorted(path.glob("*.json")) if path.is_dir() else [path]
+        if not targets:
+            print(f"{path}: no .json records found")
+            failures += 1
+            continue
+        for target in targets:
+            result = verify_record_file(target)
+            status = "PASS" if result.ok else "FAIL"
+            print(f"{status}\t{target}\tschema={result.schema}")
+            for name, passed, detail in result.checks:
+                marker = "ok" if passed else "MISMATCH"
+                print(f"  {name}: {marker}" + (f" ({detail})" if detail and not passed else ""))
+            if args.verbose:
+                for name, passed, detail in result.checks:
+                    if passed and detail:
+                        print(f"  {name}: {detail}")
+                for note in result.notes:
+                    print(f"  note: {note}")
+            if not result.ok:
+                failures += 1
+    print(f"verified={'PASS' if failures == 0 else 'FAIL'}\tfailures={failures}")
+    return 0 if failures == 0 else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="trialdiff")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -235,6 +271,18 @@ def build_parser() -> argparse.ArgumentParser:
     evidence_parser.add_argument("--force", action="store_true", help="Delete existing evidence records before generating.")
     evidence_parser.add_argument("--evidence-version", type=int, default=EVIDENCE_VERSION)
     evidence_parser.set_defaults(func=cmd_generate_evidence)
+
+    verify_parser = subparsers.add_parser(
+        "verify",
+        help="Verify exported Evidence Record files against their own hashes, offline.",
+    )
+    verify_parser.add_argument(
+        "paths",
+        nargs="+",
+        help="Record .json files or directories of records to verify.",
+    )
+    verify_parser.add_argument("--verbose", action="store_true", help="Print passing check details too.")
+    verify_parser.set_defaults(func=cmd_verify)
 
     return parser
 
