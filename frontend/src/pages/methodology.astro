@@ -58,14 +58,16 @@ export const prerender = true;
     <section class="panel panel-pad method-section" id="corpus-scope">
       <h2>Corpus Scope</h2>
       <p>
-        The live deployment renders the regenerated 100-study breast-cancer corpus under the v0.2.1 rule generation:
-        100 trials, 4,485 adjacent patches, 868 materiality events, and 483 Evidence Records. The corpus is still
-        selected for amendment density and demonstration value. It is not a representative sample of
-        ClinicalTrials.gov, oncology trials, or breast-cancer trials generally.
+        The regenerated 100-study breast-cancer corpus contains 100 trials, 4,485 adjacent patches, and 868
+        materiality events under the v0.2.1 triage-rule generation. Evidence Record counts are generation-specific:
+        the intermediate materiality-filter population contained 483 records, the published v0.1.1 event-class
+        generation contains 100 records and carries erratum E1, and the corrected v0.1.2 generation must validate at
+        97 records before promotion.
       </p>
       <p>
-        Counts on the dashboard are therefore evidence-engine outputs for this bounded corpus, not population
-        estimates.
+        The corpus was selected for amendment density and demonstration value. Dashboard counts are evidence-engine
+        outputs for this bounded corpus, not population estimates for ClinicalTrials.gov, oncology trials, or
+        breast-cancer trials generally.
       </p>
       <p>
         The frozen v0.1-alpha package remains a historical 25-study slice (25 trials, 280 adjacent patches, 122

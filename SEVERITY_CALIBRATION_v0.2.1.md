@@ -59,6 +59,22 @@ The sample was drawn with seed `trialdiff-v0.2.1-recert-2026-06-18`.
 The review package was shuffled with seed
 `trialdiff-v0.2.1-review-package-2026-06-18`.
 
+### Protocol deviation
+
+`V0.2.1_DIAGNOSTIC_PLAN.md` prescribed the 21 unused high records from the
+25-study alpha as a distinct held-out high stratum, alongside fresh records
+from the expanded corpus. The executed v0.2.1 sample instead drew 30 high
+records from the expanded 100-study corpus and did not preserve or report that
+21-record alpha holdout as its own stratum. It also retained the 11-record
+medium allocation used in v0.2 despite 217 medium candidates being available.
+This departure from the pre-registered re-certification design was not recorded
+at the time.
+
+The deviation limits any claim that v0.2.1 followed the planned
+re-certification design exactly. It does not rescue the calibration result:
+both filed reviewers failed the pre-registered critical gate on the executed
+fresh sample, and severity remains uncalibrated.
+
 ## Review Mechanism
 
 Two fresh reviewer contexts independently applied the refined rubric to the
