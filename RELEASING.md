@@ -149,7 +149,7 @@ Rules for v0.1.2 and later:
    (Zenodo → the v0.1.1 record → "New version"), so
    `10.5281/zenodo.20801956` keeps resolving to the latest corrected
    dataset. Include the erratum text in the version description and cite
-   the new implementation-pinned `event_class_rule_set_hash` (`c1215ef7…`).
+   the new implementation-pinned `event_class_rule_set_hash` (`07957f8b…`).
 3. Upload the v0.1.2 zip built from THIS repository. The exporter in section
    A copies the supporting files into `docs/`; the validator requires every
    package file to be listed in `MANIFEST.sha256`. Do not add files to the

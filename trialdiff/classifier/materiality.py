@@ -12,7 +12,7 @@ from trialdiff.classifier.timing import LATE_RECRUITMENT, POST_RECRUITMENT, UNKN
 from trialdiff.constants import Source
 from trialdiff.jsonpatch import MISSING, PatchValueContext, apply_patch as apply_json_patch, build_value_contexts, resolve_pointer
 from trialdiff.provenance import Provenance, sha256_json, utc_now_iso
-from trialdiff.ruleset import semantic_source_hash
+from trialdiff.ruleset import implementation_source_hash
 
 
 SEVERITY_RANK = {"ignore": 0, "low": 1, "medium": 2, "high": 3, "critical": 4}
@@ -22,7 +22,7 @@ SEVERITY_RANK = {"ignore": 0, "low": 1, "medium": 2, "high": 3, "critical": 4}
 V021_TRIAGE_RULE_TABLE_HASH = "6fc6d7533e740cc38ca0ba0425927ade66f2f90b067963c5cf52d08a88f8d883"
 _TRIALDIFF_DIR = Path(__file__).resolve().parents[1]
 _CLASSIFIER_DIR = Path(__file__).resolve().parent
-TRIAGE_IMPLEMENTATION_HASH = semantic_source_hash(
+TRIAGE_IMPLEMENTATION_HASH = implementation_source_hash(
     {
         "trialdiff.classifier.materiality": Path(__file__),
         "trialdiff.classifier.pathmatch": _CLASSIFIER_DIR / "pathmatch.py",

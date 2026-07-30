@@ -5,7 +5,7 @@ from typing import Any
 
 from trialdiff.jsonpatch import JsonPatchError, apply_patch
 from trialdiff.provenance import sha256_json
-from trialdiff.ruleset import semantic_source_hash
+from trialdiff.ruleset import implementation_source_hash
 
 
 EVENT_CLASS_VERSION = "trialdiff.event_classes.v0.2"
@@ -45,7 +45,7 @@ EVENT_CLASS_DEFINITIONS: dict[str, str] = {
 }
 
 _TRIALDIFF_DIR = Path(__file__).resolve().parent
-EVENT_CLASS_IMPLEMENTATION_HASH = semantic_source_hash(
+EVENT_CLASS_IMPLEMENTATION_HASH = implementation_source_hash(
     {
         "trialdiff.event_classes": Path(__file__),
         "trialdiff.jsonpatch": _TRIALDIFF_DIR / "jsonpatch.py",

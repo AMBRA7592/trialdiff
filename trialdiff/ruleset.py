@@ -1,22 +1,22 @@
 from __future__ import annotations
 
-import ast
 import hashlib
 import json
 from pathlib import Path
 from typing import Mapping
 
 
-def semantic_source_hash(sources: Mapping[str, Path]) -> str:
-    """Hash normalized Python ASTs without leaking machine-local paths."""
+def implementation_source_hash(sources: Mapping[str, Path]) -> str:
+    """Hash normalized source bytes without leaking machine-local paths."""
 
     normalized = []
     for label, path in sorted(sources.items()):
-        tree = ast.parse(path.read_text(encoding="utf-8"), filename=label)
+        source = path.read_text(encoding="utf-8")
+        source = source.replace("\r\n", "\n").replace("\r", "\n")
         normalized.append(
             {
                 "module": label,
-                "ast": ast.dump(tree, annotate_fields=True, include_attributes=False),
+                "source_sha256": hashlib.sha256(source.encode("utf-8")).hexdigest(),
             }
         )
     payload = json.dumps(normalized, ensure_ascii=True, sort_keys=True, separators=(",", ":"))

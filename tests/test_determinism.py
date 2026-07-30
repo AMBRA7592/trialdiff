@@ -18,16 +18,16 @@ from trialdiff.classifier.materiality import (
 )
 from trialdiff.db import connect, init_db
 from trialdiff.event_classes import EVENT_CLASS_RULE_SET_HASH, combined_rule_set_hash
-from trialdiff.ruleset import semantic_source_hash
+from trialdiff.ruleset import implementation_source_hash
 
 
 # Golden hashes pin the active rule semantics. If one of these assertions
 # fails, the rule set changed: bump the relevant version string, record the
 # old->new hash transition in ERRATA.md, and only then update the constant.
-GOLDEN_EVENT_CLASS_RULE_SET_HASH = "c1215ef79e6e5a01afb97e42ea4f523983ed6a9712f5ead4996f1ddc3d48989e"
+GOLDEN_EVENT_CLASS_RULE_SET_HASH = "07957f8b90549d4f42387f51b471ecde9901b6db63bbc27b84c73631603407c0"
 GOLDEN_TRIAGE_RULE_TABLE_HASH = "6fc6d7533e740cc38ca0ba0425927ade66f2f90b067963c5cf52d08a88f8d883"
-GOLDEN_TRIAGE_RULE_SET_HASH = "9b175fb9ff3b44601b987139419a776f93c67810aed1214bc2cab6c990becb03"
-GOLDEN_COMBINED_RULE_SET_HASH = "2abb30496028a384adfbf021b148a887e1ee6689d0b2efe5c4dd643c8f36d882"
+GOLDEN_TRIAGE_RULE_SET_HASH = "af5e5835e00a5fcfe2a17fd02b5fc244c2564104f93f78a1d77d7889f12a178b"
+GOLDEN_COMBINED_RULE_SET_HASH = "318445b9ad266f51fd10ef378645c753ba7a098e3e4395c3c457750dc5f88d86"
 
 # Historical hashes carried by the frozen packages; they must never be
 # reused for new generations after a definition change.
@@ -43,13 +43,13 @@ def load_active_rules(connection) -> list[ClassifierRule]:
 
 
 class GoldenHashTests(unittest.TestCase):
-    def test_semantic_source_hash_changes_with_executable_behavior(self) -> None:
+    def test_implementation_source_hash_changes_with_executable_behavior(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
             source = Path(tempdir) / "predicate.py"
             source.write_text("def predicate():\n    return True\n", encoding="utf-8")
-            first = semantic_source_hash({"predicate": source})
+            first = implementation_source_hash({"predicate": source})
             source.write_text("def predicate():\n    return False\n", encoding="utf-8")
-            second = semantic_source_hash({"predicate": source})
+            second = implementation_source_hash({"predicate": source})
         self.assertNotEqual(first, second)
 
     def test_event_class_rule_set_hash_is_pinned(self) -> None:
