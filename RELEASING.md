@@ -131,6 +131,16 @@ grep -iE '^(etag|x-trialdiff-canonical-hash):' /tmp/trialdiff.headers
 3. Root-manifest policy (documentation vs record entries) is defined in
    `ERRATA.md`.
 
+### Implementation-hash maintenance
+
+The implementation hashes cover exact normalized source bytes in these files:
+`trialdiff/event_classes.py`, `trialdiff/classifier/materiality.py`,
+`trialdiff/classifier/pathmatch.py`, `trialdiff/classifier/timing.py`,
+`trialdiff/jsonpatch.py`, and `trialdiff/ruleset.py`. Any byte edit, including
+a comment-only edit, intentionally rotates at least one published rule hash.
+Before merging such an edit, update the golden pins and record the transition
+in `ERRATA.md` and `VERSIONS.md`; regenerate records for the affected release.
+
 ## D. Tags, releases, DOI
 
 Zenodo state (already published, from `AMBRA7592/trialdiff-public`):

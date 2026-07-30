@@ -182,6 +182,7 @@ See `EVIDENCE_RECORD_PRIMITIVE.md`, `SEVERITY_CALIBRATION_v0.2.1.md`, and
 
 ## License and Citation
 
-Code is licensed under Apache-2.0 (`LICENSE`); datasets under CC BY 4.0
+Code and functional schemas are licensed under Apache-2.0 (`LICENSE`);
+datasets and project prose documentation are licensed under CC BY 4.0
 (`DATA_LICENSE.md`). Cite via `CITATION.cff`, or cite an individual record
 by its `event_id` and embedded `citation_text`.

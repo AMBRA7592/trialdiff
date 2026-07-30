@@ -2,12 +2,16 @@
 
 The datasets in this repository — `records/`, `event_class_records_v0.1.1/`
 (and the historical `event_class_records_v0.1/` stub), the `CALIBRATION_*`
-files, and `corpora/` — are published under the
+files, and `corpora/` — and the project prose documentation are published under the
 [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
 license.
 
-Code (the `trialdiff/` package, `scripts/`, `frontend/`, `postgres/`) is
-licensed separately under Apache-2.0; see `LICENSE`.
+Project prose includes the Evidence Record primitive, methodology, errata,
+corpus and calibration reports, release notes, and archived documentation.
+
+Code and functional schemas (the `trialdiff/` package, `scripts/`,
+`frontend/`, `postgres/`, and `schemas/`) are licensed separately under
+Apache-2.0; see `LICENSE`.
 
 Attribution: cite the repository (see `CITATION.cff`) or an individual
 Evidence Record by its `event_id` and `citation_text`.
