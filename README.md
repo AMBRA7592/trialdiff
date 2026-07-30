@@ -40,10 +40,12 @@ The live demo is backed by Neon Postgres and renders the **regenerated
 - 100 breast-cancer-related interventional trials
 - 4,485 adjacent version patches
 - 868 materiality events (87 critical / 396 high / 217 medium / 168 low triage)
-- 483 generated Evidence Records
+- 100 event-class Evidence Records from the published v0.1.1 generation
 
-See `CORPUS.md` for how this corpus relates to the earlier snapshots
-(including the 25-study alpha corpus below).
+The live 100-record layer carries erratum E1 until the corrected v0.1.2
+replacement is deployed. The historical count of 483 refers to the earlier
+materiality-filter inclusion policy, not the current event-class criterion.
+See `CORPUS.md` for the full population/version reconciliation.
 
 ## Frozen Packages
 

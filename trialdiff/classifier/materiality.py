@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import date
 import json
+from pathlib import Path
 from sqlite3 import Row
 from typing import Any
 
@@ -11,14 +12,31 @@ from trialdiff.classifier.timing import LATE_RECRUITMENT, POST_RECRUITMENT, UNKN
 from trialdiff.constants import Source
 from trialdiff.jsonpatch import MISSING, PatchValueContext, apply_patch as apply_json_patch, build_value_contexts, resolve_pointer
 from trialdiff.provenance import Provenance, sha256_json, utc_now_iso
+from trialdiff.ruleset import semantic_source_hash
 
 
 SEVERITY_RANK = {"ignore": 0, "low": 1, "medium": 2, "high": 3, "critical": 4}
-# Hash of the committed v0.2.1 rule seeds (migrations 002/003/005) as loaded
-# from a fresh database. Since init_db no longer replays migrations on every
-# command, drift in the rule table is permanent — callers compare against
-# this pin to make drift visible instead of silently re-converged.
-V021_TRIAGE_RULE_SET_HASH = "6fc6d7533e740cc38ca0ba0425927ade66f2f90b067963c5cf52d08a88f8d883"
+# Hash of the committed v0.2.1 rule-table rows (migrations 002/003/005) as
+# loaded from a fresh database. The full rule-set hash below also pins the
+# executable value-signal, suppression, path-match, timing, and patch logic.
+V021_TRIAGE_RULE_TABLE_HASH = "6fc6d7533e740cc38ca0ba0425927ade66f2f90b067963c5cf52d08a88f8d883"
+_TRIALDIFF_DIR = Path(__file__).resolve().parents[1]
+_CLASSIFIER_DIR = Path(__file__).resolve().parent
+TRIAGE_IMPLEMENTATION_HASH = semantic_source_hash(
+    {
+        "trialdiff.classifier.materiality": Path(__file__),
+        "trialdiff.classifier.pathmatch": _CLASSIFIER_DIR / "pathmatch.py",
+        "trialdiff.classifier.timing": _CLASSIFIER_DIR / "timing.py",
+        "trialdiff.jsonpatch": _TRIALDIFF_DIR / "jsonpatch.py",
+        "trialdiff.ruleset": _TRIALDIFF_DIR / "ruleset.py",
+    }
+)
+V021_TRIAGE_RULE_SET_HASH = sha256_json(
+    {
+        "rule_table_hash": V021_TRIAGE_RULE_TABLE_HASH,
+        "implementation_hash": TRIAGE_IMPLEMENTATION_HASH,
+    }
+)
 RANK_SEVERITY = {rank: severity for severity, rank in SEVERITY_RANK.items()}
 # Intentionally empty since the v0.2.1 rule tightening: blanket timing
 # escalation is disabled, so severity always equals severity_pre_timing.
@@ -647,7 +665,7 @@ def provenance_for_event(event: MaterialityEvent) -> Provenance:
     )
 
 
-def rule_set_hash(rules: list[ClassifierRule]) -> str:
+def rule_table_hash(rules: list[ClassifierRule]) -> str:
     payload = [
         {
             "rule_key": rule.rule_key,
@@ -662,3 +680,12 @@ def rule_set_hash(rules: list[ClassifierRule]) -> str:
         for rule in sorted(rules, key=lambda item: item.rule_key)
     ]
     return sha256_json(payload)
+
+
+def rule_set_hash(rules: list[ClassifierRule]) -> str:
+    return sha256_json(
+        {
+            "rule_table_hash": rule_table_hash(rules),
+            "implementation_hash": TRIAGE_IMPLEMENTATION_HASH,
+        }
+    )

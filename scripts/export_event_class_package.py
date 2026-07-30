@@ -33,6 +33,13 @@ def main() -> int:
         help="Package version label recorded in VALIDATION.md (e.g. v0.1.2). Explicit on purpose: "
         "the version stamped into a release document must be a reviewed input, not a guess.",
     )
+    parser.add_argument(
+        "--doc",
+        action="append",
+        default=[],
+        metavar="PATH",
+        help="Supporting document copied into docs/ and covered by MANIFEST.sha256; repeat as needed.",
+    )
     parser.add_argument("--force", action="store_true", help="Replace an existing package directory.")
     args = parser.parse_args()
 
@@ -74,6 +81,7 @@ def main() -> int:
             raise SystemExit(f"{event_id}: exported bytes do not match stored canonical_hash")
         summaries.append(summarize_record(record, stored_hash=row["canonical_hash"]))
 
+    supporting_docs = copy_supporting_docs(package_dir, [Path(value) for value in args.doc])
     stats = package_stats(summaries)
     validation_note = build_validation_note(
         db_path=db_path,
@@ -83,6 +91,7 @@ def main() -> int:
         or f"python3 -m trialdiff.cli generate-evidence --db {DB_PLACEHOLDER} --force",
         summaries=summaries,
         stats=stats,
+        supporting_docs=supporting_docs,
     )
     validation_path = package_dir / "VALIDATION.md"
     validation_path.write_text(validation_note, encoding="utf-8")
@@ -117,6 +126,25 @@ def expected_stats_sidecar(stats: dict[str, Any]) -> dict[str, Any]:
         "showcase": stats["showcase"],
         "note": "Frozen-package integrity expectations describing the package as exported.",
     }
+
+
+def copy_supporting_docs(package_dir: Path, source_paths: list[Path]) -> list[str]:
+    if not source_paths:
+        return []
+    docs_dir = package_dir / "docs"
+    docs_dir.mkdir()
+    copied: list[str] = []
+    seen_names: set[str] = set()
+    for source in source_paths:
+        if not source.is_file():
+            raise SystemExit(f"supporting document does not exist: {source}")
+        if source.name in seen_names:
+            raise SystemExit(f"duplicate supporting-document filename: {source.name}")
+        seen_names.add(source.name)
+        target = docs_dir / source.name
+        shutil.copyfile(source, target)
+        copied.append(target.relative_to(package_dir).as_posix())
+    return sorted(copied)
 
 
 def select_records(connection: sqlite3.Connection) -> list[sqlite3.Row]:
@@ -191,6 +219,7 @@ def build_validation_note(
     generation_command: str,
     summaries: list[dict[str, Any]],
     stats: dict[str, Any],
+    supporting_docs: list[str],
 ) -> str:
     class_counts = "\n".join(
         f"- `{name}`: {count}" for name, count in sorted(stats["class_counts"].items())
@@ -211,6 +240,14 @@ def build_validation_note(
     showcase_summary = next(
         summary for summary in summaries if summary["event_id"] == stats["showcase"]["event_id"]
     )
+    doc_arguments = " ".join(
+        f"--doc <source_for_{Path(path).name}>" for path in supporting_docs
+    )
+    doc_listing = (
+        "\n".join(f"- `{path}`" for path in supporting_docs)
+        if supporting_docs
+        else "- None bundled in this export."
+    )
     return f"""# TrialDiff Event-Class Evidence Records {package_version}
 
 This package is a separate event-class Evidence Record export. It does not modify the
@@ -230,7 +267,8 @@ frozen TrialDiff v0.1-alpha `records/` package or its manifest.
 - Export command:
 
 ```bash
-python3 scripts/export_event_class_package.py --db {DB_PLACEHOLDER} --out <package_dir> --corpus-label {corpus_label} --force
+python3 scripts/export_event_class_package.py --db {DB_PLACEHOLDER} --out <package_dir> \\
+  --corpus-label {corpus_label} --package-version {package_version} {doc_arguments} --force
 ```
 
 - Validation command:
@@ -267,18 +305,20 @@ Overlap counts:
 
 {overlap_counts}
 
-## Determinism Evidence
+## Export Integrity Checks
 
-- Real generation was checked by regenerating Evidence Records from the 100-study
-  working database and comparing canonical payloads across runs.
-- The final comparison was byte-identical after sorting records by
-  `(nct_id, from_version, to_version, event_id)`.
 - Export writes each record as the exact canonical JSON bytes stored in
   `evidence_records.canonical_json`.
 - For every exported record, the file SHA-256 equals the stored
   `evidence_records.canonical_hash`.
-- Re-exporting the package produced byte-identical files.
-- `MANIFEST.sha256` verifies the exported records and this validation note.
+- `MANIFEST.sha256` covers every package file except the manifest itself.
+- This export does not, by itself, attest independent regeneration or
+  byte-identical re-export. Any such release claim requires separately recorded,
+  manifest-attested evidence produced by the operator procedure in `RELEASING.md`.
+
+## Supporting Documents
+
+{doc_listing}
 
 ## Multi-Class Worked Record
 
@@ -299,11 +339,11 @@ deposit and DOI remain TODO.
 
 
 def build_manifest_entries(package_dir: Path) -> list[tuple[str, str]]:
-    paths = [
-        package_dir / "VALIDATION.md",
-        package_dir / "expected_stats.json",
-        *sorted((package_dir / "records").glob("*.json")),
-    ]
+    paths = sorted(
+        path
+        for path in package_dir.rglob("*")
+        if path.is_file() and path != package_dir / "MANIFEST.sha256"
+    )
     entries: list[tuple[str, str]] = []
     for path in paths:
         relative_path = path.relative_to(package_dir).as_posix()

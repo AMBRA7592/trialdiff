@@ -31,9 +31,9 @@ manifests).
 | `classification.timing_context` | string\|null | pre/early/late/post recruitment at the FROM version |
 | `classification.deterministic_rules` | string[] | Rule keys that fired |
 | `classification.value_signals` | object[] | Value-derived signals (timeline deltas, enrollment changes, whyStopped emptiness…) |
-| `classification.rule_set_hash` | string | Combined hash: event-class definitions + triage rule component |
-| `classification.event_class_rule_set_hash` | string | Hash of the event-class prose definitions (`EVENT_CLASS_RULE_SET_HASH`) |
-| `classification.triage_rule_set_hash` | string | Hash of the active DB classifier rules |
+| `classification.rule_set_hash` | string | Combined hash: event-class rule set + triage rule component |
+| `classification.event_class_rule_set_hash` | string | Hash of the event-class version, prose definitions, and normalized executable source digest |
+| `classification.triage_rule_set_hash` | string | Hash of the active DB rule-table rows plus normalized executable source for value signals, suppression, path matching, timing, and patch handling |
 | `changed_paths` | string[] | Sorted JSON Pointer paths changed by the patch |
 | `patch` | object[] | The registry's own JSON Patch between the two versions (replayable) |
 | `provenance.patch_hash` | string | `sha256(canonical_json(patch))` — re-derivable from `patch` |

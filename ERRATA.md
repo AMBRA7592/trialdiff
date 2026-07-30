@@ -70,18 +70,26 @@ definitions were updated accordingly, which produces new rule-set hashes:
 | Hash | Frozen v0.1/v0.1.1 generation | Corrected generation |
 | --- | --- | --- |
 | `EVENT_CLASS_VERSION` | `trialdiff.event_classes.v0.1` | `trialdiff.event_classes.v0.2` |
-| `event_class_rule_set_hash` | `a6734d37c1adc34c5c3b770ec40fbedcf8e8e2fa4bc9d56d4eab55d2e5867c4e` | `b57fd65645a5ae9ab69908e3f07ddaaeb1227049e4aa58af1b48d6478c94d937` |
-| combined `rule_set_hash` | `fda3c8331ce1074d3566d02a035a60d1b422f1bfcfac8798072414cccaf3f8a2` | `3761e1907c3d170c080ec074869a6883acbfa64c22791142b07b0d3b3cd4d861` |
-| `triage_rule_set_hash` | `6fc6d7533e740cc38ca0ba0425927ade66f2f90b067963c5cf52d08a88f8d883` | unchanged |
+| `event_class_rule_set_hash` | `a6734d37c1adc34c5c3b770ec40fbedcf8e8e2fa4bc9d56d4eab55d2e5867c4e` | `c1215ef79e6e5a01afb97e42ea4f523983ed6a9712f5ead4996f1ddc3d48989e` |
+| combined `rule_set_hash` | `fda3c8331ce1074d3566d02a035a60d1b422f1bfcfac8798072414cccaf3f8a2` | `2abb30496028a384adfbf021b148a887e1ee6689d0b2efe5c4dd643c8f36d882` |
+| `triage_rule_set_hash` | `6fc6d7533e740cc38ca0ba0425927ade66f2f90b067963c5cf52d08a88f8d883` | `9b175fb9ff3b44601b987139419a776f93c67810aed1214bc2cab6c990becb03` |
+
+The corrected hashes pin normalized executable source in addition to the
+declarative definitions and rule-table rows. This closes the earlier gap in
+which implementation changes outside those declarative inputs could retain
+the same hash.
 
 Regression tests: `tests/test_event_classes.py` (missing-TO-record cases)
 and golden-hash pins in `tests/test_determinism.py`.
 
 Because the TO view is now derived when a snapshot is missing, sibling
-classes may shift slightly at regeneration (the secondary-outcome reindex
-exclusion now applies to snapshot-less rows, and enrollment zeroings
-evidenced only by the patch are now caught); exact corrected counts are
-part of the v0.1.2 regeneration.
+classes also changed: the secondary-outcome reindex exclusion now applies
+to snapshot-less rows, and enrollment zeroings evidenced by the patch are
+caught. An independent pre-release regeneration over a copy of the frozen
+4,485-patch input yielded 97 records, 54 represented trials, and 106
+memberships (class counts 10 / 9 / 3 / 4 / 80; overlaps 88 / 9 / 0).
+The operator release must reproduce those exact invariants before v0.1.2
+is published.
 
 **Status of the frozen packages.** `event_class_records_v0.1.1` remains
 byte-identical and manifest-verified as the historical record of what the

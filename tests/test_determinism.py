@@ -14,17 +14,20 @@ from trialdiff.classifier.materiality import (
     classify_patch,
     provenance_for_event,
     rule_set_hash,
+    rule_table_hash,
 )
 from trialdiff.db import connect, init_db
 from trialdiff.event_classes import EVENT_CLASS_RULE_SET_HASH, combined_rule_set_hash
+from trialdiff.ruleset import semantic_source_hash
 
 
 # Golden hashes pin the active rule semantics. If one of these assertions
 # fails, the rule set changed: bump the relevant version string, record the
 # old->new hash transition in ERRATA.md, and only then update the constant.
-GOLDEN_EVENT_CLASS_RULE_SET_HASH = "b57fd65645a5ae9ab69908e3f07ddaaeb1227049e4aa58af1b48d6478c94d937"
-GOLDEN_TRIAGE_RULE_SET_HASH = "6fc6d7533e740cc38ca0ba0425927ade66f2f90b067963c5cf52d08a88f8d883"
-GOLDEN_COMBINED_RULE_SET_HASH = "3761e1907c3d170c080ec074869a6883acbfa64c22791142b07b0d3b3cd4d861"
+GOLDEN_EVENT_CLASS_RULE_SET_HASH = "c1215ef79e6e5a01afb97e42ea4f523983ed6a9712f5ead4996f1ddc3d48989e"
+GOLDEN_TRIAGE_RULE_TABLE_HASH = "6fc6d7533e740cc38ca0ba0425927ade66f2f90b067963c5cf52d08a88f8d883"
+GOLDEN_TRIAGE_RULE_SET_HASH = "9b175fb9ff3b44601b987139419a776f93c67810aed1214bc2cab6c990becb03"
+GOLDEN_COMBINED_RULE_SET_HASH = "2abb30496028a384adfbf021b148a887e1ee6689d0b2efe5c4dd643c8f36d882"
 
 # Historical hashes carried by the frozen packages; they must never be
 # reused for new generations after a definition change.
@@ -40,6 +43,15 @@ def load_active_rules(connection) -> list[ClassifierRule]:
 
 
 class GoldenHashTests(unittest.TestCase):
+    def test_semantic_source_hash_changes_with_executable_behavior(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            source = Path(tempdir) / "predicate.py"
+            source.write_text("def predicate():\n    return True\n", encoding="utf-8")
+            first = semantic_source_hash({"predicate": source})
+            source.write_text("def predicate():\n    return False\n", encoding="utf-8")
+            second = semantic_source_hash({"predicate": source})
+        self.assertNotEqual(first, second)
+
     def test_event_class_rule_set_hash_is_pinned(self) -> None:
         self.assertEqual(EVENT_CLASS_RULE_SET_HASH, GOLDEN_EVENT_CLASS_RULE_SET_HASH)
 
@@ -49,8 +61,12 @@ class GoldenHashTests(unittest.TestCase):
         self.assertNotEqual(EVENT_CLASS_RULE_SET_HASH, FROZEN_V011_EVENT_CLASS_RULE_SET_HASH)
 
     def test_module_pin_matches_golden_triage_hash(self) -> None:
-        from trialdiff.classifier.materiality import V021_TRIAGE_RULE_SET_HASH
+        from trialdiff.classifier.materiality import (
+            V021_TRIAGE_RULE_SET_HASH,
+            V021_TRIAGE_RULE_TABLE_HASH,
+        )
 
+        self.assertEqual(V021_TRIAGE_RULE_TABLE_HASH, GOLDEN_TRIAGE_RULE_TABLE_HASH)
         self.assertEqual(V021_TRIAGE_RULE_SET_HASH, GOLDEN_TRIAGE_RULE_SET_HASH)
 
     def test_fresh_database_reproduces_pinned_triage_rule_set_hash(self) -> None:
@@ -59,9 +75,12 @@ class GoldenHashTests(unittest.TestCase):
             init_db(db_path)
             connection = connect(db_path)
             try:
-                triage_hash = rule_set_hash(load_active_rules(connection))
+                active_rules = load_active_rules(connection)
+                table_hash = rule_table_hash(active_rules)
+                triage_hash = rule_set_hash(active_rules)
             finally:
                 connection.close()
+        self.assertEqual(table_hash, GOLDEN_TRIAGE_RULE_TABLE_HASH)
         self.assertEqual(triage_hash, GOLDEN_TRIAGE_RULE_SET_HASH)
         self.assertEqual(
             combined_rule_set_hash(triage_rule_set_hash=triage_hash),

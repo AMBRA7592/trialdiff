@@ -90,6 +90,11 @@ def verify_manifest(package_dir: Path, manifest_path: Path) -> None:
             expected_hash, relative_path = line.split(maxsplit=1)
         except ValueError as exc:
             raise SystemExit(f"{manifest_path}:{line_number}: malformed manifest line") from exc
+        relative = Path(relative_path)
+        if relative.is_absolute() or ".." in relative.parts:
+            raise SystemExit(f"{manifest_path}:{line_number}: unsafe manifest path {relative_path}")
+        if relative_path in seen_paths:
+            raise SystemExit(f"{manifest_path}:{line_number}: duplicate path {relative_path}")
         path = package_dir / relative_path
         if not path.exists():
             raise SystemExit(f"{manifest_path}:{line_number}: missing file {relative_path}")
@@ -101,10 +106,20 @@ def verify_manifest(package_dir: Path, manifest_path: Path) -> None:
     required_paths = {"VALIDATION.md", "expected_stats.json"} | {
         f"records/{path.name}" for path in (package_dir / "records").glob("*.json")
     }
-    missing = required_paths - seen_paths
-    extra = seen_paths - required_paths
-    if missing or extra:
-        raise SystemExit(f"manifest path mismatch: missing={sorted(missing)} extra={sorted(extra)}")
+    actual_paths = {
+        path.relative_to(package_dir).as_posix()
+        for path in package_dir.rglob("*")
+        if path.is_file() and path != manifest_path
+    }
+    missing_required = required_paths - seen_paths
+    unlisted = actual_paths - seen_paths
+    nonexistent = seen_paths - actual_paths
+    if missing_required or unlisted or nonexistent:
+        raise SystemExit(
+            "manifest path mismatch: "
+            f"missing_required={sorted(missing_required)} "
+            f"unlisted={sorted(unlisted)} nonexistent={sorted(nonexistent)}"
+        )
 
     record_lines = [
         line

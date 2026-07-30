@@ -45,4 +45,4 @@ historical accident.
 | Label | Hash | Status |
 | --- | --- | --- |
 | `trialdiff.event_classes.v0.1` | `a6734d37…` | Produced the v0.1/v0.1.1 packages; whyStopped predicate defect (E1) |
-| `trialdiff.event_classes.v0.2` | `b57fd656…` | Current at HEAD; the TO-version view is derived from the patch when no snapshot is stored, so all classes require observed evidence |
+| `trialdiff.event_classes.v0.2` | `c1215ef7…` | Current at HEAD; the TO-version view is derived from the patch when no snapshot is stored, and the hash pins normalized executable source as well as definitions |

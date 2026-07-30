@@ -13,7 +13,7 @@ An Evidence Record is a deterministic, claim-bounded object that asserts a bound
 - `record_id` — stable identifier, deterministically derived from the record's content. Serves as the citation key; identical inputs always yield the same id.
 - `source` — for each cited source: retrieval URL, content hash at the observed version, and version reference(s) (e.g. from/to).
 - `change` — canonical representation of what changed: the changed paths and their before/after values.
-- `ruleset_hash` — hash of the logic version that produced any derived fields. A logic change yields a new `ruleset_hash`, never a silent edit to existing records.
+- `ruleset_hash` — hash of the logic version that produced any derived fields. In TrialDiff this includes normalized executable-source digests as well as declarative definitions/rule rows. A logic change yields a new `ruleset_hash`, never a silent edit to existing records.
 - `event_classes` — deterministic set of factual class memberships for the bounded change event. A record is one-per-source-change and can carry multiple classes; class membership is not a priority ranking. The primitive permits an empty class set; TrialDiff's current reference implementation emits only records with at least one event class.
 - `triage_label` — deterministic classification of the change. Uncalibrated: a reproducible heuristic, not a validated priority.
 - `calibration_status` — status of any external validation for `triage_label`, e.g. `uncalibrated`.

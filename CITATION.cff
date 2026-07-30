@@ -9,7 +9,6 @@ authors:
   - family-names: Brandes
     given-names: Amadeus
     affiliation: Independent researcher
-    # TODO(owner): add ORCID if available.
 repository-code: "https://github.com/AMBRA7592/trialdiff"
 url: "https://trialdiff.vercel.app"
 license: Apache-2.0
