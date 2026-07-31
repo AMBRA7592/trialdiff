@@ -27,6 +27,7 @@ from trialdiff.provenance import canonical_json  # noqa: E402
 # immutable (ERRATA.md manifest policy); a change here is a defect.
 FROZEN_RECORDS_SECTION_SHA256 = {
     "event_class_records_v0.1.1": "742ffd5fcc23b5aa2b7710277135b68e4e626da199c96a44360eadccdc6b38fd",
+    "event_class_records_v0.1.2": "e465c68c76a9608e198166461ed6f2b960f9583aadce13f3ef9c55b00f950c45",
 }
 
 

@@ -3,7 +3,7 @@
 
 This gives anyone a runnable local demo without the private corpus
 databases: the committed ``records/*.json`` (frozen v0.1-alpha) and
-``event_class_records_v0.1.1/records/*.json`` files carry enough data to
+``event_class_records_v0.1.2/records/*.json`` files carry enough data to
 populate ``trials``, ``trial_versions``, ``trial_patches``,
 ``materiality_events``, and ``evidence_records``.
 
@@ -49,14 +49,14 @@ def main() -> int:
         "--source",
         action="append",
         help="Directory of record .json files. Repeatable. "
-        "Defaults to records/ and event_class_records_v0.1.1/records/.",
+        "Defaults to records/ and event_class_records_v0.1.2/records/.",
     )
     args = parser.parse_args()
 
     repo_root = Path(__file__).resolve().parent.parent
     sources = [Path(s) for s in args.source] if args.source else [
         repo_root / "records",
-        repo_root / "event_class_records_v0.1.1" / "records",
+        repo_root / "event_class_records_v0.1.2" / "records",
     ]
 
     init_db(args.db)

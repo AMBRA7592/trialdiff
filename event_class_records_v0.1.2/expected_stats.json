@@ -1,0 +1,20 @@
+{
+  "class_counts": {
+    "enrollment_changed_to_zero": 3,
+    "outcome_edit_cooccurs_with_results_posting": 80,
+    "primary_endpoint_changed_after_primary_completion_without_results_reconciliation": 10,
+    "secondary_outcome_removed_after_primary_completion": 9,
+    "why_stopped_removed_in_terminal_context": 4
+  },
+  "note": "Frozen-package integrity expectations describing the package as exported.",
+  "overlap_counts": {
+    "1": 88,
+    "2": 9
+  },
+  "records": 97,
+  "showcase": {
+    "class_count": 2,
+    "event_id": "evt_NCT05415215_v29_v30_597faa0b4362"
+  },
+  "trials": 54
+}

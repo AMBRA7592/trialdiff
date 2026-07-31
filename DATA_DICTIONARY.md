@@ -8,11 +8,11 @@ Verification for both formats: `trialdiff verify <file-or-directory>`
 
 ## `trialdiff.evidence_record` — current format
 
-Used by `event_class_records_v0.1.1/records/*.json` (and all future
-packages). **The file bytes are the canonical serialization**: key-sorted,
-compact separators, ASCII-escaped JSON. `sha256(file bytes)` is the record's
-citable hash (stored as `canonical_hash` in databases and in package
-manifests).
+Used by `event_class_records_v0.1.1/records/*.json`,
+`event_class_records_v0.1.2/records/*.json`, and future packages. **The file
+bytes are the canonical serialization**: key-sorted, compact separators,
+ASCII-escaped JSON. `sha256(file bytes)` is the record's citable hash (stored
+as `canonical_hash` in databases and in package manifests).
 
 | Field | Type | Meaning |
 | --- | --- | --- |

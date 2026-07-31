@@ -28,7 +28,8 @@ resolves to the latest version) · v0.1.1
 [10.5281/zenodo.20816639](https://doi.org/10.5281/zenodo.20816639) · v0.1
 [10.5281/zenodo.20801957](https://doi.org/10.5281/zenodo.20801957).
 Note: the published v0.1.1 dataset carries erratum E1 (`ERRATA.md`); the
-correction ships as v0.1.2 under the same concept DOI.
+corrected v0.1.2 package is frozen in this repository and awaits publication
+under the same concept DOI.
 
 ## Live Demo
 
@@ -49,7 +50,7 @@ See `CORPUS.md` for the full population/version reconciliation.
 
 ## Frozen Packages
 
-Two frozen, hash-pinned data packages live in this repository:
+Three frozen, hash-pinned data packages live in this repository:
 
 - **`records/`** — the v0.1-alpha demo: 40 selected high/critical Evidence
   Records from the 25-study alpha corpus (25 trials, 280 patches, 122
@@ -57,7 +58,11 @@ Two frozen, hash-pinned data packages live in this repository:
 - **`event_class_records_v0.1.1/`** — 100 event-class Evidence Records over
   52 trials from the 100-study corpus, with its own manifest. Carries
   erratum E1 (see `ERRATA.md`): 9 of 13 `why_stopped_removed_in_terminal_context`
-  memberships are spurious; a corrected v0.1.2 regeneration is planned.
+  memberships are spurious.
+- **`event_class_records_v0.1.2/`** — the corrected dual-regenerated package:
+  97 Evidence Records over 54 trials, with 106 event-class memberships and a
+  manifest-pinned determinism attestation. Frozen on 2026-07-31; Zenodo
+  publication is pending.
 
 Key documents:
 
@@ -85,16 +90,20 @@ Anyone can verify the committed records offline — no database required:
 
 ```bash
 # Offline integrity verification of any record file or directory:
-python3 -m trialdiff.cli verify records event_class_records_v0.1.1/records
+python3 -m trialdiff.cli verify records \
+  event_class_records_v0.1.1/records \
+  event_class_records_v0.1.2/records
 
 # Package validators (structure, counts, manifests, recomputed hashes):
 python3 scripts/validate_alpha_demo.py
 python3 scripts/validate_event_class_package.py --package event_class_records_v0.1.1
+python3 scripts/validate_event_class_package.py --package event_class_records_v0.1.2
 
 # Manifests:
 sha256sum -c MANIFEST.sha256
 sha256sum -c MANIFEST.calibration.sha256
 (cd event_class_records_v0.1.1 && sha256sum -c MANIFEST.sha256)
+(cd event_class_records_v0.1.2 && sha256sum -c MANIFEST.sha256)
 ```
 
 `trialdiff verify` recomputes canonical hashes, patch hashes, and (for

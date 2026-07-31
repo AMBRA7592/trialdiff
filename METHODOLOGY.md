@@ -49,6 +49,7 @@ is prose-only, what was never recorded) is in `CALIBRATION_REVIEWERS.md`.
 | `records/` | Frozen (v0.1-alpha) | 40 selected high/critical Evidence Records from the 25-study alpha corpus; pinned by `MANIFEST.sha256` |
 | `event_class_records_v0.1/` | Historical stub | Superseded by v0.1.1 (records were byte-identical; see the stub README) |
 | `event_class_records_v0.1.1/` | Frozen, with erratum | 100 event-class Evidence Records over 52 trials; see `ERRATA.md` E1 for the whyStopped class defect |
+| `event_class_records_v0.1.2/` | Frozen; publication pending | Corrected dual-regenerated package: 97 records over 54 trials, 106 memberships, and a manifest-pinned determinism attestation |
 
 ## Historical strategy documents (archived)
 

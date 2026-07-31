@@ -29,6 +29,14 @@
       "hash-manifest": "event_class_records_v0.1.1/MANIFEST.sha256"
     },
     {
+      "name": "event-class-records-v0.1.2",
+      "title": "Corrected Event-class Evidence Records v0.1.2 (97 records, 54 trials; publication pending)",
+      "path": "event_class_records_v0.1.2/records/",
+      "format": "json",
+      "schema": "schemas/evidence_record.schema.json",
+      "hash-manifest": "event_class_records_v0.1.2/MANIFEST.sha256"
+    },
+    {
       "name": "calibration-chain",
       "title": "v0.2/v0.2.1 severity-calibration data (samples, blinded packages, reviewer outputs, unblinding keys)",
       "path": ".",
