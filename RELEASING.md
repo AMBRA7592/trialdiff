@@ -27,8 +27,12 @@ python3 scripts/audit_event_class_inputs.py \
 # Required: op counts add/remove/replace = 25076/22710/99332; 4485 replayed;
 # 4385 stored TO matches; 100 reconstructed TO; primary = 148 relevant / 73
 # after completion / 63 reconciled / 10 clean with zero old/new disagreement;
-# secondary = 11 candidates / 10 corrected with exactly one disagreement,
-# NCT03734029 v29->v30.
+# secondary = 16 candidates / 12 corrected with exactly three disagreements:
+# NCT01224678 v109->v110, NCT03094169 v11->v12, and NCT03734029 v29->v30.
+# All 11 post-completion secondary-array count decreases must be covered by the
+# independently defined structural candidate surface; uncovered list = [].
+# Event-class totals are also enforced here: 97 records / 54 trials / 109
+# memberships, with classes 10 / 12 / 3 / 4 / 80.
 
 mkdir -p "$RELEASE_PRIVATE"
 chmod 700 "$RELEASE_PRIVATE"
@@ -77,13 +81,17 @@ python3 -m trialdiff.cli verify \
   "$RELEASE_PRIVATE/event_class_records_v0.1.3-a/records"
 ```
 
-Required v0.1.3 results are 97 records, 54 represented trials, and 107
+Required v0.1.3 results are 97 records, 54 represented trials, and 109
 memberships; class counts primary / secondary / enrollment / whyStopped /
-results co-occurrence = 10 / 10 / 3 / 4 / 80; overlaps = 87 one-class / 10
+results co-occurrence = 10 / 12 / 3 / 4 / 80; overlaps = 85 one-class / 12
 two-class / 0 three-class. The boundary remains 4,485 / 73 / 63 / 10. Any
 different count, replay failure, stored-TO mismatch, identity diff, or package
 diff halts the release. Never reconcile a divergence by editing generated
 records or `expected_stats.json`.
+
+CI exercises the audit implementation against synthetic fixtures; it cannot
+attest the private frozen-corpus totals. The manifest-covered determinism
+attestation must record the retained-DB audit command and complete output.
 
 Before freezing or deploying v0.1.3, the production compatibility work in
 section B must exist and be independently reviewed: every superseded v0.1.2

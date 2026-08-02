@@ -36,6 +36,9 @@ def record(
 
 
 class EventClassTests(unittest.TestCase):
+    def test_classification_error_is_not_a_value_error(self) -> None:
+        self.assertFalse(issubclass(EventClassInputError, ValueError))
+
     def test_secondary_outcome_reindex_is_not_treated_as_removal(self) -> None:
         moved = {"measure": "Quality of life", "description": "FACT-B score", "timeFrame": "12 months"}
         safety = {"measure": "Safety"}
@@ -60,6 +63,51 @@ class EventClassTests(unittest.TestCase):
         from_record = record(secondary_outcomes=[removed])
         to_record = record(secondary_outcomes=[])
         patch = [{"op": "remove", "path": "/protocolSection/outcomesModule/secondaryOutcomes/0"}]
+
+        self.assertIn(
+            SECONDARY_OUTCOME_REMOVED,
+            event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch),
+        )
+
+    def test_whole_secondary_outcomes_array_removal_is_classified(self) -> None:
+        removed = {"measure": "Quality of life", "timeFrame": "12 months"}
+        from_record = record(secondary_outcomes=[removed])
+        patch = [{"op": "remove", "path": "/protocolSection/outcomesModule/secondaryOutcomes"}]
+
+        self.assertIn(
+            SECONDARY_OUTCOME_REMOVED,
+            event_classes_for_patch(from_record=from_record, to_record=None, patch=patch),
+        )
+
+    def test_whole_secondary_outcomes_array_add_without_loss_is_not_removal(self) -> None:
+        added = {"measure": "Quality of life", "timeFrame": "12 months"}
+        from_record = record(secondary_outcomes=[])
+        patch = [
+            {
+                "op": "add",
+                "path": "/protocolSection/outcomesModule/secondaryOutcomes",
+                "value": [added],
+            }
+        ]
+        to_record = record(secondary_outcomes=[added])
+
+        self.assertNotIn(
+            SECONDARY_OUTCOME_REMOVED,
+            event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch),
+        )
+
+    def test_whole_secondary_outcomes_array_add_can_replace_and_remove_items(self) -> None:
+        retained = {"measure": "Overall survival", "timeFrame": "24 months"}
+        removed = {"measure": "Quality of life", "timeFrame": "12 months"}
+        from_record = record(secondary_outcomes=[retained, removed])
+        patch = [
+            {
+                "op": "add",
+                "path": "/protocolSection/outcomesModule/secondaryOutcomes",
+                "value": [retained],
+            }
+        ]
+        to_record = record(secondary_outcomes=[retained])
 
         self.assertIn(
             SECONDARY_OUTCOME_REMOVED,

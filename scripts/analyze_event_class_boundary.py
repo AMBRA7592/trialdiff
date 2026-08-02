@@ -13,6 +13,7 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from trialdiff.event_classes import (  # noqa: E402
+    EventClassInputError,
     after_primary_completion,
     derive_to_record,
     has_results_reconciliation_signal,
@@ -25,6 +26,9 @@ def compute_boundary_stats(connection: sqlite3.Connection) -> dict[str, int]:
     rows = connection.execute(
         """
         SELECT
+          p.nct_id,
+          p.from_version,
+          p.to_version,
           p.patch_json,
           from_version.record_json AS from_record_json,
           to_version.record_json AS to_record_json
@@ -46,27 +50,31 @@ def compute_boundary_stats(connection: sqlite3.Connection) -> dict[str, int]:
         "clean": 0,
     }
     for row in rows:
+        identity = f'{row["nct_id"]} v{row["from_version"]}->v{row["to_version"]}'
         if not row["from_record_json"]:
             stats["missing_from_record"] += 1
             continue
         patch: list[dict[str, Any]] = json.loads(row["patch_json"])
         from_record = json.loads(row["from_record_json"])
         stored_to_record = json.loads(row["to_record_json"]) if row["to_record_json"] else None
-        to_record = derive_to_record(from_record, stored_to_record, patch)
-        if not (
-            after_primary_completion(from_record)
-            and primary_endpoint_definition_changed(from_record, to_record, patch)
-        ):
-            continue
-        stats["inclusive_primary_after_completion"] += 1
-        if has_results_reconciliation_signal(
-            from_record=from_record,
-            to_record=to_record,
-            patch=patch,
-        ):
-            stats["results_cooccurring"] += 1
-        else:
-            stats["clean"] += 1
+        try:
+            to_record = derive_to_record(from_record, stored_to_record, patch)
+            if not (
+                after_primary_completion(from_record)
+                and primary_endpoint_definition_changed(from_record, to_record, patch)
+            ):
+                continue
+            stats["inclusive_primary_after_completion"] += 1
+            if has_results_reconciliation_signal(
+                from_record=from_record,
+                to_record=to_record,
+                patch=patch,
+            ):
+                stats["results_cooccurring"] += 1
+            else:
+                stats["clean"] += 1
+        except EventClassInputError as error:
+            raise EventClassInputError(f"{identity}: {error}") from error
     if stats["inclusive_primary_after_completion"] != (
         stats["results_cooccurring"] + stats["clean"]
     ):
@@ -80,7 +88,10 @@ def main() -> int:
     args = parser.parse_args()
     connection = sqlite3.connect(args.db)
     try:
-        stats = compute_boundary_stats(connection)
+        try:
+            stats = compute_boundary_stats(connection)
+        except EventClassInputError as error:
+            raise SystemExit(f"Boundary analysis halted: {error}") from error
     finally:
         connection.close()
     for key, value in stats.items():

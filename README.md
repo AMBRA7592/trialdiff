@@ -50,7 +50,7 @@ The 97-record v0.1.2 layer was promoted to Neon and Vercel production on
 2026-08-02. Its public JSON endpoint serves the canonical record bytes with a
 matching ETag and `x-trialdiff-canonical-hash`. The v0.1.2 dataset is published
 at [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258);
-it corrected E1 but now carries E4 for one missed secondary-outcome membership.
+it corrected E1 but now carries E4 for three missed secondary-outcome memberships.
 Production intentionally remains on those immutable v0.1.2 bytes until a
 separately verified v0.1.3 release is frozen and promoted. Published v0.1.1
 remains the immutable historical artifact that carries E1. The historical
@@ -73,8 +73,8 @@ Three frozen, hash-pinned data packages live in this repository:
   97 Evidence Records over 54 trials, with 106 event-class memberships and a
   manifest-pinned determinism attestation. Frozen on 2026-07-31 and published
   on 2026-08-02 as [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258).
-  It remains immutable and carries E4 for one missed secondary-outcome
-  membership.
+  It remains immutable and carries E4 for three missed secondary-outcome
+  memberships.
 
 Key documents:
 

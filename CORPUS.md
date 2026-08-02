@@ -43,9 +43,9 @@ counts are always quoted per snapshot.
   trials; those bytes are published but carry erratum E1
 - The v0.2 generation from this exact frozen snapshot emitted **97** records
   over 54 trials and 106 memberships for v0.1.2. It corrected E1 and carries
-  E4 for one missed secondary-outcome membership
+  E4 for three missed secondary-outcome memberships
 - The v0.3 correction is expected to retain **97** records over 54 trials and
-  produce 107 memberships; that remains a release gate until v0.1.3 is frozen
+  produce 109 memberships; that remains a release gate until v0.1.3 is frozen
 - Source of: the v0.2.1 calibration sample, the published event-class
   packages, and the live deployment at trialdiff.vercel.app
 

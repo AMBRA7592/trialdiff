@@ -14,8 +14,14 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from trialdiff.event_classes import (  # noqa: E402
+    ENROLLMENT_CHANGED_TO_ZERO,
+    OUTCOME_EDIT_WITH_RESULTS_SIGNAL,
+    PRIMARY_ENDPOINT_CLEAN,
+    SECONDARY_OUTCOME_REMOVED,
+    WHY_STOPPED_REMOVED_TERMINAL,
     after_primary_completion,
     derive_to_record,
+    event_classes_for_patch,
     get_path,
     has_results_reconciliation_signal,
     is_primary_endpoint_definition_path,
@@ -38,9 +44,25 @@ EXPECTED_V03 = {
     "primary_results_cooccurring": 63,
     "primary_clean": 10,
     "primary_literal_vs_state_disagreements": [],
-    "secondary_candidates": 11,
-    "corrected_secondary_memberships": 10,
-    "literal_vs_sequential_disagreements": ["NCT03734029_v29_v30"],
+    "secondary_candidates": 16,
+    "postcompletion_secondary_count_decreases": 11,
+    "secondary_count_decreases_without_structural_candidate": [],
+    "corrected_secondary_memberships": 12,
+    "v02_vs_corrected_secondary_disagreements": [
+        "NCT01224678_v109_v110",
+        "NCT03094169_v11_v12",
+        "NCT03734029_v29_v30",
+    ],
+    "classified_records": 97,
+    "classified_trials": 54,
+    "event_class_memberships": 109,
+    "event_class_counts": {
+        ENROLLMENT_CHANGED_TO_ZERO: 3,
+        OUTCOME_EDIT_WITH_RESULTS_SIGNAL: 80,
+        PRIMARY_ENDPOINT_CLEAN: 10,
+        SECONDARY_OUTCOME_REMOVED: 12,
+        WHY_STOPPED_REMOVED_TERMINAL: 4,
+    },
 }
 
 
@@ -83,6 +105,20 @@ def historical_v02_secondary_predicate(
     return False
 
 
+def audit_secondary_removal_candidate(operation: dict[str, Any]) -> bool:
+    """Define the audit denominator independently of the production predicate."""
+    parts = pointer_parts(operation.get("path", ""))
+    target = ["protocolSection", "outcomesModule", "secondaryOutcomes"]
+    indexed_remove = (
+        operation.get("op") == "remove"
+        and len(parts) == 4
+        and parts[:3] == target
+        and parts[3].isdigit()
+    )
+    container_operation = bool(parts) and len(parts) <= len(target) and target[: len(parts)] == parts
+    return indexed_remove or container_operation
+
+
 def compute_input_audit(connection: sqlite3.Connection) -> dict[str, Any]:
     connection.row_factory = sqlite3.Row
     rows = connection.execute(
@@ -117,6 +153,12 @@ def compute_input_audit(connection: sqlite3.Connection) -> dict[str, Any]:
     corrected_secondary_memberships = 0
     historical_v02_secondary_memberships = 0
     disagreements: list[str] = []
+    postcompletion_secondary_count_decreases = 0
+    uncovered_secondary_count_decreases: list[str] = []
+    classified_records = 0
+    classified_trials: set[str] = set()
+    event_class_memberships = 0
+    event_class_counts: Counter[str] = Counter()
 
     for row in rows:
         identity = f'{row["nct_id"]}_v{row["from_version"]}_v{row["to_version"]}'
@@ -127,6 +169,16 @@ def compute_input_audit(connection: sqlite3.Connection) -> dict[str, Any]:
         from_record = json.loads(row["from_record_json"])
         stored_to_record = json.loads(row["to_record_json"]) if row["to_record_json"] else None
         to_record = derive_to_record(from_record, stored_to_record, patch)
+        event_classes = event_classes_for_patch(
+            from_record=from_record,
+            to_record=stored_to_record,
+            patch=patch,
+        )
+        if event_classes:
+            classified_records += 1
+            classified_trials.add(row["nct_id"])
+            event_class_memberships += len(event_classes)
+            event_class_counts.update(event_classes)
         if stored_to_record is None:
             reconstructed_to_records += 1
         else:
@@ -154,7 +206,24 @@ def compute_input_audit(connection: sqlite3.Connection) -> dict[str, Any]:
                 else:
                     primary_clean += 1
 
-        has_secondary_removal = any(is_secondary_outcome_item_removal(operation) for operation in patch)
+        has_secondary_removal = any(audit_secondary_removal_candidate(operation) for operation in patch)
+        if after_primary_completion(from_record):
+            from_secondary = get_path(
+                from_record,
+                ["protocolSection", "outcomesModule", "secondaryOutcomes"],
+                [],
+            ) or []
+            to_secondary = get_path(
+                to_record,
+                ["protocolSection", "outcomesModule", "secondaryOutcomes"],
+                [],
+            ) or []
+            if not isinstance(from_secondary, list) or not isinstance(to_secondary, list):
+                raise RuntimeError(f"{identity}: secondaryOutcomes is not an array")
+            if len(from_secondary) > len(to_secondary):
+                postcompletion_secondary_count_decreases += 1
+                if not has_secondary_removal:
+                    uncovered_secondary_count_decreases.append(identity)
         if not (after_primary_completion(from_record) and has_secondary_removal):
             continue
         secondary_candidates += 1
@@ -176,9 +245,15 @@ def compute_input_audit(connection: sqlite3.Connection) -> dict[str, Any]:
         "primary_clean": primary_clean,
         "primary_literal_vs_state_disagreements": primary_disagreements,
         "secondary_candidates": secondary_candidates,
+        "postcompletion_secondary_count_decreases": postcompletion_secondary_count_decreases,
+        "secondary_count_decreases_without_structural_candidate": uncovered_secondary_count_decreases,
         "corrected_secondary_memberships": corrected_secondary_memberships,
         "historical_v02_secondary_memberships": historical_v02_secondary_memberships,
-        "literal_vs_sequential_disagreements": disagreements,
+        "v02_vs_corrected_secondary_disagreements": disagreements,
+        "classified_records": classified_records,
+        "classified_trials": len(classified_trials),
+        "event_class_memberships": event_class_memberships,
+        "event_class_counts": dict(sorted(event_class_counts.items())),
     }
 
 

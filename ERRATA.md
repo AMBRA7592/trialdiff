@@ -53,13 +53,12 @@ absent in a terminal-status context" — a claim their own patch contradicts.
 **Corrected counts.** The published class count of 13 is therefore 4 under
 the corrected definition; the package overlap distribution inherits the
 error for this class. No other false membership was identified in that E1
-audit. A later full-corpus audit found one false negative in the
+audit. A later full-corpus audit found three false negatives in the
 secondary-outcome predicate (E4 below); it does not change the v0.1.1
-"Boundary Analysis" chain
-(4,485 patches scanned → 73 inclusive primary-endpoint flags → 63
-reconciliation-confounded → 10 clean class members) rests on patch-anchored
-predicates and is expected to survive, but must be recomputed and
-re-stated as part of the v0.1.2 regeneration rather than carried forward.
+"Boundary Analysis" chain. That chain combines patch evidence with FROM/TO
+state and was independently recomputed over the frozen corpus as 4,485 patches
+scanned → 73 inclusive primary-endpoint flags → 63
+reconciliation-confounded → 10 clean class members.
 
 **Fix.** The missing-snapshot policy is now shared by all predicates:
 when no TO-version record is stored, the TO view is derived by replaying
@@ -141,7 +140,7 @@ itself. A superseded-wording banner has been added to
 `manual-audit-5-records.md` and the manifest entry re-pinned (see the
 manifest policy below). The audit's findings themselves are unaffected.
 
-## E4 — Sequential secondary-outcome removals were resolved against fixed FROM indices (2026-08-03)
+## E4 — Secondary-outcome removal shapes were incompletely resolved (2026-08-03)
 
 **Affected artifacts:** the published event-class v0.1.2 package
 [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258), its
@@ -149,12 +148,14 @@ manifest policy below). The audit's findings themselves are unaffected.
 Vercel production layer. The package is immutable and remains the authentic
 record of the v0.2 predicate generation.
 
-**Defect.** `secondary_outcome_item_removed_without_reindex` resolved every
-whole-item removal path against the original FROM-version array. JSON Patch
-array indices are evaluated sequentially: after removing index 1, the next
-item shifts into index 1. A patch containing repeated removals at the same
-path therefore targets different original items, while the v0.2 predicate
-inspected the first item repeatedly.
+**Defect.** `secondary_outcome_item_removed_without_reindex` had two incomplete
+operation-shape assumptions. First, it resolved every indexed removal path
+against the original FROM-version array. JSON Patch array indices are evaluated
+sequentially: after removing index 1, the next item shifts into index 1. A patch
+containing repeated removals at the same path therefore targets different
+original items, while the v0.2 predicate inspected the first item repeatedly.
+Second, it recognized only indexed item removals and ignored operations on the
+whole `secondaryOutcomes` array, including removal of the entire list.
 
 The published record
 `evt_NCT03734029_v29_v30_3bc3c0a82c88` contains two sequential removals at
@@ -165,12 +166,25 @@ qualifying `secondary_outcome_removed_after_primary_completion` membership.
 This is one false negative: the record itself already exists, so the correction
 adds a membership rather than a record.
 
-**Full frozen-corpus audit.** Over all 4,485 adjacent-version patches, 11 were
-post-completion whole-secondary-removal candidates. The historical literal
-resolver returned 9 memberships; sequential replay returns 10. Exactly one
-candidate disagrees, `NCT03734029` v29 to v30. The historical count of 9 is
-reported for traceability; the version-stable regression oracle is 11
-candidates / 10 corrected memberships / exactly that one disagreement.
+Two additional published records remove the whole `secondaryOutcomes` array:
+`evt_NCT01224678_v109_v110_c6b7700d37eb` and
+`evt_NCT03094169_v11_v12_d44bd11b21cb`. Both are post-completion, both lose at
+least one normalized secondary outcome, and both omit the qualifying secondary
+membership. They also remain existing records, so each correction adds one
+membership rather than one record.
+
+**Full frozen-corpus audit.** Over all 4,485 adjacent-version patches, 16 were
+post-completion structural secondary-removal candidates: 11 carried indexed
+item removals and 5 operated on the whole array. The historical v0.2 predicate
+returned 9 memberships; the corrected predicate returns 12. Exactly three
+candidates disagree: `NCT01224678` v109 to v110, `NCT03094169` v11 to v12,
+and `NCT03734029` v29 to v30. The historical count of 9 is reported for
+traceability; the version-stable regression oracle is 16 candidates / 12
+corrected memberships / exactly those three disagreements.
+The audit defines its structural candidate surface independently of the
+production predicate. As a second coverage invariant, all 11 post-completion
+patches that reduce secondary-outcome array length have a recognized structural
+candidate; none falls outside the audit surface.
 
 Mandatory patch replay is safe on this frozen input: all 4,485 patches replay;
 all 4,385 stored TO snapshots exactly match the replayed document; the 100
@@ -190,8 +204,10 @@ corpus contains no triggering replay failure. v0.3 makes replay failure and a
 stored-versus-derived TO mismatch hard classification errors. Only `add`,
 `remove`, and `replace` operations are accepted; unsupported operations such as
 `move` or `copy` halt classification instead of producing a membership.
-An unpatched `hasResults` change likewise halts as a provenance defect rather
-than serving as a reconciliation signal.
+The reconciliation helper also asserts that `hasResults` cannot differ without
+a corresponding patch operation. Strict replay makes that branch unreachable
+through the normal classification entry point; it remains a defensive
+invariant for direct callers and future patch producers.
 
 The primary-endpoint predicate had a sibling fixed-index exposure. It is now
 defined as an order-insensitive, duplicate-sensitive comparison of endpoint
@@ -201,17 +217,19 @@ primary completion, 63 results-reconciliation cases, and 10 clean members,
 with zero disagreement between the v0.2 result and the corrected state
 comparison. The primary issue was latent and did not affect v0.1.2 counts.
 
-**Correction and hash transition.** The implementation now resolves removal
-targets against the evolving document using sequential value contexts. Because
-the rule-set hash pins implementation source bytes, the correction rotates the
-event-class and combined hashes even though the class names remain unchanged:
+**Correction and hash transition.** The implementation now resolves indexed
+removal targets against the evolving document using sequential value contexts
+and evaluates whole-array operations by comparing normalized FROM/TO outcome
+sets. Because the rule-set hash pins implementation source bytes, the
+correction rotates the event-class and combined hashes even though the class
+names remain unchanged:
 
 | Hash | Frozen v0.1.2 generation | Corrected v0.3 code |
 | --- | --- | --- |
 | `EVENT_CLASS_VERSION` | `trialdiff.event_classes.v0.2` | `trialdiff.event_classes.v0.3` |
-| implementation hash | previous v0.2 implementation | `c7e1efc0a9832d5735ddbf5d43d06980957980e8714925c17321e50cb81fc7d4` |
-| `event_class_rule_set_hash` | `07957f8b90549d4f42387f51b471ecde9901b6db63bbc27b84c73631603407c0` | `e6dfdefff01f2acebbd215a629a38db1f61d7564414f5e0f9c2a96729a3a71ea` |
-| combined `rule_set_hash` | `318445b9ad266f51fd10ef378645c753ba7a098e3e4395c3c457750dc5f88d86` | `eb817af260ca8099002c26bc291977bcee53cf4d84b08770c8b1cc7194497b3d` |
+| implementation hash | previous v0.2 implementation | `59356f5a46a92e43be27781a062be48add6507f0fad132cce94d5a3dfe24beb8` |
+| `event_class_rule_set_hash` | `07957f8b90549d4f42387f51b471ecde9901b6db63bbc27b84c73631603407c0` | `d0f2dc6f101403c5a51a988195e70e6cf6bea0140560d6a6b5d269524ac00315` |
+| combined `rule_set_hash` | `318445b9ad266f51fd10ef378645c753ba7a098e3e4395c3c457750dc5f88d86` | `abae4cacc0d3055ef40679394ba0bbaa133515cfe5feb0ae81031eaa5fa666f4` |
 | `triage_rule_set_hash` | `af5e5835e00a5fcfe2a17fd02b5fc244c2564104f93f78a1d77d7889f12a178b` | unchanged |
 
 This is the first published correction demonstrating the v0.2 hash design's
@@ -219,9 +237,9 @@ intended behavior: an implementation correction cannot retain the old
 rule-set hash.
 
 The expected v0.1.3 regeneration over the unchanged frozen input is 97 records,
-54 trials, and 107 memberships; class counts 10 primary / 10 secondary / 3
-enrollment / 4 whyStopped / 80 results co-occurrence; overlaps 87 one-class /
-10 two-class / 0 three-class. These are halt-on-divergence expectations, not
+54 trials, and 109 memberships; class counts 10 primary / 12 secondary / 3
+enrollment / 4 whyStopped / 80 results co-occurrence; overlaps 85 one-class /
+12 two-class / 0 three-class. These are halt-on-divergence expectations, not
 values to force. No v0.1.3 package, tag, DOI, or production generation exists
 until the controlled freeze and release gates in `RELEASING.md` pass.
 

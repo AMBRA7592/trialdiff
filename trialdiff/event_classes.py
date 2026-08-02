@@ -23,13 +23,15 @@ EVENT_CLASS_DEFINITIONS: dict[str, str] = {
         "description, timeFrame, or whole primary-outcome item changed between the FROM-version record "
         "and the TO-version reconstructed by sequential replay of the adjacent-version patch; a pure "
         "reordering of otherwise identical primary-outcome definitions does not count as a definition "
-        "change; no hasResults/resultsSection co-occurrence signal is present."
+        "change; primary definition fields are compared as exact stored strings, so case or whitespace "
+        "edits count; no hasResults/resultsSection co-occurrence signal is present."
     ),
     SECONDARY_OUTCOME_REMOVED: (
         "FROM-version is completed or has actual primary completion; a whole secondaryOutcomes item is "
-        "removed, with each removal target resolved against the evolving document during sequential "
-        "patch replay; the normalized removed outcome does not reappear elsewhere in the reconstructed "
-        "TO-version outcome list."
+        "removed by an indexed remove operation or disappears through an operation on the whole "
+        "secondaryOutcomes array; indexed removal targets are resolved against the evolving document "
+        "during sequential patch replay; the lowercased, whitespace-stripped measure, description, and "
+        "timeFrame tuple does not reappear elsewhere in the reconstructed TO-version outcome list."
     ),
     ENROLLMENT_CHANGED_TO_ZERO: (
         "Enrollment count changes from a positive value in the FROM-version record to exactly zero in "
@@ -67,7 +69,7 @@ TERMINAL_STATUSES = {"TERMINATED", "WITHDRAWN", "SUSPENDED"}
 SUPPORTED_PATCH_OPERATIONS = frozenset({"add", "remove", "replace"})
 
 
-class EventClassInputError(ValueError):
+class EventClassInputError(Exception):
     """The source pair and patch cannot safely support event classification."""
 
 
@@ -157,6 +159,9 @@ def has_results_reconciliation_signal(
         path = operation.get("path", "")
         if path == "/hasResults" or path.startswith("/resultsSection"):
             return True
+    # With the normal strict-replay entry point this branch is unreachable: a
+    # changed top-level hasResults value must have a corresponding patch op.
+    # Keep the assertion for direct callers and future patch producers.
     if bool(from_record.get("hasResults")) != bool(to_record.get("hasResults")):
         raise EventClassInputError("hasResults changed without a corresponding patch operation")
     return False
@@ -210,24 +215,35 @@ def secondary_outcome_item_removed_without_reindex(
     to_record: dict[str, Any],
     patch: list[dict[str, Any]],
 ) -> bool:
-    if not any(is_secondary_outcome_item_removal(operation) for operation in patch):
+    if not any(is_secondary_outcome_removal_candidate(operation) for operation in patch):
         return False
+    from_outcomes = secondary_outcomes(from_record, label="FROM")
+    to_outcomes = secondary_outcomes(to_record, label="TO")
+    from_normalized = {normalize_outcome(outcome) for outcome in from_outcomes}
+    to_normalized = {normalize_outcome(outcome) for outcome in to_outcomes}
+    from_normalized.discard(None)
+    to_normalized.discard(None)
+    if any(is_secondary_outcomes_container_operation(operation) for operation in patch):
+        return bool(from_normalized - to_normalized)
     removed_contexts = [
         context
         for context in build_value_contexts(from_record, patch)
         if is_secondary_outcome_item_removal({"op": context.op, "path": context.path})
     ]
-    to_outcomes = get_path(to_record, ["protocolSection", "outcomesModule", "secondaryOutcomes"], [])
-    if to_outcomes is None:
-        to_outcomes = []
-    if not isinstance(to_outcomes, list):
-        raise EventClassInputError("secondaryOutcomes must be an array")
-    to_normalized = {normalize_outcome(outcome) for outcome in to_outcomes}
     for context in removed_contexts:
         normalized = normalize_outcome(context.old_value)
         if normalized and normalized not in to_normalized:
             return True
     return False
+
+
+def secondary_outcomes(record: dict[str, Any], *, label: str) -> list[Any]:
+    outcomes = get_path(record, ["protocolSection", "outcomesModule", "secondaryOutcomes"], [])
+    if outcomes is None:
+        return []
+    if not isinstance(outcomes, list):
+        raise EventClassInputError(f"{label} secondaryOutcomes must be an array")
+    return outcomes
 
 
 def enrollment_changed_to_zero(from_record: dict[str, Any], to_record: dict[str, Any]) -> bool:
@@ -283,6 +299,20 @@ def is_secondary_outcome_item_removal(operation: dict[str, Any]) -> bool:
         and parts[0:3] == ["protocolSection", "outcomesModule", "secondaryOutcomes"]
         and parts[3].isdigit()
     )
+
+
+def is_secondary_outcomes_container_operation(operation: dict[str, Any]) -> bool:
+    parts = pointer_parts(operation.get("path", ""))
+    target = [
+        "protocolSection",
+        "outcomesModule",
+        "secondaryOutcomes",
+    ]
+    return bool(parts) and len(parts) <= len(target) and target[: len(parts)] == parts
+
+
+def is_secondary_outcome_removal_candidate(operation: dict[str, Any]) -> bool:
+    return is_secondary_outcome_item_removal(operation) or is_secondary_outcomes_container_operation(operation)
 
 
 def is_outcome_path(path: str) -> bool:

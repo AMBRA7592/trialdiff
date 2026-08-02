@@ -5,6 +5,7 @@ import sqlite3
 import unittest
 
 from scripts.analyze_event_class_boundary import compute_boundary_stats
+from trialdiff.event_classes import EventClassInputError
 
 
 def record(*, has_results: bool) -> dict:
@@ -83,6 +84,38 @@ class BoundaryAnalysisTests(unittest.TestCase):
         self.assertEqual(stats["inclusive_primary_after_completion"], 2)
         self.assertEqual(stats["results_cooccurring"], 1)
         self.assertEqual(stats["clean"], 1)
+
+    def test_replay_failure_reports_patch_identity(self) -> None:
+        connection = sqlite3.connect(":memory:")
+        connection.executescript(
+            """
+            CREATE TABLE trial_versions (
+              nct_id text NOT NULL,
+              version integer NOT NULL,
+              record_json text,
+              PRIMARY KEY (nct_id, version)
+            );
+            CREATE TABLE trial_patches (
+              nct_id text NOT NULL,
+              from_version integer NOT NULL,
+              to_version integer NOT NULL,
+              patch_json text NOT NULL
+            );
+            """
+        )
+        before = record(has_results=False)
+        connection.execute(
+            "INSERT INTO trial_versions VALUES ('NCT00000003', 1, ?)",
+            (json.dumps(before),),
+        )
+        connection.execute(
+            "INSERT INTO trial_patches VALUES ('NCT00000003', 1, 2, ?)",
+            (json.dumps([{"op": "remove", "path": "/missing"}]),),
+        )
+
+        with self.assertRaisesRegex(EventClassInputError, "NCT00000003 v1->v2"):
+            compute_boundary_stats(connection)
+        connection.close()
 
 
 if __name__ == "__main__":

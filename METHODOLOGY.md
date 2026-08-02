@@ -49,7 +49,7 @@ is prose-only, what was never recorded) is in `CALIBRATION_REVIEWERS.md`.
 | `records/` | Frozen (v0.1-alpha) | 40 selected high/critical Evidence Records from the 25-study alpha corpus; pinned by `MANIFEST.sha256` |
 | `event_class_records_v0.1/` | Historical stub | Superseded by v0.1.1 (records were byte-identical; see the stub README) |
 | `event_class_records_v0.1.1/` | Frozen, with erratum | 100 event-class Evidence Records over 52 trials; see `ERRATA.md` E1 for the whyStopped class defect |
-| `event_class_records_v0.1.2/` | Frozen and published, with erratum | Dual-regenerated E1 correction: 97 records over 54 trials, 106 memberships, a manifest-pinned determinism attestation, and Zenodo DOI [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258). Carries E4 for one missed secondary-outcome membership |
+| `event_class_records_v0.1.2/` | Frozen and published, with erratum | Dual-regenerated E1 correction: 97 records over 54 trials, 106 memberships, a manifest-pinned determinism attestation, and Zenodo DOI [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258). Carries E4 for three missed secondary-outcome memberships |
 | `event_class_records_v0.1.3/` | Not yet frozen | Planned E4 correction under the v0.3 predicates; expected gates are documented in `RELEASING.md`, but no artifact or DOI exists yet |
 
 ## Historical strategy documents (archived)
