@@ -31,7 +31,9 @@ EVENT_CLASS_DEFINITIONS: dict[str, str] = {
         "removed by an indexed remove operation or disappears through an operation on the whole "
         "secondaryOutcomes array; indexed removal targets are resolved against the evolving document "
         "during sequential patch replay; the lowercased, whitespace-stripped measure, description, and "
-        "timeFrame tuple does not reappear elsewhere in the reconstructed TO-version outcome list."
+        "timeFrame tuple does not reappear elsewhere in the reconstructed TO-version outcome list; "
+        "presence is set-based, so reducing duplicate count does not qualify while an identical "
+        "normalized tuple remains."
     ),
     ENROLLMENT_CHANGED_TO_ZERO: (
         "Enrollment count changes from a positive value in the FROM-version record to exactly zero in "

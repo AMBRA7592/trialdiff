@@ -47,4 +47,4 @@ historical accident.
 | --- | --- | --- |
 | `trialdiff.event_classes.v0.1` | `a6734d37…` | Produced the v0.1/v0.1.1 packages; whyStopped predicate defect (E1) |
 | `trialdiff.event_classes.v0.2` | `07957f8b…` | Produced v0.1.2; corrected E1 but carries the three secondary-removal omissions documented in E4 |
-| `trialdiff.event_classes.v0.3` | `d0f2dc6f…` | Current at HEAD; strict mandatory replay, stored-TO equality, sequential and container-level secondary removal resolution, and order-insensitive primary definition comparison. Pending v0.1.3 freeze |
+| `trialdiff.event_classes.v0.3` | `74a6f55a…` | Current at HEAD; strict mandatory replay, stored-TO equality, sequential and container-level secondary removal resolution, and order-insensitive primary definition comparison. Pending v0.1.3 freeze |

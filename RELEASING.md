@@ -31,8 +31,10 @@ python3 scripts/audit_event_class_inputs.py \
 # NCT01224678 v109->v110, NCT03094169 v11->v12, and NCT03734029 v29->v30.
 # All 11 post-completion secondary-array count decreases must be covered by the
 # independently defined structural candidate surface; uncovered list = [].
+# Whole-item secondary replace operations = 0; this operation shape is counted
+# explicitly but remains outside the removal-class definition.
 # Event-class totals are also enforced here: 97 records / 54 trials / 109
-# memberships, with classes 10 / 12 / 3 / 4 / 80.
+# memberships, classes 10 / 12 / 3 / 4 / 80, and overlaps 85 / 12 / 0.
 
 mkdir -p "$RELEASE_PRIVATE"
 chmod 700 "$RELEASE_PRIVATE"

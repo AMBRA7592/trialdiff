@@ -5,6 +5,7 @@ import sqlite3
 import unittest
 
 from scripts.audit_event_class_inputs import compute_input_audit
+from trialdiff.event_classes import EventClassInputError
 
 
 def record(outcomes: list[dict]) -> dict:
@@ -97,6 +98,7 @@ class EventClassInputAuditTests(unittest.TestCase):
             stats["event_class_counts"],
             {"secondary_outcome_removed_after_primary_completion": 1},
         )
+        self.assertEqual(stats["event_class_overlap_counts"], {1: 1})
 
     def test_whole_array_operation_is_in_the_independent_candidate_denominator(self) -> None:
         connection = self.new_connection()
@@ -135,6 +137,68 @@ class EventClassInputAuditTests(unittest.TestCase):
             stats["event_class_counts"],
             {"secondary_outcome_removed_after_primary_completion": 1},
         )
+        self.assertEqual(stats["event_class_overlap_counts"], {1: 1})
+
+    def test_whole_item_replace_is_counted_but_outside_removal_scope(self) -> None:
+        connection = self.new_connection()
+        before = record([{"measure": "Overall survival"}])
+        after = record([{"measure": "Quality of life"}])
+        patch = [
+            {
+                "op": "replace",
+                "path": "/protocolSection/outcomesModule/secondaryOutcomes/0",
+                "value": {"measure": "Quality of life"},
+            }
+        ]
+        connection.execute(
+            "INSERT INTO trial_versions VALUES ('NCT00000004', 1, ?)",
+            (json.dumps(before),),
+        )
+        connection.execute(
+            "INSERT INTO trial_versions VALUES ('NCT00000004', 2, ?)",
+            (json.dumps(after),),
+        )
+        connection.execute(
+            "INSERT INTO trial_patches VALUES ('NCT00000004', 1, 2, ?)",
+            (json.dumps(patch),),
+        )
+
+        stats = compute_input_audit(connection)
+        connection.close()
+
+        self.assertEqual(stats["secondary_whole_item_replace_operations"], 1)
+        self.assertEqual(stats["secondary_candidates"], 0)
+        self.assertEqual(stats["corrected_secondary_memberships"], 0)
+
+    def test_malformed_secondary_array_uses_classification_error(self) -> None:
+        connection = self.new_connection()
+        malformed = record([])
+        malformed["protocolSection"]["outcomesModule"]["secondaryOutcomes"] = {}
+        after = json.loads(json.dumps(malformed))
+        after["protocolSection"]["outcomesModule"]["secondaryOutcomes"] = []
+        patch = [
+            {
+                "op": "replace",
+                "path": "/protocolSection/outcomesModule/secondaryOutcomes",
+                "value": [],
+            }
+        ]
+        connection.execute(
+            "INSERT INTO trial_versions VALUES ('NCT00000005', 1, ?)",
+            (json.dumps(malformed),),
+        )
+        connection.execute(
+            "INSERT INTO trial_versions VALUES ('NCT00000005', 2, ?)",
+            (json.dumps(after),),
+        )
+        connection.execute(
+            "INSERT INTO trial_patches VALUES ('NCT00000005', 1, 2, ?)",
+            (json.dumps(patch),),
+        )
+
+        with self.assertRaisesRegex(EventClassInputError, "NCT00000005"):
+            compute_input_audit(connection)
+        connection.close()
 
 
 if __name__ == "__main__":

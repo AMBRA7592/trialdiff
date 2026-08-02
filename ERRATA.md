@@ -186,6 +186,15 @@ production predicate. As a second coverage invariant, all 11 post-completion
 patches that reduce secondary-outcome array length have a recognized structural
 candidate; none falls outside the audit surface.
 
+Whole-item `replace` operations at
+`/protocolSection/outcomesModule/secondaryOutcomes/<index>` remain outside this
+removal class: they are definition substitutions, not JSON Patch removals. The
+audit makes that bound observable and found zero such operations in all 4,485
+patches. Secondary reappearance is deliberately set-presence based: reducing
+two identical normalized outcomes to one does not qualify while the normalized
+tuple remains. This differs from the primary definition comparison, which is
+duplicate-sensitive.
+
 Mandatory patch replay is safe on this frozen input: all 4,485 patches replay;
 all 4,385 stored TO snapshots exactly match the replayed document; the 100
 patches without a stored TO snapshot reconstruct successfully; there are zero
@@ -227,9 +236,9 @@ names remain unchanged:
 | Hash | Frozen v0.1.2 generation | Corrected v0.3 code |
 | --- | --- | --- |
 | `EVENT_CLASS_VERSION` | `trialdiff.event_classes.v0.2` | `trialdiff.event_classes.v0.3` |
-| implementation hash | previous v0.2 implementation | `59356f5a46a92e43be27781a062be48add6507f0fad132cce94d5a3dfe24beb8` |
-| `event_class_rule_set_hash` | `07957f8b90549d4f42387f51b471ecde9901b6db63bbc27b84c73631603407c0` | `d0f2dc6f101403c5a51a988195e70e6cf6bea0140560d6a6b5d269524ac00315` |
-| combined `rule_set_hash` | `318445b9ad266f51fd10ef378645c753ba7a098e3e4395c3c457750dc5f88d86` | `abae4cacc0d3055ef40679394ba0bbaa133515cfe5feb0ae81031eaa5fa666f4` |
+| implementation hash | previous v0.2 implementation | `05e28fd05386d9b1d3d7e57d0272e6585554618cc0cbc3defa82fb615110ebca` |
+| `event_class_rule_set_hash` | `07957f8b90549d4f42387f51b471ecde9901b6db63bbc27b84c73631603407c0` | `74a6f55a686c29aa023171acd6b43f27ea95f2b0af2d49094ac70287ba4e502c` |
+| combined `rule_set_hash` | `318445b9ad266f51fd10ef378645c753ba7a098e3e4395c3c457750dc5f88d86` | `fc87f4f0a74bc789dbe4ba85893c2c96f55db62c22970be4e991288104291621` |
 | `triage_rule_set_hash` | `af5e5835e00a5fcfe2a17fd02b5fc244c2564104f93f78a1d77d7889f12a178b` | unchanged |
 
 This is the first published correction demonstrating the v0.2 hash design's
@@ -239,9 +248,11 @@ rule-set hash.
 The expected v0.1.3 regeneration over the unchanged frozen input is 97 records,
 54 trials, and 109 memberships; class counts 10 primary / 12 secondary / 3
 enrollment / 4 whyStopped / 80 results co-occurrence; overlaps 85 one-class /
-12 two-class / 0 three-class. These are halt-on-divergence expectations, not
-values to force. No v0.1.3 package, tag, DOI, or production generation exists
-until the controlled freeze and release gates in `RELEASING.md` pass.
+12 two-class / 0 three-class. The overlap histogram is pinned by the same
+pre-regeneration oracle as the per-class totals. These are halt-on-divergence
+expectations, not values to force. No v0.1.3 package, tag, DOI, or production
+generation exists until the controlled freeze and release gates in
+`RELEASING.md` pass.
 
 **Independent reconstructibility remains open.** Of v0.1.2's 106 memberships,
 80 are decidable from the embedded patch alone in that package; the other 26

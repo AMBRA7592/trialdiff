@@ -19,6 +19,7 @@ from trialdiff.event_classes import (  # noqa: E402
     PRIMARY_ENDPOINT_CLEAN,
     SECONDARY_OUTCOME_REMOVED,
     WHY_STOPPED_REMOVED_TERMINAL,
+    EventClassInputError,
     after_primary_completion,
     derive_to_record,
     event_classes_for_patch,
@@ -63,6 +64,8 @@ EXPECTED_V03 = {
         SECONDARY_OUTCOME_REMOVED: 12,
         WHY_STOPPED_REMOVED_TERMINAL: 4,
     },
+    "event_class_overlap_counts": {1: 85, 2: 12},
+    "secondary_whole_item_replace_operations": 0,
 }
 
 
@@ -119,6 +122,16 @@ def audit_secondary_removal_candidate(operation: dict[str, Any]) -> bool:
     return indexed_remove or container_operation
 
 
+def audit_secondary_whole_item_replacement(operation: dict[str, Any]) -> bool:
+    parts = pointer_parts(operation.get("path", ""))
+    return (
+        operation.get("op") == "replace"
+        and len(parts) == 4
+        and parts[:3] == ["protocolSection", "outcomesModule", "secondaryOutcomes"]
+        and parts[3].isdigit()
+    )
+
+
 def compute_input_audit(connection: sqlite3.Connection) -> dict[str, Any]:
     connection.row_factory = sqlite3.Row
     rows = connection.execute(
@@ -159,26 +172,35 @@ def compute_input_audit(connection: sqlite3.Connection) -> dict[str, Any]:
     classified_trials: set[str] = set()
     event_class_memberships = 0
     event_class_counts: Counter[str] = Counter()
+    event_class_overlap_counts: Counter[int] = Counter()
+    secondary_whole_item_replace_operations = 0
 
     for row in rows:
         identity = f'{row["nct_id"]}_v{row["from_version"]}_v{row["to_version"]}'
         if not row["from_record_json"]:
-            raise RuntimeError(f"{identity}: missing FROM-version record")
+            raise EventClassInputError(f"{identity}: missing FROM-version record")
         patch: list[dict[str, Any]] = json.loads(row["patch_json"])
         operations.update(str(operation.get("op", "<missing>")) for operation in patch)
+        secondary_whole_item_replace_operations += sum(
+            audit_secondary_whole_item_replacement(operation) for operation in patch
+        )
         from_record = json.loads(row["from_record_json"])
         stored_to_record = json.loads(row["to_record_json"]) if row["to_record_json"] else None
-        to_record = derive_to_record(from_record, stored_to_record, patch)
-        event_classes = event_classes_for_patch(
-            from_record=from_record,
-            to_record=stored_to_record,
-            patch=patch,
-        )
+        try:
+            to_record = derive_to_record(from_record, stored_to_record, patch)
+            event_classes = event_classes_for_patch(
+                from_record=from_record,
+                to_record=stored_to_record,
+                patch=patch,
+            )
+        except EventClassInputError as error:
+            raise EventClassInputError(f"{identity}: {error}") from error
         if event_classes:
             classified_records += 1
             classified_trials.add(row["nct_id"])
             event_class_memberships += len(event_classes)
             event_class_counts.update(event_classes)
+            event_class_overlap_counts[len(event_classes)] += 1
         if stored_to_record is None:
             reconstructed_to_records += 1
         else:
@@ -212,14 +234,18 @@ def compute_input_audit(connection: sqlite3.Connection) -> dict[str, Any]:
                 from_record,
                 ["protocolSection", "outcomesModule", "secondaryOutcomes"],
                 [],
-            ) or []
+            )
             to_secondary = get_path(
                 to_record,
                 ["protocolSection", "outcomesModule", "secondaryOutcomes"],
                 [],
-            ) or []
+            )
+            if from_secondary is None:
+                from_secondary = []
+            if to_secondary is None:
+                to_secondary = []
             if not isinstance(from_secondary, list) or not isinstance(to_secondary, list):
-                raise RuntimeError(f"{identity}: secondaryOutcomes is not an array")
+                raise EventClassInputError(f"{identity}: secondaryOutcomes is not an array")
             if len(from_secondary) > len(to_secondary):
                 postcompletion_secondary_count_decreases += 1
                 if not has_secondary_removal:
@@ -227,7 +253,10 @@ def compute_input_audit(connection: sqlite3.Connection) -> dict[str, Any]:
         if not (after_primary_completion(from_record) and has_secondary_removal):
             continue
         secondary_candidates += 1
-        corrected = secondary_outcome_item_removed_without_reindex(from_record, to_record, patch)
+        try:
+            corrected = secondary_outcome_item_removed_without_reindex(from_record, to_record, patch)
+        except EventClassInputError as error:
+            raise EventClassInputError(f"{identity}: {error}") from error
         historical = historical_v02_secondary_predicate(from_record, to_record, patch)
         corrected_secondary_memberships += int(corrected)
         historical_v02_secondary_memberships += int(historical)
@@ -254,6 +283,8 @@ def compute_input_audit(connection: sqlite3.Connection) -> dict[str, Any]:
         "classified_trials": len(classified_trials),
         "event_class_memberships": event_class_memberships,
         "event_class_counts": dict(sorted(event_class_counts.items())),
+        "event_class_overlap_counts": dict(sorted(event_class_overlap_counts.items())),
+        "secondary_whole_item_replace_operations": secondary_whole_item_replace_operations,
     }
 
 
@@ -264,7 +295,9 @@ def enforce_v03_expectations(stats: dict[str, Any]) -> None:
         if stats.get(key) != expected
     }
     if mismatches:
-        raise RuntimeError(f"v0.3 event-class input audit diverged: {json.dumps(mismatches, sort_keys=True)}")
+        raise EventClassInputError(
+            f"v0.3 event-class input audit diverged: {json.dumps(mismatches, sort_keys=True)}"
+        )
 
 
 def main() -> int:
@@ -279,11 +312,14 @@ def main() -> int:
     args = parser.parse_args()
     connection = sqlite3.connect(args.db)
     try:
-        stats = compute_input_audit(connection)
+        try:
+            stats = compute_input_audit(connection)
+            if args.expect_v03:
+                enforce_v03_expectations(stats)
+        except EventClassInputError as error:
+            raise SystemExit(f"Event-class input audit halted: {error}") from error
     finally:
         connection.close()
-    if args.expect_v03:
-        enforce_v03_expectations(stats)
     print(json.dumps(stats, indent=2, sort_keys=True))
     return 0
 
