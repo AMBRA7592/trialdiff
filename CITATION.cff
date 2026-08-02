@@ -19,8 +19,12 @@ identifiers:
     value: 10.5281/zenodo.20801956
     description: >-
       Concept DOI for the TrialDiff event-class Evidence Record dataset
-      (all versions; v0.1.1 is 10.5281/zenodo.20816639). See ERRATA.md E1
-      for the correction shipping as v0.1.2.
+      (all versions; v0.1.2 is 10.5281/zenodo.21755258 and v0.1.1 is
+      10.5281/zenodo.20816639). See ERRATA.md E1 for the corrected v0.1.2
+      release.
+  - type: doi
+    value: 10.5281/zenodo.21755258
+    description: Version DOI for the corrected v0.1.2 event-class dataset.
 abstract: >-
   TrialDiff converts public ClinicalTrials.gov record-version history into
   deterministic, hash-verifiable, claim-bounded Evidence Records: exact

@@ -275,11 +275,12 @@ in `ERRATA.md` and `VERSIONS.md`; regenerate records for the affected release.
 
 ## D. Tags, releases, DOI
 
-Zenodo state (already published, from `AMBRA7592/trialdiff-public`):
-concept DOI `10.5281/zenodo.20801956`; version DOIs v0.1
+Zenodo state: concept DOI `10.5281/zenodo.20801956`; version DOIs v0.1
 `10.5281/zenodo.20801957` (2026-06-22) and v0.1.1
 `10.5281/zenodo.20816639` (2026-06-23, author Amadeus Brandes, CC-BY-4.0,
-linked to trialdiff-public commit `7a11808`).
+linked to trialdiff-public commit `7a11808`), plus corrected v0.1.2
+`10.5281/zenodo.21755258` (2026-08-02, CC-BY-4.0, linked to this repository's
+`event-class-v0.1.2` GitHub Release).
 
 Rules for v0.1.2 and later:
 

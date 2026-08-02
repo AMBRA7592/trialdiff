@@ -24,12 +24,12 @@ dataset and is not developed further; its Zenodo linkage is left intact.
 
 Published dataset DOIs (Zenodo): concept DOI
 [10.5281/zenodo.20801956](https://doi.org/10.5281/zenodo.20801956) (always
-resolves to the latest version) · v0.1.1
+resolves to the latest version) · v0.1.2
+[10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258) · v0.1.1
 [10.5281/zenodo.20816639](https://doi.org/10.5281/zenodo.20816639) · v0.1
 [10.5281/zenodo.20801957](https://doi.org/10.5281/zenodo.20801957).
 Note: the published v0.1.1 dataset carries erratum E1 (`ERRATA.md`); the
-corrected v0.1.2 package is frozen in this repository and awaits publication
-under the same concept DOI.
+corrected v0.1.2 package is published under the same concept DOI.
 
 ## Live Demo
 
@@ -45,9 +45,10 @@ The live demo is backed by Neon Postgres and renders the **regenerated
 
 The corrected 97-record layer was promoted to Neon and Vercel production on
 2026-08-02. Its public JSON endpoint serves the canonical record bytes with a
-matching ETag and `x-trialdiff-canonical-hash`. Zenodo v0.1.2 publication is
-still pending; published v0.1.1 remains the immutable historical artifact that
-carries erratum E1. The historical count of 483 refers to the earlier
+matching ETag and `x-trialdiff-canonical-hash`. The v0.1.2 dataset is published
+at [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258);
+published v0.1.1 remains the immutable historical artifact that carries
+erratum E1. The historical count of 483 refers to the earlier
 materiality-filter inclusion policy, not the current event-class criterion.
 See `CORPUS.md` for the full population/version reconciliation.
 
@@ -64,8 +65,8 @@ Three frozen, hash-pinned data packages live in this repository:
   memberships are spurious.
 - **`event_class_records_v0.1.2/`** — the corrected dual-regenerated package:
   97 Evidence Records over 54 trials, with 106 event-class memberships and a
-  manifest-pinned determinism attestation. Frozen on 2026-07-31; Zenodo
-  publication is pending.
+  manifest-pinned determinism attestation. Frozen on 2026-07-31 and published
+  on 2026-08-02 as [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258).
 
 Key documents:
 
