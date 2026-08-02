@@ -13,6 +13,8 @@ backfill from live ClinicalTrials.gov for v0.1.2.** A later data refresh must
 use a separate corpus/version label.
 
 ```bash
+set -euo pipefail
+
 # 1. Prove the frozen input and preserve the source DB:
 sqlite3 <frozen_db> "PRAGMA integrity_check;
   SELECT 'trials', count(*) FROM trials
@@ -66,6 +68,45 @@ python3 scripts/validate_event_class_package.py \
   --package event_class_records_v0.1.2 \
   --db /tmp/trialdiff-v0.1.2-a.sqlite3
 python3 -m trialdiff.cli verify event_class_records_v0.1.2/records
+
+# 7. Preserve the accepted DB and build release artifacts outside /tmp and
+#    outside the Git working tree. Set this to a durable private directory:
+export RELEASE_PRIVATE=<durable-private-release-directory>
+mkdir -p "$RELEASE_PRIVATE"
+chmod 700 "$RELEASE_PRIVATE"
+test ! -e "$RELEASE_PRIVATE/a.sqlite3"
+cp /tmp/trialdiff-v0.1.2-a.sqlite3 "$RELEASE_PRIVATE/a.sqlite3"
+cmp /tmp/trialdiff-v0.1.2-a.sqlite3 "$RELEASE_PRIVATE/a.sqlite3"
+
+# Produce the production import twice in fresh processes. The empty cmp is a
+# stop condition: the importer must be byte-deterministic across hash seeds.
+test ! -e "$RELEASE_PRIVATE/trialdiff-v0.1.2-neon.sql"
+PYTHONHASHSEED=0 python3 scripts/sqlite_to_postgres.py \
+  "$RELEASE_PRIVATE/a.sqlite3" --truncate \
+  --output "$RELEASE_PRIVATE/trialdiff-v0.1.2-neon.sql"
+PYTHONHASHSEED=4242 python3 scripts/sqlite_to_postgres.py \
+  "$RELEASE_PRIVATE/a.sqlite3" --truncate \
+  --output /tmp/trialdiff-v0.1.2-neon.verify.sql
+cmp "$RELEASE_PRIVATE/trialdiff-v0.1.2-neon.sql" \
+  /tmp/trialdiff-v0.1.2-neon.verify.sql
+
+# Build the one ZIP used unchanged for both the GitHub Release and Zenodo.
+# Running from inside the package preserves the v0.1.1 archive's root layout.
+test ! -e "$RELEASE_PRIVATE/trialdiff_event_class_records_v0.1.2.zip"
+(
+  cd event_class_records_v0.1.2
+  COPYFILE_DISABLE=1 LC_ALL=C find . -type f -print \
+    | LC_ALL=C sort \
+    | COPYFILE_DISABLE=1 zip -X -q \
+        "$RELEASE_PRIVATE/trialdiff_event_class_records_v0.1.2.zip" -@
+)
+
+(
+  cd "$RELEASE_PRIVATE"
+  shasum -a 256 a.sqlite3 trialdiff-v0.1.2-neon.sql \
+    trialdiff_event_class_records_v0.1.2.zip > RELEASE_ARTIFACTS.sha256
+  shasum -a 256 -c RELEASE_ARTIFACTS.sha256
+)
 ```
 
 Required corrected results for the frozen input are: 97 records, 54 represented
@@ -75,8 +116,21 @@ recomputed over the same 4,485 patches and must equal 73 inclusive / 63
 results-co-occurring / 10 clean before release. Any divergence is a stop
 condition, not a count to carry forward.
 
-Then: update `VERSIONS.md` (§4), add the package to CI validation, and tag
-(`git tag -a event-class-v0.1.2 -m "Corrected whyStopped class"`).
+Then: update `VERSIONS.md` (§4), add the package to CI validation, and require
+green CI. The annotated release tag is created and pushed in section D.
+
+### Accepted v0.1.2 release artifacts
+
+The controlled freeze produced the following fixed release inputs. Do not
+rebuild or silently substitute any of them during the production window:
+
+- generator code commit: `6176b2121bdcd1cac6ce859d7749ab188de4b183`
+- frozen package commit: `8777d04c11e7e660a22db51d3589498911e7d086`
+- regenerated SQLite A SHA-256: `8105dbad8ec65a83fa8304b17b193e71a69bef0a0e38c935fd3299cc182e1238`
+- production import SQL SHA-256: `3a0f26f81544415c88a8f3d34fd5426feb8d804434b3bcca9aee258e361067e7`
+- release ZIP SHA-256: `4681fb0e5baaab53fb9352721a49aaa7b5e2027a18c9029547592ff7dfb709e7`
+- release ZIP MD5: `39bbc1d58ad295a60cbebdec1fdc5ff2`
+- package manifest SHA-256: `2211d918a4f840ab9150160389856e6315a0fe1e358ac1be4580f8a1cac4c8ec`
 
 ## B. Redeploy the live database (Neon)
 
@@ -87,26 +141,103 @@ change the Vercel production branch to a release-hold branch), then perform
 the database operation below. This prevents the strict endpoint from going
 live against unverifiable legacy rows.
 
-```bash
-# 1. Back up production rows before the destructive replacement:
-pg_dump "$DATABASE_URL" --data-only --table=evidence_records \
-  > /tmp/evidence_records-pre-v0.1.2.sql
+Use a direct, non-pooled Neon connection for administrative work. Neon's
+[connection-pooling guidance](https://neon.com/docs/connect/connection-pooling)
+documents direct connections for migrations, `pg_dump`, and `pg_restore`.
+A pooled hostname contains `-pooler`; do not use it in this section. Before
+changing production, create a named manual snapshot in Neon's Backup & Restore
+page when the account offers it. The full custom-format dump below remains
+mandatory because the import replaces nine tables, not only
+`evidence_records`.
 
-# 2. Apply the new migration (canonical_json jsonb -> text):
-psql "$DATABASE_URL" -v ON_ERROR_STOP=1 \
+```bash
+set -euo pipefail
+
+# 1. Set the direct URL and prove it is not the pooled application URL:
+export DATABASE_URL_DIRECT=<direct-non-pooler-neon-url>
+case "$DATABASE_URL_DIRECT" in
+  *-pooler*) echo "Refusing pooled Neon URL" >&2; exit 1 ;;
+esac
+
+# 2. Re-check the staged artifacts immediately before the hold window:
+(
+  cd "$RELEASE_PRIVATE"
+  shasum -a 256 -c RELEASE_ARTIFACTS.sha256
+)
+
+# 3. Make a full rollback archive before the destructive replacement. A dump
+#    of evidence_records alone is insufficient: --truncate replaces all nine
+#    exported tables. pg_restore --list must succeed and produce a nonempty
+#    inventory before continuing.
+umask 077
+export PRE_RELEASE_DUMP="$RELEASE_PRIVATE/neon-pre-v0.1.2.dump"
+pg_dump --dbname="$DATABASE_URL_DIRECT" --format=custom \
+  --no-owner --no-acl --file="$PRE_RELEASE_DUMP"
+pg_restore --list "$PRE_RELEASE_DUMP" \
+  > "$RELEASE_PRIVATE/neon-pre-v0.1.2.dump.list"
+test -s "$PRE_RELEASE_DUMP"
+test -s "$RELEASE_PRIVATE/neon-pre-v0.1.2.dump.list"
+shasum -a 256 "$PRE_RELEASE_DUMP" \
+  > "$RELEASE_PRIVATE/neon-pre-v0.1.2.dump.sha256"
+shasum -a 256 -c "$RELEASE_PRIVATE/neon-pre-v0.1.2.dump.sha256"
+
+# 4. Apply the new migration (canonical_json jsonb -> text):
+psql "$DATABASE_URL_DIRECT" -v ON_ERROR_STOP=1 \
   -f postgres/migrations/006_canonical_json_text.sql
 
-# 3. Re-export from the verified corrected SQLite and atomically re-import:
-python3 scripts/sqlite_to_postgres.py /tmp/trialdiff-v0.1.2-a.sqlite3 \
-  --truncate --output /tmp/trialdiff_export.sql
-psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /tmp/trialdiff_export.sql
+# 5. Atomically import the already-verified SQL. The file contains BEGIN,
+#    TRUNCATE/INSERT statements, sequence resets, and COMMIT; ON_ERROR_STOP
+#    makes any SQL error abort instead of carrying a partial load forward.
+psql "$DATABASE_URL_DIRECT" -v ON_ERROR_STOP=1 \
+  -f "$RELEASE_PRIVATE/trialdiff-v0.1.2-neon.sql"
 
-# 4. Verify byte-verifiability in place (convert_to, NOT a ::bytea cast —
+# 6. Verify byte-verifiability in place (convert_to, NOT a ::bytea cast —
 #    casting text to bytea parses escape syntax and errors on backslashes):
-psql "$DATABASE_URL" -c "SELECT count(*) FROM evidence_records
-  WHERE encode(sha256(convert_to(canonical_json, 'UTF8')), 'hex') <> canonical_hash;"  # must be 0
+psql "$DATABASE_URL_DIRECT" -v ON_ERROR_STOP=1 -c "
+SELECT count(*) AS canonical_mismatches
+FROM evidence_records
+WHERE encode(sha256(convert_to(canonical_json, 'UTF8')), 'hex') <> canonical_hash;
+"  # must be 0
 
-# 5. Confirm the expected 97 rows and corrected class counts in Neon.
+# 7. Confirm the release population in Neon. Required counts are
+#    100 / 4485 / 868 / 97 / 54 / 106.
+psql "$DATABASE_URL_DIRECT" -v ON_ERROR_STOP=1 -c "
+SELECT 'trials' AS measure, count(*)::bigint AS value FROM trials
+UNION ALL SELECT 'trial_patches', count(*) FROM trial_patches
+UNION ALL SELECT 'materiality_events', count(*) FROM materiality_events
+UNION ALL SELECT 'evidence_records', count(*) FROM evidence_records
+UNION ALL SELECT 'evidence_record_trials', count(DISTINCT nct_id) FROM evidence_records
+UNION ALL SELECT 'event_class_memberships',
+  sum(jsonb_array_length(event_classes_json)) FROM evidence_records;
+"
+
+# Required classes: enrollment/results/primary/secondary/whyStopped =
+# 3 / 80 / 10 / 9 / 4.
+psql "$DATABASE_URL_DIRECT" -v ON_ERROR_STOP=1 -c "
+SELECT cls.event_class, count(*)::int
+FROM evidence_records er
+CROSS JOIN LATERAL jsonb_array_elements_text(er.event_classes_json)
+  AS cls(event_class)
+GROUP BY cls.event_class
+ORDER BY cls.event_class;
+"
+
+# Required overlaps: 88 one-class / 9 two-class / no three-class row.
+psql "$DATABASE_URL_DIRECT" -v ON_ERROR_STOP=1 -c "
+SELECT jsonb_array_length(event_classes_json) AS event_class_count,
+  count(*)::int
+FROM evidence_records
+GROUP BY event_class_count
+ORDER BY event_class_count;
+"
+
+# The corrected former flagship must exist under its rotated ID, carry two
+# classes, and hash to the frozen v0.1.2 value.
+psql "$DATABASE_URL_DIRECT" -v ON_ERROR_STOP=1 -c "
+SELECT event_id, canonical_hash, event_classes_json
+FROM evidence_records
+WHERE event_id = 'evt_NCT04278144_v33_v34_f64d3dc78625';
+"
 ```
 
 Only after all database checks pass: promote the already-reviewed Vercel
@@ -114,11 +245,12 @@ preview (or merge and restore the production branch), then spot-check:
 
 ```bash
 curl -fsS -D /tmp/trialdiff.headers \
-  https://trialdiff.vercel.app/events/<corrected_event_id>.json \
+  https://trialdiff.vercel.app/events/evt_NCT04278144_v33_v34_f64d3dc78625.json \
   -o /tmp/trialdiff-record.json
-sha256sum /tmp/trialdiff-record.json
+shasum -a 256 /tmp/trialdiff-record.json
 grep -iE '^(etag|x-trialdiff-canonical-hash):' /tmp/trialdiff.headers
-# all three hashes must agree
+# All three hashes must equal:
+# d96faa8297dc182164e63da59def65b831533a0780ecdbeb133325d273d616f0
 ```
 
 ## C. Freeze policy for new packages
@@ -165,14 +297,31 @@ Rules for v0.1.2 and later:
    package file to be listed in `MANIFEST.sha256`. Do not add files to the
    archive manually after export. Set "Is supplement to" to this
    repository's release tag.
-4. Tag in git and cut a GitHub Release with the same archive as asset:
+4. Before Zenodo publication, merge, branch deletion, or any history-rewriting
+   operation, create and push the annotated v0.1.2 tag at the frozen package
+   commit. The published Zenodo v0.1.1 erratum description pins commit
+   `6176b21`; `8777d04` descends from it, so the pushed tag keeps that cited
+   SHA reachable even if PR #1 is later squashed or rebased. Keep Zenodo's
+   link pointed at the immutable SHA; the tag supplies reachability.
 
 ```bash
-git tag -a v0.1-alpha <freeze-commit> -m "Frozen 25-study evidence demo"
-git tag -a event-class-v0.1.1 <package-commit> -m "Event-class package v0.1.1 (see ERRATA.md E1)"
-git tag -a event-class-v0.1.2 <new-package-commit> -m "Corrected event-class package"
-git push origin --tags
+git tag -a event-class-v0.1.2 \
+  8777d04c11e7e660a22db51d3589498911e7d086 \
+  -m "Corrected event-class package v0.1.2"
+git push origin refs/tags/event-class-v0.1.2
+git ls-remote --tags origin refs/tags/event-class-v0.1.2
+git merge-base --is-ancestor \
+  6176b2121bdcd1cac6ce859d7749ab188de4b183 event-class-v0.1.2
 ```
+
+Every commit SHA cited by published DOI metadata must be retained by a pushed
+tag before its branch can be deleted or its commits rewritten. Do not rely on
+an unpushed local tag or on an open pull-request branch for long-term
+reachability.
+
+Cut the GitHub Release from `event-class-v0.1.2` and attach the already-staged
+`trialdiff_event_class_records_v0.1.2.zip` without rebuilding it. Its SHA-256
+must remain `4681fb0e5baaab53fb9352721a49aaa7b5e2027a18c9029547592ff7dfb709e7`.
 
 5. Update `CITATION.cff`, `README.md`, and `VERSIONS.md` with the new
    version DOI once minted. The paper must cite **v0.1.2**, not v0.1.1.

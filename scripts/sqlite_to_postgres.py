@@ -64,7 +64,7 @@ TIMESTAMPTZ_COLUMNS = {
     "generated_at",
 }
 
-IDENTITY_TABLES = {
+IDENTITY_TABLES = (
     "trial_snapshots",
     "trial_versions",
     "trial_patches",
@@ -72,7 +72,7 @@ IDENTITY_TABLES = {
     "classifier_rules",
     "case_studies",
     "ingest_runs",
-}
+)
 
 
 def quote_text(value: Any) -> str:

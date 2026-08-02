@@ -218,6 +218,31 @@ class CrossProcessDeterminismTests(unittest.TestCase):
         hashes = {self.probe_hash(seed) for seed in ("0", "1", "4242")}
         self.assertEqual(len(hashes), 1, hashes)
 
+    def test_postgres_export_is_stable_across_hash_seeds(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            db_path = Path(tempdir) / "export.sqlite3"
+            init_db(db_path)
+            outputs = []
+            for hashseed in ("0", "1", "4242"):
+                result = subprocess.run(
+                    [
+                        sys.executable,
+                        "scripts/sqlite_to_postgres.py",
+                        str(db_path),
+                        "--truncate",
+                    ],
+                    capture_output=True,
+                    text=True,
+                    cwd=Path(__file__).resolve().parent.parent,
+                    env={
+                        "PATH": os.environ.get("PATH", ""),
+                        "PYTHONHASHSEED": hashseed,
+                    },
+                    check=True,
+                )
+                outputs.append(result.stdout)
+        self.assertEqual(len(set(outputs)), 1)
+
 
 class VolatileKeySweepTests(unittest.TestCase):
     VOLATILE_KEYS = {"created_at", "generated_at", "fetched_at"}
