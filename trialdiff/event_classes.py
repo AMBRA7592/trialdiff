@@ -150,14 +150,16 @@ def combined_rule_set_hash(*, triage_rule_set_hash: str | None) -> str:
 def has_results_reconciliation_signal(
     *,
     from_record: dict[str, Any],
-    to_record: dict[str, Any] | None,
+    to_record: dict[str, Any],
     patch: list[dict[str, Any]],
 ) -> bool:
     for operation in patch:
         path = operation.get("path", "")
         if path == "/hasResults" or path.startswith("/resultsSection"):
             return True
-    return not bool(from_record.get("hasResults")) and bool((to_record or {}).get("hasResults"))
+    if bool(from_record.get("hasResults")) != bool(to_record.get("hasResults")):
+        raise EventClassInputError("hasResults changed without a corresponding patch operation")
+    return False
 
 
 def after_primary_completion(record: dict[str, Any]) -> bool:

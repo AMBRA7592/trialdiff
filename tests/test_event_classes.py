@@ -9,6 +9,7 @@ from trialdiff.event_classes import (
     SECONDARY_OUTCOME_REMOVED,
     WHY_STOPPED_REMOVED_TERMINAL,
     event_classes_for_patch,
+    has_results_reconciliation_signal,
 )
 
 
@@ -184,6 +185,14 @@ class EventClassTests(unittest.TestCase):
             OUTCOME_EDIT_WITH_RESULTS_SIGNAL,
             event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch),
         )
+
+    def test_unpatched_has_results_change_is_a_provenance_error(self) -> None:
+        with self.assertRaises(EventClassInputError):
+            has_results_reconciliation_signal(
+                from_record=record(has_results=False),
+                to_record=record(has_results=True),
+                patch=[],
+            )
 
     def test_missing_to_record_without_patch_evidence_is_not_whystopped_removal(self) -> None:
         # Regression test for the v0.1/v0.1.1 package bug: a missing TO-version

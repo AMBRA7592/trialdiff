@@ -24,10 +24,10 @@ from trialdiff.ruleset import implementation_source_hash
 # Golden hashes pin the active rule semantics. If one of these assertions
 # fails, the rule set changed: bump the relevant version string, record the
 # old->new hash transition in ERRATA.md, and only then update the constant.
-GOLDEN_EVENT_CLASS_RULE_SET_HASH = "91892060d8cd852c68a8afc0806cba298701702417025433cf001779bee82350"
+GOLDEN_EVENT_CLASS_RULE_SET_HASH = "e6dfdefff01f2acebbd215a629a38db1f61d7564414f5e0f9c2a96729a3a71ea"
 GOLDEN_TRIAGE_RULE_TABLE_HASH = "6fc6d7533e740cc38ca0ba0425927ade66f2f90b067963c5cf52d08a88f8d883"
 GOLDEN_TRIAGE_RULE_SET_HASH = "af5e5835e00a5fcfe2a17fd02b5fc244c2564104f93f78a1d77d7889f12a178b"
-GOLDEN_COMBINED_RULE_SET_HASH = "95326e30a51f979e331037a0e0564f086ff568795d7659d158b0c66a31129b1b"
+GOLDEN_COMBINED_RULE_SET_HASH = "eb817af260ca8099002c26bc291977bcee53cf4d84b08770c8b1cc7194497b3d"
 
 # Historical hashes carried by the frozen packages; they must never be
 # reused for new generations after a definition change.

@@ -177,6 +177,12 @@ all 4,385 stored TO snapshots exactly match the replayed document; the 100
 patches without a stored TO snapshot reconstruct successfully; there are zero
 replay errors and zero stored-versus-derived mismatches.
 
+This establishes internal consistency between TrialDiff's ingested patches and
+stored snapshots, not independent fidelity to ClinicalTrials.gov. The 100
+missing-TO reconstructions demonstrate successful replay; their correctness is
+inferred from the 4,385 exact stored-TO comparisons rather than checked against
+an independent registry capture.
+
 **Related hardening.** Before v0.3, replay failure returned a missing TO view.
 The primary and secondary predicates could interpret that absence as automatic
 positive evidence. This was the same failure shape as E1, although the frozen
@@ -184,6 +190,8 @@ corpus contains no triggering replay failure. v0.3 makes replay failure and a
 stored-versus-derived TO mismatch hard classification errors. Only `add`,
 `remove`, and `replace` operations are accepted; unsupported operations such as
 `move` or `copy` halt classification instead of producing a membership.
+An unpatched `hasResults` change likewise halts as a provenance defect rather
+than serving as a reconciliation signal.
 
 The primary-endpoint predicate had a sibling fixed-index exposure. It is now
 defined as an order-insensitive, duplicate-sensitive comparison of endpoint
@@ -201,9 +209,9 @@ event-class and combined hashes even though the class names remain unchanged:
 | Hash | Frozen v0.1.2 generation | Corrected v0.3 code |
 | --- | --- | --- |
 | `EVENT_CLASS_VERSION` | `trialdiff.event_classes.v0.2` | `trialdiff.event_classes.v0.3` |
-| implementation hash | previous v0.2 implementation | `a3242f69e5eb3483badcfb3b295ea2f599753d256176c41b43b3b3120387aa75` |
-| `event_class_rule_set_hash` | `07957f8b90549d4f42387f51b471ecde9901b6db63bbc27b84c73631603407c0` | `91892060d8cd852c68a8afc0806cba298701702417025433cf001779bee82350` |
-| combined `rule_set_hash` | `318445b9ad266f51fd10ef378645c753ba7a098e3e4395c3c457750dc5f88d86` | `95326e30a51f979e331037a0e0564f086ff568795d7659d158b0c66a31129b1b` |
+| implementation hash | previous v0.2 implementation | `c7e1efc0a9832d5735ddbf5d43d06980957980e8714925c17321e50cb81fc7d4` |
+| `event_class_rule_set_hash` | `07957f8b90549d4f42387f51b471ecde9901b6db63bbc27b84c73631603407c0` | `e6dfdefff01f2acebbd215a629a38db1f61d7564414f5e0f9c2a96729a3a71ea` |
+| combined `rule_set_hash` | `318445b9ad266f51fd10ef378645c753ba7a098e3e4395c3c457750dc5f88d86` | `eb817af260ca8099002c26bc291977bcee53cf4d84b08770c8b1cc7194497b3d` |
 | `triage_rule_set_hash` | `af5e5835e00a5fcfe2a17fd02b5fc244c2564104f93f78a1d77d7889f12a178b` | unchanged |
 
 This is the first published correction demonstrating the v0.2 hash design's

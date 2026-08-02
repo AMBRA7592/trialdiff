@@ -52,6 +52,9 @@ python3 scripts/analyze_event_class_boundary.py \
 # Required boundary: 4485 / 73 / 63 / 10.
 
 $EDITOR "$RELEASE_PRIVATE/DETERMINISM_ATTESTATION_v0.1.3.md"
+# The attestation must state that stored-TO equality proves internal ingestion
+# consistency, not independent registry fidelity. It must also distinguish the
+# 100 successful missing-TO replays from externally checked reconstructions.
 for suffix in a b; do
   python3 scripts/export_event_class_package.py \
     --db "$RELEASE_PRIVATE/v0.1.3-${suffix}.sqlite3" \
@@ -90,13 +93,17 @@ ID. Active feeds may move to v0.1.3 only after this resolver is verified.
 
 ## A1. Historical accepted v0.1.2 procedure (erratum E1 correction)
 
+> **ARCHIVE ONLY - DO NOT EXECUTE.** This block records the completed v0.1.2
+> release. Current operators must use section A and must not substitute these
+> commands, counts, IDs, or artifact hashes into a v0.1.3 release.
+
 Requires an intact copy of the **frozen Snapshot C SQLite database** in
 `CORPUS.md`: 100 trials and exactly 4,485 adjacent-version patches. This is a
 correction release, not a registry-data refresh. **Do not run `ingest` or
 backfill from live ClinicalTrials.gov for v0.1.2.** A later data refresh must
 use a separate corpus/version label.
 
-```bash
+```text
 set -euo pipefail
 
 # 1. Prove the frozen input and preserve the source DB:
@@ -234,6 +241,21 @@ requirements:
 5. An unknown event ID still returns 404.
 6. Backup and rollback cover both active and superseded generations.
 
+The existing `scripts/sqlite_to_postgres.py --truncate` path is prohibited for
+v0.1.3 because it deletes the published v0.1.2 rows. The production design must
+add a package-generation column (distinct from the record-schema
+`evidence_version`), import v0.1.3 additively, and make the active generation an
+explicit configuration value. Every feed, corpus count, trial/patch evidence
+lookup, and rule-set query must filter that value; correctness must not depend
+on `generated_at`, hash ordering, or a single-row assumption.
+
+Canonical JSON bodies remain immutable. Supersession state belongs in response
+headers and HTML, never in the hashed record body. Because published JSON uses
+one-year immutable caching, also expose a non-immutable supersession index that
+maps every published event ID to its package generation and successor, if any.
+The index must be independently queryable without fetching or mutating a cached
+record response.
+
 TrialDiff uses manual Vercel promotion; no Git-triggered production deployment
 is configured. Build and verify a preview, migrate/import Neon under a hold,
 then promote that exact reviewed deployment ID with `vercel promote`. Do not
@@ -245,6 +267,10 @@ saved body, body SHA-256, ETag, and offline `trialdiff verify`. Promotion fails
 unless both generations match their frozen package files byte-for-byte.
 
 ## B1. Historical v0.1.2 Neon migration procedure
+
+> **ARCHIVE ONLY - DO NOT EXECUTE.** This destructive truncate-and-reload
+> procedure records the completed v0.1.2 migration. It violates the v0.1.3
+> coexistence policy and must not be adapted as the current production path.
 
 **Do not merge or promote the new frontend while production Neon still has
 the pre-migration schema/data.** First build and inspect the PR's Vercel
@@ -262,7 +288,7 @@ page when the account offers it. The full custom-format dump below remains
 mandatory because the import replaces nine tables, not only
 `evidence_records`.
 
-```bash
+```text
 set -euo pipefail
 
 # 1. Set the direct URL and prove it is not the pooled application URL:
@@ -355,7 +381,7 @@ WHERE event_id = 'evt_NCT04278144_v33_v34_f64d3dc78625';
 Only after all database checks pass: promote the exact already-reviewed Vercel
 preview deployment ID, then spot-check:
 
-```bash
+```text
 curl -fsS -D /tmp/trialdiff.headers \
   https://trialdiff.vercel.app/events/evt_NCT04278144_v33_v34_f64d3dc78625.json \
   -o /tmp/trialdiff-record.json
@@ -409,6 +435,9 @@ from an expectation. Record them only from the accepted frozen artifacts.
 
 ## D1. Historical accepted v0.1.2 tags, release, and DOI
 
+> **ARCHIVE ONLY - DO NOT EXECUTE.** These commands and identifiers document a
+> completed publication. Use section D for v0.1.3.
+
 This section records the completed v0.1.2 publication workflow and its exact
 anchors. Do not rerun it or replace its hashes with v0.1.3 values.
 
@@ -442,7 +471,7 @@ Historical v0.1.2 rules (completed 2026-08-02):
    SHA reachable even if PR #1 is later squashed or rebased. Keep Zenodo's
    link pointed at the immutable SHA; the tag supplies reachability.
 
-```bash
+```text
 git tag -a event-class-v0.1.2 \
   8777d04c11e7e660a22db51d3589498911e7d086 \
   -m "Corrected event-class package v0.1.2"
