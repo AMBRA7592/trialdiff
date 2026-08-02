@@ -1,51 +1,134 @@
-# TrialDiff Evidence Demo v0.1-alpha
+# TrialDiff
 
-TrialDiff v0.1-alpha is a bounded evidence demo showing that public ClinicalTrials.gov record changes can be converted into replayable, source-linked, deterministic Evidence Records with deterministic triage classifications.
+TrialDiff converts public ClinicalTrials.gov record-version history into
+replayable, source-linked, deterministic **Evidence Records**: exact changed
+paths, the registry's own JSON Patch payloads, content hashes, deterministic
+classification rules, timing context, and explicit claims-supported /
+claims-not-supported boundaries.
 
-This is not a product launch, monitoring service, pharma SaaS, misconduct detector, or allegation engine.
+This is not a product launch, monitoring service, pharma SaaS, misconduct
+detector, or allegation engine.
 
-> Severity is deterministic, reproducible, uncalibrated triage metadata. It is not validated review priority and not proven wrongdoing.
+> Severity is deterministic, reproducible, uncalibrated triage metadata. It
+> is not validated review priority and not proven wrongdoing.
+
+New here? `METHODOLOGY.md` is the documentation map and reading order.
+Known defects in published artifacts are recorded in `ERRATA.md`.
+
+## Repository Authority
+
+**This repository (`AMBRA7592/trialdiff`) is the active, canonical
+repository.** The companion `AMBRA7592/trialdiff-public` repository is the
+immutable historical snapshot backing the published v0.1/v0.1.1 Zenodo
+dataset and is not developed further; its Zenodo linkage is left intact.
+
+Published dataset DOIs (Zenodo): concept DOI
+[10.5281/zenodo.20801956](https://doi.org/10.5281/zenodo.20801956) (always
+resolves to the latest version) · v0.1.2
+[10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258) · v0.1.1
+[10.5281/zenodo.20816639](https://doi.org/10.5281/zenodo.20816639) · v0.1
+[10.5281/zenodo.20801957](https://doi.org/10.5281/zenodo.20801957).
+Note: the published v0.1.1 dataset carries erratum E1 (`ERRATA.md`); the
+corrected v0.1.2 package is published under the same concept DOI.
 
 ## Live Demo
 
 Live site: <https://trialdiff.vercel.app>
 
-The live demo is backed by Neon Postgres and currently renders the same 25-study alpha corpus used for this frozen package:
+The live demo is backed by Neon Postgres and renders the **regenerated
+100-study breast-cancer corpus** under the v0.2.1 rule generation:
 
-- 25 breast-cancer-related interventional trials
-- 280 adjacent version patches
-- 122 materiality events
-- 86 generated Evidence Records
-- 40 selected frozen records in `records/`
+- 100 breast-cancer-related interventional trials
+- 4,485 adjacent version patches
+- 868 materiality events (87 critical / 396 high / 217 medium / 168 low triage)
+- 97 event-class Evidence Records from the corrected v0.1.2 generation
 
-The alpha is intentionally relabeled as a 25-study demo because the local 100-study SQLite file was not reliably readable at freeze time.
+The corrected 97-record layer was promoted to Neon and Vercel production on
+2026-08-02. Its public JSON endpoint serves the canonical record bytes with a
+matching ETag and `x-trialdiff-canonical-hash`. The v0.1.2 dataset is published
+at [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258);
+published v0.1.1 remains the immutable historical artifact that carries
+erratum E1. The historical count of 483 refers to the earlier
+materiality-filter inclusion policy, not the current event-class criterion.
+See `CORPUS.md` for the full population/version reconciliation.
 
-## Frozen Package
+## Frozen Packages
 
-This repository snapshot contains:
+Three frozen, hash-pinned data packages live in this repository:
 
-- `records/*.json` - 40 selected self-contained Evidence Records
-- `CLAIMS.md` - what the demo is allowed to claim
-- `NON_CLAIMS.md` - what the demo explicitly does not claim
-- `EVIDENCE_RECORD_PRIMITIVE.md` - operational primitive specification
-- `EVIDENCE_RECORD_SCHEMA.md` - schema description for exported records
-- `VALIDATION.md` - validation and audit status
-- `RELEASE_NOTES_v0.1-alpha.md` - what exists, what is excluded, and what is deferred
-- `manual-audit-5-records.md` - five-record manual audit notes
-- `MANIFEST.sha256` - SHA-256 manifest for frozen files
-- `scripts/export_alpha_demo.py` - deterministic export script
-- `scripts/validate_alpha_demo.py` - package validation script
+- **`records/`** — the v0.1-alpha demo: 40 selected high/critical Evidence
+  Records from the 25-study alpha corpus (25 trials, 280 patches, 122
+  events, 86 records at freeze). Pinned by `MANIFEST.sha256`.
+- **`event_class_records_v0.1.1/`** — 100 event-class Evidence Records over
+  52 trials from the 100-study corpus, with its own manifest. Carries
+  erratum E1 (see `ERRATA.md`): 9 of 13 `why_stopped_removed_in_terminal_context`
+  memberships are spurious.
+- **`event_class_records_v0.1.2/`** — the corrected dual-regenerated package:
+  97 Evidence Records over 54 trials, with 106 event-class memberships and a
+  manifest-pinned determinism attestation. Frozen on 2026-07-31 and published
+  on 2026-08-02 as [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258).
 
-## Selection Rule
+Key documents:
 
-The frozen package exports 40 Evidence Records from the 25-study corpus:
+- `CLAIMS.md` / `NON_CLAIMS.md` — what is and is not claimed
+- `EVIDENCE_RECORD_PRIMITIVE.md` — the operational primitive specification
+- `DATA_DICTIONARY.md` + `schemas/` — both record schemas
+- `VALIDATION.md` — validation and audit status of the alpha package
+- `VERSIONS.md` — disambiguates the spec/release/calibration/package version lines
+
+## Selection Rule (frozen alpha)
+
+The v0.1-alpha package exports 40 Evidence Records from the 25-study corpus:
 
 1. all records carrying the critical triage label first;
 2. then records carrying the high triage label;
 3. ordered by timing context, with post-recruitment and late-recruitment records before earlier records;
 4. capped at 40 records.
 
-This produces a deterministic, bounded inspection slice rather than a full product dataset or validated priority feed.
+This produces a deterministic, bounded inspection slice rather than a full
+product dataset or validated priority feed.
+
+## Verify The Frozen Packages
+
+Anyone can verify the committed records offline — no database required:
+
+```bash
+# Offline integrity verification of any record file or directory:
+python3 -m trialdiff.cli verify records \
+  event_class_records_v0.1.1/records \
+  event_class_records_v0.1.2/records
+
+# Package validators (structure, counts, manifests, recomputed hashes):
+python3 scripts/validate_alpha_demo.py
+python3 scripts/validate_event_class_package.py --package event_class_records_v0.1.1
+python3 scripts/validate_event_class_package.py --package event_class_records_v0.1.2
+
+# Manifests:
+sha256sum -c MANIFEST.sha256
+sha256sum -c MANIFEST.calibration.sha256
+(cd event_class_records_v0.1.1 && sha256sum -c MANIFEST.sha256)
+(cd event_class_records_v0.1.2 && sha256sum -c MANIFEST.sha256)
+```
+
+`trialdiff verify` recomputes canonical hashes, patch hashes, and (for
+current-format records) the deterministic `event_id` from the record's own
+contents. A record that fails any of these has been altered.
+
+Scope of that guarantee, precisely:
+
+- **`trialdiff verify` alone** proves canonical form and internal
+  self-consistency. Its checks are recomputed from the record's own
+  contents, so an editor who re-serializes canonically (and re-derives the
+  self-referential hashes) can alter fields without failing it. The
+  **authenticity anchors are the manifests** (`MANIFEST.sha256`, the
+  package manifests) and the database `canonical_hash` values — always
+  verify against those when provenance matters.
+- Hashes and manifests together prove **byte integrity** — the artifact is
+  exactly what was published. They do not prove **semantic correctness** —
+  that the claims inside it are true. The published v0.1.1 dataset passes
+  every integrity check and still carries a false class claim in 9 records
+  (`ERRATA.md` E1). Correctness lives in the errata, regeneration, and
+  rule-set-hash discipline, not in the checksums.
 
 ## What A Reviewer Can Inspect
 
@@ -55,41 +138,64 @@ For each exported record, a reviewer can answer:
 2. Where did it change?
 3. When did it change?
 4. Which deterministic rule or value signal classified it?
-5. Which deterministic triage signal caused it to be selected?
+5. Which deterministic event class or triage signal caused it to be selected?
 6. What source/provenance/hash fields support the record?
 7. Can the record be verified against the frozen manifest?
 8. What is explicitly not being claimed?
 
-## Regenerate The Frozen Records
+## Run It Locally
 
-From the repository root:
-
-```bash
-python3 -m trialdiff.cli generate-evidence \
-  --db trialdiff_breast_cancer_limit25.sqlite3 \
-  --force
-
-python3 scripts/export_alpha_demo.py \
-  --db trialdiff_breast_cancer_limit25.sqlite3 \
-  --out records \
-  --limit 40
-```
-
-## Validate The Frozen Package
+The pipeline is stdlib-only Python 3.11+. Install and use the CLI:
 
 ```bash
-python3 scripts/validate_alpha_demo.py
-shasum -a 256 -c MANIFEST.sha256
+pip install .          # or: pip install -e ".[dev]" for development
+trialdiff --help       # init-db, ingest, classify, inspect, select-corpus,
+                       # generate-evidence, verify
 ```
 
-Expected validator output:
+The corpus SQLite databases are not committed (they are large, regenerable
+working files), but a runnable demo database can be built from the committed
+records:
 
-```text
-records=40
+```bash
+python3 scripts/seed_from_records.py --db seed_demo.sqlite3
 ```
+
+To run the web frontend against it locally, see `frontend/README.md`
+(docker-compose Postgres + seed import). To regenerate corpora from the live
+registry, see the `select-corpus`, `ingest`, `classify`, and
+`generate-evidence` CLI commands — note that the live registry moves, so
+fresh ingests will not byte-reproduce the frozen packages; those are
+verified, not re-derived (see `EVIDENCE_RECORD_PRIMITIVE.md`).
+
+Regenerating the *frozen alpha* exactly additionally requires the original
+25-study database and the v0.1-alpha code generation; at current HEAD the
+generator gates on event classes and emits additional fields, so the
+`records/` package is preserved as a verified historical artifact rather
+than re-derived (see `VERSIONS.md`).
 
 ## Current Status
 
-Technical proof cleared; 30-day artifact closed as a v0.1 alpha.
+Technical proof cleared; 30-day artifact closed as a v0.1 alpha; severity
+calibration attempted and failed; severity decoupled from review priority.
 
-The v0.2/v0.2.1 severity calibration failed the review-priority gate. Critical confirmations across fresh rubric applications ranged from 4/30 to 17/30, below the 24/30 required threshold. Severity labels are therefore retained only as deterministic uncalibrated triage metadata. The evidence-record primitive remains supported; the certified-severity claim and buyer-facing priority brief remain blocked. See `EVIDENCE_RECORD_PRIMITIVE.md`, `SEVERITY_CALIBRATION_v0.2.1.md`, and `SEVERITY_DECOUPLING_v0.2.1.md`.
+The v0.2/v0.2.1 severity calibration failed the pre-registered
+review-priority gate (≥24/30 critical confirmations required):
+
+- v0.2: 6/30 (reviewer 1) and 3/30 (reviewer 2)
+- v0.2.1 re-certification: 17/30 (reviewer 1) and 4/30 (reviewer 2)
+- v0.2.1 critical-stratum fresh applications: 4/30, 5/30, 12/30, 17/30
+
+Severity labels are therefore retained only as deterministic uncalibrated
+triage metadata. The evidence-record primitive remains supported; the
+certified-severity claim and buyer-facing priority brief remain blocked.
+See `EVIDENCE_RECORD_PRIMITIVE.md`, `SEVERITY_CALIBRATION_v0.2.1.md`, and
+`SEVERITY_DECOUPLING_v0.2.1.md`; the full arc is indexed in
+`METHODOLOGY.md`.
+
+## License and Citation
+
+Code and functional schemas are licensed under Apache-2.0 (`LICENSE`);
+datasets and project prose documentation are licensed under CC BY 4.0
+(`DATA_LICENSE.md`). Cite via `CITATION.cff`, or cite an individual record
+by its `event_id` and embedded `citation_text`.

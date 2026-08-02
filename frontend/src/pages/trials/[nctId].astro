@@ -9,12 +9,21 @@ const nctId = String(Astro.params.nctId ?? "").toUpperCase();
 const data = await getTrialDetail(nctId);
 const trial = data.trial;
 const title = trial ? `${trial.nctId} | TrialDiff` : "TrialDiff trial detail";
+const description = trial
+  ? `${trial.nctId} amendment history: ${data.patchCount} adjacent patches, ${data.events.length} material events · deterministic, uncalibrated triage metadata`
+  : "TrialDiff amendment history for a ClinicalTrials.gov study.";
+
+if (!data.databaseReady) {
+  Astro.response.status = 503;
+} else if (!trial) {
+  Astro.response.status = 404;
+}
 ---
 
-<BaseLayout title={title}>
-  <main class="page-shell stack">
+<BaseLayout title={title} description={description}>
+  <main class="page-shell stack" id="main-content">
     <a class="button" href="/">
-      <ArrowLeft size={16} />
+      <ArrowLeft size={16} aria-hidden="true" />
       Back to feed
     </a>
 
@@ -30,7 +39,7 @@ const title = trial ? `${trial.nctId} | TrialDiff` : "TrialDiff trial detail";
               </div>
               <a class="button" href={`https://clinicaltrials.gov/study/${trial.nctId}`}>
                 ClinicalTrials.gov
-                <ExternalLink size={16} />
+                <ExternalLink size={16} aria-hidden="true" />
               </a>
             </div>
           </header>
@@ -96,8 +105,12 @@ const title = trial ? `${trial.nctId} | TrialDiff` : "TrialDiff trial detail";
         </>
       ) : (
         <section class="panel panel-pad notice">
-          <div class="notice-title">{data.databaseReady ? "Trial not found" : "Database connection pending"}</div>
-          <div>{data.databaseError ?? "No trial record exists for this NCT ID."}</div>
+          <div class="notice-title">{data.databaseReady ? "Trial not found" : "Evidence database unavailable"}</div>
+          <div>
+            {data.databaseReady
+              ? "No trial record exists for this NCT ID."
+              : "The corpus database is not reachable right now. Try again shortly."}
+          </div>
         </section>
       )
     }

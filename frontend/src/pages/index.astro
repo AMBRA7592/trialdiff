@@ -13,15 +13,22 @@ import {
 
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { formatNumber, severityClass, severityLabel, titleCase } from "@/lib/format";
+import { rankChangedPaths } from "@/lib/pathRanking";
 import { getHomeData, normalizeLens } from "@/queries/feed";
 import type { EvidenceRecordRow, Lens, TrialLensRow } from "@/queries/types";
 
 const activeLens = normalizeLens(Astro.url.searchParams.get("lens"));
 const data = await getHomeData();
 
+if (!data.databaseReady) {
+  Astro.response.status = 503;
+} else {
+  Astro.response.headers.set("Cache-Control", "public, s-maxage=300, stale-while-revalidate=600");
+}
+
 const lensCopy: Record<Lens, { label: string; description: string; href: string }> = {
   "post-completion": {
-    label: "Post-completion evidence",
+    label: "Post-recruitment evidence",
     description: "Evidence Records with deterministic triage metadata and explicit claim boundaries.",
     href: "/?lens=post-completion",
   },
@@ -45,7 +52,7 @@ const lensCopy: Record<Lens, { label: string; description: string; href: string 
 const activeRows: TrialLensRow[] =
   activeLens === "amendment-intensity" ? data.amendmentIntensityTrials : data.criticalDensityTrials;
 
-const activeEvidenceRows: EvidenceRecordRow[] = data.postCompletionEvidenceRecords;
+const activeEvidenceRows: EvidenceRecordRow[] = data.postRecruitmentEvidenceRecords;
 
 const lensIcons = {
   "post-completion": FileSearch,
@@ -57,19 +64,23 @@ const lensIcons = {
 const lensTitle =
   activeLens === "critical-density" ? "Trials by critical-triage density" : "Trials by amendment intensity";
 
-function hasResultsPostingConfound(record: EvidenceRecordRow) {
-  const isOutcomeChange =
-    record.category === "primary_outcome_change" || record.category === "secondary_outcome_change";
-  if (!isOutcomeChange) return false;
-  return record.changedPaths.includes("/resultsSection") || record.changedPaths.includes("/hasResults");
-}
+// Mirrors trialdiff/classifier/materiality.py is_results_reconciliation_patch:
+// "/resultsSection" itself or nested paths under it, or "/hasResults".
+const ruleSetHashes = data.corpusStamp.ruleSetHashes;
+const firstRuleSetHash = ruleSetHashes.length > 0 ? ruleSetHashes[0] : undefined;
+const ruleSetLabel =
+  ruleSetHashes.length === 1 && firstRuleSetHash
+    ? `rule set ${firstRuleSetHash.slice(0, 12)}`
+    : ruleSetHashes.length > 1
+      ? `${ruleSetHashes.length} rule sets`
+      : "rule set unavailable";
 ---
 
 <BaseLayout
   title="TrialDiff"
   description="Open, reproducible ClinicalTrials.gov amendment evidence records."
 >
-  <main class="page-shell stack">
+  <main class="page-shell stack" id="main-content">
     <header class="panel panel-pad">
       <div class="header-row">
         <div>
@@ -83,7 +94,11 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
         </div>
         <a class="button" href="https://clinicaltrials.gov/">
           Source registry
-          <ExternalLink size={16} />
+          <ExternalLink size={16} aria-hidden="true" />
+        </a>
+        <a class="button" href="https://github.com/AMBRA7592/trialdiff">
+          Repository &amp; data
+          <ExternalLink size={16} aria-hidden="true" />
         </a>
         <a class="button" href="/methodology">
           Methodology
@@ -93,7 +108,7 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
 
     <section class="panel panel-pad disclaimer">
       <div class="disclaimer-inner">
-        <ShieldCheck size={20} />
+        <ShieldCheck size={20} aria-hidden="true" />
         <div>
           Severity is deterministic, reproducible, uncalibrated triage metadata, not validated review priority or proven wrongdoing. Evidence Records state what the registry history supports and what it does not support.
         </div>
@@ -102,7 +117,7 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
 
     <section class="grid case-grid">
       <a class="panel case-card" href="/case-studies/nct01441947-secondary-outcome">
-        <span class="case-icon"><BookOpen size={18} /></span>
+        <span class="case-icon"><BookOpen size={18} aria-hidden="true" /></span>
         <span>
           <span class="lens-title">Case Study A: read an Evidence Record</span>
           <span class="lens-description">
@@ -111,7 +126,7 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
         </span>
       </a>
       <a class="panel case-card" href="/case-studies/nct02942355-timeline-slip">
-        <span class="case-icon"><BookOpen size={18} /></span>
+        <span class="case-icon"><BookOpen size={18} aria-hidden="true" /></span>
         <span>
           <span class="lens-title">Case Study B: late-stage timeline movement</span>
           <span class="lens-description">
@@ -145,15 +160,23 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
     </section>
 
     {
+      data.databaseReady && (
+        <p class="corpus-stamp">
+          Corpus snapshot through {data.corpusStamp.maxSubmittedDate ?? "unknown date"} · {ruleSetLabel}
+        </p>
+      )
+    }
+
+    {
       !data.databaseReady && (
         <section class="panel panel-pad notice">
-          <Database size={20} />
-          <div class="notice-title">Database connection pending</div>
+          <Database size={20} aria-hidden="true" />
+          <div class="notice-title">Evidence database unavailable</div>
           <div>
-            Point <code>DATABASE_URL</code> at Neon after running the Postgres migrations, then the feed will render
-            live corpus data.
+            The corpus database is not reachable right now, so live feed data cannot render. If you are running
+            locally, point <code>DATABASE_URL</code> at a migrated, seeded Postgres instance (see the frontend README)
+            and reload.
           </div>
-          {data.databaseError && <div>{data.databaseError}</div>}
         </section>
       )
     }
@@ -165,7 +188,7 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
           return (
             <a class={`panel lens ${activeLens === lens ? "lens-active" : ""}`} href={lensCopy[lens].href}>
               <span class="lens-content">
-                <Icon size={20} />
+                <Icon size={20} aria-hidden="true" />
                 <span>
                   <span class="lens-title">{lensCopy[lens].label}</span>
                   <span class="lens-description">{lensCopy[lens].description}</span>
@@ -194,48 +217,66 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
       activeLens === "post-completion" && (
         <section class="panel">
           <div class="section-head">
-            <h2>Post-completion Evidence Records</h2>
+            <div>
+              <h2>Post-recruitment Evidence Records</h2>
+              <p class="section-subtitle">
+                Covers completed, terminated, and suspended registry contexts after recruitment ended.
+              </p>
+            </div>
             <span class="section-count">{activeEvidenceRows.length} shown</span>
           </div>
           <div>
-            {activeEvidenceRows.map((record) => (
-              <article class="event evidence-event">
-                <div>
-                  <span class={severityClass(record.severity)}>{severityLabel(record.severity)}</span>
-                  <div class="event-date">{record.submittedDate ?? "Date unavailable"}</div>
-                </div>
-                <div>
-                  <div class="event-title">
-                    <a href={`/events/${record.eventId}`}>{record.eventId}</a>
+            {activeEvidenceRows.map((record) => {
+              const rankedPaths = rankChangedPaths(record.changedPaths);
+              return (
+                <article class="event evidence-event">
+                  <div>
+                    <span class={severityClass(record.severity)}>{severityLabel(record.severity)}</span>
+                    <div class="event-date">{record.submittedDate ?? "Date unavailable"}</div>
                   </div>
-                  <div class="lede">
-                    <a href={`/trials/${record.nctId}`}>{record.nctId}</a>
-                    {" · "}
-                    {record.briefTitle ?? "Untitled study"}
-                  </div>
-                  <div class="event-meta" style="margin-top: 10px">
-                    <span>{titleCase(record.category)}</span>
-                    <span>v{record.fromVersion} to v{record.toVersion}</span>
-                    {record.timingContext && <span>{titleCase(record.timingContext)}</span>}
-                    <span>Evidence v{record.evidenceVersion}</span>
-                  </div>
-                  {
-                    hasResultsPostingConfound(record) && (
-                      <div class="event-caveat">
-                        Outcome paths changed while results were added. Treat as a deterministic triage
-                        results-posting/reconciliation record, not a standalone outcome-switching example.
+                  <div>
+                    <div class="event-title">
+                      <a href={`/events/${record.eventId}`}>{record.eventId}</a>
+                    </div>
+                    <div class="lede">
+                      <a href={`/trials/${record.nctId}`}>{record.nctId}</a>
+                      {" · "}
+                      {record.briefTitle ?? "Untitled study"}
+                    </div>
+                    <div class="event-meta" style="margin-top: 10px">
+                      <span>{titleCase(record.category)}</span>
+                      <span>v{record.fromVersion} to v{record.toVersion}</span>
+                      {record.timingContext && <span>{titleCase(record.timingContext)}</span>}
+                      <span>Evidence v{record.evidenceVersion}</span>
+                      {record.resultsConfound && (
+                        <span class="chip chip-confound">Results posting co-occurs</span>
+                      )}
+                    </div>
+                    {record.eventClasses.length > 0 && (
+                      <div class="chip-row">
+                        {record.eventClasses.map((eventClass) => (
+                          <span class="chip chip-class">{eventClass}</span>
+                        ))}
                       </div>
-                    )
-                  }
-                </div>
-                <div class="path-list">
-                  {record.changedPaths.slice(0, 2).map((path) => (
-                    <div class="path-item" title={path}>{path}</div>
-                  ))}
-                  {record.changedPaths.length > 2 && <div>{record.changedPaths.length - 2} more paths</div>}
-                </div>
-              </article>
-            ))}
+                    )}
+                    {
+                      record.resultsConfound && (
+                        <div class="event-caveat">
+                          Outcome paths changed while results were added. Treat as a deterministic triage
+                          results-posting/reconciliation record, not a standalone outcome-switching example.
+                        </div>
+                      )
+                    }
+                  </div>
+                  <div class="path-list">
+                    {rankedPaths.slice(0, 2).map((path) => (
+                      <div class="path-item" title={path}>{path}</div>
+                    ))}
+                    {record.changedPathCount > 2 && <div>{record.changedPathCount - 2} more paths</div>}
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
       )
@@ -291,33 +332,39 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
       </div>
       <div>
         {
-          data.recentEvents.map((event) => (
-            <article class="event">
-              <div>
-                <span class={severityClass(event.severity)}>{severityLabel(event.severity)}</span>
-                <div class="event-date">{event.submittedDate ?? "Date unavailable"}</div>
-              </div>
-              <div>
-                <div class="event-title">
-                  <a href={`/trials/${event.nctId}`}>{event.nctId}</a>
+          data.recentEvents.map((event) => {
+            const rankedPaths = rankChangedPaths(event.changedPaths);
+            return (
+              <article class="event">
+                <div>
+                  <span class={severityClass(event.severity)}>{severityLabel(event.severity)}</span>
+                  <div class="event-date">{event.submittedDate ?? "Date unavailable"}</div>
                 </div>
-                <div class="lede">{event.briefTitle ?? "Untitled study"}</div>
-                <div class="event-meta" style="margin-top: 10px">
-                  <span>{titleCase(event.category)}</span>
-                  <span>v{event.fromVersion} to v{event.toVersion}</span>
-                  {event.timingContext && <span>{titleCase(event.timingContext)}</span>}
-                  {event.needsHumanReview && <span>Human review</span>}
-                  {event.evidenceEventId && <a href={`/events/${event.evidenceEventId}`}>Evidence Record</a>}
+                <div>
+                  <div class="event-title">
+                    <a href={`/trials/${event.nctId}`}>{event.nctId}</a>
+                  </div>
+                  <div class="lede">{event.briefTitle ?? "Untitled study"}</div>
+                  <div class="event-meta" style="margin-top: 10px">
+                    <span>{titleCase(event.category)}</span>
+                    <span>v{event.fromVersion} to v{event.toVersion}</span>
+                    {event.timingContext && <span>{titleCase(event.timingContext)}</span>}
+                    {event.needsHumanReview && <span>Human review</span>}
+                    {event.resultsConfound && (
+                      <span class="chip chip-confound">Results posting co-occurs</span>
+                    )}
+                    {event.evidenceEventId && <a href={`/events/${event.evidenceEventId}`}>Evidence Record</a>}
+                  </div>
                 </div>
-              </div>
-              <div class="path-list">
-                {event.changedPaths.slice(0, 2).map((path) => (
-                  <div class="path-item" title={path}>{path}</div>
-                ))}
-                {event.changedPaths.length > 2 && <div>{event.changedPaths.length - 2} more paths</div>}
-              </div>
-            </article>
-          ))
+                <div class="path-list">
+                  {rankedPaths.slice(0, 2).map((path) => (
+                    <div class="path-item" title={path}>{path}</div>
+                  ))}
+                  {event.changedPathCount > 2 && <div>{event.changedPathCount - 2} more paths</div>}
+                </div>
+              </article>
+            );
+          })
         }
       </div>
     </section>
@@ -325,7 +372,7 @@ function hasResultsPostingConfound(record: EvidenceRecordRow) {
     {
       data.databaseReady && data.recentEvents.length === 0 && (
         <section class="panel panel-pad notice">
-          <TriangleAlert size={20} />
+          <TriangleAlert size={20} aria-hidden="true" />
           No materiality events found in the connected database.
         </section>
       )

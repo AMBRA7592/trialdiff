@@ -1,8 +1,8 @@
 import { getSql, hasDatabaseUrl } from "@/db/client";
 
-import { getPostCompletionEvidenceRecords } from "./evidence";
-import { mapEventRow, mapTrialLensRow, numberValue } from "./mappers";
-import type { HomeData, SeverityCount, SummaryCounts } from "./types";
+import { getPostRecruitmentEvidenceRecords } from "./evidence";
+import { mapEventRow, mapTrialLensRow, numberValue, stringArray } from "./mappers";
+import type { CorpusStamp, HomeData, SeverityCount, SummaryCounts } from "./types";
 
 const emptySummary: SummaryCounts = {
   trialCount: 0,
@@ -10,6 +10,11 @@ const emptySummary: SummaryCounts = {
   materialEventCount: 0,
   criticalCount: 0,
   highCount: 0,
+};
+
+const emptyCorpusStamp: CorpusStamp = {
+  maxSubmittedDate: null,
+  ruleSetHashes: [],
 };
 
 export function normalizeLens(value: string | null | undefined) {
@@ -66,6 +71,24 @@ async function getSeverityCounts(): Promise<SeverityCount[]> {
   }));
 }
 
+async function getCorpusStamp(): Promise<CorpusStamp> {
+  const sql = getSql();
+  const rows = await sql<Record<string, unknown>[]>`
+    SELECT
+      (SELECT max(submitted_date) FROM materiality_events) AS max_submitted_date,
+      (
+        SELECT coalesce(json_agg(hash ORDER BY hash), '[]'::json)
+        FROM (SELECT DISTINCT rule_set_hash AS hash FROM evidence_records WHERE rule_set_hash <> '') h
+      ) AS rule_set_hashes
+  `;
+  const row = rows[0] ?? {};
+
+  return {
+    maxSubmittedDate: typeof row.max_submitted_date === "string" ? row.max_submitted_date : null,
+    ruleSetHashes: stringArray(row.rule_set_hashes),
+  };
+}
+
 async function getRecentEvents(limit = 40) {
   const sql = getSql();
   const rows = await sql<Record<string, unknown>[]>`
@@ -83,7 +106,17 @@ async function getRecentEvents(limit = 40) {
       e.timing_context,
       e.category,
       e.categories_json,
-      e.changed_paths_json,
+      jsonb_array_length(e.changed_paths_json) AS changed_path_count,
+      (
+        SELECT jsonb_agg(p.value)
+        FROM (
+          SELECT value
+          FROM jsonb_array_elements_text(e.changed_paths_json) WITH ORDINALITY AS t(value, ord)
+          ORDER BY ord
+          LIMIT 200
+        ) p
+      ) AS changed_paths_json,
+      (e.categories_json ? 'results_reconciliation') AS results_confound,
       e.needs_human_review
     FROM materiality_events e
     LEFT JOIN trials t ON t.nct_id = e.nct_id
@@ -93,8 +126,7 @@ async function getRecentEvents(limit = 40) {
       WHERE er.nct_id = e.nct_id
         AND er.from_version = e.from_version
         AND er.to_version = e.to_version
-        AND er.rule_set_hash = e.rule_set_hash
-      ORDER BY er.evidence_version DESC
+      ORDER BY er.evidence_version DESC, er.generated_at DESC NULLS LAST
       LIMIT 1
     ) er ON true
     ORDER BY e.submitted_date DESC NULLS LAST, e.id DESC
@@ -188,7 +220,8 @@ export async function getHomeData(): Promise<HomeData> {
       databaseError: "DATABASE_URL is not configured.",
       summary: emptySummary,
       severityCounts: [],
-      postCompletionEvidenceRecords: [],
+      corpusStamp: emptyCorpusStamp,
+      postRecruitmentEvidenceRecords: [],
       recentEvents: [],
       criticalDensityTrials: [],
       amendmentIntensityTrials: [],
@@ -199,14 +232,16 @@ export async function getHomeData(): Promise<HomeData> {
     const [
       summary,
       severityCounts,
-      postCompletionEvidenceRecords,
+      corpusStamp,
+      postRecruitmentEvidenceRecords,
       recentEvents,
       criticalDensityTrials,
       amendmentIntensityTrials,
     ] = await Promise.all([
       getSummary(),
       getSeverityCounts(),
-      getPostCompletionEvidenceRecords(),
+      getCorpusStamp(),
+      getPostRecruitmentEvidenceRecords(),
       getRecentEvents(),
       getCriticalDensityTrials(),
       getAmendmentIntensityTrials(),
@@ -216,18 +251,21 @@ export async function getHomeData(): Promise<HomeData> {
       databaseReady: true,
       summary,
       severityCounts,
-      postCompletionEvidenceRecords,
+      corpusStamp,
+      postRecruitmentEvidenceRecords,
       recentEvents,
       criticalDensityTrials,
       amendmentIntensityTrials,
     };
   } catch (error) {
+    console.error("getHomeData failed:", error);
     return {
       databaseReady: false,
       databaseError: error instanceof Error ? error.message : "Database query failed.",
       summary: emptySummary,
       severityCounts: [],
-      postCompletionEvidenceRecords: [],
+      corpusStamp: emptyCorpusStamp,
+      postRecruitmentEvidenceRecords: [],
       recentEvents: [],
       criticalDensityTrials: [],
       amendmentIntensityTrials: [],

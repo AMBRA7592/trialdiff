@@ -1,5 +1,5 @@
 import type { Severity } from "./pathMatching";
-import { maxSeverity } from "./pathMatching";
+import { maxSeverity, pointerHasPrefix } from "./pathMatching";
 import type { EnrichedPatchOperation } from "./patchEnrichment";
 
 export type OperationGroup = {
@@ -129,7 +129,7 @@ export function groupOperations(operations: EnrichedPatchOperation[]): Operation
 
 function groupDefinitionForPath(path: string): GroupDefinition {
   return (
-    GROUPS.find((group) => group.prefixes.some((prefix) => path === prefix || path.startsWith(`${prefix}/`))) ?? {
+    GROUPS.find((group) => group.prefixes.some((prefix) => pointerHasPrefix(path, prefix))) ?? {
       key: "other",
       label: "Other registry fields",
       description: "Changes outside the current high-signal rule families.",

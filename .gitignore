@@ -24,6 +24,17 @@ frontend/dist/
 *.sqlite3
 *.sqlite3-*
 *.db
+*_export.sql
+seed_demo.sql
+
+# Python virtualenvs
+.venv/
+venv/
 
 # Local caches
 .cache/
+
+# Python build artifacts
+build/
+*.egg-info/
+build/

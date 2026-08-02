@@ -13,7 +13,7 @@ labels are defensible as review-priority labels under the frozen v0.2 rubric.
 - Sample plan: `CALIBRATION_SAMPLE_PLAN_v0.2.md`
 - Sample manifest: `CALIBRATION_SAMPLE_v0.2.csv`
 - Blinded review package: `CALIBRATION_REVIEW_PACKAGE_v0.2.jsonl`
-- Private crosswalk: `CALIBRATION_REVIEW_CROSSWALK_PRIVATE_v0.2.csv`
+- Private crosswalk: `CALIBRATION_REVIEW_CROSSWALK_UNBLINDING_KEY_v0.2.csv`
 - Scorer: `scripts/score_calibration_reviews.py`
 
 The review package hid TrialDiff severity, category, deterministic rules fired,

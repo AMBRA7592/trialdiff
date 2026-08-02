@@ -79,10 +79,10 @@ def score_review(crosswalk: list[dict], review: dict[str, dict]) -> dict:
         },
         "critical_not_confirmed": critical_not_confirmed,
         "critical_total": len(critical),
-        "critical_not_confirmed_rate": critical_not_confirmed / len(critical),
+        "critical_not_confirmed_rate": critical_not_confirmed / len(critical) if critical else None,
         "high_plus_not_confirmed": high_plus_not_confirmed,
         "high_plus_total": len(high_plus),
-        "high_plus_not_confirmed_rate": high_plus_not_confirmed / len(high_plus),
+        "high_plus_not_confirmed_rate": high_plus_not_confirmed / len(high_plus) if high_plus else None,
         "high_plus_by_category": {
             category: ordered_counter(counts)
             for category, counts in sorted(category_matrix.items())
@@ -92,7 +92,7 @@ def score_review(crosswalk: list[dict], review: dict[str, dict]) -> dict:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--crosswalk", type=Path, default=Path("CALIBRATION_REVIEW_CROSSWALK_PRIVATE_v0.2.csv"))
+    parser.add_argument("--crosswalk", type=Path, default=Path("CALIBRATION_REVIEW_CROSSWALK_UNBLINDING_KEY_v0.2.csv"))
     parser.add_argument("reviews", nargs="+", type=Path)
     args = parser.parse_args()
 

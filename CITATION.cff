@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: >-
+  If you use TrialDiff or its Evidence Record datasets, please cite this
+  repository. Individual Evidence Records can additionally be cited by their
+  event_id and citation_text.
+title: "TrialDiff: deterministic Evidence Records for ClinicalTrials.gov amendment history"
+type: software
+authors:
+  - family-names: Brandes
+    given-names: Amadeus
+    affiliation: Independent researcher
+repository-code: "https://github.com/AMBRA7592/trialdiff"
+url: "https://trialdiff.vercel.app"
+license: Apache-2.0
+# Data (records/, event_class_records_*, CALIBRATION_*, corpora/) and project
+# prose documentation are CC-BY-4.0; see DATA_LICENSE.md.
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.20801956
+    description: >-
+      Concept DOI for the TrialDiff event-class Evidence Record dataset
+      (all versions; v0.1.2 is 10.5281/zenodo.21755258 and v0.1.1 is
+      10.5281/zenodo.20816639). See ERRATA.md E1 for the corrected v0.1.2
+      release.
+  - type: doi
+    value: 10.5281/zenodo.21755258
+    description: Version DOI for the corrected v0.1.2 event-class dataset.
+abstract: >-
+  TrialDiff converts public ClinicalTrials.gov record-version history into
+  deterministic, hash-verifiable, claim-bounded Evidence Records: exact
+  changed paths, source hashes, deterministic classification rules, timing
+  context, and explicit claims-supported / claims-not-supported boundaries.
+  Severity/triage labels are deterministic, reproducible, uncalibrated
+  metadata; the v0.2/v0.2.1 blinded calibration attempt failed its
+  pre-registered gate and is published in full.
+keywords:
+  - clinical-trials
+  - clinicaltrials-gov
+  - meta-research
+  - protocol-amendments
+  - provenance
+  - reproducibility

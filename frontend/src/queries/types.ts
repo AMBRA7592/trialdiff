@@ -28,6 +28,8 @@ export type EventRow = {
   category: string;
   categories: string[];
   changedPaths: string[];
+  changedPathCount: number;
+  resultsConfound: boolean;
   needsHumanReview: boolean;
 };
 
@@ -46,6 +48,8 @@ export type EvidenceRecordRow = {
   categories: string[];
   eventClasses: string[];
   changedPaths: string[];
+  changedPathCount: number;
+  resultsConfound: boolean;
   deterministicRules: string[];
   claimsSupported: string[];
   claimsNotSupported: string[];
@@ -66,12 +70,18 @@ export type TrialLensRow = {
   latestEventDate: string | null;
 };
 
+export type CorpusStamp = {
+  maxSubmittedDate: string | null;
+  ruleSetHashes: string[];
+};
+
 export type HomeData = {
   databaseReady: boolean;
   databaseError?: string;
   summary: SummaryCounts;
   severityCounts: SeverityCount[];
-  postCompletionEvidenceRecords: EvidenceRecordRow[];
+  corpusStamp: CorpusStamp;
+  postRecruitmentEvidenceRecords: EvidenceRecordRow[];
   recentEvents: EventRow[];
   criticalDensityTrials: TrialLensRow[];
   amendmentIntensityTrials: TrialLensRow[];
@@ -124,6 +134,8 @@ export type EvidenceRecordData = {
 export type EvidenceCanonicalData = {
   databaseReady: boolean;
   databaseError?: string;
-  canonicalJson?: Record<string, unknown>;
+  // Exact stored serialization of the record; the endpoint verifies
+  // sha256(canonicalText) against canonicalHash before serving.
+  canonicalText?: string;
   canonicalHash?: string;
 };

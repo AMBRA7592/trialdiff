@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TrialDiff frontend
 
-## Getting Started
+Server-rendered dashboard for TrialDiff evidence records: it reads a Postgres
+database of ClinicalTrials.gov trials, adjacent amendment patches, materiality
+events, and Evidence Records, and renders feeds, trial timelines, a
+field-level patch inspector, and citeable per-record pages (HTML plus a
+hash-verifiable canonical JSON endpoint).
 
-First, run the development server:
+Stack: [Astro 6](https://astro.build) with `output: "server"`, the
+`@astrojs/vercel` adapter, [postgres.js](https://github.com/porsager/postgres)
+for queries, plain CSS. No client-side JavaScript framework.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Node.js >= 20 and npm
+- PostgreSQL 16 (via Docker or a local install)
+- Python 3.11+ (only for seeding demo data from the committed record files)
+- `psql` client
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Local development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Start Postgres. Either use the compose file at the repo root:
 
-## Learn More
+   ```bash
+   docker compose up -d db
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+   or run a local server yourself (`initdb` + `pg_ctl start`, then
+   `createdb -U trialdiff trialdiff`). The compose service exposes
+   `postgres://trialdiff:trialdiff@localhost:5432/trialdiff`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Apply the schema migrations in order (from the repo root):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   export DATABASE_URL='postgres://trialdiff:trialdiff@localhost:5432/trialdiff?sslmode=disable'
+   for f in postgres/migrations/*.sql; do psql "$DATABASE_URL" -f "$f"; done
+   ```
 
-## Deploy on Vercel
+3. Seed demo data from the committed Evidence Record files:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   python3 scripts/seed_from_records.py --db seed_demo.sqlite3
+   python3 scripts/sqlite_to_postgres.py seed_demo.sqlite3 --truncate --output seed_demo.sql
+   psql "$DATABASE_URL" -f seed_demo.sql
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Configure and run the app:
+
+   ```bash
+   cd frontend
+   cp .env.example .env   # edit if your DATABASE_URL differs
+   npm install
+   npm run dev
+   ```
+
+   The dev server picks up `frontend/.env`; open http://localhost:4321.
+
+## Commands
+
+| Command | Effect |
+| --- | --- |
+| `npm run dev` | Start the dev server on 0.0.0.0:4321 |
+| `npm run build` | Production build (Vercel adapter output in `.vercel/`) |
+| `npm run check` / `npx astro check` | Type-check the project |
+
+## Environment variables
+
+| Variable | Required | Description |
+| --- | --- | --- |
+| `DATABASE_URL` | yes | Postgres connection string. If it carries an `sslmode=` parameter (Neon URLs do; local URLs should use `sslmode=disable`), it is honored as-is; otherwise TLS defaults to `require`. Read from `frontend/.env` under `astro dev` and from the process environment in production. |
+| `DATABASE_POOL_MAX` | no | Max postgres.js pool connections (default 5). |
+
+## Deployment
+
+The app deploys to Vercel with the `@astrojs/vercel` adapter and a Neon
+Postgres database; set `DATABASE_URL` (and optionally `DATABASE_POOL_MAX`) in
+the Vercel project environment. `/methodology` and the case-study pages are
+prerendered at build time; everything else renders per-request against the
+database.
+
+## Seeded-data limitation
+
+The seed pipeline builds the database from exported Evidence Records, and
+version snapshots (`trial_versions.record_json`) are not part of exported
+records. The patch inspector therefore shows before-values as `<MISSING>` for
+seeded data; op-level after-values and all record/hash data are unaffected. A
+database populated by the full ingest pipeline does not have this limitation.

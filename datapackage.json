@@ -1,0 +1,53 @@
+{
+  "name": "trialdiff-evidence-records",
+  "title": "TrialDiff Evidence Records for ClinicalTrials.gov amendment history",
+  "description": "Deterministic, hash-verifiable, claim-bounded Evidence Records derived from public ClinicalTrials.gov record-version history, plus the full (failed) severity-calibration paper trail. Severity/triage labels are deterministic, reproducible, uncalibrated metadata — not validated review priority and not findings of wrongdoing. See ERRATA.md for known defects.",
+  "homepage": "https://github.com/AMBRA7592/trialdiff",
+  "licenses": [
+    {
+      "name": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0",
+      "path": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  ],
+  "contributors": [{ "title": "A. Brandes", "role": "author" }],
+  "resources": [
+    {
+      "name": "alpha-demo-records",
+      "title": "Frozen v0.1-alpha Evidence Records (40 records, 25-study corpus)",
+      "path": "records/",
+      "format": "json",
+      "schema": "schemas/alpha_demo_record.schema.json",
+      "hash-manifest": "MANIFEST.sha256"
+    },
+    {
+      "name": "event-class-records-v0.1.1",
+      "title": "Event-class Evidence Records v0.1.1 (100 records, 52 trials; see ERRATA.md E1)",
+      "path": "event_class_records_v0.1.1/records/",
+      "format": "json",
+      "schema": "schemas/evidence_record.schema.json",
+      "hash-manifest": "event_class_records_v0.1.1/MANIFEST.sha256"
+    },
+    {
+      "name": "event-class-records-v0.1.2",
+      "title": "Corrected Event-class Evidence Records v0.1.2 (97 records, 54 trials; Zenodo 10.5281/zenodo.21755258)",
+      "path": "event_class_records_v0.1.2/records/",
+      "format": "json",
+      "schema": "schemas/evidence_record.schema.json",
+      "hash-manifest": "event_class_records_v0.1.2/MANIFEST.sha256"
+    },
+    {
+      "name": "calibration-chain",
+      "title": "v0.2/v0.2.1 severity-calibration data (samples, blinded packages, reviewer outputs, unblinding keys)",
+      "path": ".",
+      "format": "mixed",
+      "hash-manifest": "MANIFEST.calibration.sha256"
+    },
+    {
+      "name": "corpora",
+      "title": "Reproducible corpus NCT selections",
+      "path": "corpora/",
+      "format": "json"
+    }
+  ]
+}

@@ -6,11 +6,18 @@ from pathlib import Path
 import sqlite3
 import sys
 
-from trialdiff.classifier.materiality import ClassifierRule, classify_patch, provenance_for_event
+from trialdiff.classifier.materiality import (
+    V021_TRIAGE_RULE_SET_HASH,
+    ClassifierRule,
+    classify_patch,
+    provenance_for_event,
+    rule_set_hash,
+)
 from trialdiff.corpus import select_breast_cancer_corpus, write_corpus
 from trialdiff.db import TrialDiffStore, connect, init_db
 from trialdiff.evidence import EVIDENCE_VERSION, generate_evidence_records
 from trialdiff.ingest import ingest_nct_ids
+from trialdiff.verify import verify_record_file
 
 
 def read_nct_ids(args: argparse.Namespace) -> list[str]:
@@ -77,6 +84,15 @@ def cmd_classify(args: argparse.Namespace) -> int:
             deleted = store.delete_materiality_events(args.nct)
             print(f"deleted_existing_events={deleted}")
         rules = [ClassifierRule.from_row(row) for row in store.load_active_rules()]
+        active_hash = rule_set_hash(rules)
+        if active_hash != V021_TRIAGE_RULE_SET_HASH:
+            print(
+                f"WARNING: active rule set hash {active_hash} does not match the committed "
+                f"v0.2.1 rule set {V021_TRIAGE_RULE_SET_HASH}; the rule table has drifted "
+                "from the migrations and generated events will carry the non-standard hash. "
+                "Re-create the database (or restore the seeds) to reconverge.",
+                file=sys.stderr,
+            )
         patch_rows = store.iter_patches(args.nct)
         for patch_row in patch_rows:
             from_record = store.get_version_record(patch_row["nct_id"], patch_row["from_version"])
@@ -114,7 +130,14 @@ def cmd_inspect(args: argparse.Namespace) -> int:
                    value_signals_json, changed_paths_json
             FROM materiality_events
             WHERE nct_id=?
-            ORDER BY from_version, to_version, severity DESC
+            ORDER BY from_version, to_version,
+              CASE severity
+                WHEN 'critical' THEN 4
+                WHEN 'high' THEN 3
+                WHEN 'medium' THEN 2
+                WHEN 'low' THEN 1
+                ELSE 0
+              END DESC
             """,
             (args.nct,),
         ).fetchall()
@@ -185,6 +208,32 @@ def cmd_generate_evidence(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_verify(args: argparse.Namespace) -> int:
+    failures = 0
+    for raw_path in args.paths:
+        path = Path(raw_path)
+        targets = sorted(path.glob("*.json")) if path.is_dir() else [path]
+        if not targets:
+            print(f"{path}: no .json records found")
+            failures += 1
+            continue
+        for target in targets:
+            result = verify_record_file(target)
+            status = "PASS" if result.ok else "FAIL"
+            print(f"{status}\t{target}\tschema={result.schema}")
+            for name, passed, detail in result.checks:
+                marker = "ok" if passed else "MISMATCH"
+                show_detail = detail and (not passed or args.verbose)
+                print(f"  {name}: {marker}" + (f" ({detail})" if show_detail else ""))
+            if args.verbose:
+                for note in result.notes:
+                    print(f"  note: {note}")
+            if not result.ok:
+                failures += 1
+    print(f"verified={'PASS' if failures == 0 else 'FAIL'}\tfailures={failures}")
+    return 0 if failures == 0 else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="trialdiff")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -235,6 +284,18 @@ def build_parser() -> argparse.ArgumentParser:
     evidence_parser.add_argument("--force", action="store_true", help="Delete existing evidence records before generating.")
     evidence_parser.add_argument("--evidence-version", type=int, default=EVIDENCE_VERSION)
     evidence_parser.set_defaults(func=cmd_generate_evidence)
+
+    verify_parser = subparsers.add_parser(
+        "verify",
+        help="Verify exported Evidence Record files against their own hashes, offline.",
+    )
+    verify_parser.add_argument(
+        "paths",
+        nargs="+",
+        help="Record .json files or directories of records to verify.",
+    )
+    verify_parser.add_argument("--verbose", action="store_true", help="Print passing check details too.")
+    verify_parser.set_defaults(func=cmd_verify)
 
     return parser
 

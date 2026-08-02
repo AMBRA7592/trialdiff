@@ -13,9 +13,7 @@ import sqlite3
 from typing import Any
 
 
-PACKAGE_VERSION = "v0.1"
-DEFAULT_PACKAGE_DIR = "event_class_records_v0.1"
-THREE_CLASS_EVENT_ID = "evt_NCT04278144_v33_v34_bdd9f29ed71e"
+DEFAULT_PACKAGE_DIR = "event_class_records_v0.2"
 DB_PLACEHOLDER = "<db_path>"
 
 
@@ -28,6 +26,19 @@ def main() -> int:
         "--generation-command",
         default=None,
         help="Command recorded in VALIDATION.md as the generation command.",
+    )
+    parser.add_argument(
+        "--package-version",
+        required=True,
+        help="Package version label recorded in VALIDATION.md (e.g. v0.1.2). Explicit on purpose: "
+        "the version stamped into a release document must be a reviewed input, not a guess.",
+    )
+    parser.add_argument(
+        "--doc",
+        action="append",
+        default=[],
+        metavar="PATH",
+        help="Supporting document copied into docs/ and covered by MANIFEST.sha256; repeat as needed.",
     )
     parser.add_argument("--force", action="store_true", help="Replace an existing package directory.")
     args = parser.parse_args()
@@ -70,15 +81,25 @@ def main() -> int:
             raise SystemExit(f"{event_id}: exported bytes do not match stored canonical_hash")
         summaries.append(summarize_record(record, stored_hash=row["canonical_hash"]))
 
+    supporting_docs = copy_supporting_docs(package_dir, [Path(value) for value in args.doc])
+    stats = package_stats(summaries)
     validation_note = build_validation_note(
         db_path=db_path,
         corpus_label=args.corpus_label,
+        package_version=args.package_version,
         generation_command=args.generation_command
         or f"python3 -m trialdiff.cli generate-evidence --db {DB_PLACEHOLDER} --force",
         summaries=summaries,
+        stats=stats,
+        supporting_docs=supporting_docs,
     )
     validation_path = package_dir / "VALIDATION.md"
     validation_path.write_text(validation_note, encoding="utf-8")
+    sidecar_path = package_dir / "expected_stats.json"
+    sidecar_path.write_text(
+        json.dumps(expected_stats_sidecar(stats), indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
 
     manifest_path = package_dir / "MANIFEST.sha256"
     manifest_entries = build_manifest_entries(package_dir)
@@ -87,14 +108,43 @@ def main() -> int:
         encoding="utf-8",
     )
 
-    stats = package_stats(summaries)
     print(f"package={package_dir}")
     print(f"records={stats['records']}\ttrials={stats['trials']}\tmemberships={stats['memberships']}")
     print(f"class_counts={dict(sorted(stats['class_counts'].items()))}")
     print(f"overlaps={dict(sorted(stats['overlap_counts'].items()))}")
-    print(f"three_class_record_present={stats['three_class_record_present']}")
+    print(f"max_class_overlap={stats['showcase']['class_count']}")
     print("exported_bytes_match_stored_canonical_hash=True")
     return 0
+
+
+def expected_stats_sidecar(stats: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "records": stats["records"],
+        "trials": stats["trials"],
+        "class_counts": dict(sorted(stats["class_counts"].items())),
+        "overlap_counts": {str(size): count for size, count in sorted(stats["overlap_counts"].items())},
+        "showcase": stats["showcase"],
+        "note": "Frozen-package integrity expectations describing the package as exported.",
+    }
+
+
+def copy_supporting_docs(package_dir: Path, source_paths: list[Path]) -> list[str]:
+    if not source_paths:
+        return []
+    docs_dir = package_dir / "docs"
+    docs_dir.mkdir()
+    copied: list[str] = []
+    seen_names: set[str] = set()
+    for source in source_paths:
+        if not source.is_file():
+            raise SystemExit(f"supporting document does not exist: {source}")
+        if source.name in seen_names:
+            raise SystemExit(f"duplicate supporting-document filename: {source.name}")
+        seen_names.add(source.name)
+        target = docs_dir / source.name
+        shutil.copyfile(source, target)
+        copied.append(target.relative_to(package_dir).as_posix())
+    return sorted(copied)
 
 
 def select_records(connection: sqlite3.Connection) -> list[sqlite3.Row]:
@@ -132,16 +182,14 @@ def package_stats(summaries: list[dict[str, Any]]) -> dict[str, Any]:
     for summary in summaries:
         class_counts.update(summary["event_classes"])
         overlap_counts[len(summary["event_classes"])] += 1
+    showcase = max(summaries, key=lambda summary: (len(summary["event_classes"]), summary["event_id"]))
     return {
         "records": len(summaries),
         "trials": len({summary["nct_id"] for summary in summaries}),
         "memberships": sum(len(summary["event_classes"]) for summary in summaries),
         "class_counts": class_counts,
         "overlap_counts": overlap_counts,
-        "three_class_record_present": any(
-            summary["event_id"] == THREE_CLASS_EVENT_ID and len(summary["event_classes"]) == 3
-            for summary in summaries
-        ),
+        "showcase": {"event_id": showcase["event_id"], "class_count": len(showcase["event_classes"])},
         "event_class_rule_set_hashes": sorted(
             {summary["event_class_rule_set_hash"] for summary in summaries}
         ),
@@ -167,10 +215,12 @@ def build_validation_note(
     *,
     db_path: Path,
     corpus_label: str,
+    package_version: str,
     generation_command: str,
     summaries: list[dict[str, Any]],
+    stats: dict[str, Any],
+    supporting_docs: list[str],
 ) -> str:
-    stats = package_stats(summaries)
     class_counts = "\n".join(
         f"- `{name}`: {count}" for name, count in sorted(stats["class_counts"].items())
     )
@@ -185,10 +235,20 @@ def build_validation_note(
         )
         for rule_set_hash, count in sorted(stats["rule_set_hash_counts"].items())
     )
-    three_class_summary = next(
-        summary for summary in summaries if summary["event_id"] == THREE_CLASS_EVENT_ID
+    # Single source of truth for the showcase: the selection package_stats
+    # already made (and expected_stats.json enforces).
+    showcase_summary = next(
+        summary for summary in summaries if summary["event_id"] == stats["showcase"]["event_id"]
     )
-    return f"""# TrialDiff Event-Class Evidence Records {PACKAGE_VERSION}
+    doc_arguments = " ".join(
+        f"--doc <source_for_{Path(path).name}>" for path in supporting_docs
+    )
+    doc_listing = (
+        "\n".join(f"- `{path}`" for path in supporting_docs)
+        if supporting_docs
+        else "- None bundled in this export."
+    )
+    return f"""# TrialDiff Event-Class Evidence Records {package_version}
 
 This package is a separate event-class Evidence Record export. It does not modify the
 frozen TrialDiff v0.1-alpha `records/` package or its manifest.
@@ -207,7 +267,8 @@ frozen TrialDiff v0.1-alpha `records/` package or its manifest.
 - Export command:
 
 ```bash
-python3 scripts/export_event_class_package.py --db {DB_PLACEHOLDER} --out <package_dir> --corpus-label {corpus_label} --force
+python3 scripts/export_event_class_package.py --db {DB_PLACEHOLDER} --out <package_dir> \\
+  --corpus-label {corpus_label} --package-version {package_version} {doc_arguments} --force
 ```
 
 - Validation command:
@@ -244,26 +305,28 @@ Overlap counts:
 
 {overlap_counts}
 
-## Determinism Evidence
+## Export Integrity Checks
 
-- Real generation was checked by regenerating Evidence Records from the 100-study
-  working database and comparing canonical payloads across runs.
-- The final comparison was byte-identical after sorting records by
-  `(nct_id, from_version, to_version, event_id)`.
 - Export writes each record as the exact canonical JSON bytes stored in
   `evidence_records.canonical_json`.
 - For every exported record, the file SHA-256 equals the stored
   `evidence_records.canonical_hash`.
-- Re-exporting the package produced byte-identical files.
-- `MANIFEST.sha256` verifies the exported records and this validation note.
+- `MANIFEST.sha256` covers every package file except the manifest itself.
+- This export does not, by itself, attest independent regeneration or
+  byte-identical re-export. Any such release claim requires separately recorded,
+  manifest-attested evidence produced by the operator procedure in `RELEASING.md`.
+
+## Supporting Documents
+
+{doc_listing}
 
 ## Multi-Class Worked Record
 
-- Event ID: `{THREE_CLASS_EVENT_ID}`
-- NCT ID: `{three_class_summary["nct_id"]}`
-- Versions: v{three_class_summary["from_version"]}->v{three_class_summary["to_version"]}
-- Canonical hash: `{three_class_summary["canonical_hash"]}`
-- Event classes: `{", ".join(three_class_summary["event_classes"])}`
+- Event ID: `{showcase_summary["event_id"]}`
+- NCT ID: `{showcase_summary["nct_id"]}`
+- Versions: v{showcase_summary["from_version"]}->v{showcase_summary["to_version"]}
+- Canonical hash: `{showcase_summary["canonical_hash"]}`
+- Event classes: `{", ".join(showcase_summary["event_classes"])}`
 
 The reconciliation class is a co-occurrence tag, not a claim that the amendment
 was harmless or purely administrative.
@@ -276,7 +339,11 @@ deposit and DOI remain TODO.
 
 
 def build_manifest_entries(package_dir: Path) -> list[tuple[str, str]]:
-    paths = [package_dir / "VALIDATION.md", *sorted((package_dir / "records").glob("*.json"))]
+    paths = sorted(
+        path
+        for path in package_dir.rglob("*")
+        if path.is_file() and path != package_dir / "MANIFEST.sha256"
+    )
     entries: list[tuple[str, str]] = []
     for path in paths:
         relative_path = path.relative_to(package_dir).as_posix()

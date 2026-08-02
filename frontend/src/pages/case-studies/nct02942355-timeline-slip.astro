@@ -2,15 +2,17 @@
 import { ArrowLeft, ExternalLink } from "@lucide/astro";
 
 import BaseLayout from "@/layouts/BaseLayout.astro";
+
+export const prerender = true;
 ---
 
 <BaseLayout
   title="Case Study B | TrialDiff"
   description="A TrialDiff case study showing why late-stage timeline registry changes can matter."
 >
-  <main class="page-shell stack methodology-page">
+  <main class="page-shell stack methodology-page" id="main-content">
     <a class="button" href="/">
-      <ArrowLeft size={16} />
+      <ArrowLeft size={16} aria-hidden="true" />
       Back to dashboard
     </a>
 
@@ -99,7 +101,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       <p>
         <a href="https://clinicaltrials.gov/study/NCT02942355">
           View NCT02942355 on ClinicalTrials.gov
-          <ExternalLink size={14} />
+          <ExternalLink size={14} aria-hidden="true" />
         </a>
       </p>
     </section>

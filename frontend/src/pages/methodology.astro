@@ -2,15 +2,17 @@
 import { ArrowLeft } from "@lucide/astro";
 
 import BaseLayout from "@/layouts/BaseLayout.astro";
+
+export const prerender = true;
 ---
 
 <BaseLayout
   title="Methodology | TrialDiff"
   description="How TrialDiff builds deterministic, source-linked ClinicalTrials.gov amendment Evidence Records."
 >
-  <main class="page-shell stack methodology-page">
+  <main class="page-shell stack methodology-page" id="main-content">
     <a class="button" href="/">
-      <ArrowLeft size={16} />
+      <ArrowLeft size={16} aria-hidden="true" />
       Back to dashboard
     </a>
 
@@ -56,14 +58,20 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     <section class="panel panel-pad method-section" id="corpus-scope">
       <h2>Corpus Scope</h2>
       <p>
-        This alpha demo uses a 25-study breast-cancer-related corpus selected for amendment density and demonstration
-        value. It is not a representative sample of ClinicalTrials.gov, oncology trials, or breast-cancer trials
-        generally.
+        The regenerated 100-study breast-cancer corpus contains 100 trials, 4,485 adjacent patches, and 868
+        materiality events under the v0.2.1 triage-rule generation. Evidence Record counts are generation-specific:
+        the intermediate materiality-filter population contained 483 records, the published v0.1.1 event-class
+        generation contains 100 records and carries erratum E1, and the corrected v0.1.2 generation validated at
+        97 records before its 2026-08-02 production promotion and Zenodo publication.
       </p>
       <p>
-        Counts on the dashboard are therefore evidence-engine outputs for this bounded demo corpus, not population
-        estimates. The original 100-study breast-cancer corpus remains a later expansion; it is not required to evaluate
-        whether the Evidence Record pipeline works.
+        The corpus was selected for amendment density and demonstration value. Dashboard counts are evidence-engine
+        outputs for this bounded corpus, not population estimates for ClinicalTrials.gov, oncology trials, or
+        breast-cancer trials generally.
+      </p>
+      <p>
+        The frozen v0.1-alpha package remains a historical 25-study slice (25 trials, 280 adjacent patches, 122
+        materiality events, 86 Evidence Records, 40 exported) preserved byte-identically in the repository.
       </p>
     </section>
 
@@ -141,10 +149,15 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     <section class="panel panel-pad method-section">
       <h2>Timing Modifier</h2>
       <p>
-        Base triage severity is computed first, then timing context can escalate sensitive changes. For example, an endpoint or
-        eligibility change during late recruitment or after completion can carry a higher triage label than the same
-        change before recruitment begins. The stored event keeps both <code>severity_pre_timing</code> and final
-        <code>severity</code>.
+        Timing context (pre-recruitment, early recruitment, late recruitment, post-recruitment) is recorded on every
+        event. Automatic timing escalation was disabled in the v0.2.1 rule tightening (see
+        <a href="https://github.com/AMBRA7592/trialdiff/blob/main/V0.2.1_RULE_TIGHTENING_DIAGNOSTIC.md">
+          V0.2.1_RULE_TIGHTENING_DIAGNOSTIC.md
+        </a> in the repository), so <code>severity</code> currently always equals <code>severity_pre_timing</code> for
+        the displayed generation.
+      </p>
+      <p>
+        Both fields are stored so a future calibrated rule set can re-enable escalation per category.
       </p>
     </section>
 

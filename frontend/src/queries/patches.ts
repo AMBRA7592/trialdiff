@@ -69,34 +69,44 @@ export async function getPatchInspection(
       `,
       sql<Record<string, unknown>[]>`
         SELECT
-          id,
-          nct_id,
-          from_version,
-          to_version,
-          submitted_date,
-          timing_context,
-          severity_pre_timing,
-          severity,
-          category,
-          categories_json,
-          changed_paths_json,
-          deterministic_rules_json,
-          value_signals_json,
-          summary,
-          summary_source,
-          needs_human_review,
-          rule_set_hash
-        FROM materiality_events
-        WHERE nct_id = ${nctId}
-          AND from_version = ${fromVersion}
-          AND to_version = ${toVersion}
-        ORDER BY CASE severity
+          e.id,
+          er.event_id AS evidence_event_id,
+          e.nct_id,
+          e.from_version,
+          e.to_version,
+          e.submitted_date,
+          e.timing_context,
+          e.severity_pre_timing,
+          e.severity,
+          e.category,
+          e.categories_json,
+          e.changed_paths_json,
+          e.deterministic_rules_json,
+          e.value_signals_json,
+          e.summary,
+          e.summary_source,
+          e.needs_human_review,
+          e.rule_set_hash
+        FROM materiality_events e
+        LEFT JOIN LATERAL (
+          SELECT event_id
+          FROM evidence_records er
+          WHERE er.nct_id = e.nct_id
+            AND er.from_version = e.from_version
+            AND er.to_version = e.to_version
+          ORDER BY er.evidence_version DESC, er.generated_at DESC NULLS LAST
+          LIMIT 1
+        ) er ON true
+        WHERE e.nct_id = ${nctId}
+          AND e.from_version = ${fromVersion}
+          AND e.to_version = ${toVersion}
+        ORDER BY CASE e.severity
           WHEN 'critical' THEN 1
           WHEN 'high' THEN 2
           WHEN 'medium' THEN 3
           WHEN 'low' THEN 4
           ELSE 5
-        END, id
+        END, e.id
       `,
       sql<Record<string, unknown>[]>`
         SELECT
@@ -156,6 +166,7 @@ export async function getPatchInspection(
       events: eventRows.map(mapMaterialityEvent),
     };
   } catch (error) {
+    console.error("getPatchInspection failed:", error);
     return {
       databaseReady: false,
       databaseError: error instanceof Error ? error.message : "Database query failed.",
@@ -185,6 +196,7 @@ function isPatchOperation(value: unknown): value is { op: string; path: string; 
 function mapMaterialityEvent(row: Record<string, unknown>): MaterialityEventDetail {
   return {
     id: numberValue(row.id),
+    evidenceEventId: nullableString(row.evidence_event_id),
     nctId: String(row.nct_id ?? ""),
     fromVersion: numberValue(row.from_version),
     toVersion: numberValue(row.to_version),

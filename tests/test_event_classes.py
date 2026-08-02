@@ -70,6 +70,54 @@ class EventClassTests(unittest.TestCase):
             event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch),
         )
 
+    def test_missing_to_record_without_patch_evidence_is_not_whystopped_removal(self) -> None:
+        # Regression test for the v0.1/v0.1.1 package bug: a missing TO-version
+        # snapshot must not be read as "whyStopped absent". Without patch
+        # evidence, the class must not fire.
+        from_record = record(status="TERMINATED")
+        from_record["protocolSection"]["statusModule"]["whyStopped"] = "Recruitment failed"
+        patch = [
+            {"op": "replace", "path": "/protocolSection/statusModule/statusVerifiedDate", "value": "2025-12"},
+            {"op": "replace", "path": "/hasResults", "value": True},
+        ]
+
+        self.assertNotIn(
+            WHY_STOPPED_REMOVED_TERMINAL,
+            event_classes_for_patch(from_record=from_record, to_record=None, patch=patch),
+        )
+
+    def test_missing_to_record_with_patch_removal_is_whystopped_removal(self) -> None:
+        from_record = record(status="TERMINATED")
+        from_record["protocolSection"]["statusModule"]["whyStopped"] = "Recruitment failed"
+        patch = [{"op": "remove", "path": "/protocolSection/statusModule/whyStopped"}]
+
+        self.assertIn(
+            WHY_STOPPED_REMOVED_TERMINAL,
+            event_classes_for_patch(from_record=from_record, to_record=None, patch=patch),
+        )
+
+    def test_missing_to_record_with_patch_emptying_is_whystopped_removal(self) -> None:
+        from_record = record(status="TERMINATED")
+        from_record["protocolSection"]["statusModule"]["whyStopped"] = "Recruitment failed"
+        patch = [{"op": "replace", "path": "/protocolSection/statusModule/whyStopped", "value": "  "}]
+
+        self.assertIn(
+            WHY_STOPPED_REMOVED_TERMINAL,
+            event_classes_for_patch(from_record=from_record, to_record=None, patch=patch),
+        )
+
+    def test_to_record_showing_removal_fires_without_patch_op(self) -> None:
+        # Two stored snapshots are direct evidence; no patch op is required.
+        from_record = record(status="TERMINATED")
+        from_record["protocolSection"]["statusModule"]["whyStopped"] = "Recruitment failed"
+        to_record = record(status="TERMINATED")
+        patch = [{"op": "replace", "path": "/protocolSection/statusModule/statusVerifiedDate", "value": "2025-12"}]
+
+        self.assertIn(
+            WHY_STOPPED_REMOVED_TERMINAL,
+            event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch),
+        )
+
     def test_event_classes_are_returned_in_sorted_order(self) -> None:
         removed = {"measure": "Quality of life", "description": "FACT-B score", "timeFrame": "12 months"}
         from_record = record(

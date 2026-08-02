@@ -227,7 +227,7 @@ def main() -> int:
     parser.add_argument("--db", default="trialdiff_breast_cancer_limit25.sqlite3")
     parser.add_argument("--sample", default="CALIBRATION_SAMPLE_v0.2.csv")
     parser.add_argument("--out", default="CALIBRATION_REVIEW_PACKAGE_v0.2.jsonl")
-    parser.add_argument("--crosswalk", default="CALIBRATION_REVIEW_CROSSWALK_PRIVATE_v0.2.csv")
+    parser.add_argument("--crosswalk", default="CALIBRATION_REVIEW_CROSSWALK_UNBLINDING_KEY_v0.2.csv")
     parser.add_argument("--seed", default=DEFAULT_SEED)
     args = parser.parse_args()
 

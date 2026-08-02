@@ -17,6 +17,8 @@ interface Props {
 
 const { nctId, fromVersion, toVersion, events, provenance, enriched, rawOperations } = Astro.props;
 
+const evidenceEventId = events.find((event) => event.evidenceEventId)?.evidenceEventId ?? null;
+
 function valueBlock(value: unknown) {
   const formatted = formatPatchValue(value);
   return formatted === undefined ? "" : formatted;
@@ -36,13 +38,18 @@ function valueBlock(value: unknown) {
     </div>
     <a class="button" href={`https://clinicaltrials.gov/study/${nctId}`}>
       ClinicalTrials.gov
-      <ExternalLink size={16} />
+      <ExternalLink size={16} aria-hidden="true" />
     </a>
   </div>
 
   <div class="patch-disclaimer">
-    <ShieldCheck size={18} />
-    <span>Severity is deterministic uncalibrated triage metadata, not validated review priority. Operation-level severity is inferred from deterministic path rules.</span>
+    <ShieldCheck size={18} aria-hidden="true" />
+    <span>
+      Severity is deterministic uncalibrated triage metadata, not validated review priority. Operation-level severity
+      is inferred from deterministic path rules. Rule matches shown per operation are approximate previews (they skip
+      the pipeline's suppression passes); the authoritative classification is the stored
+      {evidenceEventId ? <a href={`/events/${evidenceEventId}`}>event record</a> : "event record"}.
+    </span>
   </div>
 
   <div class="patch-summary-grid">

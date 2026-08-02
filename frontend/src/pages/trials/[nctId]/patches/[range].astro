@@ -20,12 +20,21 @@ const data: PatchInspectionData = Number.isFinite(fromVersion) && Number.isFinit
       events: [],
       databaseError: "Invalid patch range.",
     };
+
+if (!data.databaseReady) {
+  Astro.response.status = 503;
+} else if (!data.patch) {
+  Astro.response.status = 404;
+}
 ---
 
-<BaseLayout title={`${nctId} patch ${range} | TrialDiff`}>
-  <main class="page-shell stack">
+<BaseLayout
+  title={`${nctId} patch ${range} | TrialDiff`}
+  description={`Field-level registry diff for ${nctId}, version ${fromVersion} to ${toVersion}.`}
+>
+  <main class="page-shell stack" id="main-content">
     <a class="button" href={`/trials/${nctId}`}>
-      <ArrowLeft size={16} />
+      <ArrowLeft size={16} aria-hidden="true" />
       Back to trial
     </a>
 
@@ -53,8 +62,12 @@ const data: PatchInspectionData = Number.isFinite(fromVersion) && Number.isFinit
         </>
       ) : (
         <section class="panel panel-pad notice">
-          <div class="notice-title">{data.databaseReady ? "Patch not found" : "Database connection pending"}</div>
-          <div>{data.databaseError ?? "No patch record exists for this version range."}</div>
+          <div class="notice-title">{data.databaseReady ? "Patch not found" : "Evidence database unavailable"}</div>
+          <div>
+            {data.databaseReady
+              ? "No patch record exists for this version range."
+              : "The corpus database is not reachable right now. Try again shortly."}
+          </div>
         </section>
       )
     }

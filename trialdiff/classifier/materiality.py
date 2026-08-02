@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import date
 import json
+from pathlib import Path
 from sqlite3 import Row
 from typing import Any
 
@@ -11,10 +12,36 @@ from trialdiff.classifier.timing import LATE_RECRUITMENT, POST_RECRUITMENT, UNKN
 from trialdiff.constants import Source
 from trialdiff.jsonpatch import MISSING, PatchValueContext, apply_patch as apply_json_patch, build_value_contexts, resolve_pointer
 from trialdiff.provenance import Provenance, sha256_json, utc_now_iso
+from trialdiff.ruleset import implementation_source_hash
 
 
 SEVERITY_RANK = {"ignore": 0, "low": 1, "medium": 2, "high": 3, "critical": 4}
+# Hash of the committed v0.2.1 rule-table rows (migrations 002/003/005) as
+# loaded from a fresh database. The full rule-set hash below also pins the
+# executable value-signal, suppression, path-match, timing, and patch logic.
+V021_TRIAGE_RULE_TABLE_HASH = "6fc6d7533e740cc38ca0ba0425927ade66f2f90b067963c5cf52d08a88f8d883"
+_TRIALDIFF_DIR = Path(__file__).resolve().parents[1]
+_CLASSIFIER_DIR = Path(__file__).resolve().parent
+TRIAGE_IMPLEMENTATION_HASH = implementation_source_hash(
+    {
+        "trialdiff.classifier.materiality": Path(__file__),
+        "trialdiff.classifier.pathmatch": _CLASSIFIER_DIR / "pathmatch.py",
+        "trialdiff.classifier.timing": _CLASSIFIER_DIR / "timing.py",
+        "trialdiff.jsonpatch": _TRIALDIFF_DIR / "jsonpatch.py",
+        "trialdiff.ruleset": _TRIALDIFF_DIR / "ruleset.py",
+    }
+)
+V021_TRIAGE_RULE_SET_HASH = sha256_json(
+    {
+        "rule_table_hash": V021_TRIAGE_RULE_TABLE_HASH,
+        "implementation_hash": TRIAGE_IMPLEMENTATION_HASH,
+    }
+)
 RANK_SEVERITY = {rank: severity for severity, rank in SEVERITY_RANK.items()}
+# Intentionally empty since the v0.2.1 rule tightening: blanket timing
+# escalation is disabled, so severity always equals severity_pre_timing.
+# See V0.2.1_RULE_TIGHTENING_DIAGNOSTIC.md. The mechanism is kept so a
+# future calibrated rule set can re-enable escalation per category.
 TIMING_SENSITIVE_CATEGORIES: set[str] = set()
 OUTCOME_CHANGE_CATEGORIES = {"primary_outcome_change", "secondary_outcome_change"}
 TIMELINE_RULE_CATEGORY = "timeline_shift"
@@ -77,7 +104,12 @@ class ClassifierRule:
         if not match_path(self.path_pattern, context.path):
             return False
         if "in" in self.value_filter:
-            return context.new_value in set(self.value_filter["in"])
+            try:
+                return context.new_value in set(self.value_filter["in"])
+            except TypeError:
+                # Unhashable new values (dicts/lists) can never equal the
+                # scalar values a value_filter enumerates.
+                return False
         return True
 
 
@@ -100,6 +132,12 @@ class MaterialityEvent:
     rule_set_hash: str
 
     def as_dict(self) -> dict[str, Any]:
+        return self.content_dict() | {"created_at": self.created_at}
+
+    def content_dict(self) -> dict[str, Any]:
+        # The deterministic content of the event: everything except the
+        # wall-clock created_at stamp. Hashes must be computed over this dict
+        # so that re-classifying identical inputs reproduces identical hashes.
         return {
             "nct_id": self.nct_id,
             "from_version": self.from_version,
@@ -114,7 +152,6 @@ class MaterialityEvent:
             "deterministic_rules": self.deterministic_rules,
             "value_signals": self.value_signals,
             "needs_human_review": self.needs_human_review,
-            "created_at": self.created_at,
             "rule_set_hash": self.rule_set_hash,
         }
 
@@ -573,7 +610,10 @@ def collect_categories(
     categories = {rule.category for rule, _context in matched_rules}
     for signal in value_signals:
         categories.add(signal_category(signal))
-    return sorted(categories, key=lambda category: category_priority(category), reverse=True)
+    # Priority ties (e.g. two categories both outside the priority table)
+    # must break deterministically by name, never by set iteration order,
+    # or the canonical hash becomes PYTHONHASHSEED-dependent.
+    return sorted(categories, key=lambda category: (-category_priority(category), category))
 
 
 def signal_category(signal: dict[str, Any]) -> str:
@@ -616,7 +656,7 @@ def apply_timing_modifier(severity: str, timing_context: str, category: str) -> 
 
 
 def provenance_for_event(event: MaterialityEvent) -> Provenance:
-    payload = event.as_dict()
+    payload = event.content_dict()
     return Provenance.from_payload(
         source=Source.DERIVED_CLASSIFIER,
         source_url="trialdiff://classifier/materiality",
@@ -625,7 +665,7 @@ def provenance_for_event(event: MaterialityEvent) -> Provenance:
     )
 
 
-def rule_set_hash(rules: list[ClassifierRule]) -> str:
+def rule_table_hash(rules: list[ClassifierRule]) -> str:
     payload = [
         {
             "rule_key": rule.rule_key,
@@ -640,3 +680,12 @@ def rule_set_hash(rules: list[ClassifierRule]) -> str:
         for rule in sorted(rules, key=lambda item: item.rule_key)
     ]
     return sha256_json(payload)
+
+
+def rule_set_hash(rules: list[ClassifierRule]) -> str:
+    return sha256_json(
+        {
+            "rule_table_hash": rule_table_hash(rules),
+            "implementation_hash": TRIAGE_IMPLEMENTATION_HASH,
+        }
+    )
