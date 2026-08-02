@@ -8,6 +8,7 @@ from typing import Any
 
 from trialdiff.event_classes import (
     EVENT_CLASS_RULE_SET_HASH,
+    EventClassInputError,
     combined_rule_set_hash,
     event_classes_for_patch,
 )
@@ -441,11 +442,15 @@ class TrialDiffStore:
             patch = json.loads(patch_row["patch_json"])
             from_record = json.loads(patch_row["from_record_json"])
             to_record = json.loads(patch_row["to_record_json"]) if patch_row["to_record_json"] else None
-            event_classes = event_classes_for_patch(
-                from_record=from_record,
-                to_record=to_record,
-                patch=patch,
-            )
+            try:
+                event_classes = event_classes_for_patch(
+                    from_record=from_record,
+                    to_record=to_record,
+                    patch=patch,
+                )
+            except EventClassInputError as error:
+                identity = f"{patch_row['nct_id']} v{patch_row['from_version']}->v{patch_row['to_version']}"
+                raise EventClassInputError(f"{identity}: {error}") from error
             if not event_classes:
                 continue
             materiality = materiality_rows.get(
