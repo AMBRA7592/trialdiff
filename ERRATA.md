@@ -52,8 +52,10 @@ absent in a terminal-status context" — a claim their own patch contradicts.
 
 **Corrected counts.** The published class count of 13 is therefore 4 under
 the corrected definition; the package overlap distribution inherits the
-error for this class. Other event classes are patch- or snapshot-anchored
-and are not affected; in particular the v0.1.1 "Boundary Analysis" chain
+error for this class. No other false membership was identified in that E1
+audit. A later full-corpus audit found one false negative in the
+secondary-outcome predicate (E4 below); it does not change the v0.1.1
+"Boundary Analysis" chain
 (4,485 patches scanned → 73 inclusive primary-endpoint flags → 63
 reconciliation-confounded → 10 clean class members) rests on patch-anchored
 predicates and is expected to survive, but must be recomputed and
@@ -139,6 +141,95 @@ itself. A superseded-wording banner has been added to
 `manual-audit-5-records.md` and the manifest entry re-pinned (see the
 manifest policy below). The audit's findings themselves are unaffected.
 
+## E4 — Sequential secondary-outcome removals were resolved against fixed FROM indices (2026-08-03)
+
+**Affected artifacts:** the published event-class v0.1.2 package
+[10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258), its
+`event-class-v0.1.2` GitHub Release, and the v0.1.2 rows served by the Neon /
+Vercel production layer. The package is immutable and remains the authentic
+record of the v0.2 predicate generation.
+
+**Defect.** `secondary_outcome_item_removed_without_reindex` resolved every
+whole-item removal path against the original FROM-version array. JSON Patch
+array indices are evaluated sequentially: after removing index 1, the next
+item shifts into index 1. A patch containing repeated removals at the same
+path therefore targets different original items, while the v0.2 predicate
+inspected the first item repeatedly.
+
+The published record
+`evt_NCT03734029_v29_v30_3bc3c0a82c88` contains two sequential removals at
+`/protocolSection/outcomesModule/secondaryOutcomes/1`. Its first removed item
+reappears in the TO-version list; its second removed item does not. The record
+correctly carries `outcome_edit_cooccurs_with_results_posting` but omits the
+qualifying `secondary_outcome_removed_after_primary_completion` membership.
+This is one false negative: the record itself already exists, so the correction
+adds a membership rather than a record.
+
+**Full frozen-corpus audit.** Over all 4,485 adjacent-version patches, 11 were
+post-completion whole-secondary-removal candidates. The historical literal
+resolver returned 9 memberships; sequential replay returns 10. Exactly one
+candidate disagrees, `NCT03734029` v29 to v30. The historical count of 9 is
+reported for traceability; the version-stable regression oracle is 11
+candidates / 10 corrected memberships / exactly that one disagreement.
+
+Mandatory patch replay is safe on this frozen input: all 4,485 patches replay;
+all 4,385 stored TO snapshots exactly match the replayed document; the 100
+patches without a stored TO snapshot reconstruct successfully; there are zero
+replay errors and zero stored-versus-derived mismatches.
+
+**Related hardening.** Before v0.3, replay failure returned a missing TO view.
+The primary and secondary predicates could interpret that absence as automatic
+positive evidence. This was the same failure shape as E1, although the frozen
+corpus contains no triggering replay failure. v0.3 makes replay failure and a
+stored-versus-derived TO mismatch hard classification errors. Only `add`,
+`remove`, and `replace` operations are accepted; unsupported operations such as
+`move` or `copy` halt classification instead of producing a membership.
+
+The primary-endpoint predicate had a sibling fixed-index exposure. It is now
+defined as an order-insensitive, duplicate-sensitive comparison of endpoint
+definitions after sequential replay, so a pure reorder is not a definition
+change. A full-denominator audit found 148 relevant primary patches, 73 after
+primary completion, 63 results-reconciliation cases, and 10 clean members,
+with zero disagreement between the v0.2 result and the corrected state
+comparison. The primary issue was latent and did not affect v0.1.2 counts.
+
+**Correction and hash transition.** The implementation now resolves removal
+targets against the evolving document using sequential value contexts. Because
+the rule-set hash pins implementation source bytes, the correction rotates the
+event-class and combined hashes even though the class names remain unchanged:
+
+| Hash | Frozen v0.1.2 generation | Corrected v0.3 code |
+| --- | --- | --- |
+| `EVENT_CLASS_VERSION` | `trialdiff.event_classes.v0.2` | `trialdiff.event_classes.v0.3` |
+| implementation hash | previous v0.2 implementation | `a3242f69e5eb3483badcfb3b295ea2f599753d256176c41b43b3b3120387aa75` |
+| `event_class_rule_set_hash` | `07957f8b90549d4f42387f51b471ecde9901b6db63bbc27b84c73631603407c0` | `91892060d8cd852c68a8afc0806cba298701702417025433cf001779bee82350` |
+| combined `rule_set_hash` | `318445b9ad266f51fd10ef378645c753ba7a098e3e4395c3c457750dc5f88d86` | `95326e30a51f979e331037a0e0564f086ff568795d7659d158b0c66a31129b1b` |
+| `triage_rule_set_hash` | `af5e5835e00a5fcfe2a17fd02b5fc244c2564104f93f78a1d77d7889f12a178b` | unchanged |
+
+This is the first published correction demonstrating the v0.2 hash design's
+intended behavior: an implementation correction cannot retain the old
+rule-set hash.
+
+The expected v0.1.3 regeneration over the unchanged frozen input is 97 records,
+54 trials, and 107 memberships; class counts 10 primary / 10 secondary / 3
+enrollment / 4 whyStopped / 80 results co-occurrence; overlaps 87 one-class /
+10 two-class / 0 three-class. These are halt-on-divergence expectations, not
+values to force. No v0.1.3 package, tag, DOI, or production generation exists
+until the controlled freeze and release gates in `RELEASING.md` pass.
+
+**Independent reconstructibility remains open.** Of v0.1.2's 106 memberships,
+80 are decidable from the embedded patch alone in that package; the other 26
+depend on registry-sourced FROM state not included in the record bytes. Snapshot
+hashes identify omitted source payloads but do not reconstruct them. This does
+not establish another incorrect membership; it limits what an outsider can
+recompute without the retained frozen database. A later source-closed
+validation set must use registry-sourced slices and an independent checker; it
+must not use TrialDiff-generated fields as oracle inputs.
+
+Regression coverage: `tests/test_event_classes.py`,
+`tests/test_event_class_input_audit.py`, and
+`scripts/audit_event_class_inputs.py --expect-v0.3`.
+
 ## Integrity is not correctness
 
 Every hash and manifest in this project proves **byte integrity**: the
@@ -167,3 +258,7 @@ Re-pinned on 2026-07-14 alongside E1–E3: `README.md`, `CLAIMS.md`,
 `manual-audit-5-records.md`, `EVIDENCE_RECORD_SCHEMA.md`,
 `EVIDENCE_RECORD_PRIMITIVE.md`, `scripts/export_alpha_demo.py`,
 `scripts/validate_alpha_demo.py`. All 40 record entries are unchanged.
+
+Re-pinned on 2026-08-03 alongside E4: `README.md`, `CLAIMS.md`,
+`NON_CLAIMS.md`, and `EVIDENCE_RECORD_PRIMITIVE.md`. All 40 frozen alpha
+record entries and every event-class package manifest remain unchanged.

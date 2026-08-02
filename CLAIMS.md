@@ -1,29 +1,59 @@
 # Claims
 
-TrialDiff Evidence Demo v0.1-alpha supports the following bounded claims.
+This file defines the current bounded claims for TrialDiff's frozen packages,
+event-class generator, and live evidence layer. Package-specific counts remain
+claims of the named immutable package, subject to `ERRATA.md`.
 
-## Core Claim
+## Core claim
 
-TrialDiff can take public ClinicalTrials.gov record changes and produce auditable, replayable Evidence Records that make meaningful amendments easier to inspect.
+TrialDiff can convert public ClinicalTrials.gov record-version changes into
+deterministic, source-linked Evidence Records with replayable patches, explicit
+event-class definitions, content hashes, and bounded supported/non-supported
+claims.
 
-## Supported Claims
+## Supported claims
 
-- The demo uses a bounded 25-study breast-cancer-related corpus.
-- TrialDiff stores adjacent ClinicalTrials.gov record-version patches.
-- TrialDiff classifies selected high-signal amendments using deterministic rules and value signals.
-- TrialDiff assigns severity as deterministic, reproducible, uncalibrated triage metadata, not as validated review priority or a finding of wrongdoing.
-- TrialDiff generates stable Evidence Record IDs from source data, patch hashes, changed paths, rule-set hash, category, and evidence version.
-- TrialDiff stores and exports hash/provenance fields for patches, snapshots, materiality events, and generated Evidence Records.
-- The frozen package contains 40 selected Evidence Records carrying high or critical triage labels.
-- Each exported record includes NCT ID, study title, sponsor, source links, version references, changed paths, JSON Patch data, rules/value signals, timing context, category, severity, provenance fields, supported claims, non-claims, and live demo URLs.
-- The exported records can be validated against `MANIFEST.sha256`.
+- TrialDiff stores adjacent ClinicalTrials.gov record-version patches and
+  applies deterministic event-class predicates to a named, frozen corpus.
+- Within an event-class package, the exported membership set is intended to be
+  exhaustive for that frozen corpus, generator version, and rule-set hash. A
+  missed membership is therefore an erratum, not an undocumented selection.
+- Event IDs, canonical record bytes, and manifests make a published generation
+  immutable and make later rule changes visible through rotated hashes and IDs.
+- `trialdiff verify` checks canonical form and internal hash consistency;
+  package manifests and deployed database hashes anchor artifact authenticity.
+- The live v0.1.2 layer and Zenodo v0.1.2 package contain 97 records over 54
+  trials and 106 event-class memberships. They remain immutable historical
+  artifacts and carry erratum E4; a v0.3 predicate correction is pending a
+  separately frozen v0.1.3 package.
+- The frozen v0.1-alpha package contains 40 selected Evidence Records from a
+  bounded 25-study corpus. Its selection rule is not an exhaustive event-class
+  export.
+- Severity is deterministic, reproducible, uncalibrated triage metadata. It is
+  not validated review priority or a finding of wrongdoing.
 
-## What The Demo Proves
+## Verification levels
 
-The demo proves that a conservative, deterministic evidence layer can be built over ClinicalTrials.gov amendment history.
+TrialDiff currently supports two distinct forms of checking:
 
-It does not prove that any specific amendment was improper, clinically meaningful, undisclosed in publications, or made with bad intent.
+1. **Byte integrity and authenticity:** canonical hashes, manifests, database
+   hashes, and exact HTTP response bytes identify the artifact that was frozen.
+2. **Generator correctness over the private frozen input:** regression tests,
+   full-corpus audits, dual regeneration, and halt-on-divergence release gates
+   test the implementation against the retained source database.
 
-## Severity Calibration Status
+The published v0.1.2 records are not fully source-closed: they include the
+adjacent-version patch and snapshot hashes, but not every registry snapshot
+slice required to independently recompute all five predicates. Full clean-room
+predicate reconstruction from packaged bytes alone is therefore not claimed.
 
-The v0.2/v0.2.1 calibration did not validate severity as an external review-priority standard. Against the pre-registered gate of at least 24/30 critical confirmations, the observed confirmations were 6/30 and 3/30 (v0.2 reviewers), 17/30 and 4/30 (v0.2.1 re-certification reviewers), and 4/30, 5/30, 12/30, 17/30 across the v0.2.1 critical-stratum fresh applications. Severity therefore remains an uncalibrated triage label. See `SEVERITY_CALIBRATION_v0.2.md`, `SEVERITY_CALIBRATION_v0.2.1.md`, and `SEVERITY_DECOUPLING_v0.2.1.md`.
+## Severity calibration status
+
+The v0.2/v0.2.1 calibration did not validate severity as an external
+review-priority standard. Against the pre-registered gate of at least 24/30
+critical confirmations, the observed confirmations were 6/30 and 3/30 (v0.2
+reviewers), 17/30 and 4/30 (v0.2.1 re-certification reviewers), and 4/30, 5/30,
+12/30, 17/30 across the v0.2.1 critical-stratum fresh applications. Severity
+therefore remains an uncalibrated triage label. See
+`SEVERITY_CALIBRATION_v0.2.md`, `SEVERITY_CALIBRATION_v0.2.1.md`, and
+`SEVERITY_DECOUPLING_v0.2.1.md`.
