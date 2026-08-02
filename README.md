@@ -41,10 +41,13 @@ The live demo is backed by Neon Postgres and renders the **regenerated
 - 100 breast-cancer-related interventional trials
 - 4,485 adjacent version patches
 - 868 materiality events (87 critical / 396 high / 217 medium / 168 low triage)
-- 100 event-class Evidence Records from the published v0.1.1 generation
+- 97 event-class Evidence Records from the corrected v0.1.2 generation
 
-The live 100-record layer carries erratum E1 until the corrected v0.1.2
-replacement is deployed. The historical count of 483 refers to the earlier
+The corrected 97-record layer was promoted to Neon and Vercel production on
+2026-08-02. Its public JSON endpoint serves the canonical record bytes with a
+matching ETag and `x-trialdiff-canonical-hash`. Zenodo v0.1.2 publication is
+still pending; published v0.1.1 remains the immutable historical artifact that
+carries erratum E1. The historical count of 483 refers to the earlier
 materiality-filter inclusion policy, not the current event-class criterion.
 See `CORPUS.md` for the full population/version reconciliation.
 
