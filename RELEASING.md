@@ -136,7 +136,8 @@ byte-identical and have the single SQL hash above. The fixed release ZIP was
 built twice from `bad85f8:event_class_records_v0.1.3` with `git archive`; both
 copies were byte-identical and matched the frozen repository package after
 extraction. The secret-free preparation packet records these checks and omits
-the private databases.
+the private databases. It is private operator/auditor evidence; do not attach
+the packet itself to a public GitHub Release or Zenodo record.
 
 ## A1. Historical accepted v0.1.2 procedure (erratum E1 correction)
 
@@ -323,8 +324,16 @@ esac
 echo "bb7fea78d25028b83bc9cf3dfe6de6cbbbffe3f5d0c8a2ab315bfd63dd6cea83  $V013_DB" \
   | shasum -a 256 -c -
 cmp "$V013_SQL_A" "$V013_SQL_B"
-! grep -Eq '(^|[[:space:]])(TRUNCATE|DELETE|DROP)([[:space:]]|$)' "$V013_SQL_A"
+! grep -Eiq '^[[:space:]]*(TRUNCATE|DELETE|DROP|UPDATE|ALTER)([[:space:]]|$)' \
+  "$V013_SQL_A"
+! grep -Eiq '^[[:space:]]*(SELECT[[:space:]]+setval|ON[[:space:]]+CONFLICT)([[:space:](]|$)' \
+  "$V013_SQL_A"
 ! grep -Fq 'trialdiff_activate_evidence_generation' "$V013_SQL_A"
+test "$(grep -Ec '^INSERT INTO ' "$V013_SQL_A")" = "3"
+for target in evidence_record_generations evidence_record_store \
+  evidence_record_supersessions; do
+  grep -Eq "^INSERT INTO ${target} " "$V013_SQL_A"
+done
 echo "cbc40527da1840632452d762c92587a00783268a0db4e89e1aa4e5e961b05c77  $V013_SQL_A" \
   | shasum -a 256 -c -
 
