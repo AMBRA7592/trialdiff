@@ -9,7 +9,8 @@ Verification for both formats: `trialdiff verify <file-or-directory>`
 ## `trialdiff.evidence_record` — current format
 
 Used by `event_class_records_v0.1.1/records/*.json`,
-`event_class_records_v0.1.2/records/*.json`, and future packages. **The file
+`event_class_records_v0.1.2/records/*.json`,
+`event_class_records_v0.1.3/records/*.json`, and future packages. **The file
 bytes are the canonical serialization**: key-sorted, compact separators,
 ASCII-escaped JSON. `sha256(file bytes)` is the record's citable hash (stored
 as `canonical_hash` in databases and in package manifests).
@@ -39,7 +40,7 @@ as `canonical_hash` in databases and in package manifests).
 | `provenance.patch_hash` | string | `sha256(canonical_json(patch))` — re-derivable from `patch` |
 | `provenance.patch_source` / `patch_source_url` | string | Where the patch came from (CT.gov internal history endpoint) |
 | `provenance.patch_raw_hash` | string | Hash of the raw fetched payload |
-| `provenance.from_snapshot_hash` / `to_snapshot_hash` | string\|null | Hashes of stored version snapshots; null = snapshot not stored (see `ERRATA.md` E1). These are identity anchors, not the snapshot bytes: v0.1.2 is not fully source-closed for clean-room predicate recomputation (see E4) |
+| `provenance.from_snapshot_hash` / `to_snapshot_hash` | string\|null | Hashes of stored version snapshots; null = snapshot not stored (see `ERRATA.md` E1). These are identity anchors, not the snapshot bytes: v0.1.2 and v0.1.3 are not fully source-closed for clean-room predicate recomputation (see E4) |
 | `provenance.materiality_event_hash` | string | Hash of the deterministic content of the upstream materiality event (excludes wall-clock fields since E2) |
 | `claims_supported` | string[] | Exactly what this record asserts |
 | `claims_not_supported` | string[] | Exactly what it refuses to assert (misconduct, intent, compliance…) |
@@ -79,8 +80,8 @@ bytes that hash to `canonical_hash`).
 The current schema embeds the adjacent-version patch but not the complete FROM
 and TO registry snapshots. Four event-class predicates consume FROM-version
 state that cannot always be recovered from a JSON Patch alone. Consequently,
-v0.1.2 supports integrity verification and internal consistency checks, but not
-clean-room reconstruction of every class membership from the record file by
-itself. A future source-closed validation artifact must carry only the minimal
-registry-sourced slices required by each predicate and must not use
-TrialDiff-generated fields as oracle inputs.
+v0.1.2 and v0.1.3 support integrity verification and internal consistency
+checks, but not clean-room reconstruction of every class membership from the
+record file by itself. A future source-closed validation artifact must carry
+only the minimal registry-sourced slices required by each predicate and must
+not use TrialDiff-generated fields as oracle inputs.

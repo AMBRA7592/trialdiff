@@ -41,7 +41,7 @@ for queries, plain CSS. No client-side JavaScript framework.
    ```bash
    python3 scripts/seed_from_records.py --db seed_demo.sqlite3
    python3 scripts/sqlite_to_postgres.py seed_demo.sqlite3 \
-     --truncate --package-generation v0.1.2 --activate-generation \
+     --truncate --package-generation v0.1.3 --activate-generation \
      --output seed_demo.sql
    psql "$DATABASE_URL" -f seed_demo.sql
    ```

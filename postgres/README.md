@@ -32,7 +32,7 @@ Export the current SQLite corpus into Postgres-compatible SQL and apply it:
 ```sh
 python3 scripts/sqlite_to_postgres.py trialdiff_breast_cancer_limit100.sqlite3 \
   --truncate \
-  --package-generation v0.1.2 \
+  --package-generation v0.1.3 \
   --activate-generation \
   --output postgres/trialdiff_limit100_export.sql
 psql "$DATABASE_URL" -f postgres/trialdiff_limit100_export.sql
