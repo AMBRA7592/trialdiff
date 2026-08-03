@@ -53,6 +53,11 @@ HTML (`<details>`, links).
 - Supersession metadata belongs in HTML, headers, and the non-immutable index,
   not in canonical JSON. Before activation, an imported inactive successor
   must not make the active predecessor appear superseded.
+- Exact inactive-generation IDs intentionally remain retrievable for hold-stage
+  byte verification, with `x-trialdiff-record-status: inactive`; never expose
+  them through feeds, active links, totals, or the supersession index.
+- Homepage counts are import-attested generation metadata. No active generation
+  is an unavailable state, not a zero-count corpus.
 
 ## Local database
 

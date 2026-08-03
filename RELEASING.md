@@ -242,6 +242,11 @@ active-only compatibility view, and records one-to-one transitions in
 `evidence_record_supersessions`. The package-generation label is distinct from
 the record-schema `evidence_version`.
 
+Corpus and severity totals shown by the frontend are the generation metadata
+attested during import. They describe the frozen generation and do not drift
+with later mutations of the underlying corpus tables. No active generation is
+an unavailable state, never a zero-count corpus.
+
 The existing `scripts/sqlite_to_postgres.py --truncate` path is prohibited for
 v0.1.3. Use the frozen v0.1.3 SQLite A database from section A and import only
 its Evidence Records. The generated SQL inserts the generation as inactive,
@@ -322,9 +327,12 @@ SELECT count(*) AS transition_count FROM evidence_record_supersessions;
 # 97 records / 54 trials / 109 memberships and the frozen v0.1.3 rule hash.
 
 # 5. Verify the already-built Vercel preview against this schema while v0.1.2
-#    is still active. The index must expose only the active published generation;
-#    an imported candidate must not prematurely supersede v0.1.2. Promote that
-#    exact reviewed deployment ID; do not trigger a fresh production build.
+#    is still active. The active predecessor must report current with no
+#    successor, and the index must omit v0.1.3. An exact known v0.1.3 ID is
+#    intentionally retrievable as 200 with x-trialdiff-record-status: inactive
+#    so its frozen bytes can be checked during the hold; this does not make the
+#    candidate current or discoverable. Promote that exact reviewed deployment
+#    ID; do not trigger a fresh production build.
 vercel promote <verified-preview-deployment-id>
 
 # 6. Activate v0.1.3 in one small transaction. The function refuses the switch
@@ -351,11 +359,14 @@ their hashed bodies.
 
 Rollback is explicit. Before activation, any migration/import failure rolls
 back at the transaction boundary; leave v0.1.2 active and do not promote. After
-activation, a presentation failure is reversed by reactivating v0.1.2 and
-promoting the previous verified Vercel deployment. A schema/data failure uses
-the pre-release dump (or named Neon snapshot) into a clean recovery branch,
-followed by the same count and canonical-hash checks before traffic moves. Do
-not delete either generation as part of rollback.
+activation, a presentation failure is reversed with
+`SELECT trialdiff_activate_evidence_generation('v0.1.2');` and promotion of the
+previous verified Vercel deployment. The activation function accepts the same
+complete one-to-one transition map in either direction and rechecks the target
+generation before switching. A schema/data failure uses the pre-release dump
+(or named Neon snapshot) into a clean recovery branch, followed by the same
+count and canonical-hash checks before traffic moves. Do not delete either
+generation as part of rollback.
 
 ## B1. Historical v0.1.2 Neon migration procedure
 

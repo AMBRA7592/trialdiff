@@ -129,7 +129,8 @@ DECLARE
   target_expected_count integer;
   target_rule_hash_count integer;
   target_canonical_mismatches integer;
-  mapped_count integer;
+  forward_mapped_count integer;
+  reverse_mapped_count integer;
 BEGIN
   LOCK TABLE evidence_record_generations IN EXCLUSIVE MODE;
 
@@ -180,7 +181,11 @@ BEGIN
     FROM evidence_record_store
     WHERE package_generation = previous_generation;
 
-    SELECT count(*) INTO mapped_count
+    -- A release transition is stored once, from predecessor to successor. The
+    -- same complete one-to-one map must also authorize a rollback from the
+    -- successor to its predecessor; duplicating reverse rows would violate the
+    -- supersession table's uniqueness constraints.
+    SELECT count(*) INTO forward_mapped_count
     FROM evidence_record_supersessions mapping
     JOIN evidence_record_store old_record
       ON old_record.event_id = mapping.superseded_event_id
@@ -189,11 +194,24 @@ BEGIN
       ON new_record.event_id = mapping.successor_event_id
      AND new_record.package_generation = target_generation;
 
+    SELECT count(*) INTO reverse_mapped_count
+    FROM evidence_record_supersessions mapping
+    JOIN evidence_record_store target_record
+      ON target_record.event_id = mapping.superseded_event_id
+     AND target_record.package_generation = target_generation
+    JOIN evidence_record_store previous_record
+      ON previous_record.event_id = mapping.successor_event_id
+     AND previous_record.package_generation = previous_generation;
+
     IF previous_count = 0
        OR previous_count <> target_count
-       OR mapped_count <> previous_count THEN
-      RAISE EXCEPTION 'activation requires a complete one-to-one map from % to %: old %, new %, mapped %',
-        previous_generation, target_generation, previous_count, target_count, mapped_count;
+       OR (
+         forward_mapped_count <> previous_count
+         AND reverse_mapped_count <> previous_count
+       ) THEN
+      RAISE EXCEPTION 'activation requires a complete one-to-one map between % and %: previous %, target %, forward mapped %, reverse mapped %',
+        previous_generation, target_generation, previous_count, target_count,
+        forward_mapped_count, reverse_mapped_count;
     END IF;
   END IF;
 

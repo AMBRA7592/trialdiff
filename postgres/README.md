@@ -57,7 +57,14 @@ The additive SQL refuses to activate its own generation. It verifies its
 record/membership/rule-hash metadata against the inserted rows, verifies its
 corpus metadata against the target database, and requires a complete
 one-to-one transition map. Activation is a separate transaction and refuses
-to switch unless that map remains complete.
+to switch unless that map remains complete. The same stored forward map
+authorizes a checked rollback from successor to predecessor; reverse duplicate
+rows are neither required nor permitted.
+
+Generation totals are immutable release attestations checked at import and
+activation time, not live aggregates over subsequently mutable corpus tables.
+If no generation is active, consumer surfaces must report unavailable rather
+than presenting zero-valued corpus totals.
 
 The exporter is pure Python stdlib. It preserves provenance columns, JSON
 payloads as `jsonb`, booleans, identity IDs, and `canonical_json` as opaque

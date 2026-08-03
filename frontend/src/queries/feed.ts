@@ -43,7 +43,10 @@ async function getSummary(): Promise<SummaryCounts> {
     WHERE is_active
     LIMIT 1
   `;
-  const row = rows[0] ?? {};
+  const row = rows[0];
+  if (!row) {
+    throw new Error("No active Evidence Record generation is configured.");
+  }
 
   return {
     trialCount: numberValue(row.trial_count),

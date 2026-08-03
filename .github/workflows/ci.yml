@@ -170,7 +170,7 @@ jobs:
             --evidence-only --package-generation v0.1.2 --supersedes v0.1.1 \
             --output /tmp/v012.sql
 
-      - name: Rehearse additive import and explicit activation
+      - name: Stage additive generation without activation
         working-directory: .
         shell: bash
         run: |
@@ -187,16 +187,6 @@ jobs:
                     (SELECT string_agg(package_generation || ':' || is_active::text, ',' ORDER BY package_generation) FROM evidence_record_generations), \
                     (SELECT count(*) FROM evidence_record_supersessions);")
           test "$staged" = "190|95|v0.1.1:true,v0.1.2:false|95"
-
-          psql -h localhost -U trialdiff -d trialdiff -q -v ON_ERROR_STOP=1 \
-            -c "SELECT trialdiff_activate_evidence_generation('v0.1.2');"
-          active=$(psql -h localhost -U trialdiff -d trialdiff -tA -F '|' -c \
-            "SELECT (SELECT count(*) FROM evidence_record_store), \
-                    (SELECT count(*) FROM evidence_records), \
-                    (SELECT string_agg(package_generation || ':' || is_active::text, ',' ORDER BY package_generation) FROM evidence_record_generations), \
-                    (SELECT count(*) FROM evidence_record_supersessions), \
-                    (SELECT count(*) FROM evidence_record_store WHERE encode(sha256(convert_to(canonical_json,'UTF8')),'hex') <> canonical_hash);")
-          test "$active" = "190|95|v0.1.1:false,v0.1.2:true|95|0"
           psql -h localhost -U trialdiff -d trialdiff -tA -F ' ' -c \
             "SELECT superseded_event_id, successor_event_id FROM evidence_record_supersessions ORDER BY superseded_event_id LIMIT 1" \
             > /tmp/coexistence-ids.txt
@@ -211,6 +201,77 @@ jobs:
           done
           cat /tmp/trialdiff-frontend.log
           exit 1
+
+      - name: Verify inactive hold state and fail-closed no-active state
+        working-directory: .
+        shell: bash
+        run: |
+          set -euo pipefail
+          read -r old_id new_id < /tmp/coexistence-ids.txt
+          old_file=$(find /tmp/v011-common -name "$old_id.json" -print -quit)
+          new_file=$(find /tmp/v012-common -name "$new_id.json" -print -quit)
+          test -n "$old_file"
+          test -n "$new_file"
+
+          # During the hold, the active predecessor remains current and the
+          # exact candidate ID is verifiable but explicitly inactive. The
+          # discovery index must not enumerate the inactive candidate.
+          curl -fsS -D /tmp/hold-old.headers \
+            "http://127.0.0.1:4321/events/$old_id.json" -o /tmp/hold-old.json
+          cmp "$old_file" /tmp/hold-old.json
+          grep -qi '^x-trialdiff-record-status: current' /tmp/hold-old.headers
+          ! grep -qi '^x-trialdiff-successor-event-id:' /tmp/hold-old.headers
+
+          curl -fsS -D /tmp/hold-new.headers \
+            "http://127.0.0.1:4321/events/$new_id.json" -o /tmp/hold-new.json
+          cmp "$new_file" /tmp/hold-new.json
+          grep -qi '^x-trialdiff-record-status: inactive' /tmp/hold-new.headers
+          grep -qi "^x-trialdiff-predecessor-event-id: $old_id" /tmp/hold-new.headers
+          trialdiff verify /tmp/hold-old.json /tmp/hold-new.json
+
+          curl -fsS http://127.0.0.1:4321/events/supersessions.json \
+            -o /tmp/hold-index.json
+          grep -F '"active_package_generation":"v0.1.1"' /tmp/hold-index.json
+          grep -F "\"event_id\":\"$old_id\"" /tmp/hold-index.json
+          ! grep -Fq "$new_id" /tmp/hold-index.json
+
+          # A database with no active generation is unavailable, never an
+          # apparently valid corpus with zero counts.
+          psql -h localhost -U trialdiff -d trialdiff -q -v ON_ERROR_STOP=1 \
+            -c "UPDATE evidence_record_generations SET is_active = false;"
+          test "$(curl -sS -o /tmp/no-active.html -w '%{http_code}' http://127.0.0.1:4321/)" = "503"
+          grep -F 'Evidence database unavailable' /tmp/no-active.html
+          psql -h localhost -U trialdiff -d trialdiff -q -v ON_ERROR_STOP=1 \
+            -c "SELECT trialdiff_activate_evidence_generation('v0.1.1');"
+
+      - name: Verify forward activation and reverse rollback
+        working-directory: .
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql -h localhost -U trialdiff -d trialdiff -q -v ON_ERROR_STOP=1 \
+            -c "SELECT trialdiff_activate_evidence_generation('v0.1.2');"
+          active=$(psql -h localhost -U trialdiff -d trialdiff -tA -F '|' -c \
+            "SELECT (SELECT count(*) FROM evidence_record_store), \
+                    (SELECT count(*) FROM evidence_records), \
+                    (SELECT string_agg(package_generation || ':' || is_active::text, ',' ORDER BY package_generation) FROM evidence_record_generations), \
+                    (SELECT count(*) FROM evidence_record_supersessions), \
+                    (SELECT count(*) FROM evidence_record_store WHERE encode(sha256(convert_to(canonical_json,'UTF8')),'hex') <> canonical_hash);")
+          test "$active" = "190|95|v0.1.1:false,v0.1.2:true|95|0"
+
+          psql -h localhost -U trialdiff -d trialdiff -q -v ON_ERROR_STOP=1 \
+            -c "SELECT trialdiff_activate_evidence_generation('v0.1.1');"
+          rolled_back=$(psql -h localhost -U trialdiff -d trialdiff -tA -F '|' -c \
+            "SELECT (SELECT count(*) FROM evidence_records), \
+                    (SELECT string_agg(package_generation || ':' || is_active::text, ',' ORDER BY package_generation) FROM evidence_record_generations);")
+          test "$rolled_back" = "95|v0.1.1:true,v0.1.2:false"
+
+          psql -h localhost -U trialdiff -d trialdiff -q -v ON_ERROR_STOP=1 \
+            -c "SELECT trialdiff_activate_evidence_generation('v0.1.2');"
+          reactivated=$(psql -h localhost -U trialdiff -d trialdiff -tA -F '|' -c \
+            "SELECT (SELECT count(*) FROM evidence_records), \
+                    (SELECT string_agg(package_generation || ':' || is_active::text, ',' ORDER BY package_generation) FROM evidence_record_generations);")
+          test "$reactivated" = "95|v0.1.1:false,v0.1.2:true"
 
       - name: Verify immutable old/new HTTP responses and discovery index
         working-directory: .

@@ -88,6 +88,18 @@ Active feeds and corpus totals are selected explicitly from
 its original canonical JSON bytes and hash. Supersession state is carried in
 HTML and response headers, never added to the hashed JSON body.
 
+An exact ID from an imported but inactive generation is also intentionally
+retrievable as HTTP 200 with `x-trialdiff-record-status: inactive`. This makes
+the frozen candidate bytes verifiable during the production hold without
+making that candidate current or discoverable: feeds, links, corpus totals,
+and the supersession index continue to expose only the active generation.
+
+Homepage counts are attested generation metadata captured and checked during
+import, not mutable live aggregates. They describe the frozen generation; a
+later corpus mutation does not rewrite those counts and requires a new
+generation/import to become public. If no generation is active, the homepage
+returns its database-unavailable state instead of rendering zero counts.
+
 `/events/supersessions.json` is the revalidated discovery index for active and
 superseded published IDs. Canonical record responses remain independently
 cacheable for one year with `immutable`; the index and HTML record pages use
