@@ -303,7 +303,10 @@ shasum -a 256 "$PRE_RELEASE_DUMP" \
 shasum -a 256 -c "$RELEASE_PRIVATE/neon-pre-v0.1.3.dump.sha256"
 
 # 3. Apply the coexistence schema, then atomically import v0.1.3 as inactive.
-#    Existing v0.1.2 rows remain active and byte-identical.
+#    Existing v0.1.2 rows remain active and byte-identical. Migration 007 is
+#    one-shot: a disposable preview/staging database that ran any earlier PR
+#    draft of 007 must be rebuilt from a migration-006 snapshot before this
+#    rehearsal. Do not rerun or patch an already-applied draft migration.
 psql "$DATABASE_URL_DIRECT" -v ON_ERROR_STOP=1 \
   -f postgres/migrations/007_evidence_generation_coexistence.sql
 psql "$DATABASE_URL_DIRECT" -v ON_ERROR_STOP=1 -f "$V013_SQL_A"

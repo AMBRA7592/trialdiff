@@ -90,7 +90,10 @@ async function getCorpusStamp(): Promise<CorpusStamp> {
     WHERE is_active
     LIMIT 1
   `;
-  const row = rows[0] ?? {};
+  const row = rows[0];
+  if (!row) {
+    throw new Error("No active Evidence Record generation is configured.");
+  }
 
   return {
     maxSubmittedDate: typeof row.max_submitted_date === "string" ? row.max_submitted_date : null,
