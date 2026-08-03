@@ -101,6 +101,43 @@ event ID must continue serving its exact immutable JSON bytes and original
 hashes, with superseded/successor metadata. Do not redirect or 404 a published
 ID. Active feeds may move to v0.1.3 only after this resolver is verified.
 
+### Accepted v0.1.3 preparation artifacts
+
+The controlled freeze and non-production release preparation produced these
+fixed inputs. Do not rebuild, overwrite, or silently substitute them during the
+production window:
+
+- generator code merge commit:
+  `7a15a1fd1aa7c9c75dc3dcf96a40be70dd7831bb`
+- final frozen-package commit:
+  `bad85f8714592c2bcfa28ec5d5696582be3ae177`
+- regenerated SQLite A SHA-256:
+  `bb7fea78d25028b83bc9cf3dfe6de6cbbbffe3f5d0c8a2ab315bfd63dd6cea83`
+- regenerated SQLite B SHA-256:
+  `15ed5a441961cb98641b0aad807a3c6c0b53f39c50d3fb5abcad68089edc1719`
+- A/B identity-listing SHA-256:
+  `f6920e2f5d8afa7caef18d9d102beafb1d56a89d469a1c19a4d3a82b1213da2b`
+- production import SQL SHA-256:
+  `cbc40527da1840632452d762c92587a00783268a0db4e89e1aa4e5e961b05c77`
+- release ZIP SHA-256:
+  `501f3c544b251b19316e4473c03fc1ac9ba8ef3fb8a55873b0a11ab597b048e4`
+- release ZIP MD5: `2c30105d426f2923782d9b904041a368`
+- package manifest SHA-256:
+  `ac58a8d202d671f7f5d938e5bfe6bcbdcef93160cbb1a5468c33e76d0faf4e1d`
+- release-preparation audit-packet manifest SHA-256:
+  `25e63fbef5afa80a95443d372c293c7837b3b814885ac9050e3ee387fa71ca2c`
+- release-preparation audit-packet ZIP SHA-256:
+  `d267f4682f89b22299e5a145fbe5eb3d7b5dcd28d58a71da97e54f3472fe3a8f`
+
+Database A is the only authorized production-import source. Database B is an
+independent regeneration copy; raw SQLite byte equality was not a freeze gate.
+The two SQL exports generated from A under different hash seeds are
+byte-identical and have the single SQL hash above. The fixed release ZIP was
+built twice from `bad85f8:event_class_records_v0.1.3` with `git archive`; both
+copies were byte-identical and matched the frozen repository package after
+extraction. The secret-free preparation packet records these checks and omits
+the private databases.
+
 ## A1. Historical accepted v0.1.2 procedure (erratum E1 correction)
 
 > **ARCHIVE ONLY - DO NOT EXECUTE.** This block records the completed v0.1.2
@@ -268,24 +305,28 @@ export DATABASE_URL_DIRECT=<direct-non-pooler-neon-url>
 export V013_DB="$RELEASE_PRIVATE/v0.1.3-a.sqlite3"
 export V013_SQL_A="$RELEASE_PRIVATE/trialdiff-v0.1.3-neon-a.sql"
 export V013_SQL_B="$RELEASE_PRIVATE/trialdiff-v0.1.3-neon-b.sql"
+export V012_CHECK_ID="evt_NCT04278144_v33_v34_f64d3dc78625"
+export V013_CHECK_ID="evt_NCT04278144_v33_v34_c2f5c01ccf14"
+export V012_CHECK_HASH="d96faa8297dc182164e63da59def65b831533a0780ecdbeb133325d273d616f0"
+export V013_CHECK_HASH="2eb721f2744fea365180714af2390388d7650521783b03858d6da44ab092bf22"
 
 case "$DATABASE_URL_DIRECT" in
   *-pooler*) echo "Refusing pooled Neon URL" >&2; exit 1 ;;
 esac
 
-# 1. Re-prove the accepted source and build the import twice. The exports must
-#    be byte-identical and must contain no destructive statement or activation.
-echo "<PIN_AFTER_FREEZE>  $V013_DB" | shasum -a 256 -c -
-PYTHONHASHSEED=0 python3 scripts/sqlite_to_postgres.py "$V013_DB" \
-  --evidence-only --package-generation v0.1.3 --supersedes v0.1.2 \
-  --output "$V013_SQL_A"
-PYTHONHASHSEED=4242 python3 scripts/sqlite_to_postgres.py "$V013_DB" \
-  --evidence-only --package-generation v0.1.3 --supersedes v0.1.2 \
-  --output "$V013_SQL_B"
-diff -u "$V013_SQL_A" "$V013_SQL_B"
+# 1. Re-prove the fixed artifacts. Save this output in the production audit
+#    packet. Do not regenerate the accepted SQL or release ZIP in the window.
+(
+  cd "$RELEASE_PRIVATE"
+  shasum -a 256 -c RELEASE_ARTIFACTS.sha256
+) | tee "$RELEASE_PRIVATE/V013_PREWINDOW_ARTIFACT_CHECK.txt"
+echo "bb7fea78d25028b83bc9cf3dfe6de6cbbbffe3f5d0c8a2ab315bfd63dd6cea83  $V013_DB" \
+  | shasum -a 256 -c -
+cmp "$V013_SQL_A" "$V013_SQL_B"
 ! grep -Eq '(^|[[:space:]])(TRUNCATE|DELETE|DROP)([[:space:]]|$)' "$V013_SQL_A"
 ! grep -Fq 'trialdiff_activate_evidence_generation' "$V013_SQL_A"
-shasum -a 256 "$V013_SQL_A" > "$RELEASE_PRIVATE/trialdiff-v0.1.3-neon.sql.sha256"
+echo "cbc40527da1840632452d762c92587a00783268a0db4e89e1aa4e5e961b05c77  $V013_SQL_A" \
+  | shasum -a 256 -c -
 
 # 2. Create a named Neon snapshot when available and a complete custom-format
 #    rollback dump. This must cover the whole database, including all current
@@ -324,10 +365,15 @@ SELECT count(*) AS canonical_mismatches
 FROM evidence_record_store
 WHERE encode(sha256(convert_to(canonical_json, 'UTF8')), 'hex') <> canonical_hash;
 SELECT count(*) AS transition_count FROM evidence_record_supersessions;
+SELECT superseded_event_id, successor_event_id
+FROM evidence_record_supersessions
+WHERE superseded_event_id = '$V012_CHECK_ID'
+  AND successor_event_id = '$V013_CHECK_ID';
 "
 # Required before activation: v0.1.2 active, v0.1.3 inactive; 97 rows in each;
 # 97 transitions; zero canonical mismatches. The v0.1.3 metadata row must state
-# 97 records / 54 trials / 109 memberships and the frozen v0.1.3 rule hash.
+# 97 records / 54 trials / 109 memberships and the frozen v0.1.3 rule hash. The
+# final query must return exactly the fixed predecessor/successor pair above.
 
 # 5. Verify the already-built Vercel preview against this schema while v0.1.2
 #    is still active. The active predecessor must report current with no
@@ -351,7 +397,9 @@ must show its v0.1.3 successor. Its JSON body must remain byte-identical to the
 frozen v0.1.2 file with the original ETag; the v0.1.3 JSON body must match its
 new frozen file. `trialdiff verify` must pass on both. The unknown HTML and JSON
 IDs must return 404. A conditional request for the superseded JSON must return
-304 with zero body bytes.
+304 with zero body bytes. Use `V012_CHECK_ID` / `V013_CHECK_ID` and require the
+body hashes to equal `V012_CHECK_HASH` / `V013_CHECK_HASH`; do not substitute a
+different pair during the window.
 
 Also save `/events/supersessions.json`: it must name v0.1.3 as active, map all
 97 v0.1.2 IDs, use `public, max-age=0, must-revalidate`, and omit
@@ -522,8 +570,10 @@ Only after the v0.1.3 freeze commit and independent audit:
 
 1. Create and push an annotated `event-class-v0.1.3` tag at the exact freeze
    commit. Confirm the tag on `origin` before publishing or deleting any branch.
-2. Build one deterministic ZIP from the accepted package, pin its SHA-256, and
-   use that same file unchanged for the GitHub Release and Zenodo.
+2. Use the already-staged deterministic ZIP with SHA-256
+   `501f3c544b251b19316e4473c03fc1ac9ba8ef3fb8a55873b0a11ab597b048e4`;
+   do not rebuild it. Use that same file unchanged for the GitHub Release and
+   Zenodo.
 3. Complete the version-aware production migration and anonymous live checks in
    section B before publishing the new Zenodo version.
 4. Add a metadata-only E4 notice to Zenodo v0.1.2. Do not alter its deposited
