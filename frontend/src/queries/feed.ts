@@ -61,7 +61,7 @@ async function getSeverityCounts(): Promise<SeverityCount[]> {
     FROM evidence_record_generations generation
     CROSS JOIN LATERAL jsonb_each_text(generation.severity_counts_json) counts
     WHERE generation.is_active
-    ORDER BY CASE severity
+    ORDER BY CASE counts.key
       WHEN 'critical' THEN 1
       WHEN 'high' THEN 2
       WHEN 'medium' THEN 3
