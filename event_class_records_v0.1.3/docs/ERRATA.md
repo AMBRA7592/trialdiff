@@ -241,27 +241,31 @@ names remain unchanged:
 | combined `rule_set_hash` | `318445b9ad266f51fd10ef378645c753ba7a098e3e4395c3c457750dc5f88d86` | `fc87f4f0a74bc789dbe4ba85893c2c96f55db62c22970be4e991288104291621` |
 | `triage_rule_set_hash` | `af5e5835e00a5fcfe2a17fd02b5fc244c2564104f93f78a1d77d7889f12a178b` | unchanged |
 
-This is the first published correction demonstrating the v0.2 hash design's
-intended behavior: an implementation correction cannot retain the old
-rule-set hash.
+This is the first correction demonstrating the v0.2 hash design's intended
+behavior: an implementation correction cannot retain the old rule-set hash.
 
-The expected v0.1.3 regeneration over the unchanged frozen input is 97 records,
+The frozen v0.1.3 regeneration over the unchanged input contains 97 records,
 54 trials, and 109 memberships; class counts 10 primary / 12 secondary / 3
 enrollment / 4 whyStopped / 80 results co-occurrence; overlaps 85 one-class /
-12 two-class / 0 three-class. The overlap histogram is pinned by the same
-pre-regeneration oracle as the per-class totals. These are halt-on-divergence
-expectations, not values to force. No v0.1.3 package, tag, DOI, or production
-generation exists until the controlled freeze and release gates in
-`RELEASING.md` pass.
+12 two-class / 0 three-class. The overlap histogram was pinned by the same
+pre-regeneration oracle as the per-class totals. These were halt-on-divergence
+expectations, not values to force. The repository package now exists; no
+v0.1.3 tag, DOI, or production generation exists until the remaining controlled
+release gates in `RELEASING.md` pass.
 
 **Independent reconstructibility remains open.** Of v0.1.2's 106 memberships,
 80 are decidable from the embedded patch alone in that package; the other 26
 depend on registry-sourced FROM state not included in the record bytes. Snapshot
 hashes identify omitted source payloads but do not reconstruct them. This does
 not establish another incorrect membership; it limits what an outsider can
-recompute without the retained frozen database. A later source-closed
-validation set must use registry-sourced slices and an independent checker; it
-must not use TrialDiff-generated fields as oracle inputs.
+recompute without the retained frozen database. In v0.1.3, 80 of 109
+memberships are patch-decidable and 29 require additional registry-sourced
+slices. All 80 patch-decidable memberships are
+`outcome_edit_cooccurs_with_results_posting`; the three E4 additions are
+FROM-gated secondary-outcome memberships and therefore increase the
+source-slice-dependent count. A later source-closed validation set must use
+registry-sourced slices and an independent checker; it must not use
+TrialDiff-generated fields as oracle inputs.
 
 Regression coverage: `tests/test_event_classes.py`,
 `tests/test_event_class_input_audit.py`, and
@@ -299,3 +303,10 @@ Re-pinned on 2026-07-14 alongside E1–E3: `README.md`, `CLAIMS.md`,
 Re-pinned on 2026-08-03 alongside E4: `README.md`, `CLAIMS.md`,
 `NON_CLAIMS.md`, and `EVIDENCE_RECORD_PRIMITIVE.md`. All 40 frozen alpha
 record entries and every event-class package manifest remain unchanged.
+
+Re-pinned later on 2026-08-03 for the v0.1.3 repository freeze:
+`README.md`, `CLAIMS.md`, and `NON_CLAIMS.md`. The 40 alpha record entries and
+the frozen v0.1.1/v0.1.2 record sections remain unchanged. The new v0.1.3
+package has its own manifest and immutable records-section pin; its bundled
+ERRATA copy and package manifest were refreshed during audit follow-up without
+changing any of its 97 canonical record files.
