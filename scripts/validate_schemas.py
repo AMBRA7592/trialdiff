@@ -24,6 +24,7 @@ TARGETS = [
     ("schemas/alpha_demo_record.schema.json", "records/*.json"),
     ("schemas/evidence_record.schema.json", "event_class_records_v0.1.1/records/*.json"),
     ("schemas/evidence_record.schema.json", "event_class_records_v0.1.2/records/*.json"),
+    ("schemas/evidence_record.schema.json", "event_class_records_v0.1.3/records/*.json"),
 ]
 
 

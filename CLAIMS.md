@@ -23,9 +23,12 @@ claims.
 - `trialdiff verify` checks canonical form and internal hash consistency;
   package manifests and deployed database hashes anchor artifact authenticity.
 - The live v0.1.2 layer and Zenodo v0.1.2 package contain 97 records over 54
-  trials and 106 event-class memberships. They remain immutable historical
-  artifacts and carry erratum E4; a v0.3 predicate correction is pending a
-  separately frozen v0.1.3 package.
+  trials and 106 event-class memberships. They remain exact v0.1.2 release
+  bytes and carry erratum E4.
+- The separately frozen, not-yet-published v0.1.3 package contains 97 records
+  over 54 trials and 109 event-class memberships under the v0.3 predicates. It
+  corrects E4 but is not claimed to be live or DOI-deposited until those
+  owner-gated release steps occur.
 - The frozen v0.1-alpha package contains 40 selected Evidence Records from a
   bounded 25-study corpus. Its selection rule is not an exhaustive event-class
   export.
@@ -42,7 +45,7 @@ TrialDiff currently supports two distinct forms of checking:
    full-corpus audits, dual regeneration, and halt-on-divergence release gates
    test the implementation against the retained source database.
 
-The published v0.1.2 records are not fully source-closed: they include the
+The v0.1.2 and v0.1.3 records are not fully source-closed: they include the
 adjacent-version patch and snapshot hashes, but not every registry snapshot
 slice required to independently recompute all five predicates. Full clean-room
 predicate reconstruction from packaged bytes alone is therefore not claimed.

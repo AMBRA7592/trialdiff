@@ -47,6 +47,7 @@ jobs:
           python scripts/validate_alpha_demo.py
           python scripts/validate_event_class_package.py --package event_class_records_v0.1.1
           python scripts/validate_event_class_package.py --package event_class_records_v0.1.2
+          python scripts/validate_event_class_package.py --package event_class_records_v0.1.3
 
       - name: JSON Schema validation of all committed records
         run: python scripts/validate_schemas.py
@@ -57,6 +58,7 @@ jobs:
           sha256sum -c --quiet MANIFEST.calibration.sha256
           (cd event_class_records_v0.1.1 && sha256sum -c --quiet MANIFEST.sha256)
           (cd event_class_records_v0.1.2 && sha256sum -c --quiet MANIFEST.sha256)
+          (cd event_class_records_v0.1.3 && sha256sum -c --quiet MANIFEST.sha256)
           # v0.1 is a stub: its record entries must still verify against the
           # byte-identical v0.1.1 copies (this proves the stub's claim).
           (cd event_class_records_v0.1 && sed 's#  records/#  ../event_class_records_v0.1.1/records/#' MANIFEST.sha256 | sha256sum -c --quiet)
@@ -65,13 +67,13 @@ jobs:
         # shell: bash makes GitHub add pipefail, so the verifier's exit code
         # survives the pipe; without it this gate could never fail.
         shell: bash
-        run: trialdiff verify records event_class_records_v0.1.1/records event_class_records_v0.1.2/records | tail -1
+        run: trialdiff verify records event_class_records_v0.1.1/records event_class_records_v0.1.2/records event_class_records_v0.1.3/records | tail -1
 
       - name: Seed-from-records smoke test
         run: |
           python scripts/seed_from_records.py --db /tmp/seed_ci.sqlite3
           python scripts/sqlite_to_postgres.py /tmp/seed_ci.sqlite3 \
-            --truncate --package-generation v0.1.2 --activate-generation \
+            --truncate --package-generation v0.1.3 --activate-generation \
             --output /tmp/seed_ci.sql
           test -s /tmp/seed_ci.sql
 
@@ -91,7 +93,7 @@ jobs:
             "SELECT (SELECT count(*) FROM evidence_record_store), \
                     (SELECT count(*) FROM evidence_records), \
                     (SELECT package_generation FROM evidence_record_generations WHERE is_active);")
-          test "$state" = "97|97|v0.1.2"
+          test "$state" = "97|97|v0.1.3"
 
   frontend:
     name: Frontend — build + two-generation HTTP contract

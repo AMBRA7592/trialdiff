@@ -21,8 +21,9 @@ TrialDiff does not claim:
 - sensitivity, specificity, or externally validated accuracy for event-class
   predicates;
 - that hashes, manifests, or `trialdiff verify` prove semantic correctness;
-- that the v0.1.2 package is fully source-closed or that all predicate decisions
-  can be independently reconstructed from its packaged bytes alone; or
+- that the v0.1.2 or v0.1.3 package is fully source-closed or that all
+  predicate decisions can be independently reconstructed from its packaged
+  bytes alone; or
 - that a future clean-room conformance set has already been built or validated.
 
 Event-class packages do claim exhaustive application of the named predicates

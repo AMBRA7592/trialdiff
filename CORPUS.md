@@ -44,8 +44,9 @@ counts are always quoted per snapshot.
 - The v0.2 generation from this exact frozen snapshot emitted **97** records
   over 54 trials and 106 memberships for v0.1.2. It corrected E1 and carries
   E4 for three missed secondary-outcome memberships
-- The v0.3 correction is expected to retain **97** records over 54 trials and
-  produce 109 memberships; that remains a release gate until v0.1.3 is frozen
+- The frozen v0.3 correction retains **97** records over 54 trials and
+  produces 109 memberships in v0.1.3; publication and production activation
+  remain separate owner-gated release steps
 - Source of: the v0.2.1 calibration sample, the published event-class
   packages, and the live deployment at trialdiff.vercel.app
 
@@ -64,7 +65,7 @@ counts are always quoted per snapshot.
   population; 97 is the v0.1.2 event-class population. The last two use
   membership-driven inclusion, and their record-count difference is erratum
   E1. E4 adds a membership to an already-exported v0.1.2 record, so the
-  corrected v0.1.3 record population is expected to remain 97.
+  corrected v0.1.3 record population remains 97.
 - **25-study vs 100-study trial overlap**: the two selected lists share only
   1 NCT ID — the limit-25 and limit-100 runs are different slices of the
   ranked candidate pool, not a subset relationship. The 40 frozen alpha

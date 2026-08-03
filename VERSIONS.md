@@ -39,7 +39,7 @@ historical accident.
 | event-class v0.1 | 2026-06-22 | Superseded stub — records were byte-identical to v0.1.1. Zenodo DOI [10.5281/zenodo.20801957](https://doi.org/10.5281/zenodo.20801957) |
 | event-class v0.1.1 | 2026-06-23 | Frozen; carries erratum E1 (`ERRATA.md`) for the whyStopped class. Zenodo DOI [10.5281/zenodo.20816639](https://doi.org/10.5281/zenodo.20816639), published from the `trialdiff-public` snapshot |
 | event-class v0.1.2 | 2026-08-02 | Frozen after byte-identical dual regeneration under `trialdiff.event_classes.v0.2`: 97 records, 54 trials, 106 memberships. Promoted to Neon/Vercel and published as Zenodo DOI [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258). Remains immutable; carries E4 for three missed secondary-outcome memberships |
-| event-class v0.1.3 | Pending | Planned E4 correction under `trialdiff.event_classes.v0.3`. Expected freeze gates: 97 records, 54 trials, 109 memberships. No package, tag, DOI, or production generation exists until the controlled release gates pass |
+| event-class v0.1.3 | 2026-08-03 | Frozen after byte-identical dual regeneration under `trialdiff.event_classes.v0.3`: 97 records, 54 trials, 109 memberships. Corrects E4. Repository package exists; tag, DOI, and production activation remain pending owner-gated release steps |
 
 ## 5. Event-class definitions (code semantics)
 
@@ -47,4 +47,4 @@ historical accident.
 | --- | --- | --- |
 | `trialdiff.event_classes.v0.1` | `a6734d37…` | Produced the v0.1/v0.1.1 packages; whyStopped predicate defect (E1) |
 | `trialdiff.event_classes.v0.2` | `07957f8b…` | Produced v0.1.2; corrected E1 but carries the three secondary-removal omissions documented in E4 |
-| `trialdiff.event_classes.v0.3` | `74a6f55a…` | Current at HEAD; strict mandatory replay, stored-TO equality, sequential and container-level secondary removal resolution, and order-insensitive primary definition comparison. Pending v0.1.3 freeze |
+| `trialdiff.event_classes.v0.3` | `74a6f55a…` | Produced the frozen v0.1.3 package; strict mandatory replay, stored-TO equality, sequential and container-level secondary removal resolution, and order-insensitive primary definition comparison |

@@ -28,12 +28,13 @@ from trialdiff.provenance import canonical_json  # noqa: E402
 FROZEN_RECORDS_SECTION_SHA256 = {
     "event_class_records_v0.1.1": "742ffd5fcc23b5aa2b7710277135b68e4e626da199c96a44360eadccdc6b38fd",
     "event_class_records_v0.1.2": "e465c68c76a9608e198166461ed6f2b960f9583aadce13f3ef9c55b00f950c45",
+    "event_class_records_v0.1.3": "60348b644cd552a8a54d15f1701f3537c2b56c8238feafd7dc290d7c67affcfc",
 }
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--package", default="event_class_records_v0.1.1", help="Package directory.")
+    parser.add_argument("--package", default="event_class_records_v0.1.3", help="Package directory.")
     parser.add_argument("--db", default=None, help="Optional SQLite DB for canonical_hash cross-checks.")
     args = parser.parse_args()
 
