@@ -15,6 +15,7 @@ const emptySummary: SummaryCounts = {
 const emptyCorpusStamp: CorpusStamp = {
   maxSubmittedDate: null,
   ruleSetHashes: [],
+  packageGeneration: null,
 };
 
 export function normalizeLens(value: string | null | undefined) {
@@ -33,13 +34,19 @@ async function getSummary(): Promise<SummaryCounts> {
   const sql = getSql();
   const rows = await sql<Record<string, unknown>[]>`
     SELECT
-      (SELECT count(*)::int FROM trials) AS trial_count,
-      (SELECT count(*)::int FROM trial_patches) AS patch_count,
-      (SELECT count(*)::int FROM materiality_events) AS material_event_count,
-      (SELECT count(*)::int FROM materiality_events WHERE severity = 'critical') AS critical_count,
-      (SELECT count(*)::int FROM materiality_events WHERE severity = 'high') AS high_count
+      corpus_trial_count AS trial_count,
+      corpus_patch_count AS patch_count,
+      material_event_count,
+      critical_event_count AS critical_count,
+      high_event_count AS high_count
+    FROM evidence_record_generations
+    WHERE is_active
+    LIMIT 1
   `;
-  const row = rows[0] ?? {};
+  const row = rows[0];
+  if (!row) {
+    throw new Error("No active Evidence Record generation is configured.");
+  }
 
   return {
     trialCount: numberValue(row.trial_count),
@@ -53,10 +60,11 @@ async function getSummary(): Promise<SummaryCounts> {
 async function getSeverityCounts(): Promise<SeverityCount[]> {
   const sql = getSql();
   const rows = await sql<Record<string, unknown>[]>`
-    SELECT severity, count(*)::int AS count
-    FROM materiality_events
-    GROUP BY severity
-    ORDER BY CASE severity
+    SELECT counts.key AS severity, counts.value::int AS count
+    FROM evidence_record_generations generation
+    CROSS JOIN LATERAL jsonb_each_text(generation.severity_counts_json) counts
+    WHERE generation.is_active
+    ORDER BY CASE counts.key
       WHEN 'critical' THEN 1
       WHEN 'high' THEN 2
       WHEN 'medium' THEN 3
@@ -75,17 +83,22 @@ async function getCorpusStamp(): Promise<CorpusStamp> {
   const sql = getSql();
   const rows = await sql<Record<string, unknown>[]>`
     SELECT
-      (SELECT max(submitted_date) FROM materiality_events) AS max_submitted_date,
-      (
-        SELECT coalesce(json_agg(hash ORDER BY hash), '[]'::json)
-        FROM (SELECT DISTINCT rule_set_hash AS hash FROM evidence_records WHERE rule_set_hash <> '') h
-      ) AS rule_set_hashes
+      corpus_max_submitted_date AS max_submitted_date,
+      jsonb_build_array(rule_set_hash) AS rule_set_hashes,
+      package_generation
+    FROM evidence_record_generations
+    WHERE is_active
+    LIMIT 1
   `;
-  const row = rows[0] ?? {};
+  const row = rows[0];
+  if (!row) {
+    throw new Error("No active Evidence Record generation is configured.");
+  }
 
   return {
     maxSubmittedDate: typeof row.max_submitted_date === "string" ? row.max_submitted_date : null,
     ruleSetHashes: stringArray(row.rule_set_hashes),
+    packageGeneration: typeof row.package_generation === "string" ? row.package_generation : null,
   };
 }
 
@@ -122,11 +135,13 @@ async function getRecentEvents(limit = 40) {
     LEFT JOIN trials t ON t.nct_id = e.nct_id
     LEFT JOIN LATERAL (
       SELECT event_id
-      FROM evidence_records er
+      FROM evidence_record_store er
+      JOIN evidence_record_generations generation
+        ON generation.package_generation = er.package_generation
+       AND generation.is_active
       WHERE er.nct_id = e.nct_id
         AND er.from_version = e.from_version
         AND er.to_version = e.to_version
-      ORDER BY er.evidence_version DESC, er.generated_at DESC NULLS LAST
       LIMIT 1
     ) er ON true
     ORDER BY e.submitted_date DESC NULLS LAST, e.id DESC

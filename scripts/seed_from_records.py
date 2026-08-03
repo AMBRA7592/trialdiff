@@ -2,15 +2,15 @@
 """Seed a TrialDiff SQLite database from committed Evidence Record files.
 
 This gives anyone a runnable local demo without the private corpus
-databases: the committed ``records/*.json`` (frozen v0.1-alpha) and
-``event_class_records_v0.1.2/records/*.json`` files carry enough data to
-populate ``trials``, ``trial_versions``, ``trial_patches``,
+databases: the committed ``event_class_records_v0.1.2/records/*.json`` files
+carry enough data to populate ``trials``, ``trial_versions``, ``trial_patches``,
 ``materiality_events``, and ``evidence_records``.
 
 Typical local-dev flow:
 
     python3 scripts/seed_from_records.py --db seed_demo.sqlite3
-    python3 scripts/sqlite_to_postgres.py seed_demo.sqlite3 --truncate --output seed_demo.sql
+    python3 scripts/sqlite_to_postgres.py seed_demo.sqlite3 --truncate \
+      --package-generation v0.1.2 --activate-generation --output seed_demo.sql
     psql "$DATABASE_URL" -f seed_demo.sql
 
 Limitations (documented, not bugs): version snapshots (``record_json``) are
@@ -49,15 +49,16 @@ def main() -> int:
         "--source",
         action="append",
         help="Directory of record .json files. Repeatable. "
-        "Defaults to records/ and event_class_records_v0.1.2/records/.",
+        "Defaults to event_class_records_v0.1.2/records/.",
     )
     args = parser.parse_args()
 
     repo_root = Path(__file__).resolve().parent.parent
-    sources = [Path(s) for s in args.source] if args.source else [
-        repo_root / "records",
-        repo_root / "event_class_records_v0.1.2" / "records",
-    ]
+    sources = (
+        [Path(s) for s in args.source]
+        if args.source
+        else [repo_root / "event_class_records_v0.1.2" / "records"]
+    )
 
     init_db(args.db)
     connection = connect(args.db)

@@ -104,6 +104,8 @@ export function mapEvidenceRecordRow(row: Record<string, unknown>): EvidenceReco
     reviewQuestion: String(row.review_question ?? ""),
     evidenceVersion: numberValue(row.evidence_version),
     canonicalHash: String(row.canonical_hash ?? ""),
+    packageGeneration: String(row.package_generation ?? ""),
+    isActiveGeneration: Boolean(row.is_active_generation),
   };
 }
 
@@ -124,6 +126,8 @@ export function mapEvidenceRecordDetail(row: Record<string, unknown>): EvidenceR
     source: String(row.source ?? ""),
     sourceUrl: String(row.source_url ?? ""),
     generatedAt: nullableTimestamp(row.generated_at),
+    successorEventId: nullableString(row.successor_event_id),
+    predecessorEventId: nullableString(row.predecessor_event_id),
     trial: {
       overallStatus: nullableString(row.overall_status),
       hasResults: Boolean(row.has_results),

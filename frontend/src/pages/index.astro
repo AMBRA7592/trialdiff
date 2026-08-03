@@ -162,7 +162,8 @@ const ruleSetLabel =
     {
       data.databaseReady && (
         <p class="corpus-stamp">
-          Corpus snapshot through {data.corpusStamp.maxSubmittedDate ?? "unknown date"} · {ruleSetLabel}
+          {data.corpusStamp.packageGeneration ?? "unknown generation"} · Corpus snapshot through{" "}
+          {data.corpusStamp.maxSubmittedDate ?? "unknown date"} · {ruleSetLabel}
         </p>
       )
     }

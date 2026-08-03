@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import type { APIRoute } from "astro";
 
 import { getEvidenceCanonical, getEvidenceCanonicalHash } from "@/queries/evidence";
+import type { EvidenceCanonicalData } from "@/queries/types";
 
 // Evidence records are immutable and hash-addressed: canonical_json stores
 // the exact bytes that hash to canonical_hash (migration 006 + re-import).
@@ -22,6 +23,26 @@ function etagMatches(ifNoneMatch: string | null, etag: string): boolean {
 
 const JSON_HEADERS = { "content-type": "application/json; charset=utf-8" };
 
+function recordMetadataHeaders(data: EvidenceCanonicalData): Record<string, string> {
+  const headers: Record<string, string> = {};
+  if (data.packageGeneration) {
+    headers["x-trialdiff-package-generation"] = data.packageGeneration;
+  }
+  headers["x-trialdiff-record-status"] = data.successorEventId
+    ? "superseded"
+    : data.isActiveGeneration
+      ? "current"
+      : "inactive";
+  if (data.successorEventId) {
+    headers["x-trialdiff-successor-event-id"] = data.successorEventId;
+    headers.link = `</events/${encodeURIComponent(data.successorEventId)}.json>; rel="successor-version"`;
+  }
+  if (data.predecessorEventId) {
+    headers["x-trialdiff-predecessor-event-id"] = data.predecessorEventId;
+  }
+  return headers;
+}
+
 export const GET: APIRoute = async ({ params, request }) => {
   const eventId = String(params.event_id ?? "");
 
@@ -40,6 +61,7 @@ export const GET: APIRoute = async ({ params, request }) => {
             "cache-control": "public, max-age=31536000, immutable",
             etag,
             "x-trialdiff-canonical-hash": head.canonicalHash,
+            ...recordMetadataHeaders(head),
           },
         });
       }
@@ -98,6 +120,7 @@ export const GET: APIRoute = async ({ params, request }) => {
       "cache-control": "public, max-age=31536000, immutable",
       etag,
       "x-trialdiff-canonical-hash": canonicalHash,
+      ...recordMetadataHeaders(data),
     },
   });
 };

@@ -236,45 +236,140 @@ rebuild or silently substitute any of them during the production window:
 ## B. Preserve published IDs and promote v0.1.3 manually
 
 v0.1.3 rotates every event ID because the implementation-pinned rule-set hash
-changes. Published v0.1.2 IDs are permanent citation keys. Before replacing the
-active generation, implement and test a version-aware resolver with these
-requirements:
+changes. Published v0.1.2 IDs are permanent citation keys. Migration 007 moves
+the physical rows to `evidence_record_store`, retains `evidence_records` as an
+active-only compatibility view, and records one-to-one transitions in
+`evidence_record_supersessions`. The package-generation label is distinct from
+the record-schema `evidence_version`.
 
-1. The active feed and corpus counts select only v0.1.3.
-2. A v0.1.2 HTML event URL returns HTTP 200 with a visible superseded notice and
-   the v0.1.3 successor link.
-3. A v0.1.2 JSON event URL returns HTTP 200 with the exact immutable v0.1.2
-   canonical bytes and original ETag/hash. It does not redirect.
-4. The successor metadata is outside the immutable JSON body, for example in
-   response headers and the HTML view; never rewrite a published record to add
-   it.
-5. An unknown event ID still returns 404.
-6. Backup and rollback cover both active and superseded generations.
+Corpus and severity totals shown by the frontend are the generation metadata
+attested during import. They describe the frozen generation and do not drift
+with later mutations of the underlying corpus tables. No active generation is
+an unavailable state, never a zero-count corpus.
 
 The existing `scripts/sqlite_to_postgres.py --truncate` path is prohibited for
-v0.1.3 because it deletes the published v0.1.2 rows. The production design must
-add a package-generation column (distinct from the record-schema
-`evidence_version`), import v0.1.3 additively, and make the active generation an
-explicit configuration value. Every feed, corpus count, trial/patch evidence
-lookup, and rule-set query must filter that value; correctness must not depend
-on `generated_at`, hash ordering, or a single-row assumption.
-
-Canonical JSON bodies remain immutable. Supersession state belongs in response
-headers and HTML, never in the hashed record body. Because published JSON uses
-one-year immutable caching, also expose a non-immutable supersession index that
-maps every published event ID to its package generation and successor, if any.
-The index must be independently queryable without fetching or mutating a cached
-record response.
+v0.1.3. Use the frozen v0.1.3 SQLite A database from section A and import only
+its Evidence Records. The generated SQL inserts the generation as inactive,
+checks record/trial/membership/rule-hash metadata against the inserted rows,
+checks corpus and severity metadata against production, and requires a complete
+one-to-one transition map. It cannot activate the generation in the same
+transaction.
 
 TrialDiff uses manual Vercel promotion; no Git-triggered production deployment
-is configured. Build and verify a preview, migrate/import Neon under a hold,
-then promote that exact reviewed deployment ID with `vercel promote`. Do not
-trigger a fresh production rebuild between preview verification and promotion.
+is configured. The safe order is migration -> inactive additive import ->
+preview verification -> promotion of that exact deployment -> explicit
+activation. The old production frontend continues to query the active-only
+compatibility view while migration and import run, so it cannot display two
+generations.
 
-The production gate must capture anonymous evidence for one superseded v0.1.2
-ID, its v0.1.3 successor, and an unknown control: response status, headers,
-saved body, body SHA-256, ETag, and offline `trialdiff verify`. Promotion fails
-unless both generations match their frozen package files byte-for-byte.
+```bash
+set -euo pipefail
+export DATABASE_URL_DIRECT=<direct-non-pooler-neon-url>
+export V013_DB="$RELEASE_PRIVATE/v0.1.3-a.sqlite3"
+export V013_SQL_A="$RELEASE_PRIVATE/trialdiff-v0.1.3-neon-a.sql"
+export V013_SQL_B="$RELEASE_PRIVATE/trialdiff-v0.1.3-neon-b.sql"
+
+case "$DATABASE_URL_DIRECT" in
+  *-pooler*) echo "Refusing pooled Neon URL" >&2; exit 1 ;;
+esac
+
+# 1. Re-prove the accepted source and build the import twice. The exports must
+#    be byte-identical and must contain no destructive statement or activation.
+echo "<PIN_AFTER_FREEZE>  $V013_DB" | shasum -a 256 -c -
+PYTHONHASHSEED=0 python3 scripts/sqlite_to_postgres.py "$V013_DB" \
+  --evidence-only --package-generation v0.1.3 --supersedes v0.1.2 \
+  --output "$V013_SQL_A"
+PYTHONHASHSEED=4242 python3 scripts/sqlite_to_postgres.py "$V013_DB" \
+  --evidence-only --package-generation v0.1.3 --supersedes v0.1.2 \
+  --output "$V013_SQL_B"
+diff -u "$V013_SQL_A" "$V013_SQL_B"
+! grep -Eq '(^|[[:space:]])(TRUNCATE|DELETE|DROP)([[:space:]]|$)' "$V013_SQL_A"
+! grep -Fq 'trialdiff_activate_evidence_generation' "$V013_SQL_A"
+shasum -a 256 "$V013_SQL_A" > "$RELEASE_PRIVATE/trialdiff-v0.1.3-neon.sql.sha256"
+
+# 2. Create a named Neon snapshot when available and a complete custom-format
+#    rollback dump. This must cover the whole database, including all current
+#    Evidence Record rows; a table-only dump is insufficient.
+umask 077
+export PRE_RELEASE_DUMP="$RELEASE_PRIVATE/neon-pre-v0.1.3.dump"
+pg_dump --dbname="$DATABASE_URL_DIRECT" --format=custom \
+  --no-owner --no-acl --file="$PRE_RELEASE_DUMP"
+pg_restore --list "$PRE_RELEASE_DUMP" \
+  > "$RELEASE_PRIVATE/neon-pre-v0.1.3.dump.list"
+test -s "$PRE_RELEASE_DUMP"
+test -s "$RELEASE_PRIVATE/neon-pre-v0.1.3.dump.list"
+shasum -a 256 "$PRE_RELEASE_DUMP" \
+  > "$RELEASE_PRIVATE/neon-pre-v0.1.3.dump.sha256"
+shasum -a 256 -c "$RELEASE_PRIVATE/neon-pre-v0.1.3.dump.sha256"
+
+# 3. Apply the coexistence schema, then atomically import v0.1.3 as inactive.
+#    Existing v0.1.2 rows remain active and byte-identical. Migration 007 is
+#    one-shot: a disposable preview/staging database that ran any earlier PR
+#    draft of 007 must be rebuilt from a migration-006 snapshot before this
+#    rehearsal. Do not rerun or patch an already-applied draft migration.
+psql "$DATABASE_URL_DIRECT" -v ON_ERROR_STOP=1 \
+  -f postgres/migrations/007_evidence_generation_coexistence.sql
+psql "$DATABASE_URL_DIRECT" -v ON_ERROR_STOP=1 -f "$V013_SQL_A"
+
+# 4. Stop unless production contains both complete generations, v0.1.2 remains
+#    active, every row verifies, and every predecessor has exactly one successor.
+psql "$DATABASE_URL_DIRECT" -v ON_ERROR_STOP=1 -c "
+SELECT package_generation, is_active, record_count, represented_trial_count,
+  membership_count, rule_set_hash
+FROM evidence_record_generations
+ORDER BY package_generation;
+SELECT package_generation, count(*)::int
+FROM evidence_record_store GROUP BY package_generation ORDER BY package_generation;
+SELECT count(*) AS canonical_mismatches
+FROM evidence_record_store
+WHERE encode(sha256(convert_to(canonical_json, 'UTF8')), 'hex') <> canonical_hash;
+SELECT count(*) AS transition_count FROM evidence_record_supersessions;
+"
+# Required before activation: v0.1.2 active, v0.1.3 inactive; 97 rows in each;
+# 97 transitions; zero canonical mismatches. The v0.1.3 metadata row must state
+# 97 records / 54 trials / 109 memberships and the frozen v0.1.3 rule hash.
+
+# 5. Verify the already-built Vercel preview against this schema while v0.1.2
+#    is still active. The active predecessor must report current with no
+#    successor, and the index must omit v0.1.3. An exact known v0.1.3 ID is
+#    intentionally retrievable as 200 with x-trialdiff-record-status: inactive
+#    so its frozen bytes can be checked during the hold; this does not make the
+#    candidate current or discoverable. Promote that exact reviewed deployment
+#    ID; do not trigger a fresh production build.
+vercel promote <verified-preview-deployment-id>
+
+# 6. Activate v0.1.3 in one small transaction. The function refuses the switch
+#    unless the v0.1.2 -> v0.1.3 map remains complete and one-to-one.
+psql "$DATABASE_URL_DIRECT" -v ON_ERROR_STOP=1 \
+  -c "SELECT trialdiff_activate_evidence_generation('v0.1.3');"
+```
+
+After activation, capture a secret-free audit packet. For one mapped pair and
+one unknown control, save anonymous request traces, headers, and bodies. Both
+published IDs must return HTTP 200; neither redirects. The v0.1.2 HTML page
+must show its v0.1.3 successor. Its JSON body must remain byte-identical to the
+frozen v0.1.2 file with the original ETag; the v0.1.3 JSON body must match its
+new frozen file. `trialdiff verify` must pass on both. The unknown HTML and JSON
+IDs must return 404. A conditional request for the superseded JSON must return
+304 with zero body bytes.
+
+Also save `/events/supersessions.json`: it must name v0.1.3 as active, map all
+97 v0.1.2 IDs, use `public, max-age=0, must-revalidate`, and omit
+`immutable`. Active feeds, corpus totals, and trial/patch Evidence Record links
+must contain only v0.1.3 IDs. Canonical JSON responses retain
+`public, max-age=31536000, immutable`; supersession metadata remains outside
+their hashed bodies.
+
+Rollback is explicit. Before activation, any migration/import failure rolls
+back at the transaction boundary; leave v0.1.2 active and do not promote. After
+activation, a presentation failure is reversed with
+`SELECT trialdiff_activate_evidence_generation('v0.1.2');` and promotion of the
+previous verified Vercel deployment. The activation function accepts the same
+complete one-to-one transition map in either direction and rechecks the target
+generation before switching. A schema/data failure uses the pre-release dump
+(or named Neon snapshot) into a clean recovery branch, followed by the same
+count and canonical-hash checks before traffic moves. Do not delete either
+generation as part of rollback.
 
 ## B1. Historical v0.1.2 Neon migration procedure
 

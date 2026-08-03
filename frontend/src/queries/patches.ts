@@ -90,11 +90,13 @@ export async function getPatchInspection(
         FROM materiality_events e
         LEFT JOIN LATERAL (
           SELECT event_id
-          FROM evidence_records er
+          FROM evidence_record_store er
+          JOIN evidence_record_generations generation
+            ON generation.package_generation = er.package_generation
+           AND generation.is_active
           WHERE er.nct_id = e.nct_id
             AND er.from_version = e.from_version
             AND er.to_version = e.to_version
-          ORDER BY er.evidence_version DESC, er.generated_at DESC NULLS LAST
           LIMIT 1
         ) er ON true
         WHERE e.nct_id = ${nctId}
