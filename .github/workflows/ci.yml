@@ -212,22 +212,25 @@ jobs:
           new_file=$(find /tmp/v012-common -name "$new_id.json" -print -quit)
           test -n "$old_file"
           test -n "$new_file"
+          mkdir -p /tmp/hold-old /tmp/hold-new
+          old_body="/tmp/hold-old/$old_id.json"
+          new_body="/tmp/hold-new/$new_id.json"
 
           # During the hold, the active predecessor remains current and the
           # exact candidate ID is verifiable but explicitly inactive. The
           # discovery index must not enumerate the inactive candidate.
           curl -fsS -D /tmp/hold-old.headers \
-            "http://127.0.0.1:4321/events/$old_id.json" -o /tmp/hold-old.json
-          cmp "$old_file" /tmp/hold-old.json
+            "http://127.0.0.1:4321/events/$old_id.json" -o "$old_body"
+          cmp "$old_file" "$old_body"
           grep -qi '^x-trialdiff-record-status: current' /tmp/hold-old.headers
           ! grep -qi '^x-trialdiff-successor-event-id:' /tmp/hold-old.headers
 
           curl -fsS -D /tmp/hold-new.headers \
-            "http://127.0.0.1:4321/events/$new_id.json" -o /tmp/hold-new.json
-          cmp "$new_file" /tmp/hold-new.json
+            "http://127.0.0.1:4321/events/$new_id.json" -o "$new_body"
+          cmp "$new_file" "$new_body"
           grep -qi '^x-trialdiff-record-status: inactive' /tmp/hold-new.headers
           grep -qi "^x-trialdiff-predecessor-event-id: $old_id" /tmp/hold-new.headers
-          trialdiff verify /tmp/hold-old.json /tmp/hold-new.json
+          trialdiff verify "$old_body" "$new_body"
 
           curl -fsS http://127.0.0.1:4321/events/supersessions.json \
             -o /tmp/hold-index.json
