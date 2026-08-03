@@ -40,7 +40,9 @@ for queries, plain CSS. No client-side JavaScript framework.
 
    ```bash
    python3 scripts/seed_from_records.py --db seed_demo.sqlite3
-   python3 scripts/sqlite_to_postgres.py seed_demo.sqlite3 --truncate --output seed_demo.sql
+   python3 scripts/sqlite_to_postgres.py seed_demo.sqlite3 \
+     --truncate --package-generation v0.1.2 --activate-generation \
+     --output seed_demo.sql
    psql "$DATABASE_URL" -f seed_demo.sql
    ```
 
@@ -77,6 +79,20 @@ Postgres database; set `DATABASE_URL` (and optionally `DATABASE_POOL_MAX`) in
 the Vercel project environment. `/methodology` and the case-study pages are
 prerendered at build time; everything else renders per-request against the
 database.
+
+## Published generations
+
+Active feeds and corpus totals are selected explicitly from
+`evidence_record_generations`. Exact event URLs resolve against
+`evidence_record_store`, so a superseded published ID remains HTTP 200 with
+its original canonical JSON bytes and hash. Supersession state is carried in
+HTML and response headers, never added to the hashed JSON body.
+
+`/events/supersessions.json` is the revalidated discovery index for active and
+superseded published IDs. Canonical record responses remain independently
+cacheable for one year with `immutable`; the index and HTML record pages use
+`max-age=0, must-revalidate` so a previously cached record need not be mutated
+to publish its successor. Only canonical JSON is immutable.
 
 ## Seeded-data limitation
 

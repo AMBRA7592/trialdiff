@@ -11,7 +11,8 @@ HTML (`<details>`, links).
   and `case-studies/` (prerendered static), `trials/[nctId].astro`,
   `trials/[nctId]/patches/[range].astro` (range format `"{from}-to-{to}"`,
   e.g. `5-to-6`), `events/[event_id].astro`, and
-  `events/[event_id].json.ts` (canonical-bytes JSON endpoint).
+  `events/[event_id].json.ts` (canonical-bytes JSON endpoint), and
+  `events/supersessions.json.ts` (always-revalidated discovery index).
 - `src/queries/` — all SQL (`feed.ts`, `trials.ts`, `patches.ts`,
   `evidence.ts`) plus row mappers (`mappers.ts`) and shared types
   (`types.ts`).
@@ -42,8 +43,16 @@ HTML (`<details>`, links).
 - Severity is deterministic, uncalibrated triage metadata — copy in the UI is
   written to avoid implying validated review priority; keep new copy
   consistent with that.
-- `evidence_records.canonical_json` is a text column whose exact bytes hash
-  to `canonical_hash`; never re-encode it when serving.
+- `evidence_record_store.canonical_json` is a text column whose exact bytes
+  hash to `canonical_hash`; never re-encode it when serving. Exact-ID routes
+  query this all-generation store. The `evidence_records` compatibility view
+  exposes only the active generation.
+- Every feed, corpus total, and trial/patch Evidence Record link must join
+  `evidence_record_generations` with `is_active`; never infer the active
+  generation from `generated_at`, `evidence_version`, or hash ordering.
+- Supersession metadata belongs in HTML, headers, and the non-immutable index,
+  not in canonical JSON. Before activation, an imported inactive successor
+  must not make the active predecessor appear superseded.
 
 ## Local database
 
