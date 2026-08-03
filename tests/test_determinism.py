@@ -227,7 +227,20 @@ class CrossProcessDeterminismTests(unittest.TestCase):
     def test_postgres_export_is_stable_across_hash_seeds(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
             db_path = Path(tempdir) / "export.sqlite3"
-            init_db(db_path)
+            subprocess.run(
+                [
+                    sys.executable,
+                    "scripts/seed_from_records.py",
+                    "--db",
+                    str(db_path),
+                    "--source",
+                    "event_class_records_v0.1.2/records",
+                ],
+                capture_output=True,
+                text=True,
+                cwd=Path(__file__).resolve().parent.parent,
+                check=True,
+            )
             outputs = []
             for hashseed in ("0", "1", "4242"):
                 result = subprocess.run(
@@ -236,6 +249,9 @@ class CrossProcessDeterminismTests(unittest.TestCase):
                         "scripts/sqlite_to_postgres.py",
                         str(db_path),
                         "--truncate",
+                        "--package-generation",
+                        "v0.1.2",
+                        "--activate-generation",
                     ],
                     capture_output=True,
                     text=True,
