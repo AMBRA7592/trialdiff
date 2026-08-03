@@ -18,7 +18,7 @@ if (!data.databaseReady) {
 } else if (!record) {
   Astro.response.status = 404;
 } else {
-  Astro.response.headers.set("Cache-Control", "public, s-maxage=3600");
+  Astro.response.headers.set("Cache-Control", "public, max-age=0, must-revalidate");
 }
 
 const diffHref = record ? `/trials/${record.nctId}/patches/${record.fromVersion}-to-${record.toVersion}` : null;
@@ -48,6 +48,7 @@ const diffHref = record ? `/trials/${record.nctId}/patches/${record.fromVersion}
               <div class="button-stack">
                 {diffHref && <a class="button" href={diffHref}>View field-level diff</a>}
                 <a class="button" href={`/events/${record.eventId}.json`}>Canonical JSON</a>
+                <a class="button" href="/events/supersessions.json">Supersession index</a>
                 <a class="button" href={`https://clinicaltrials.gov/study/${record.nctId}`}>
                   ClinicalTrials.gov
                   <ExternalLink size={16} aria-hidden="true" />
@@ -55,6 +56,18 @@ const diffHref = record ? `/trials/${record.nctId}/patches/${record.fromVersion}
               </div>
             </div>
           </header>
+
+          {
+            record.successorEventId && (
+              <section class="panel panel-pad notice supersession-notice">
+                <div class="notice-title">Superseded Evidence Record</div>
+                <p>
+                  This page preserves the immutable {record.packageGeneration} record. Its current successor is{" "}
+                  <a href={`/events/${record.successorEventId}`}>{record.successorEventId}</a>.
+                </p>
+              </section>
+            )
+          }
 
           <section class="panel panel-pad disclaimer">
             <div class="disclaimer-inner">
@@ -152,6 +165,26 @@ const diffHref = record ? `/trials/${record.nctId}/patches/${record.fromVersion}
           <section class="panel panel-pad">
             <h2>Provenance</h2>
             <dl class="provenance-list evidence-provenance">
+              <div>
+                <dt>Package generation</dt>
+                <dd><code>{record.packageGeneration}</code>{record.isActiveGeneration ? " (active)" : ""}</dd>
+              </div>
+              {
+                record.predecessorEventId && (
+                  <div>
+                    <dt>Supersedes</dt>
+                    <dd><a href={`/events/${record.predecessorEventId}`}>{record.predecessorEventId}</a></dd>
+                  </div>
+                )
+              }
+              {
+                record.successorEventId && (
+                  <div>
+                    <dt>Succeeded by</dt>
+                    <dd><a href={`/events/${record.successorEventId}`}>{record.successorEventId}</a></dd>
+                  </div>
+                )
+              }
               <div>
                 <dt>Patch hash</dt>
                 <dd><code>{record.patchHash}</code></dd>
@@ -256,6 +289,10 @@ const diffHref = record ? `/trials/${record.nctId}/patches/${record.fromVersion}
 
   .evidence-provenance {
     margin-top: 14px;
+  }
+
+  .supersession-notice p {
+    margin: 8px 0 0;
   }
 
   .evidence-provenance div {

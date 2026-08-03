@@ -1,7 +1,12 @@
 import { getSql, hasDatabaseUrl } from "@/db/client";
 
 import { mapEvidenceRecordDetail, mapEvidenceRecordRow } from "./mappers";
-import type { EvidenceCanonicalData, EvidenceRecordData, EvidenceRecordRow } from "./types";
+import type {
+  EvidenceCanonicalData,
+  EvidenceRecordData,
+  EvidenceRecordRow,
+  EvidenceSupersessionData,
+} from "./types";
 
 // Cards preview at most two paths; shipping full arrays is wasted transfer
 // (one corpus record carries 7,000+ paths). The cap leaves plenty of headroom
@@ -48,8 +53,13 @@ export async function getPostRecruitmentEvidenceRecords(limit = 40): Promise<Evi
       er.claims_not_supported_json,
       er.review_question,
       er.evidence_version,
-      er.canonical_hash
-    FROM evidence_records er
+      er.canonical_hash,
+      er.package_generation,
+      generation.is_active AS is_active_generation
+    FROM evidence_record_store er
+    JOIN evidence_record_generations generation
+      ON generation.package_generation = er.package_generation
+     AND generation.is_active
     LEFT JOIN trials t ON t.nct_id = er.nct_id
     WHERE er.timing_context = 'post_recruitment'
     ORDER BY
@@ -88,8 +98,20 @@ export async function getEvidenceRecord(eventId: string): Promise<EvidenceRecord
         t.brief_title,
         t.lead_sponsor,
         t.overall_status,
-        t.has_results
-      FROM evidence_records er
+        t.has_results,
+        generation.is_active AS is_active_generation,
+        CASE
+          WHEN generation.is_active THEN NULL
+          ELSE outgoing.successor_event_id
+        END AS successor_event_id,
+        incoming.superseded_event_id AS predecessor_event_id
+      FROM evidence_record_store er
+      JOIN evidence_record_generations generation
+        ON generation.package_generation = er.package_generation
+      LEFT JOIN evidence_record_supersessions outgoing
+        ON outgoing.superseded_event_id = er.event_id
+      LEFT JOIN evidence_record_supersessions incoming
+        ON incoming.successor_event_id = er.event_id
       LEFT JOIN trials t ON t.nct_id = er.nct_id
       WHERE er.event_id = ${eventId}
       LIMIT 1
@@ -119,9 +141,24 @@ export async function getEvidenceCanonical(eventId: string): Promise<EvidenceCan
   try {
     const sql = getSql();
     const rows = await sql<Record<string, unknown>[]>`
-      SELECT canonical_json, canonical_hash
-      FROM evidence_records
-      WHERE event_id = ${eventId}
+      SELECT
+        er.canonical_json,
+        er.canonical_hash,
+        er.package_generation,
+        generation.is_active AS is_active_generation,
+        CASE
+          WHEN generation.is_active THEN NULL
+          ELSE outgoing.successor_event_id
+        END AS successor_event_id,
+        incoming.superseded_event_id AS predecessor_event_id
+      FROM evidence_record_store er
+      JOIN evidence_record_generations generation
+        ON generation.package_generation = er.package_generation
+      LEFT JOIN evidence_record_supersessions outgoing
+        ON outgoing.superseded_event_id = er.event_id
+      LEFT JOIN evidence_record_supersessions incoming
+        ON incoming.successor_event_id = er.event_id
+      WHERE er.event_id = ${eventId}
       LIMIT 1
     `;
     const row = rows[0];
@@ -142,6 +179,10 @@ export async function getEvidenceCanonical(eventId: string): Promise<EvidenceCan
       databaseReady: true,
       canonicalText,
       canonicalHash: String(row.canonical_hash ?? ""),
+      packageGeneration: String(row.package_generation ?? ""),
+      isActiveGeneration: Boolean(row.is_active_generation),
+      successorEventId: typeof row.successor_event_id === "string" ? row.successor_event_id : null,
+      predecessorEventId: typeof row.predecessor_event_id === "string" ? row.predecessor_event_id : null,
     };
   } catch (error) {
     console.error("getEvidenceCanonical failed:", error);
@@ -154,7 +195,7 @@ export async function getEvidenceCanonical(eventId: string): Promise<EvidenceCan
 
 export async function getEvidenceCanonicalHash(
   eventId: string,
-): Promise<{ databaseReady: boolean; canonicalHash?: string }> {
+): Promise<Omit<EvidenceCanonicalData, "canonicalText">> {
   // Conditional-request precheck: answering an If-None-Match must not pull
   // the full canonical body (records run to ~2 MB) from the database.
   if (!hasDatabaseUrl()) {
@@ -163,12 +204,89 @@ export async function getEvidenceCanonicalHash(
   try {
     const sql = getSql();
     const rows = await sql<Record<string, unknown>[]>`
-      SELECT canonical_hash FROM evidence_records WHERE event_id = ${eventId} LIMIT 1
+      SELECT
+        er.canonical_hash,
+        er.package_generation,
+        generation.is_active AS is_active_generation,
+        CASE
+          WHEN generation.is_active THEN NULL
+          ELSE outgoing.successor_event_id
+        END AS successor_event_id,
+        incoming.superseded_event_id AS predecessor_event_id
+      FROM evidence_record_store er
+      JOIN evidence_record_generations generation
+        ON generation.package_generation = er.package_generation
+      LEFT JOIN evidence_record_supersessions outgoing
+        ON outgoing.superseded_event_id = er.event_id
+      LEFT JOIN evidence_record_supersessions incoming
+        ON incoming.successor_event_id = er.event_id
+      WHERE er.event_id = ${eventId}
+      LIMIT 1
     `;
     const row = rows[0];
-    return { databaseReady: true, canonicalHash: row ? String(row.canonical_hash ?? "") : undefined };
+    return row
+      ? {
+          databaseReady: true,
+          canonicalHash: String(row.canonical_hash ?? ""),
+          packageGeneration: String(row.package_generation ?? ""),
+          isActiveGeneration: Boolean(row.is_active_generation),
+          successorEventId: typeof row.successor_event_id === "string" ? row.successor_event_id : null,
+          predecessorEventId: typeof row.predecessor_event_id === "string" ? row.predecessor_event_id : null,
+        }
+      : { databaseReady: true };
   } catch (error) {
     console.error("getEvidenceCanonicalHash failed:", error);
     return { databaseReady: false };
+  }
+}
+
+export async function getEvidenceSupersessionIndex(): Promise<EvidenceSupersessionData> {
+  if (!hasDatabaseUrl()) {
+    return {
+      databaseReady: false,
+      databaseError: "DATABASE_URL is not configured.",
+      entries: [],
+    };
+  }
+
+  try {
+    const sql = getSql();
+    const rows = await sql<Record<string, unknown>[]>`
+      SELECT
+        er.event_id,
+        er.package_generation,
+        generation.is_active AS is_active_generation,
+        CASE
+          WHEN generation.is_active THEN NULL
+          ELSE outgoing.successor_event_id
+        END AS successor_event_id,
+        incoming.superseded_event_id AS predecessor_event_id
+      FROM evidence_record_store er
+      JOIN evidence_record_generations generation
+        ON generation.package_generation = er.package_generation
+      LEFT JOIN evidence_record_supersessions outgoing
+        ON outgoing.superseded_event_id = er.event_id
+      LEFT JOIN evidence_record_supersessions incoming
+        ON incoming.successor_event_id = er.event_id
+      WHERE generation.is_active OR outgoing.successor_event_id IS NOT NULL
+      ORDER BY er.package_generation, er.event_id
+    `;
+    return {
+      databaseReady: true,
+      entries: rows.map((row) => ({
+        eventId: String(row.event_id ?? ""),
+        packageGeneration: String(row.package_generation ?? ""),
+        isActiveGeneration: Boolean(row.is_active_generation),
+        successorEventId: typeof row.successor_event_id === "string" ? row.successor_event_id : null,
+        predecessorEventId: typeof row.predecessor_event_id === "string" ? row.predecessor_event_id : null,
+      })),
+    };
+  } catch (error) {
+    console.error("getEvidenceSupersessionIndex failed:", error);
+    return {
+      databaseReady: false,
+      databaseError: error instanceof Error ? error.message : "Database query failed.",
+      entries: [],
+    };
   }
 }

@@ -56,6 +56,8 @@ export type EvidenceRecordRow = {
   reviewQuestion: string;
   evidenceVersion: number;
   canonicalHash: string;
+  packageGeneration: string;
+  isActiveGeneration: boolean;
 };
 
 export type TrialLensRow = {
@@ -73,6 +75,7 @@ export type TrialLensRow = {
 export type CorpusStamp = {
   maxSubmittedDate: string | null;
   ruleSetHashes: string[];
+  packageGeneration: string | null;
 };
 
 export type HomeData = {
@@ -119,6 +122,8 @@ export type EvidenceRecordDetail = EvidenceRecordRow & {
   source: string;
   sourceUrl: string;
   generatedAt: string | null;
+  successorEventId: string | null;
+  predecessorEventId: string | null;
   trial?: {
     overallStatus: string | null;
     hasResults: boolean;
@@ -138,4 +143,22 @@ export type EvidenceCanonicalData = {
   // sha256(canonicalText) against canonicalHash before serving.
   canonicalText?: string;
   canonicalHash?: string;
+  packageGeneration?: string;
+  isActiveGeneration?: boolean;
+  successorEventId?: string | null;
+  predecessorEventId?: string | null;
+};
+
+export type EvidenceSupersessionEntry = {
+  eventId: string;
+  packageGeneration: string;
+  isActiveGeneration: boolean;
+  successorEventId: string | null;
+  predecessorEventId: string | null;
+};
+
+export type EvidenceSupersessionData = {
+  databaseReady: boolean;
+  databaseError?: string;
+  entries: EvidenceSupersessionEntry[];
 };
