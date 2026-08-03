@@ -30,7 +30,7 @@
     },
     {
       "name": "event-class-records-v0.1.2",
-      "title": "Corrected Event-class Evidence Records v0.1.2 (97 records, 54 trials; Zenodo 10.5281/zenodo.21755258)",
+      "title": "Event-class Evidence Records v0.1.2 (97 records, 54 trials; carries E4; Zenodo 10.5281/zenodo.21755258)",
       "path": "event_class_records_v0.1.2/records/",
       "format": "json",
       "schema": "schemas/evidence_record.schema.json",

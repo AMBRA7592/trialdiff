@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from copy import deepcopy
 import json
 import sqlite3
 import tempfile
@@ -377,6 +378,13 @@ class EvidenceRecordTests(unittest.TestCase):
             init_db(db_path)
             connection = connect(db_path)
             try:
+                record_v1 = primary_outcome_record("NCT00000001", "Overall survival")
+                record_v1["protocolSection"]["statusModule"]["completionDateStruct"] = {
+                    "date": "2025-01-01",
+                    "type": "ACTUAL",
+                }
+                record_v2 = deepcopy(record_v1)
+                record_v2["protocolSection"]["statusModule"]["completionDateStruct"]["date"] = "2026-01-01"
                 insert_evidence_fixture(
                     connection,
                     severity="medium",
@@ -384,6 +392,15 @@ class EvidenceRecordTests(unittest.TestCase):
                     category="timeline_shift",
                     changed_paths=["/protocolSection/statusModule/completionDateStruct/date"],
                     deterministic_rules=["timeline_completion_change"],
+                    record_v1=record_v1,
+                    record_v2=record_v2,
+                    patch=[
+                        {
+                            "op": "replace",
+                            "path": "/protocolSection/statusModule/completionDateStruct/date",
+                            "value": "2026-01-01",
+                        }
+                    ],
                 )
                 store = TrialDiffStore(connection)
                 result = generate_evidence_records(store)

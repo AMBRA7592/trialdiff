@@ -41,9 +41,11 @@ counts are always quoted per snapshot.
   the older materiality-filter inclusion policy
 - The event-class v0.1/v0.1.1 generation emitted **100** records over 52
   trials; those bytes are published but carry erratum E1
-- Corrected generation from this exact frozen snapshot emits **97** records
-  over 54 trials under the v0.2 definitions; this is the required v0.1.2
-  release population
+- The v0.2 generation from this exact frozen snapshot emitted **97** records
+  over 54 trials and 106 memberships for v0.1.2. It corrected E1 and carries
+  E4 for three missed secondary-outcome memberships
+- The v0.3 correction is expected to retain **97** records over 54 trials and
+  produce 109 memberships; that remains a release gate until v0.1.3 is frozen
 - Source of: the v0.2.1 calibration sample, the published event-class
   packages, and the live deployment at trialdiff.vercel.app
 
@@ -59,8 +61,10 @@ counts are always quoted per snapshot.
 - **86 vs 483 vs 100/97 Evidence Records**: 86 is the alpha's complete
   severity-selected population (40 exported); 483 is the intermediate
   materiality-filter population; 100 is the published v0.1.1 event-class
-  population; 97 is the corrected v0.1.2 event-class population. The last
-  two use membership-driven inclusion, and their difference is erratum E1.
+  population; 97 is the v0.1.2 event-class population. The last two use
+  membership-driven inclusion, and their record-count difference is erratum
+  E1. E4 adds a membership to an already-exported v0.1.2 record, so the
+  corrected v0.1.3 record population is expected to remain 97.
 - **25-study vs 100-study trial overlap**: the two selected lists share only
   1 NCT ID — the limit-25 and limit-100 runs are different slices of the
   ranked candidate pool, not a subset relationship. The 40 frozen alpha

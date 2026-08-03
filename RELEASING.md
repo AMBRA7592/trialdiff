@@ -4,7 +4,108 @@ Steps that require the private working databases or production credentials.
 Everything here is deliberately out of scope for CI; the repo carries the
 code and the frozen outputs, this file carries the procedure.
 
-## A. Regenerate the event-class package as v0.1.2 (erratum E1 correction)
+## A. Regenerate event-class v0.1.3 (erratum E4 correction)
+
+v0.1.3 is a correction release over the exact accepted v0.1.2 source database,
+not a registry refresh. Do not ingest, backfill, or alter source tables. Keep
+`event_class_records_v0.1.2/`, its tag, hashes, IDs, GitHub Release, DOI, and
+production bytes unchanged as historical provenance.
+
+The accepted source is the durable v0.1.2 SQLite A artifact with SHA-256
+`8105dbad8ec65a83fa8304b17b193e71a69bef0a0e38c935fd3299cc182e1238`.
+Before regeneration, the read-only E4 audit is a stop gate:
+
+```bash
+set -euo pipefail
+export RELEASE_PRIVATE=<durable-private-v0.1.3-release-directory>
+export FROZEN_V012_DB=<durable-v0.1.2-release-directory>/a.sqlite3
+
+echo "8105dbad8ec65a83fa8304b17b193e71a69bef0a0e38c935fd3299cc182e1238  $FROZEN_V012_DB" \
+  | shasum -a 256 -c -
+python3 scripts/audit_event_class_inputs.py \
+  --db "$FROZEN_V012_DB" --expect-v0.3
+# Required: op counts add/remove/replace = 25076/22710/99332; 4485 replayed;
+# 4385 stored TO matches; 100 reconstructed TO; primary = 148 relevant / 73
+# after completion / 63 reconciled / 10 clean with zero old/new disagreement;
+# secondary = 16 candidates / 12 corrected with exactly three disagreements:
+# NCT01224678 v109->v110, NCT03094169 v11->v12, and NCT03734029 v29->v30.
+# All 11 post-completion secondary-array count decreases must be covered by the
+# independently defined structural candidate surface; uncovered list = [].
+# Whole-item secondary replace operations = 0; this operation shape is counted
+# explicitly but remains outside the removal-class definition.
+# Event-class totals are also enforced here: 97 records / 54 trials / 109
+# memberships, classes 10 / 12 / 3 / 4 / 80, and overlaps 85 / 12 / 0.
+
+mkdir -p "$RELEASE_PRIVATE"
+chmod 700 "$RELEASE_PRIVATE"
+cp "$FROZEN_V012_DB" "$RELEASE_PRIVATE/v0.1.3-a.sqlite3"
+cp "$FROZEN_V012_DB" "$RELEASE_PRIVATE/v0.1.3-b.sqlite3"
+
+for db in "$RELEASE_PRIVATE"/v0.1.3-{a,b}.sqlite3; do
+  python3 -m trialdiff.cli classify --db "$db" --force
+  python3 -m trialdiff.cli generate-evidence --db "$db" --force
+done
+
+for suffix in a b; do
+  sqlite3 "$RELEASE_PRIVATE/v0.1.3-${suffix}.sqlite3" \
+    "SELECT event_id || '  ' || canonical_hash FROM evidence_records ORDER BY event_id;" \
+    > "$RELEASE_PRIVATE/v0.1.3-${suffix}.hashes"
+done
+diff -u "$RELEASE_PRIVATE/v0.1.3-a.hashes" \
+  "$RELEASE_PRIVATE/v0.1.3-b.hashes"
+python3 scripts/analyze_event_class_boundary.py \
+  --db "$RELEASE_PRIVATE/v0.1.3-a.sqlite3"
+# Required boundary: 4485 / 73 / 63 / 10.
+
+$EDITOR "$RELEASE_PRIVATE/DETERMINISM_ATTESTATION_v0.1.3.md"
+# The attestation must state that stored-TO equality proves internal ingestion
+# consistency, not independent registry fidelity. It must also distinguish the
+# 100 successful missing-TO replays from externally checked reconstructions.
+for suffix in a b; do
+  python3 scripts/export_event_class_package.py \
+    --db "$RELEASE_PRIVATE/v0.1.3-${suffix}.sqlite3" \
+    --out "$RELEASE_PRIVATE/event_class_records_v0.1.3-${suffix}" \
+    --package-version v0.1.3 \
+    --corpus-label breast-cancer-phase2-3-limit100-v021 \
+    --doc EVIDENCE_RECORD_PRIMITIVE.md \
+    --doc SEVERITY_CALIBRATION_v0.2.1.md \
+    --doc SEVERITY_DECOUPLING_v0.2.1.md \
+    --doc ERRATA.md \
+    --doc "$RELEASE_PRIVATE/DETERMINISM_ATTESTATION_v0.1.3.md" \
+    --force
+done
+diff -qr "$RELEASE_PRIVATE/event_class_records_v0.1.3-a" \
+  "$RELEASE_PRIVATE/event_class_records_v0.1.3-b"
+python3 scripts/validate_event_class_package.py \
+  --package "$RELEASE_PRIVATE/event_class_records_v0.1.3-a" \
+  --db "$RELEASE_PRIVATE/v0.1.3-a.sqlite3"
+python3 -m trialdiff.cli verify \
+  "$RELEASE_PRIVATE/event_class_records_v0.1.3-a/records"
+```
+
+Required v0.1.3 results are 97 records, 54 represented trials, and 109
+memberships; class counts primary / secondary / enrollment / whyStopped /
+results co-occurrence = 10 / 12 / 3 / 4 / 80; overlaps = 85 one-class / 12
+two-class / 0 three-class. The boundary remains 4,485 / 73 / 63 / 10. Any
+different count, replay failure, stored-TO mismatch, identity diff, or package
+diff halts the release. Never reconcile a divergence by editing generated
+records or `expected_stats.json`.
+
+CI exercises the audit implementation against synthetic fixtures; it cannot
+attest the private frozen-corpus totals. The manifest-covered determinism
+attestation must record the retained-DB audit command and complete output.
+
+Before freezing or deploying v0.1.3, the production compatibility work in
+section B must exist and be independently reviewed: every superseded v0.1.2
+event ID must continue serving its exact immutable JSON bytes and original
+hashes, with superseded/successor metadata. Do not redirect or 404 a published
+ID. Active feeds may move to v0.1.3 only after this resolver is verified.
+
+## A1. Historical accepted v0.1.2 procedure (erratum E1 correction)
+
+> **ARCHIVE ONLY - DO NOT EXECUTE.** This block records the completed v0.1.2
+> release. Current operators must use section A and must not substitute these
+> commands, counts, IDs, or artifact hashes into a v0.1.3 release.
 
 Requires an intact copy of the **frozen Snapshot C SQLite database** in
 `CORPUS.md`: 100 trials and exactly 4,485 adjacent-version patches. This is a
@@ -12,7 +113,7 @@ correction release, not a registry-data refresh. **Do not run `ingest` or
 backfill from live ClinicalTrials.gov for v0.1.2.** A later data refresh must
 use a separate corpus/version label.
 
-```bash
+```text
 set -euo pipefail
 
 # 1. Prove the frozen input and preserve the source DB:
@@ -117,7 +218,7 @@ results-co-occurring / 10 clean before release. Any divergence is a stop
 condition, not a count to carry forward.
 
 Then: update `VERSIONS.md` (§4), add the package to CI validation, and require
-green CI. The annotated release tag is created and pushed in section D.
+green CI. The accepted v0.1.2 tag evidence is retained in section D1.
 
 ### Accepted v0.1.2 release artifacts
 
@@ -132,12 +233,59 @@ rebuild or silently substitute any of them during the production window:
 - release ZIP MD5: `39bbc1d58ad295a60cbebdec1fdc5ff2`
 - package manifest SHA-256: `2211d918a4f840ab9150160389856e6315a0fe1e358ac1be4580f8a1cac4c8ec`
 
-## B. Redeploy the live database (Neon)
+## B. Preserve published IDs and promote v0.1.3 manually
+
+v0.1.3 rotates every event ID because the implementation-pinned rule-set hash
+changes. Published v0.1.2 IDs are permanent citation keys. Before replacing the
+active generation, implement and test a version-aware resolver with these
+requirements:
+
+1. The active feed and corpus counts select only v0.1.3.
+2. A v0.1.2 HTML event URL returns HTTP 200 with a visible superseded notice and
+   the v0.1.3 successor link.
+3. A v0.1.2 JSON event URL returns HTTP 200 with the exact immutable v0.1.2
+   canonical bytes and original ETag/hash. It does not redirect.
+4. The successor metadata is outside the immutable JSON body, for example in
+   response headers and the HTML view; never rewrite a published record to add
+   it.
+5. An unknown event ID still returns 404.
+6. Backup and rollback cover both active and superseded generations.
+
+The existing `scripts/sqlite_to_postgres.py --truncate` path is prohibited for
+v0.1.3 because it deletes the published v0.1.2 rows. The production design must
+add a package-generation column (distinct from the record-schema
+`evidence_version`), import v0.1.3 additively, and make the active generation an
+explicit configuration value. Every feed, corpus count, trial/patch evidence
+lookup, and rule-set query must filter that value; correctness must not depend
+on `generated_at`, hash ordering, or a single-row assumption.
+
+Canonical JSON bodies remain immutable. Supersession state belongs in response
+headers and HTML, never in the hashed record body. Because published JSON uses
+one-year immutable caching, also expose a non-immutable supersession index that
+maps every published event ID to its package generation and successor, if any.
+The index must be independently queryable without fetching or mutating a cached
+record response.
+
+TrialDiff uses manual Vercel promotion; no Git-triggered production deployment
+is configured. Build and verify a preview, migrate/import Neon under a hold,
+then promote that exact reviewed deployment ID with `vercel promote`. Do not
+trigger a fresh production rebuild between preview verification and promotion.
+
+The production gate must capture anonymous evidence for one superseded v0.1.2
+ID, its v0.1.3 successor, and an unknown control: response status, headers,
+saved body, body SHA-256, ETag, and offline `trialdiff verify`. Promotion fails
+unless both generations match their frozen package files byte-for-byte.
+
+## B1. Historical v0.1.2 Neon migration procedure
+
+> **ARCHIVE ONLY - DO NOT EXECUTE.** This destructive truncate-and-reload
+> procedure records the completed v0.1.2 migration. It violates the v0.1.3
+> coexistence policy and must not be adapted as the current production path.
 
 **Do not merge or promote the new frontend while production Neon still has
 the pre-migration schema/data.** First build and inspect the PR's Vercel
-preview. Temporarily pause automatic production deployment from `main` (or
-change the Vercel production branch to a release-hold branch), then perform
+preview. Because production promotion is manual and no Git-triggered deploy is
+configured, leave the existing production deployment in place while performing
 the database operation below. This prevents the strict endpoint from going
 live against unverifiable legacy rows.
 
@@ -150,7 +298,7 @@ page when the account offers it. The full custom-format dump below remains
 mandatory because the import replaces nine tables, not only
 `evidence_records`.
 
-```bash
+```text
 set -euo pipefail
 
 # 1. Set the direct URL and prove it is not the pooled application URL:
@@ -240,10 +388,10 @@ WHERE event_id = 'evt_NCT04278144_v33_v34_f64d3dc78625';
 "
 ```
 
-Only after all database checks pass: promote the already-reviewed Vercel
-preview (or merge and restore the production branch), then spot-check:
+Only after all database checks pass: promote the exact already-reviewed Vercel
+preview deployment ID, then spot-check:
 
-```bash
+```text
 curl -fsS -D /tmp/trialdiff.headers \
   https://trialdiff.vercel.app/events/evt_NCT04278144_v33_v34_f64d3dc78625.json \
   -o /tmp/trialdiff-record.json
@@ -273,16 +421,44 @@ a comment-only edit, intentionally rotates at least one published rule hash.
 Before merging such an edit, update the golden pins and record the transition
 in `ERRATA.md` and `VERSIONS.md`; regenerate records for the affected release.
 
-## D. Tags, releases, DOI
+## D. Tags, releases, and DOI for v0.1.3
+
+Only after the v0.1.3 freeze commit and independent audit:
+
+1. Create and push an annotated `event-class-v0.1.3` tag at the exact freeze
+   commit. Confirm the tag on `origin` before publishing or deleting any branch.
+2. Build one deterministic ZIP from the accepted package, pin its SHA-256, and
+   use that same file unchanged for the GitHub Release and Zenodo.
+3. Complete the version-aware production migration and anonymous live checks in
+   section B before publishing the new Zenodo version.
+4. Add a metadata-only E4 notice to Zenodo v0.1.2. Do not alter its deposited
+   ZIP or version DOI.
+5. Publish v0.1.3 as a new version under concept DOI
+   `10.5281/zenodo.20801956`, with `Is supplement to` pointing at the immutable
+   GitHub Release tag.
+6. Verify the anonymous Zenodo download against the staged ZIP and its internal
+   manifest, then update `CITATION.cff`, `README.md`, `VERSIONS.md`, and any
+   manuscript citation with the minted version DOI.
+
+No v0.1.3 hash, event ID, tag, GitHub Release, DOI, or live URL may be filled in
+from an expectation. Record them only from the accepted frozen artifacts.
+
+## D1. Historical accepted v0.1.2 tags, release, and DOI
+
+> **ARCHIVE ONLY - DO NOT EXECUTE.** These commands and identifiers document a
+> completed publication. Use section D for v0.1.3.
+
+This section records the completed v0.1.2 publication workflow and its exact
+anchors. Do not rerun it or replace its hashes with v0.1.3 values.
 
 Zenodo state: concept DOI `10.5281/zenodo.20801956`; version DOIs v0.1
 `10.5281/zenodo.20801957` (2026-06-22) and v0.1.1
 `10.5281/zenodo.20816639` (2026-06-23, author Amadeus Brandes, CC-BY-4.0,
-linked to trialdiff-public commit `7a11808`), plus corrected v0.1.2
+linked to trialdiff-public commit `7a11808`), plus the E1-corrected v0.1.2
 `10.5281/zenodo.21755258` (2026-08-02, CC-BY-4.0, linked to this repository's
 `event-class-v0.1.2` GitHub Release).
 
-Rules for v0.1.2 and later:
+Historical v0.1.2 rules (completed 2026-08-02):
 
 1. **Never mutate or withdraw v0.1.1.** It stays as published; `ERRATA.md`
    E1 is its correction record. On the Zenodo v0.1.1 page, add a link to
@@ -293,8 +469,8 @@ Rules for v0.1.2 and later:
    `10.5281/zenodo.20801956` keeps resolving to the latest corrected
    dataset. Include the erratum text in the version description and cite
    the new implementation-pinned `event_class_rule_set_hash` (`07957f8b…`).
-3. Upload the v0.1.2 zip built from THIS repository. The exporter in section
-   A copies the supporting files into `docs/`; the validator requires every
+3. Upload the v0.1.2 zip built from THIS repository. The exporter in historical
+   section A1 copies the supporting files into `docs/`; the validator requires every
    package file to be listed in `MANIFEST.sha256`. Do not add files to the
    archive manually after export. Set "Is supplement to" to this
    repository's release tag.
@@ -305,7 +481,7 @@ Rules for v0.1.2 and later:
    SHA reachable even if PR #1 is later squashed or rebased. Keep Zenodo's
    link pointed at the immutable SHA; the tag supplies reachability.
 
-```bash
+```text
 git tag -a event-class-v0.1.2 \
   8777d04c11e7e660a22db51d3589498911e7d086 \
   -m "Corrected event-class package v0.1.2"
@@ -324,8 +500,10 @@ Cut the GitHub Release from `event-class-v0.1.2` and attach the already-staged
 `trialdiff_event_class_records_v0.1.2.zip` without rebuilding it. Its SHA-256
 must remain `4681fb0e5baaab53fb9352721a49aaa7b5e2027a18c9029547592ff7dfb709e7`.
 
-5. Update `CITATION.cff`, `README.md`, and `VERSIONS.md` with the new
-   version DOI once minted. The paper must cite **v0.1.2**, not v0.1.1.
+5. `CITATION.cff`, `README.md`, and `VERSIONS.md` were updated with the minted
+   v0.1.2 DOI. After E4, a manuscript may cite v0.1.2 only as the historical
+   affected artifact with E4 disclosed; corrected event-class counts must cite
+   the eventual v0.1.3 DOI.
 
 ## D2. Repository authority (one-time)
 

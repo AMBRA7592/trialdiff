@@ -28,8 +28,11 @@ resolves to the latest version) · v0.1.2
 [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258) · v0.1.1
 [10.5281/zenodo.20816639](https://doi.org/10.5281/zenodo.20816639) · v0.1
 [10.5281/zenodo.20801957](https://doi.org/10.5281/zenodo.20801957).
-Note: the published v0.1.1 dataset carries erratum E1 (`ERRATA.md`); the
-corrected v0.1.2 package is published under the same concept DOI.
+Note: the published v0.1.1 dataset carries erratum E1 (`ERRATA.md`). The
+v0.1.2 package corrected E1 and is published under the same concept DOI; it
+remains immutable and carries the subsequently discovered false-negative
+erratum E4. A v0.3 predicate correction is pending a separately frozen v0.1.3
+package.
 
 ## Live Demo
 
@@ -41,14 +44,17 @@ The live demo is backed by Neon Postgres and renders the **regenerated
 - 100 breast-cancer-related interventional trials
 - 4,485 adjacent version patches
 - 868 materiality events (87 critical / 396 high / 217 medium / 168 low triage)
-- 97 event-class Evidence Records from the corrected v0.1.2 generation
+- 97 event-class Evidence Records from the published v0.1.2 generation
 
-The corrected 97-record layer was promoted to Neon and Vercel production on
+The 97-record v0.1.2 layer was promoted to Neon and Vercel production on
 2026-08-02. Its public JSON endpoint serves the canonical record bytes with a
 matching ETag and `x-trialdiff-canonical-hash`. The v0.1.2 dataset is published
 at [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258);
-published v0.1.1 remains the immutable historical artifact that carries
-erratum E1. The historical count of 483 refers to the earlier
+it corrected E1 but now carries E4 for three missed secondary-outcome memberships.
+Production intentionally remains on those immutable v0.1.2 bytes until a
+separately verified v0.1.3 release is frozen and promoted. Published v0.1.1
+remains the immutable historical artifact that carries E1. The historical
+count of 483 refers to the earlier
 materiality-filter inclusion policy, not the current event-class criterion.
 See `CORPUS.md` for the full population/version reconciliation.
 
@@ -63,10 +69,12 @@ Three frozen, hash-pinned data packages live in this repository:
   52 trials from the 100-study corpus, with its own manifest. Carries
   erratum E1 (see `ERRATA.md`): 9 of 13 `why_stopped_removed_in_terminal_context`
   memberships are spurious.
-- **`event_class_records_v0.1.2/`** — the corrected dual-regenerated package:
+- **`event_class_records_v0.1.2/`** — the dual-regenerated E1 correction:
   97 Evidence Records over 54 trials, with 106 event-class memberships and a
   manifest-pinned determinism attestation. Frozen on 2026-07-31 and published
   on 2026-08-02 as [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258).
+  It remains immutable and carries E4 for three missed secondary-outcome
+  memberships.
 
 Key documents:
 
@@ -127,8 +135,13 @@ Scope of that guarantee, precisely:
   exactly what was published. They do not prove **semantic correctness** —
   that the claims inside it are true. The published v0.1.1 dataset passes
   every integrity check and still carries a false class claim in 9 records
-  (`ERRATA.md` E1). Correctness lives in the errata, regeneration, and
-  rule-set-hash discipline, not in the checksums.
+  (`ERRATA.md` E1); v0.1.2 likewise verifies perfectly while omitting one
+  qualifying secondary-outcome membership (E4). Correctness lives in the
+  errata, regeneration, and rule-set-hash discipline, not in the checksums.
+- The published v0.1.2 records are not fully source-closed. They carry patches
+  and source hashes but omit some source fields consumed by four predicates,
+  so they do not support independent clean-room reconstruction of every
+  membership from packaged bytes alone.
 
 ## What A Reviewer Can Inspect
 

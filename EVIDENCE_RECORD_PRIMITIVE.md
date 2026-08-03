@@ -1,12 +1,16 @@
 # Evidence Record — Primitive Specification
 
-Status: specification (v0.1)
-Date: 2026-06-19
+Status: specification (v0.2; source-closure clarification)
+Date: 2026-08-03
 Scope: defines the Evidence Record primitive. TrialDiff is the reference implementation.
 
 ## Definition
 
-An Evidence Record is a deterministic, claim-bounded object that asserts a bounded public-record change event, addressable by a stable identifier and independently verifiable from its cited source.
+An Evidence Record is a deterministic, claim-bounded object that asserts a
+bounded public-record change event and is addressable by a stable identifier.
+Its canonical bytes and provenance anchors are independently integrity-verifiable.
+Independent recomputation of derived claims additionally requires a
+source-closed record that carries every source field consumed by its rules.
 
 ## Fields
 
@@ -24,7 +28,12 @@ An Evidence Record is a deterministic, claim-bounded object that asserts a bound
 
 ## Determinism guarantee
 
-A record is a pure function of cited source content, source-selection rules, canonicalization rules, generator version, and `ruleset_hash`. The same inputs produce byte-identical canonical JSON, and therefore an identical `record_hash` and `record_id`. Canonicalization — stable key ordering and fixed normalization — is what makes the hash reproducible. Regenerating a record from the same inputs is a verification, not a re-derivation.
+A record is a pure function of cited source content, source-selection rules,
+canonicalization rules, generator version, and `ruleset_hash`. The same inputs
+produce byte-identical canonical JSON, and therefore an identical `record_hash`
+and `record_id`. Canonicalization -- stable key ordering and fixed normalization
+-- is what makes the hash reproducible. This guarantee does not imply that the
+record itself contains every input needed for clean-room recomputation.
 
 ## Integrity is not correctness
 
@@ -37,12 +46,20 @@ discipline (defective logic is corrected in a NEW generation under a new
 hash) and by a published errata record; verification tooling must not be
 described as validating claims. See `ERRATA.md` for the operative example.
 
-## Provenance and hash rules
+## Provenance, source closure, and hash rules
 
-- Each source is pinned by content hash at the observed version; the record is derivable from those sources alone.
+- Each cited source version is pinned by content hash.
+- A source-closed record also carries, or points immutably to, every source
+  field consumed by its predicates. A hash without the corresponding bytes is
+  an identity anchor, not a reconstructible source.
 - The record's own canonical form is hashed as `record_hash`.
 - Published records are immutable. A logic change produces new records under a new `ruleset_hash`; it never mutates the bytes of an existing record, which would break its hash and any citation to it.
-- Verification: retrieve each cited or archived source payload → confirm its content hash → recompute the canonical form → confirm `record_hash`.
+- Integrity verification: confirm canonical form and `record_hash`, then compare
+  the record against its package manifest or deployed database hash.
+- Predicate reconstruction: obtain the immutable source bytes or source slices,
+  confirm their hashes, and recompute the predicates with an independent
+  implementation. This stronger step is unavailable when required source bytes
+  are not published.
 
 ## Claim-boundary rule
 
@@ -50,7 +67,20 @@ Every record states `claims_supported` and `claims_not_supported`. A record asse
 
 ## Worked instance: TrialDiff
 
-TrialDiff is the reference implementation. It produces Evidence Records for ClinicalTrials.gov protocol-amendment changes: deterministic event ids of the form `evt_{nct_id}_v{from}_v{to}_{hash}`, canonical JSON, source URLs and content hashes, explicit claim boundaries, deterministic `event_classes`, and a `triage_label` (formerly `severity`). That label's calibration was attempted under blinded review and did not pass the pre-registered gate; it is retained as uncalibrated metadata (see `SEVERITY_CALIBRATION_v0.2.1.md` and `SEVERITY_DECOUPLING_v0.2.1.md`).
+TrialDiff is the reference implementation. It produces Evidence Records for
+ClinicalTrials.gov protocol-amendment changes: deterministic event ids of the
+form `evt_{nct_id}_v{from}_v{to}_{hash}`, canonical JSON, source URLs and
+content hashes, explicit claim boundaries, deterministic `event_classes`, and
+a `triage_label` (formerly `severity`). That label's calibration was attempted
+under blinded review and did not pass the pre-registered gate; it is retained
+as uncalibrated metadata (see `SEVERITY_CALIBRATION_v0.2.1.md` and
+`SEVERITY_DECOUPLING_v0.2.1.md`).
+
+The published TrialDiff v0.1.2 event-class package is integrity-verifiable but
+not fully source-closed: its records carry patches and snapshot hashes, but not
+every snapshot slice consumed by four of the five predicates. It therefore does
+not support clean-room recomputation of every membership from packaged bytes
+alone. See `CLAIMS.md`, `NON_CLAIMS.md`, and `ERRATA.md` E4.
 
 ## Other instantiations
 

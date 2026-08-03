@@ -3,10 +3,13 @@ from __future__ import annotations
 import unittest
 
 from trialdiff.event_classes import (
+    EventClassInputError,
     OUTCOME_EDIT_WITH_RESULTS_SIGNAL,
+    PRIMARY_ENDPOINT_CLEAN,
     SECONDARY_OUTCOME_REMOVED,
     WHY_STOPPED_REMOVED_TERMINAL,
     event_classes_for_patch,
+    has_results_reconciliation_signal,
 )
 
 
@@ -22,8 +25,10 @@ def record(
         "protocolSection": {
             "statusModule": {"overallStatus": status},
             "outcomesModule": {
-                "primaryOutcomes": primary_outcomes or [{"measure": "Overall survival"}],
-                "secondaryOutcomes": secondary_outcomes or [],
+                "primaryOutcomes": (
+                    [{"measure": "Overall survival"}] if primary_outcomes is None else primary_outcomes
+                ),
+                "secondaryOutcomes": [] if secondary_outcomes is None else secondary_outcomes,
             },
             "designModule": {},
         },
@@ -31,11 +36,22 @@ def record(
 
 
 class EventClassTests(unittest.TestCase):
+    def test_classification_error_is_not_a_value_error(self) -> None:
+        self.assertFalse(issubclass(EventClassInputError, ValueError))
+
     def test_secondary_outcome_reindex_is_not_treated_as_removal(self) -> None:
         moved = {"measure": "Quality of life", "description": "FACT-B score", "timeFrame": "12 months"}
-        from_record = record(secondary_outcomes=[{"measure": "Safety"}, moved])
-        to_record = record(secondary_outcomes=[moved])
-        patch = [{"op": "remove", "path": "/protocolSection/outcomesModule/secondaryOutcomes/1"}]
+        safety = {"measure": "Safety"}
+        from_record = record(secondary_outcomes=[safety, moved])
+        to_record = record(secondary_outcomes=[moved, safety])
+        patch = [
+            {"op": "remove", "path": "/protocolSection/outcomesModule/secondaryOutcomes/0"},
+            {
+                "op": "add",
+                "path": "/protocolSection/outcomesModule/secondaryOutcomes/1",
+                "value": safety,
+            },
+        ]
 
         self.assertNotIn(
             SECONDARY_OUTCOME_REMOVED,
@@ -52,6 +68,154 @@ class EventClassTests(unittest.TestCase):
             SECONDARY_OUTCOME_REMOVED,
             event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch),
         )
+
+    def test_whole_secondary_outcomes_array_removal_is_classified(self) -> None:
+        removed = {"measure": "Quality of life", "timeFrame": "12 months"}
+        from_record = record(secondary_outcomes=[removed])
+        patch = [{"op": "remove", "path": "/protocolSection/outcomesModule/secondaryOutcomes"}]
+
+        self.assertIn(
+            SECONDARY_OUTCOME_REMOVED,
+            event_classes_for_patch(from_record=from_record, to_record=None, patch=patch),
+        )
+
+    def test_whole_secondary_outcomes_array_add_without_loss_is_not_removal(self) -> None:
+        added = {"measure": "Quality of life", "timeFrame": "12 months"}
+        from_record = record(secondary_outcomes=[])
+        patch = [
+            {
+                "op": "add",
+                "path": "/protocolSection/outcomesModule/secondaryOutcomes",
+                "value": [added],
+            }
+        ]
+        to_record = record(secondary_outcomes=[added])
+
+        self.assertNotIn(
+            SECONDARY_OUTCOME_REMOVED,
+            event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch),
+        )
+
+    def test_whole_secondary_outcomes_array_add_can_replace_and_remove_items(self) -> None:
+        retained = {"measure": "Overall survival", "timeFrame": "24 months"}
+        removed = {"measure": "Quality of life", "timeFrame": "12 months"}
+        from_record = record(secondary_outcomes=[retained, removed])
+        patch = [
+            {
+                "op": "add",
+                "path": "/protocolSection/outcomesModule/secondaryOutcomes",
+                "value": [retained],
+            }
+        ]
+        to_record = record(secondary_outcomes=[retained])
+
+        self.assertIn(
+            SECONDARY_OUTCOME_REMOVED,
+            event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch),
+        )
+
+    def test_sequential_secondary_removals_resolve_against_evolving_array(self) -> None:
+        reappearing = {"measure": "Cohort overall survival"}
+        removed = {"measure": "All-patient overall survival"}
+        retained = {"measure": "Progression-free survival"}
+        added = {"measure": "Duration of response"}
+        from_record = record(secondary_outcomes=[retained, reappearing, removed])
+        patch = [
+            {"op": "remove", "path": "/protocolSection/outcomesModule/secondaryOutcomes/1"},
+            {"op": "remove", "path": "/protocolSection/outcomesModule/secondaryOutcomes/1"},
+            {
+                "op": "add",
+                "path": "/protocolSection/outcomesModule/secondaryOutcomes/1",
+                "value": reappearing,
+            },
+            {
+                "op": "add",
+                "path": "/protocolSection/outcomesModule/secondaryOutcomes/2",
+                "value": added,
+            },
+        ]
+        to_record = record(secondary_outcomes=[retained, reappearing, added])
+
+        self.assertIn(
+            SECONDARY_OUTCOME_REMOVED,
+            event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch),
+        )
+
+    def test_primary_outcome_reorder_is_not_definition_change(self) -> None:
+        first = {"measure": "Overall survival", "timeFrame": "24 months"}
+        second = {"measure": "Progression-free survival", "timeFrame": "24 months"}
+        from_record = record(primary_outcomes=[first, second])
+        patch = [
+            {"op": "remove", "path": "/protocolSection/outcomesModule/primaryOutcomes/0"},
+            {
+                "op": "add",
+                "path": "/protocolSection/outcomesModule/primaryOutcomes/1",
+                "value": first,
+            },
+        ]
+        to_record = record(primary_outcomes=[second, first])
+
+        self.assertNotIn(
+            PRIMARY_ENDPOINT_CLEAN,
+            event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch),
+        )
+
+    def test_primary_outcome_comparison_preserves_duplicate_counts(self) -> None:
+        duplicate = {"measure": "Overall survival", "timeFrame": "24 months"}
+        from_record = record(primary_outcomes=[duplicate, duplicate])
+        patch = [{"op": "remove", "path": "/protocolSection/outcomesModule/primaryOutcomes/0"}]
+        to_record = record(primary_outcomes=[duplicate])
+
+        self.assertIn(
+            PRIMARY_ENDPOINT_CLEAN,
+            event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch),
+        )
+
+    def test_primary_outcome_definition_replacement_still_fires(self) -> None:
+        from_record = record(primary_outcomes=[{"measure": "Overall survival"}])
+        patch = [
+            {
+                "op": "replace",
+                "path": "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+                "value": "Progression-free survival",
+            }
+        ]
+        to_record = record(primary_outcomes=[{"measure": "Progression-free survival"}])
+
+        self.assertIn(
+            PRIMARY_ENDPOINT_CLEAN,
+            event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch),
+        )
+
+    def test_malformed_primary_outcomes_array_is_rejected(self) -> None:
+        from_record = record()
+        from_record["protocolSection"]["outcomesModule"]["primaryOutcomes"] = {
+            "0": {"measure": "Overall survival"}
+        }
+        patch = [
+            {
+                "op": "replace",
+                "path": "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+                "value": "Progression-free survival",
+            }
+        ]
+
+        with self.assertRaises(EventClassInputError):
+            event_classes_for_patch(from_record=from_record, to_record=None, patch=patch)
+
+    def test_malformed_secondary_outcomes_array_is_rejected(self) -> None:
+        from_record = record(secondary_outcomes=[{"measure": "Quality of life"}])
+        patch = [
+            {"op": "remove", "path": "/protocolSection/outcomesModule/secondaryOutcomes/0"},
+            {
+                "op": "replace",
+                "path": "/protocolSection/outcomesModule/secondaryOutcomes",
+                "value": {},
+            },
+        ]
+
+        with self.assertRaises(EventClassInputError):
+            event_classes_for_patch(from_record=from_record, to_record=None, patch=patch)
 
     def test_results_signal_is_a_cooccurrence_class_not_suppression(self) -> None:
         from_record = record(has_results=False, primary_outcomes=[{"measure": "Response rate"}])
@@ -70,6 +234,14 @@ class EventClassTests(unittest.TestCase):
             event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch),
         )
 
+    def test_unpatched_has_results_change_is_a_provenance_error(self) -> None:
+        with self.assertRaises(EventClassInputError):
+            has_results_reconciliation_signal(
+                from_record=record(has_results=False),
+                to_record=record(has_results=True),
+                patch=[],
+            )
+
     def test_missing_to_record_without_patch_evidence_is_not_whystopped_removal(self) -> None:
         # Regression test for the v0.1/v0.1.1 package bug: a missing TO-version
         # snapshot must not be read as "whyStopped absent". Without patch
@@ -77,7 +249,7 @@ class EventClassTests(unittest.TestCase):
         from_record = record(status="TERMINATED")
         from_record["protocolSection"]["statusModule"]["whyStopped"] = "Recruitment failed"
         patch = [
-            {"op": "replace", "path": "/protocolSection/statusModule/statusVerifiedDate", "value": "2025-12"},
+            {"op": "add", "path": "/protocolSection/statusModule/statusVerifiedDate", "value": "2025-12"},
             {"op": "replace", "path": "/hasResults", "value": True},
         ]
 
@@ -106,17 +278,55 @@ class EventClassTests(unittest.TestCase):
             event_classes_for_patch(from_record=from_record, to_record=None, patch=patch),
         )
 
-    def test_to_record_showing_removal_fires_without_patch_op(self) -> None:
-        # Two stored snapshots are direct evidence; no patch op is required.
+    def test_stored_to_must_equal_patch_replay(self) -> None:
         from_record = record(status="TERMINATED")
         from_record["protocolSection"]["statusModule"]["whyStopped"] = "Recruitment failed"
         to_record = record(status="TERMINATED")
-        patch = [{"op": "replace", "path": "/protocolSection/statusModule/statusVerifiedDate", "value": "2025-12"}]
+        patch = [{"op": "add", "path": "/protocolSection/statusModule/statusVerifiedDate", "value": "2025-12"}]
 
-        self.assertIn(
-            WHY_STOPPED_REMOVED_TERMINAL,
-            event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch),
-        )
+        with self.assertRaises(EventClassInputError):
+            event_classes_for_patch(from_record=from_record, to_record=to_record, patch=patch)
+
+    def test_replay_failure_is_not_secondary_removal_evidence(self) -> None:
+        from_record = record(secondary_outcomes=[{"measure": "Quality of life"}])
+        patch = [
+            {"op": "remove", "path": "/protocolSection/outcomesModule/secondaryOutcomes/0"},
+            {"op": "move", "from": "/unsupported", "path": "/unsupported-target"},
+        ]
+
+        with self.assertRaises(EventClassInputError):
+            event_classes_for_patch(from_record=from_record, to_record=None, patch=patch)
+
+    def test_replay_failure_is_not_primary_change_evidence(self) -> None:
+        from_record = record(primary_outcomes=[{"measure": "Overall survival"}])
+        patch = [
+            {
+                "op": "replace",
+                "path": "/protocolSection/outcomesModule/primaryOutcomes/0/measure",
+                "value": "Progression-free survival",
+            },
+            {"op": "copy", "from": "/unsupported", "path": "/unsupported-target"},
+        ]
+
+        with self.assertRaises(EventClassInputError):
+            event_classes_for_patch(from_record=from_record, to_record=None, patch=patch)
+
+    def test_supported_operation_requires_a_string_path(self) -> None:
+        with self.assertRaises(EventClassInputError):
+            event_classes_for_patch(
+                from_record=record(),
+                to_record=None,
+                patch=[{"op": "replace", "path": None, "value": "invalid"}],
+            )
+
+    def test_add_and_replace_operations_require_values(self) -> None:
+        for op in ("add", "replace"):
+            with self.subTest(op=op), self.assertRaises(EventClassInputError):
+                event_classes_for_patch(
+                    from_record=record(),
+                    to_record=None,
+                    patch=[{"op": op, "path": "/hasResults"}],
+                )
 
     def test_event_classes_are_returned_in_sorted_order(self) -> None:
         removed = {"measure": "Quality of life", "description": "FACT-B score", "timeFrame": "12 months"}
@@ -134,6 +344,7 @@ class EventClassTests(unittest.TestCase):
             primary_outcomes=[{"measure": "Overall survival"}],
             secondary_outcomes=[],
         )
+        to_record["protocolSection"]["statusModule"]["primaryCompletionDateStruct"] = {"type": "ACTUAL"}
         patch = [
             {"op": "remove", "path": "/protocolSection/statusModule/whyStopped"},
             {"op": "replace", "path": "/hasResults", "value": True},
