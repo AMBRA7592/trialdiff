@@ -220,14 +220,16 @@ jobs:
           read -r old_id new_id < /tmp/coexistence-ids.txt
           old_file=$(find /tmp/v011-common -name "$old_id.json" -print -quit)
           new_file=$(find /tmp/v012-common -name "$new_id.json" -print -quit)
+          old_body="/tmp/$old_id.json"
+          new_body="/tmp/$new_id.json"
           test -n "$old_file"
           test -n "$new_file"
 
-          curl -fsS -D /tmp/old.headers "http://127.0.0.1:4321/events/$old_id.json" -o /tmp/old.json
-          curl -fsS -D /tmp/new.headers "http://127.0.0.1:4321/events/$new_id.json" -o /tmp/new.json
-          cmp "$old_file" /tmp/old.json
-          cmp "$new_file" /tmp/new.json
-          trialdiff verify /tmp/old.json /tmp/new.json
+          curl -fsS -D /tmp/old.headers "http://127.0.0.1:4321/events/$old_id.json" -o "$old_body"
+          curl -fsS -D /tmp/new.headers "http://127.0.0.1:4321/events/$new_id.json" -o "$new_body"
+          cmp "$old_file" "$old_body"
+          cmp "$new_file" "$new_body"
+          trialdiff verify "$old_body" "$new_body"
           grep -qi '^x-trialdiff-record-status: superseded' /tmp/old.headers
           grep -qi "^x-trialdiff-successor-event-id: $new_id" /tmp/old.headers
           grep -qi '^cache-control: public, max-age=31536000, immutable' /tmp/old.headers
