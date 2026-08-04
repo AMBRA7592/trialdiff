@@ -50,9 +50,12 @@ HTML (`<details>`, links).
 - Every feed, corpus total, and trial/patch Evidence Record link must join
   `evidence_record_generations` with `is_active`; never infer the active
   generation from `generated_at`, `evidence_version`, or hash ordering.
-- Supersession metadata belongs in HTML, headers, and the non-immutable index,
-  not in canonical JSON. Before activation, an imported inactive successor
-  must not make the active predecessor appear superseded.
+- Supersession metadata belongs in HTML, origin-served 200 response headers,
+  and the non-immutable index, not in canonical JSON. An edge-served 304 may
+  omit application-defined metadata headers; assert its status and empty body,
+  then use the index as the authoritative discovery surface. Before activation,
+  an imported inactive successor must not make the active predecessor appear
+  superseded.
 - Exact inactive-generation IDs intentionally remain retrievable for hold-stage
   byte verification, with `x-trialdiff-record-status: inactive`; never expose
   them through feeds, active links, totals, or the supersession index.

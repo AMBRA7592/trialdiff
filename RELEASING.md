@@ -389,8 +389,12 @@ WHERE superseded_event_id = '$V012_CHECK_ID'
 #    successor, and the index must omit v0.1.3. An exact known v0.1.3 ID is
 #    intentionally retrievable as 200 with x-trialdiff-record-status: inactive
 #    so its frozen bytes can be checked during the hold; this does not make the
-#    candidate current or discoverable. Promote that exact reviewed deployment
-#    ID; do not trigger a fresh production build.
+#    candidate current or discoverable. Until the coexistence build is
+#    promoted, the pre-coexistence production build returns 404 for that same
+#    inactive ID because it reads the active-only evidence_records compatibility
+#    view; the preview 200 and production 404 are therefore expected to coexist.
+#    Promote that exact reviewed deployment ID; do not trigger a fresh
+#    production build.
 vercel promote <verified-preview-deployment-id>
 
 # 6. Activate v0.1.3 in one small transaction. The function refuses the switch
@@ -406,9 +410,16 @@ must show its v0.1.3 successor. Its JSON body must remain byte-identical to the
 frozen v0.1.2 file with the original ETag; the v0.1.3 JSON body must match its
 new frozen file. `trialdiff verify` must pass on both. The unknown HTML and JSON
 IDs must return 404. A conditional request for the superseded JSON must return
-304 with zero body bytes. Use `V012_CHECK_ID` / `V013_CHECK_ID` and require the
-body hashes to equal `V012_CHECK_HASH` / `V013_CHECK_HASH`; do not substitute a
-different pair during the window.
+304 with zero body bytes. Vercel's edge may answer that 304 without the
+application-defined `x-trialdiff-*` or successor/predecessor headers even
+though the origin handler sets them; assert only the 304 status and empty body
+on this conditional path. Verify status and successor metadata on an
+origin-generated 200 response: use a one-time cache-busting query for this
+header check and require its saved headers to contain `x-vercel-cache: MISS`.
+Also verify through the authoritative non-immutable supersession index. Use
+`V012_CHECK_ID` / `V013_CHECK_ID` and require the body hashes to equal
+`V012_CHECK_HASH` / `V013_CHECK_HASH`; do not substitute a different pair
+during the window.
 
 Also save `/events/supersessions.json`: it must name v0.1.3 as active, map all
 97 v0.1.2 IDs, use `public, max-age=0, must-revalidate`, and omit

@@ -106,6 +106,13 @@ cacheable for one year with `immutable`; the index and HTML record pages use
 `max-age=0, must-revalidate` so a previously cached record need not be mutated
 to publish its successor. Only canonical JSON is immutable.
 
+Application-generated 200 responses carry `x-trialdiff-record-status` and,
+when applicable, predecessor/successor headers. Do not treat those headers as a
+conditional-revalidation contract: Vercel's edge may answer a 304 with the
+ETag and cache policy but without application-defined metadata headers, even
+though the origin handler sets them. Use the non-immutable supersession index
+as the authoritative status and successor-discovery surface.
+
 ## Seeded-data limitation
 
 The seed pipeline builds the database from exported Evidence Records, and
