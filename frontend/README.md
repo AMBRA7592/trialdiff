@@ -104,14 +104,18 @@ returns its database-unavailable state instead of rendering zero counts.
 superseded published IDs. Canonical record responses remain independently
 cacheable for one year with `immutable`; the index and HTML record pages use
 `max-age=0, must-revalidate` so a previously cached record need not be mutated
-to publish its successor. Only canonical JSON is immutable.
+to publish its successor. Canonical JSON bytes and ETags remain immutable
+record data; relationship status is resolved through the revalidated index.
 
 Application-generated 200 responses carry `x-trialdiff-record-status` and,
-when applicable, predecessor/successor headers. Do not treat those headers as a
-conditional-revalidation contract: Vercel's edge may answer a 304 with the
-ETag and cache policy but without application-defined metadata headers, even
-though the origin handler sets them. Use the non-immutable supersession index
-as the authoritative status and successor-discovery surface.
+when applicable, predecessor/successor headers. These headers are advisory,
+point-in-time metadata, not a current-state contract: an immutable cached 200
+may retain status and relationship values captured before a generation change,
+even while its canonical body and ETag remain exact. Vercel's edge may also
+answer a 304 with the ETag and cache policy but without application-defined
+metadata headers, even though the origin handler sets them. Use the
+non-immutable supersession index as the authoritative source for current status
+and successor discovery.
 
 ## Seeded-data limitation
 
