@@ -414,9 +414,10 @@ IDs must return 404. A conditional request for the superseded JSON must return
 application-defined `x-trialdiff-*` or successor/predecessor headers even
 though the origin handler sets them; assert only the 304 status and empty body
 on this conditional path. Verify status and successor metadata on an
-origin-generated 200 response (use a one-time cache-busting query for this
-header check) and through the authoritative non-immutable supersession index.
-Use `V012_CHECK_ID` / `V013_CHECK_ID` and require the body hashes to equal
+origin-generated 200 response: use a one-time cache-busting query for this
+header check and require its saved headers to contain `x-vercel-cache: MISS`.
+Also verify through the authoritative non-immutable supersession index. Use
+`V012_CHECK_ID` / `V013_CHECK_ID` and require the body hashes to equal
 `V012_CHECK_HASH` / `V013_CHECK_HASH`; do not substitute a different pair
 during the window.
 
