@@ -413,9 +413,13 @@ IDs must return 404. A conditional request for the superseded JSON must return
 304 with zero body bytes. Vercel's edge may answer that 304 without the
 application-defined `x-trialdiff-*` or successor/predecessor headers even
 though the origin handler sets them; assert only the 304 status and empty body
-on this conditional path. Verify status and successor metadata on an
-origin-generated 200 response: use a one-time cache-busting query for this
-header check and require its saved headers to contain `x-vercel-cache: MISS`.
+on this conditional path. A cached 200 may likewise retain status and
+relationship headers captured before activation under the immutable cache
+policy; its canonical body and ETag remain authoritative, but those cached
+headers do not establish current status. Verify status and successor metadata
+on an origin-generated 200 response: use a one-time cache-busting query for
+this header check and require its saved headers to contain
+`x-vercel-cache: MISS`.
 Also verify through the authoritative non-immutable supersession index. Use
 `V012_CHECK_ID` / `V013_CHECK_ID` and require the body hashes to equal
 `V012_CHECK_HASH` / `V013_CHECK_HASH`; do not substitute a different pair
