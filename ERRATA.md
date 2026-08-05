@@ -145,8 +145,9 @@ manifest policy below). The audit's findings themselves are unaffected.
 **Affected artifacts:** the published event-class v0.1.2 package
 [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258), its
 `event-class-v0.1.2` GitHub Release, and the v0.1.2 rows served by the Neon /
-Vercel production layer. The package is immutable and remains the authentic
-record of the v0.2 predicate generation.
+Vercel production layer until 2026-08-04. Exact v0.1.2 IDs remain resolvable as
+superseded records. The package is immutable and remains the authentic record
+of the v0.2 predicate generation.
 
 **Defect.** `secondary_outcome_item_removed_without_reindex` had two incomplete
 operation-shape assumptions. First, it resolved every indexed removal path
@@ -249,9 +250,10 @@ The frozen v0.1.3 regeneration over the unchanged input contains 97 records,
 enrollment / 4 whyStopped / 80 results co-occurrence; overlaps 85 one-class /
 12 two-class / 0 three-class. The overlap histogram was pinned by the same
 pre-regeneration oracle as the per-class totals. These were halt-on-divergence
-expectations, not values to force. The repository package now exists; no
-v0.1.3 tag, DOI, or production generation exists until the remaining controlled
-release gates in `RELEASING.md` pass.
+expectations, not values to force. The corrected generation has been active in
+production since 2026-08-04 and was published on 2026-08-05 as
+[10.5281/zenodo.21811845](https://doi.org/10.5281/zenodo.21811845), linked to
+the immutable `event-class-v0.1.3` GitHub Release.
 
 **Independent reconstructibility remains open.** Of v0.1.2's 106 memberships,
 80 are decidable from the embedded patch alone in that package; the other 26
@@ -310,3 +312,8 @@ the frozen v0.1.1/v0.1.2 record sections remain unchanged. The new v0.1.3
 package has its own manifest and immutable records-section pin; its bundled
 ERRATA copy and package manifest were refreshed during audit follow-up without
 changing any of its 97 canonical record files.
+
+Re-pinned on 2026-08-05 after v0.1.3 production activation and DOI publication:
+`README.md` and `CLAIMS.md`. All 40 alpha record entries and every frozen
+event-class package file remain unchanged; the repository documentation alone
+now records the minted v0.1.3 DOI and active-generation state.

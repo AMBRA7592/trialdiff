@@ -22,13 +22,12 @@ claims.
   immutable and make later rule changes visible through rotated hashes and IDs.
 - `trialdiff verify` checks canonical form and internal hash consistency;
   package manifests and deployed database hashes anchor artifact authenticity.
-- The live v0.1.2 layer and Zenodo v0.1.2 package contain 97 records over 54
-  trials and 106 event-class memberships. They remain exact v0.1.2 release
-  bytes and carry erratum E4.
-- The separately frozen, not-yet-published v0.1.3 package contains 97 records
-  over 54 trials and 109 event-class memberships under the v0.3 predicates. It
-  corrects E4 but is not claimed to be live or DOI-deposited until those
-  owner-gated release steps occur.
+- The immutable Zenodo v0.1.2 package contains 97 records over 54 trials and
+  106 event-class memberships. Exact v0.1.2 event IDs remain resolvable as
+  superseded records; the generation carries erratum E4.
+- The active live v0.1.3 layer and Zenodo v0.1.3 package contain 97 records
+  over 54 trials and 109 event-class memberships under the v0.3 predicates.
+  They correct E4 and preserve a one-to-one supersession map from v0.1.2.
 - The frozen v0.1-alpha package contains 40 selected Evidence Records from a
   bounded 25-study corpus. Its selection rule is not an exhaustive event-class
   export.

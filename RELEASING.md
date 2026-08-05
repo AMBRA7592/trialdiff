@@ -590,6 +590,15 @@ in `ERRATA.md` and `VERSIONS.md`; regenerate records for the affected release.
 
 ## D. Tags, releases, and DOI for v0.1.3
 
+The v0.1.3 tag, GitHub Release, production activation, and Zenodo publication
+were completed and independently audited on 2026-08-05. The release ZIP remained
+byte-identical across the pinned local artifact, GitHub, and Zenodo. Version DOI:
+`10.5281/zenodo.21811845`; concept DOI: `10.5281/zenodo.20801956`. Two
+metadata-only Zenodo cleanups remain owner-gated: add the E4 successor notice
+to the immutable v0.1.2 record, and replace the v0.1.1 notice's future-tense
+v0.1.2 sentence with the minted v0.1.2 DOI. Neither cleanup may alter a
+deposited ZIP.
+
 Only after the v0.1.3 freeze commit and independent audit:
 
 1. Create and push an annotated `event-class-v0.1.3` tag at the exact freeze
@@ -672,7 +681,7 @@ must remain `4681fb0e5baaab53fb9352721a49aaa7b5e2027a18c9029547592ff7dfb709e7`.
 5. `CITATION.cff`, `README.md`, and `VERSIONS.md` were updated with the minted
    v0.1.2 DOI. After E4, a manuscript may cite v0.1.2 only as the historical
    affected artifact with E4 disclosed; corrected event-class counts must cite
-   the eventual v0.1.3 DOI.
+   v0.1.3 DOI `10.5281/zenodo.21811845`.
 
 ## D2. Repository authority (one-time)
 
