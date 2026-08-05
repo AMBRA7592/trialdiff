@@ -24,37 +24,40 @@ dataset and is not developed further; its Zenodo linkage is left intact.
 
 Published dataset DOIs (Zenodo): concept DOI
 [10.5281/zenodo.20801956](https://doi.org/10.5281/zenodo.20801956) (always
-resolves to the latest version) · v0.1.2
+resolves to the latest version) · v0.1.3
+[10.5281/zenodo.21811845](https://doi.org/10.5281/zenodo.21811845) · v0.1.2
 [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258) · v0.1.1
 [10.5281/zenodo.20816639](https://doi.org/10.5281/zenodo.20816639) · v0.1
 [10.5281/zenodo.20801957](https://doi.org/10.5281/zenodo.20801957).
 Note: the published v0.1.1 dataset carries erratum E1 (`ERRATA.md`). The
 v0.1.2 package corrected E1 and is published under the same concept DOI; it
 remains immutable and carries the subsequently discovered false-negative
-erratum E4. The separately frozen v0.1.3 package corrects E4 but is not yet
-published or promoted to production.
+erratum E4. The v0.1.3 package corrects E4, has been active in production
+since 2026-08-04, and was published on 2026-08-05 under the same concept DOI.
 
 ## Live Demo
 
 Live site: <https://trialdiff.vercel.app>
 
 The live demo is backed by Neon Postgres and renders the **regenerated
-100-study breast-cancer corpus** under the v0.2.1 rule generation:
+100-study breast-cancer corpus** under the v0.2.1 triage generation and active
+v0.3 event-class generation:
 
 - 100 breast-cancer-related interventional trials
 - 4,485 adjacent version patches
 - 868 materiality events (87 critical / 396 high / 217 medium / 168 low triage)
-- 97 event-class Evidence Records from the published v0.1.2 generation
+- 97 event-class Evidence Records from the published v0.1.3 generation
 
-The 97-record v0.1.2 layer was promoted to Neon and Vercel production on
-2026-08-02. Its public JSON endpoint serves the canonical record bytes with a
-matching ETag and `x-trialdiff-canonical-hash`. The v0.1.2 dataset is published
-at [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258);
-it corrected E1 but now carries E4 for three missed secondary-outcome memberships.
-Production intentionally remains on those immutable v0.1.2 bytes until the
-separately frozen v0.1.3 release is promoted. Published v0.1.1
-remains the immutable historical artifact that carries E1. The historical
-count of 483 refers to the earlier
+The 97-record v0.1.3 layer has been active in Neon and Vercel production since
+2026-08-04. Its public JSON endpoint serves canonical record bytes with a
+matching ETag and `x-trialdiff-canonical-hash`, while exact v0.1.2 IDs remain
+resolvable as immutable superseded records. The corrected v0.1.3 dataset was
+published on 2026-08-05 at
+[10.5281/zenodo.21811845](https://doi.org/10.5281/zenodo.21811845). The
+immutable v0.1.2 dataset remains at
+[10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258) and carries
+E4; published v0.1.1 remains the historical artifact that carries E1. The
+historical count of 483 refers to the earlier
 materiality-filter inclusion policy, not the current event-class criterion.
 See `CORPUS.md` for the full population/version reconciliation.
 
@@ -77,8 +80,9 @@ Four frozen, hash-pinned data packages live in this repository:
   memberships.
 - **`event_class_records_v0.1.3/`** — the dual-regenerated E4 correction:
   97 Evidence Records over 54 trials, with 109 event-class memberships and a
-  manifest-pinned determinism attestation. Frozen on 2026-08-03; publication,
-  production activation, tag, and DOI remain pending owner-gated release steps.
+  manifest-pinned determinism attestation. Frozen on 2026-08-03, activated in
+  production on 2026-08-04, and published on 2026-08-05 as
+  [10.5281/zenodo.21811845](https://doi.org/10.5281/zenodo.21811845).
 
 Key documents:
 
@@ -143,8 +147,8 @@ Scope of that guarantee, precisely:
   that the claims inside it are true. The published v0.1.1 dataset passes
   every integrity check and still carries a false class claim in 9 records
   (`ERRATA.md` E1); v0.1.2 likewise verifies perfectly while omitting three
-  qualifying secondary-outcome memberships (E4); the separately frozen v0.1.3
-  package corrects those omissions. Correctness lives in the errata,
+  qualifying secondary-outcome memberships (E4); the published v0.1.3 package
+  corrects those omissions. Correctness lives in the errata,
   regeneration, and rule-set-hash discipline, not in the checksums.
 - The v0.1.2 and v0.1.3 records are not fully source-closed. They carry patches
   and source hashes but omit some source fields consumed by four predicates,

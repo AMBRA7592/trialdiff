@@ -38,7 +38,7 @@
     },
     {
       "name": "event-class-records-v0.1.3",
-      "title": "Event-class Evidence Records v0.1.3 (97 records, 54 trials, 109 memberships; frozen, publication pending)",
+      "title": "Event-class Evidence Records v0.1.3 (97 records, 54 trials, 109 memberships; Zenodo 10.5281/zenodo.21811845)",
       "path": "event_class_records_v0.1.3/records/",
       "format": "json",
       "schema": "schemas/evidence_record.schema.json",

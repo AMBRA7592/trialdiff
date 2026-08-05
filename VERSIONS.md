@@ -39,7 +39,7 @@ historical accident.
 | event-class v0.1 | 2026-06-22 | Superseded stub — records were byte-identical to v0.1.1. Zenodo DOI [10.5281/zenodo.20801957](https://doi.org/10.5281/zenodo.20801957) |
 | event-class v0.1.1 | 2026-06-23 | Frozen; carries erratum E1 (`ERRATA.md`) for the whyStopped class. Zenodo DOI [10.5281/zenodo.20816639](https://doi.org/10.5281/zenodo.20816639), published from the `trialdiff-public` snapshot |
 | event-class v0.1.2 | 2026-08-02 | Frozen after byte-identical dual regeneration under `trialdiff.event_classes.v0.2`: 97 records, 54 trials, 106 memberships. Promoted to Neon/Vercel and published as Zenodo DOI [10.5281/zenodo.21755258](https://doi.org/10.5281/zenodo.21755258). Remains immutable; carries E4 for three missed secondary-outcome memberships |
-| event-class v0.1.3 | 2026-08-03 | Frozen after byte-identical dual regeneration under `trialdiff.event_classes.v0.3`: 97 records, 54 trials, 109 memberships. Corrects E4. Repository package exists; tag, DOI, and production activation remain pending owner-gated release steps |
+| event-class v0.1.3 | 2026-08-05 | Frozen on 2026-08-03 after byte-identical dual regeneration under `trialdiff.event_classes.v0.3`: 97 records, 54 trials, 109 memberships. Corrects E4. Active in Neon/Vercel since 2026-08-04 and published as Zenodo DOI [10.5281/zenodo.21811845](https://doi.org/10.5281/zenodo.21811845) |
 
 ## 5. Event-class definitions (code semantics)
 
