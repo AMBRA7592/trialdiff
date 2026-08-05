@@ -61,10 +61,10 @@ export const prerender = true;
         The regenerated 100-study breast-cancer corpus contains 100 trials, 4,485 adjacent patches, and 868
         materiality events under the v0.2.1 triage-rule generation. Evidence Record counts are generation-specific:
         the intermediate materiality-filter population contained 483 records, the published v0.1.1 event-class
-        generation contains 100 records and carries erratum E1, and the v0.1.2 generation validated at 97 records
-        before its 2026-08-02 production promotion and Zenodo publication. The immutable v0.1.2 generation now carries
-        erratum E4 for three missed secondary-outcome memberships; a v0.3 predicate correction is pending in a
-        separately frozen v0.1.3 package.
+        generation contains 100 records and carries erratum E1, and the published v0.1.2 generation contains 97
+        records and now carries erratum E4 for three missed secondary-outcome memberships. The corrected v0.1.3
+        generation also contains 97 records and has been active in production since 2026-08-04; its GitHub Release and
+        Zenodo publication are pending.
       </p>
       <p>
         The corpus was selected for amendment density and demonstration value. Dashboard counts are evidence-engine
@@ -107,9 +107,10 @@ export const prerender = true;
         source, and cite the record without trusting a hidden scoring system.
       </p>
       <p>
-        The published v0.1.2 records are byte-verifiable but not fully source-closed: they embed the adjacent-version
-        patch and snapshot hashes, not every registry source field consumed by four event-class predicates. Independent
-        clean-room reconstruction of every membership from packaged bytes alone remains unfinished and is not claimed.
+        The active v0.1.3 records are byte-verifiable but not fully source-closed: 80 of 109 class memberships are
+        decidable from the embedded adjacent-version patches, while 29 require registry-sourced slices that the package
+        does not include. Independent clean-room reconstruction of every membership from packaged bytes alone remains
+        unfinished and is not claimed.
       </p>
     </section>
 
